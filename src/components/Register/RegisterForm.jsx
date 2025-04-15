@@ -1,6 +1,7 @@
 import React from "react";
+import { useState } from "react";
 
-const Register = () => {
+const RegisterForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -35,4 +36,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterForm;
