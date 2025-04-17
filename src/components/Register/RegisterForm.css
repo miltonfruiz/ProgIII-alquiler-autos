@@ -16,7 +16,7 @@ img {
 
 .navRegister {
   width: 100%;
-  height: 100px;
+  height: 6em;
   background-color: #4338cad1;
   display: flex;
   justify-content: left;
@@ -24,47 +24,51 @@ img {
 }
 
 .imagenAutoRegister {
-  width: 125px;
-  height: 100px;
+  width: 7.5em;
+  height: 6em;
   margin-left: 2em;
 }
 
 .botonBuscar {
   display: inline;
-  border-radius: 50px;
+  border-radius: 3em;
 }
 
 .imagenBuscar {
-  width: 24px;
-  height: 24px;
+  width: 1.44em;
+  height: 1.44em;
 }
 
 .barraBusqueda {
-  height: 44px;
-  width: 492px;
-  border-radius: 50px;
+  height: 2.64em;
+  width: 29.52em;
+  border-radius: 3em;
   border: none;
 }
 
-.imagenRegister:first-child {
-  margin-left: 10%;
+.imagenAuto {
+  width: 2.4em;
+  height: 2.4em;
+  margin-left: 30%;
 }
 
-.imagenRegister {
-  width: 40px;
-  height: 40px;
+.imagenPersona {
+  width: 2.4em;
+  height: 2.4em;
+  margin-left: 5%;
 }
 
 .formRegister {
   margin: 5em;
   background-color: #ffffff;
-  border-radius: 10px;
-  padding: 1em;
+  border-radius: 0.6em;
+  padding: 4em;
+  box-shadow: 0.12em 0.12em 0 0 #83838333;
 }
 
 .titleRegister {
-  width: 220px;
-  height: 60px;
+  width: 13.2em;
+  height: 3.6em;
   margin: auto;
   font-family: Poppins;
 }
@@ -72,31 +76,33 @@ img {
 .labelRegister {
   font-family: Poppins;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.44em;
 }
 
 .inputRegister {
-  width: 400px;
-  height: 60px;
+  width: 24em;
+  height: 3.6em;
   background-color: #c3d4e966;
-  border-radius: 10px;
+  border-radius: 0.6em;
   padding: 1em;
 }
 
 .gridRegister {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 100px 100px 100px;
-  gap: 10px;
+  grid-template-rows: 6em 6em 6em;
+  gap: 0.6em;
 }
 .divButton {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0.6em;
 }
 .buttonRegister {
-  width: 250px;
-  height: 50px;
+  width: 15em;
+  height: 3em;
   background-color: #5939f2;
   color: #ffffff;
+  border-radius: 0.9em;
 }

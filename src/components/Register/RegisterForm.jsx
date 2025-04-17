@@ -38,12 +38,12 @@ const RegisterForm = () => {
           placeholder="Buscar algo aqui"
         />
         <img
-          className="imagenRegister"
+          className="imagenAuto"
           src="https://cdn.pixabay.com/photo/2017/01/31/16/58/car-2025538_1280.png"
           alt=""
         />
         <img
-          className="imagenRegister"
+          className="imagenPersona"
           src="https://cdn.pixabay.com/photo/2022/09/21/02/37/woman-7469274_1280.png"
           alt=""
         />
