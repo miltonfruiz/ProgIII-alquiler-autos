@@ -38,6 +38,24 @@ const Validation = ({ datos }) => {
   if (datos.password != datos.verifyPassword) {
     errores.verifyPassword = "Las contraseñas deben ser iguales";
   }
+
+  if (!datos.dni.trim()) {
+    errores.dni = "el dni es obligatorio";
+  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datos.dni)) {
+    errores.dni =
+      "el dni debe tener entre 6 y 8 caracteres y no puede tener letras ni espacios";
+  }
+
+  if (!datos.nacimiento.trim()) {
+    errores.nacimiento = "la fecha de nacimiento es obligatoria";
+  }
+
+  if (!datos.licencia.trim()) {
+    errores.licencia = "la licencia es obligatoria";
+  } else if (!/\d/.test(datos.licencia)) {
+    errores.licencia =
+      "la licencia no puede tener letras ni caracteres especiales";
+  }
 };
 
 export default Validation;

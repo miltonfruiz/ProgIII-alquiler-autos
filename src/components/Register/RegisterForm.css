@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: #eeeeee;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.navRegister {
+  width: 100%;
+  height: 100px;
+  background-color: #4338cad1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.imagenAutoRegister {
+  width: 125px;
+  height: 100px;
+  margin-left: 2em;
+}
+
+.botonBuscar {
+  display: inline;
+  border-radius: 50px;
+}
+
+.imagenBuscar {
+  width: 24px;
+  height: 24px;
+}
+
+.barraBusqueda {
+  height: 44px;
+  width: 492px;
+  border-radius: 50px;
+  border: none;
+}
+
+.imagenRegister:first-child {
+  margin-left: 10%;
+}
+
+.imagenRegister {
+  width: 40px;
+  height: 40px;
+}
+
+.formRegister {
+  margin: 5em;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.titleRegister {
+  width: 220px;
+  height: 60px;
+  margin: auto;
+  font-family: Poppins;
+}
+
+.labelRegister {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.inputRegister {
+  width: 400px;
+  height: 60px;
+  background-color: #c3d4e966;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.gridRegister {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 100px 100px 100px;
+  gap: 10px;
+}
+.divButton {
+  display: flex;
+  justify-content: center;
+}
+.buttonRegister {
+  width: 250px;
+  height: 50px;
+  background-color: #5939f2;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
