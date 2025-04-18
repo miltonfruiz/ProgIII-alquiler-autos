@@ -29,9 +29,18 @@ img {
   margin-left: 2em;
 }
 
+.divBusqueda {
+  margin-left: 3em;
+}
+
 .botonBuscar {
   display: inline;
-  border-radius: 3em;
+  border-radius: 5em;
+  height: 2.2em;
+  position: absolute;
+  background-color: #ffffff;
+  border: none;
+  margin-left: 0.2em;
 }
 
 .imagenBuscar {
@@ -44,18 +53,19 @@ img {
   width: 29.52em;
   border-radius: 3em;
   border: none;
+  padding-left: 5em;
 }
 
 .imagenAuto {
   width: 2.4em;
   height: 2.4em;
-  margin-left: 30%;
+  margin-left: 35%;
 }
 
 .imagenPersona {
   width: 2.4em;
   height: 2.4em;
-  margin-left: 5%;
+  margin-left: 6%;
 }
 
 .formRegister {
@@ -63,20 +73,21 @@ img {
   background-color: #ffffff;
   border-radius: 0.6em;
   padding: 4em;
-  box-shadow: 0.12em 0.12em 0 0 #83838333;
+  box-shadow: 0.2em 0.2em 0 0 #83838333;
 }
 
 .titleRegister {
   width: 13.2em;
   height: 1.5em;
   margin: auto;
-  font-family: Poppins;
+  font-family: Segoe UI;
   display: flex;
   justify-content: center;
+  font-weight: 500;
 }
 
 .labelRegister {
-  font-family: Poppins;
+  font-family: Segoe UI;
   font-weight: 500;
   font-size: 1.44em;
 }
