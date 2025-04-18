@@ -68,9 +68,11 @@ img {
 
 .titleRegister {
   width: 13.2em;
-  height: 3.6em;
+  height: 1.5em;
   margin: auto;
   font-family: Poppins;
+  display: flex;
+  justify-content: center;
 }
 
 .labelRegister {
