@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./LoginForm.css";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -14,12 +15,12 @@ const LoginForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Falta lógica de login
+    // Falta lógica console.log("Datos enviados:", formData);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Inicia Sesión</h2>
-      <div>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <h2 className="login-title">Inicia Sesión</h2>
+      <div className="form-group">
         <label htmlFor="email">Correo electrónico</label>
         <input
           type="email"
@@ -30,7 +31,7 @@ const LoginForm = () => {
           onChange={handleChange}
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="password">Contraseña</label>
         <input
           type="password"
@@ -41,11 +42,14 @@ const LoginForm = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Iniciar Sesión</button>
-      <p>
+      <button type="submit" className="login-button">
+        Iniciar Sesión
+      </button>
+      <p className="register-link">
         ¿No tienes cuenta? <a href="/register">Regístrate</a>
       </p>
     </form>
   );
 };
+
 export default LoginForm;
