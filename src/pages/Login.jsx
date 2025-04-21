@@ -6,11 +6,7 @@ const Login = () => {
     <div className="login-page">
       <div className="login-container">
         <div className="login-image-section">
-          <img
-            src="/img/autos.jpg"
-            alt="Autos disponibles para alquiler"
-            className="login-image"
-          />
+          <img src="images/auto.png" alt="auto azul" className="login-image" />
         </div>
         <div className="login-form-section">
           <LoginForm />
