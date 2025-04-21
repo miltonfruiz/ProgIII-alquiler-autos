@@ -37,6 +37,10 @@
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 .login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
   width: 50%;
   background-color: #6366f1;
   color: white;
@@ -66,10 +70,17 @@
 }
 #password,
 #email {
+  letter-spacing: 0.05rem;
+  font-style: oblique;
   font-size: 0.75rem;
   background-color: rgba(128, 128, 128, 0.075);
 }
 .button-container {
   display: flex;
   justify-content: center;
+}
+.label-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
 }

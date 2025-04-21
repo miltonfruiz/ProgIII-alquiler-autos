@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./LoginForm.css";
+import { FaLock } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { FiLogIn } from "react-icons/fi";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +24,10 @@ const LoginForm = () => {
     <form className="login-form" onSubmit={handleSubmit}>
       <h2 className="login-title">Iniciar Sesión</h2>
       <div className="form-group">
-        <label htmlFor="email">Correo electrónico</label>
+        <label htmlFor="email" className="label-with-icon">
+          <MdEmail size={13} />
+          Correo electrónico
+        </label>
         <input
           type="email"
           name="email"
@@ -32,7 +38,10 @@ const LoginForm = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="password">Contraseña</label>
+        <label htmlFor="password" className="label-with-icon">
+          <FaLock size={12} />
+          Contraseña
+        </label>
         <input
           type="password"
           name="password"
@@ -44,6 +53,7 @@ const LoginForm = () => {
       </div>
       <div className="button-container">
         <button type="submit" className="login-button">
+          <FiLogIn size={14} />
           Iniciar Sesión
         </button>
       </div>
