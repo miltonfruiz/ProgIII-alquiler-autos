@@ -19,7 +19,7 @@ const LoginForm = () => {
   };
   return (
     <form className="login-form" onSubmit={handleSubmit}>
-      <h2 className="login-title">Inicia Sesión</h2>
+      <h2 className="login-title">Iniciar Sesión</h2>
       <div className="form-group">
         <label htmlFor="email">Correo electrónico</label>
         <input
@@ -42,9 +42,12 @@ const LoginForm = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" className="login-button">
-        Iniciar Sesión
-      </button>
+      <div className="button-container">
+        <button type="submit" className="login-button">
+          Iniciar Sesión
+        </button>
+      </div>
+
       <p className="register-link">
         ¿No tienes cuenta? <a href="/register">Regístrate</a>
       </p>
