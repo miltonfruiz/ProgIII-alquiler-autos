@@ -1,0 +1,33 @@
+.whyUsSection {
+  margin: 50px 150px 0 150px;
+}
+
+.imagenConsensionaria {
+  width: 1630px;
+}
+
+.whyUsConteiner {
+  position: relative;
+}
+
+.whyUsText {
+  color: white;
+}
+
+.trustText {
+  font-weight: 500;
+  max-width: 45%;
+  font-size: 6rem;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  color: #edefff;
+}
+
+.whyUs {
+  position: absolute;
+  top: 13%;
+  right: 5%;
+  max-width: 33%;
+  font-size: 1.5rem;
+}

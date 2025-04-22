@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./Categorias.module.css";
-import economicCar from "../../assets/toyota_etios.png";
-import estandarCar from "../../assets/fiat-cronos.png";
-import suvCar from "../../assets/vw-t-cross.png";
-import fullSizeCar from "../../assets/toyota_etios-sedan.png";
+import economicCar from "../../../assets/toyota_etios.png";
+import estandarCar from "../../../assets/fiat-cronos.png";
+import suvCar from "../../../assets/vw-t-cross.png";
+import fullSizeCar from "../../../assets/toyota_etios-sedan.png";
 
 function Categorias() {
   return (
