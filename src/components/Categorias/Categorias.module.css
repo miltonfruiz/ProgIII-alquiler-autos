@@ -1,0 +1,82 @@
+.categoriesSection {
+  margin: 50px 150px 0 150px;
+}
+
+.titleConteiner {
+  color: #1a202c;
+  font-size: 1.5rem;
+}
+
+.titleConteiner h2 {
+  font-weight: 500;
+}
+
+.categoriesConteiner {
+  display: flex;
+  gap: 80px;
+  margin-left: 20px;
+}
+
+.cardConteiner {
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem;
+  width: 400px;
+  height: 380px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.cardTitle {
+  font-size: 1.3rem;
+  margin-top: 0;
+}
+
+.cardImage {
+  width: 230px;
+  height: 110px;
+  margin: 40px auto 0 auto;
+  display: block;
+}
+
+.cardLabel {
+  font-weight: 500;
+  color: #90a3bf;
+  margin-bottom: 0;
+  margin-top: 2.5rem;
+}
+
+.cardPrice {
+  margin-top: 0;
+}
+
+.priceValue {
+  color: #1a202c;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.priceUnit {
+  font-weight: 500;
+  color: #d4d5ff;
+}
+
+/* Button */
+
+.cardButton {
+  background-color: #9ea4ff;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.cardButton a {
+  color: #fff;
+}
+
+.estandarImage {
+  width: 250px;
+  height: 120px;
+}

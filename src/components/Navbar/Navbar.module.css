@@ -1,0 +1,36 @@
+.navBarConteiner {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* para que quede encima de todo */
+  background-color: #7a77ff;
+  height: 100px;
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 150px 0 150px;
+}
+
+.logoMarca {
+  width: 125px;
+  height: 100px;
+}
+
+.iconsConteiner a {
+  color: white;
+  font-size: 30px;
+  transition: 0.3s ease;
+}
+
+.iconsConteiner a:hover {
+  color: #21174f;
+  transform: scale(1.2);
+}
+
+.carIcon {
+  margin-right: 5rem;
+}
+
+.carIcon {
+  margin-right: 5rem;
+}
