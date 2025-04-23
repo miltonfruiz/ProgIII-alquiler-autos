@@ -1,12 +1,14 @@
 import LoginForm from "../components/LoginForm/LoginForm";
 import LoginValidation from "../components/LoginValidation/LoginValidation";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [errores, setErrores] = useState({});
+  const navigate = useNavigate();
 
   const handleLogin = (FormData) => {
     const errorValidation = LoginValidation({ datos: FormData });
@@ -20,6 +22,9 @@ const Login = () => {
     } else {
       setErrores({});
       alert("Usuario ingresado correctamente!");
+      setTimeout(() => {
+        navigate("/testhome");
+      }, 2000);
     }
   };
   return (
