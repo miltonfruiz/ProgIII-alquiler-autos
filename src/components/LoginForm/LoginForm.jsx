@@ -4,7 +4,7 @@ import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FiLogIn } from "react-icons/fi";
 
-const LoginForm = ({ errores }) => {
+const LoginForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,7 +18,7 @@ const LoginForm = ({ errores }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Falta lógica console.log("Datos enviados:", formData);
+    onSubmit(formData);
   };
   return (
     <form className="login-form" onSubmit={handleSubmit}>
@@ -35,6 +35,7 @@ const LoginForm = ({ errores }) => {
           placeholder="tunombre@gmail.com"
           value={formData.email}
           onChange={handleChange}
+          ref={refs.emailRef}
         />
         {errores.email && <p style={{ color: "red" }}>{errores.email}</p>}
       </div>
@@ -50,6 +51,7 @@ const LoginForm = ({ errores }) => {
           placeholder="********"
           value={formData.password}
           onChange={handleChange}
+          ref={refs.passwordRef}
         />
         {errores.password && <p style={{ color: "red" }}>{errores.password}</p>}
       </div>
