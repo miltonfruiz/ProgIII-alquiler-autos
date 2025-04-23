@@ -1,4 +1,4 @@
-const ValidationLogin = ({ datos }) => {
+const LoginValidation = ({ datos }) => {
   const errores = {};
   if (!datos.email.trim()) {
     errores.email = "El email es obligatorio";
@@ -12,4 +12,4 @@ const ValidationLogin = ({ datos }) => {
   }
   return errores;
 };
-export default ValidationLogin;
+export default LoginValidation;
