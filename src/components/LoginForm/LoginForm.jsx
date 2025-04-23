@@ -4,7 +4,7 @@ import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FiLogIn } from "react-icons/fi";
 
-const LoginForm = () => {
+const LoginForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,7 +18,7 @@ const LoginForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Falta lógica console.log("Datos enviados:", formData);
+    onSubmit(formData);
   };
   return (
     <form className="login-form" onSubmit={handleSubmit}>
@@ -35,7 +35,11 @@ const LoginForm = () => {
           placeholder="tunombre@gmail.com"
           value={formData.email}
           onChange={handleChange}
+          ref={refs.emailRef}
         />
+        <p className={`error-message ${errores.email ? "visible" : ""}`}>
+          {errores.email || ""}
+        </p>
       </div>
       <div className="form-group">
         <label htmlFor="password" className="label-with-icon">
@@ -49,7 +53,11 @@ const LoginForm = () => {
           placeholder="********"
           value={formData.password}
           onChange={handleChange}
+          ref={refs.passwordRef}
         />
+        <p className={`error-message ${errores.password ? "visible" : ""}`}>
+          {errores.password || ""}
+        </p>
       </div>
       <div className="button-container">
         <button type="submit" className="login-button">
@@ -57,7 +65,6 @@ const LoginForm = () => {
           Iniciar Sesión
         </button>
       </div>
-
       <p className="register-link">
         ¿No tienes cuenta? <a href="/register">Regístrate</a>
       </p>
