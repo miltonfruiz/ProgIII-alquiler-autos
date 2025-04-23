@@ -4,7 +4,7 @@ import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FiLogIn } from "react-icons/fi";
 
-const LoginForm = () => {
+const LoginForm = ({ errores }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -36,6 +36,7 @@ const LoginForm = () => {
           value={formData.email}
           onChange={handleChange}
         />
+        {errores.email && <p style={{ color: "red" }}>{errores.email}</p>}
       </div>
       <div className="form-group">
         <label htmlFor="password" className="label-with-icon">
@@ -50,6 +51,7 @@ const LoginForm = () => {
           value={formData.password}
           onChange={handleChange}
         />
+        {errores.password && <p style={{ color: "red" }}>{errores.password}</p>}
       </div>
       <div className="button-container">
         <button type="submit" className="login-button">
