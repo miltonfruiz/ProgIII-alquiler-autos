@@ -17,7 +17,6 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
 }
 .form-group label {
   margin-bottom: 0.5rem;
@@ -83,4 +82,34 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
+}
+.error-message {
+  height: 1rem;
+  color: red;
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.error-message.visible {
+  opacity: 1;
+}
+.label-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.button-container .login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.85rem;
 }
