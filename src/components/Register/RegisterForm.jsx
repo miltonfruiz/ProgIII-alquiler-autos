@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { AiOutlineUser } from "react-icons/ai"; // nombre
-import { AiTwotoneMail } from "react-icons/ai"; // mail
+import { MdDriveFileRenameOutline } from "react-icons/md"; // nombre
+import { MdMail } from "react-icons/md"; // mail
 import { RiLockPasswordFill } from "react-icons/ri"; // contraseña
-import { CiCalendarDate } from "react-icons/ci"; // fecha nacimiento
+import { IoCalendar } from "react-icons/io5"; // fecha nacimiento
 import { HiIdentification } from "react-icons/hi2"; // dni
 import { TbLicense } from "react-icons/tb"; // licencia
 import { IoSearchOutline } from "react-icons/io5"; // buscador
@@ -36,11 +36,7 @@ const RegisterForm = () => {
         />
         <div className="divBusqueda">
           <button className="botonBuscar">
-            <img
-              className="imagenBuscar"
-              src="https://cdn.pixabay.com/photo/2015/12/14/20/35/magnifier-1093183_1280.png"
-              alt=""
-            />
+            <IoSearchOutline className="imagenBuscar"></IoSearchOutline>
           </button>
           <input
             className="barraBusqueda"
@@ -49,21 +45,17 @@ const RegisterForm = () => {
           />
         </div>
 
-        <img
-          className="imagenAuto"
-          src="https://cdn.pixabay.com/photo/2017/01/31/16/58/car-2025538_1280.png"
-          alt=""
-        />
-        <img
+        <FaCar style={{ color: "black" }} className="imagenAuto"></FaCar>
+        <LuUserRound
+          style={{ color: "black" }}
           className="imagenPersona"
-          src="https://cdn.pixabay.com/photo/2022/09/21/02/37/woman-7469274_1280.png"
-          alt=""
-        />
+        ></LuUserRound>
       </nav>
       <form className="formRegister" action="">
         <h1 className="titleRegister">Registrarse</h1>
         <div className="gridRegister">
           <div>
+            <MdDriveFileRenameOutline></MdDriveFileRenameOutline>
             <label className="labelRegister">Nombre</label>
             <input
               className="inputRegister"
@@ -75,6 +67,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
+            <MdDriveFileRenameOutline></MdDriveFileRenameOutline>
             <label className="labelRegister">Apellido</label>
             <input
               className="inputRegister"
@@ -86,6 +79,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
+            <MdMail></MdMail>
             <label className="labelRegister">Correo elecrónico</label>
             <input
               className="inputRegister"
@@ -96,6 +90,7 @@ const RegisterForm = () => {
             />
           </div>
           <div>
+            <RiLockPasswordFill></RiLockPasswordFill>
             <label className="labelRegister">Contraseña</label>
             <input
               className="inputRegister"
@@ -106,6 +101,7 @@ const RegisterForm = () => {
             />
           </div>
           <div>
+            <RiLockPasswordFill></RiLockPasswordFill>
             <label className="labelRegister">Repetir contraseña</label>
             <input
               className="inputRegister"
@@ -117,6 +113,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
+            <HiIdentification></HiIdentification>
             <label className="labelRegister">DNI</label>
             <input
               className="inputRegister"
@@ -128,6 +125,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
+            <IoCalendar></IoCalendar>
             <label className="labelRegister">Fecha de Nacimiento</label>
             <input
               className="inputRegister"
@@ -139,6 +137,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
+            <TbLicense></TbLicense>
             <label className="labelRegister">N° De licencia</label>
             <input
               className="inputRegister"
