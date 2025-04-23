@@ -3,6 +3,7 @@ import Hero from "./Hero/Hero";
 import Categorias from "./Categorias/Categorias";
 import Recomendados from "./Recomendados/Recomendados";
 import WhyUs from "./WhyUs/WhyUs";
+import Opiniones from "./Opiniones/Opiniones";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <Categorias />
       <Recomendados />
       <WhyUs />
+      <Opiniones />
     </>
   );
 }

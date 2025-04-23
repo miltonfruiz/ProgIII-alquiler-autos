@@ -1,0 +1,109 @@
+/* Sistema de estrellas */
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.filledStar {
+  color: #3e26ad; /* Amarillo dorado */
+}
+
+.emptyStar {
+  color: #e0e0e0; /* Gris claro */
+}
+
+.opinionesTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 3.75rem;
+}
+
+.ratingText {
+  margin-left: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.opinionesSection {
+  width: 1550px;
+  margin: 50px 150px 0 150px;
+}
+
+.opinionesConteiner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  row-gap: 6.25rem;
+  column-gap: 4.688rem;
+}
+
+.opinionesCard {
+  display: flex;
+  width: 450px;
+  height: 210px;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.cardContent {
+  margin-left: 1.25rem;
+  width: 370px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardRating {
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+.profilePicConteiner {
+  flex-shrink: 0;
+}
+
+.imageCard {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nameCard {
+  color: #1a202c;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.dateCard {
+  color: #596780;
+}
+
+.cardIcon {
+  margin-right: 8px;
+}
+
+.cardVehicule {
+  color: #596780;
+}
+
+.cardOpinion {
+  color: #596780;
+  margin: 0.5rem 0;
+  font-weight: 300;
+}
+
+.ratingText {
+  margin-left: 0px;
+  margin-right: 130px;
+}
