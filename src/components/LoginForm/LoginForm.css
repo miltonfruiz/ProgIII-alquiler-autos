@@ -101,14 +101,12 @@
   font-weight: 500;
   margin-bottom: 0.25rem;
 }
-
 .button-container .login-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
-
 .register-link {
   margin-top: 1rem;
   font-size: 0.85rem;

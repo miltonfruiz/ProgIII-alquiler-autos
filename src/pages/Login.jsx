@@ -2,6 +2,8 @@ import LoginForm from "../components/LoginForm/LoginForm";
 import LoginValidation from "../components/LoginValidation/LoginValidation";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 const Login = () => {
@@ -21,10 +23,10 @@ const Login = () => {
       setErrores(errorValidation);
     } else {
       setErrores({});
-      alert("Usuario ingresado correctamente!");
+      toast.success("¡Usuario ingresado correctamente!");
       setTimeout(() => {
         navigate("/testhome");
-      }, 2000);
+      }, 4000);
     }
   };
   return (
@@ -41,6 +43,7 @@ const Login = () => {
           />
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
 };
