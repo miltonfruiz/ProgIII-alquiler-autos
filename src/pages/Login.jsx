@@ -9,14 +9,14 @@ const Login = () => {
   const [errores, setErrores] = useState({});
 
   const handleLogin = (FormData) => {
-    const errores = LoginValidation({ datos: FormData });
-    if (Object.keys(errores).length > 0) {
-      if (errores.email && emailRef.current) {
+    const errorValidation = LoginValidation({ datos: FormData });
+    if (Object.keys(errorValidation).length > 0) {
+      if (errorValidation.email && emailRef.current) {
         emailRef.current.focus();
-      } else if (errores.password && passwordRef.current) {
+      } else if (errorValidation.password && passwordRef.current) {
         passwordRef.current.focus();
       }
-      setErrores(errores);
+      setErrores(errorValidation);
     } else {
       setErrores({});
       alert("Usuario ingresado correctamente!");
