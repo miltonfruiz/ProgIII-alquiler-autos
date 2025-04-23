@@ -1,5 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { AiOutlineUser } from "react-icons/ai"; // nombre
+import { AiTwotoneMail } from "react-icons/ai"; // mail
+import { RiLockPasswordFill } from "react-icons/ri"; // contraseña
+import { CiCalendarDate } from "react-icons/ci"; // fecha nacimiento
+import { HiIdentification } from "react-icons/hi2"; // dni
+import { TbLicense } from "react-icons/tb"; // licencia
+import { IoSearchOutline } from "react-icons/io5"; // buscador
+import { FaCar } from "react-icons/fa"; // auto
+import { LuUserRound } from "react-icons/lu"; // persona
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -143,7 +152,7 @@ const RegisterForm = () => {
         <div className="divButton">
           <button className="buttonRegister">Registrarse</button>
           <p>
-            ya tienes cuenta? <a href="/loginForm">iniciar seccion</a>
+            ¿Ya tienes cuenta? <a href="/loginForm">Iniciar seccion</a>
           </p>
         </div>
       </form>
