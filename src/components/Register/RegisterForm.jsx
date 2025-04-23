@@ -7,8 +7,9 @@ import { IoCalendar } from "react-icons/io5"; // fecha nacimiento
 import { HiIdentification } from "react-icons/hi2"; // dni
 import { TbLicense } from "react-icons/tb"; // licencia
 import { IoSearchOutline } from "react-icons/io5"; // buscador
-import { FaCar } from "react-icons/fa"; // auto
+import { BiCar } from "react-icons/bi"; // auto
 import { LuUserRound } from "react-icons/lu"; // persona
+import { VscSettings } from "react-icons/vsc"; // settings
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +31,7 @@ const RegisterForm = () => {
     <div className="container">
       <nav className="navRegister">
         <img
-          className="imagenAutoRegister"
+          className="autoHeader"
           src="https://s3-alpha-sig.figma.com/img/d1ab/d407/925ba1de8ebb96f996afb3d06d39aac3?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=DCr8hQQY1QJgj1ZGW-YPjU6P6Ls1jYMt~~AzOYOO-GAq2IaQM9QCdBIy4sIaPiVhQWTZwSW72Lx5kytW7VE3M8S~zvlS89wTSCCWEsZcc3WcU4kgiIp-F0RIVz-T9cc8xsVXJuxSBGEDA~e-VgDh0S1n-gKGv1XlqvLzzkjSgE7lEbMI5n4i5YOparI6Pti-v48nwv6NwhkGHxK9Ad7Xfod2mvSKA2HrCWdoPxH9mF~7MnncWCOMIjJchxsP4FXBQp6PdiLEXw~eClqwhcctDkSS7bbDbmi8oJWhb0sR2oywKh9TTD9lpgciBIwP3BDfvgDxL8CjXZtCzamE1RNYxQ__"
           alt=""
         />
@@ -43,20 +44,22 @@ const RegisterForm = () => {
             type="search"
             placeholder="Buscar algo aqui"
           />
+          <button className="botonSettings">
+            <VscSettings className="settings"></VscSettings>
+          </button>
         </div>
 
-        <FaCar style={{ color: "black" }} className="imagenAuto"></FaCar>
-        <LuUserRound
-          style={{ color: "black" }}
-          className="imagenPersona"
-        ></LuUserRound>
+        <BiCar className="imagenAuto"></BiCar>
+        <LuUserRound className="imagenPersona"></LuUserRound>
       </nav>
       <form className="formRegister" action="">
         <h1 className="titleRegister">Registrarse</h1>
         <div className="gridRegister">
           <div>
-            <MdDriveFileRenameOutline></MdDriveFileRenameOutline>
-            <label className="labelRegister">Nombre</label>
+            <div>
+              <MdDriveFileRenameOutline id="icono"></MdDriveFileRenameOutline>
+              <label className="labelRegister">Nombre</label>
+            </div>
             <input
               className="inputRegister"
               placeholder="Nombre"
@@ -67,7 +70,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
-            <MdDriveFileRenameOutline></MdDriveFileRenameOutline>
+            <MdDriveFileRenameOutline id="icono"></MdDriveFileRenameOutline>
             <label className="labelRegister">Apellido</label>
             <input
               className="inputRegister"
@@ -79,7 +82,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
-            <MdMail></MdMail>
+            <MdMail id="icono"></MdMail>
             <label className="labelRegister">Correo elecrónico</label>
             <input
               className="inputRegister"
@@ -90,7 +93,7 @@ const RegisterForm = () => {
             />
           </div>
           <div>
-            <RiLockPasswordFill></RiLockPasswordFill>
+            <RiLockPasswordFill id="icono"></RiLockPasswordFill>
             <label className="labelRegister">Contraseña</label>
             <input
               className="inputRegister"
@@ -101,7 +104,7 @@ const RegisterForm = () => {
             />
           </div>
           <div>
-            <RiLockPasswordFill></RiLockPasswordFill>
+            <RiLockPasswordFill id="icono"></RiLockPasswordFill>
             <label className="labelRegister">Repetir contraseña</label>
             <input
               className="inputRegister"
@@ -113,7 +116,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
-            <HiIdentification></HiIdentification>
+            <HiIdentification id="icono"></HiIdentification>
             <label className="labelRegister">DNI</label>
             <input
               className="inputRegister"
@@ -125,7 +128,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
-            <IoCalendar></IoCalendar>
+            <IoCalendar id="icono"></IoCalendar>
             <label className="labelRegister">Fecha de Nacimiento</label>
             <input
               className="inputRegister"
@@ -137,7 +140,7 @@ const RegisterForm = () => {
           </div>
 
           <div>
-            <TbLicense></TbLicense>
+            <TbLicense id="icono"></TbLicense>
             <label className="labelRegister">N° De licencia</label>
             <input
               className="inputRegister"
@@ -150,8 +153,8 @@ const RegisterForm = () => {
         </div>
         <div className="divButton">
           <button className="buttonRegister">Registrarse</button>
-          <p>
-            ¿Ya tienes cuenta? <a href="/loginForm">Iniciar seccion</a>
+          <p className="tienesCuenta">
+            ¿Ya tienes una cuenta? <a href="/loginForm">Iniciar seccion</a>
           </p>
         </div>
       </form>
