@@ -43,6 +43,7 @@ const Login = () => {
           />
         </div>
       </div>
+      <p className="login-footer">© 2025 Todos los derechos reservados</p>
       <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
