@@ -65,6 +65,9 @@ const LoginForm = ({ onSubmit, errores, refs }) => {
           Iniciar Sesión
         </button>
       </div>
+      <p className="forgot-password">
+        <a href="/recuperar-password">¿Olvidaste tu contraseña?</a>
+      </p>
       <p className="register-link">
         ¿No tienes cuenta? <a href="/register">Regístrate</a>
       </p>
