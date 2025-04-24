@@ -2,7 +2,6 @@
   background-color: #ffffff;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
@@ -87,7 +86,7 @@
 .error-message {
   height: 1rem;
   color: red;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   margin-top: 0.2rem;
   margin-bottom: 0.7rem;
   transition: opacity 0.3s ease;
