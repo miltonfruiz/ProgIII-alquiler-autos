@@ -5,9 +5,10 @@
 }
 
 .container {
-  background-color: #eeeeee;
+  margin: 0; /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina paddings por defecto */
+  min-height: 100vh; /* Opcional: cubre toda la pantalla */
 }
-
 img {
   max-width: 100%;
   height: auto;
@@ -31,23 +32,29 @@ img {
 
 .divBusqueda {
   margin-left: 2.5em;
+  position: relative;
+  display: inline-flex;
 }
 
-.botonBuscar {
+.botonBuscar,
+.botonSettings {
   display: inline;
   border-radius: 5em;
   height: 2.2em;
   position: absolute;
   background-color: #ffffff;
   border: none;
-  margin-left: 0.2em;
 }
 
-.imagenBuscar {
-  width: 1.5em;
-  height: 1.5em;
-  padding: auto;
-  margin: auto;
+.botonSettings {
+  right: 0.1em;
+}
+
+.imagenBuscar,
+.settings {
+  width: 1.2em;
+  height: 1.2em;
+  display: flex;
 }
 
 .barraBusqueda {
@@ -56,26 +63,15 @@ img {
   border-radius: 3em;
   border: none;
   padding-left: 5em;
-}
-
-botonSettings {
-  height: 2em;
-  background-color: #ffffff;
-  border-radius: 3em;
-  position: absolute;
-  padding: 0;
-  border-radius: 18em;
-}
-
-.settings {
-  padding: 0;
+  padding-right: 5em;
 }
 
 .imagenAuto {
   width: 2em;
   height: 2em;
-  margin-left: 29em;
+  margin-left: 28em;
   color: #fff;
+  cursor: pointer;
 }
 
 .imagenPersona {
@@ -83,6 +79,7 @@ botonSettings {
   height: 2em;
   margin-left: 4em;
   color: #fff;
+  cursor: pointer;
 }
 
 .formRegister {
@@ -151,4 +148,5 @@ botonSettings {
 
 .tienesCuenta {
   color: #dde2ff;
+  margin-top: 1em;
 }

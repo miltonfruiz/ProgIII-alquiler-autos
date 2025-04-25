@@ -153,6 +153,7 @@ const RegisterForm = () => {
         </div>
         <div className="divButton">
           <button className="buttonRegister">Registrarse</button>
+          <a className="olvidaste">¿Olvidaste tu contraseña?</a>
           <p className="tienesCuenta">
             ¿Ya tienes una cuenta? <a href="/loginForm">Iniciar seccion</a>
           </p>
