@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./PasswordRecover.css";
 import { MdEmail } from "react-icons/md";
+import { IoIosSend } from "react-icons/io";
+import { TiArrowBack } from "react-icons/ti";
 import { ToastContainer, toast } from "react-toastify";
 
 const PasswordRecover = () => {
@@ -16,11 +18,11 @@ const PasswordRecover = () => {
     setEmail("");
   };
   return (
-    <div className="recuperar-page">
-      <form className="recuperar-form" onSubmit={handleSubmit}>
+    <div className="page-recovery">
+      <form className="form-recovery" onSubmit={handleSubmit}>
         <h2>Recuperar Contraseña</h2>
         <label htmlFor="email">
-          <MdEmail size={14} style={{ marginRight: "0.5rem" }} />
+          <MdEmail size={14} className="md-email" />
           Correo electrónico
         </label>
         <input
@@ -31,9 +33,15 @@ const PasswordRecover = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button type="submit">Enviar instrucciones</button>
-        <p className="volver-link">
-          <a href="/">Volver al login</a>
+        <button className="button-send-instructions" type="submit">
+          <IoIosSend size={14} />
+          Enviar instrucciones
+        </button>
+        <p className="back-link">
+          <a href="/">
+            <TiArrowBack size={14} className="arrow-back" />
+            Volver a Inicio Sesión
+          </a>
         </p>
       </form>
       <ToastContainer position="top-center" autoClose={4000} />

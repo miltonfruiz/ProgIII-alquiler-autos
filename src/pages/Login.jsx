@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({ setLogged }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [errores, setErrores] = useState({});
@@ -22,11 +22,12 @@ const Login = () => {
       }
       setErrores(errorValidation);
     } else {
-      setErrores({});
       toast.success("¡Usuario ingresado correctamente!");
+      setErrores({});
+      setLogged(true);
       setTimeout(() => {
         navigate("/testhome");
-      }, 4000);
+      }, 3000);
     }
   };
   return (
