@@ -14,16 +14,10 @@ function Navbar() {
         alt="logo de la marca"
       ></img>
       <div className={styles.iconsConteiner}>
-        <a
-          href="https://www.instagram.com/chinososa__/"
-          className={styles.carIcon}
-        >
+        <a href="#" className={styles.carIcon}>
           <FontAwesomeIcon icon={faCar} />
         </a>
-        <a
-          href="https://www.instagram.com/chinososa__/"
-          className={styles.userIcon}
-        >
+        <a href="#" className={styles.userIcon}>
           <FontAwesomeIcon icon={faUser} />
         </a>
       </div>

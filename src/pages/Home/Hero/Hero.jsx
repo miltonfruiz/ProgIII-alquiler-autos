@@ -17,7 +17,7 @@ function Hero() {
         </div>
 
         <div className={styles.btnConteiner}>
-          <button>Rentar ya</button>
+          <a href="#">Rentar ya</a>
         </div>
       </div>
       <div className={styles.carImgConteiner}>

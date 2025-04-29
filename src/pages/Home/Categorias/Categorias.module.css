@@ -17,6 +17,8 @@
   margin-left: 20px;
 }
 
+/* Card */
+
 .cardConteiner {
   display: flex;
   flex-direction: column;
@@ -70,13 +72,19 @@
   text-decoration: none;
   padding: 15px;
   border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardButton:hover {
+  background-color: #7371fc;
 }
 
 .cardButton a {
   color: #fff;
+  padding: 15px 100px;
 }
 
 .estandarImage {
   width: 250px;
-  height: 120px;
+  height: 110px;
 }
