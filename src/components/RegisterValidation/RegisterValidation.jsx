@@ -58,4 +58,4 @@ const Validation = ({ datos }) => {
   }
 };
 
-export default Validation;
+export default RegisterValidation;

@@ -49,8 +49,8 @@ const RegisterForm = () => {
           </button>
         </div>
 
-        <BiCar className="imagenAuto"></BiCar>
-        <LuUserRound className="imagenPersona"></LuUserRound>
+        <BiCar title="Autos" className="imagenAuto"></BiCar>
+        <LuUserRound title="Usuarios" className="imagenPersona"></LuUserRound>
       </nav>
       <form className="formRegister" action="">
         <h1 className="titleRegister">Registrarse</h1>
@@ -153,12 +153,12 @@ const RegisterForm = () => {
         </div>
         <div className="divButton">
           <button className="buttonRegister">Registrarse</button>
-          <a className="olvidaste">¿Olvidaste tu contraseña?</a>
           <p className="tienesCuenta">
             ¿Ya tienes una cuenta? <a href="/loginForm">Iniciar seccion</a>
           </p>
         </div>
       </form>
+      <p className="login-footer">© 2025 Todos los derechos reservados</p>
     </div>
   );
 };
