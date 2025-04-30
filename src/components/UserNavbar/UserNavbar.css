@@ -3,11 +3,12 @@
   align-items: center;
   justify-content: space-between;
   background-color: #5e49d8;
-  padding: 12px 24px;
+  padding: 2px 24px;
   color: white;
 }
 .navbar-left .navbar-logo {
-  height: 35px;
+  width: 80px;
+  height: auto;
   cursor: pointer;
 }
 .navbar-center {
@@ -20,20 +21,23 @@
   align-items: center;
   background-color: white;
   border-radius: 999px;
-  padding: 1px 18px;
+  padding: 0px 18px;
   width: 100%;
   max-width: 350px;
+}
+.search-icon {
+  color: gray;
 }
 .logo-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 100px;
+  padding: 0px 100px;
 }
 .icon-wrapper {
   display: flex;
   gap: 40px;
-  padding: 4px 100px;
+  padding: 0px 100px;
 }
 .user-container,
 .cars-container {
@@ -51,7 +55,8 @@
 }
 .navbar-search::placeholder {
   font-size: 12px;
-  color: grey;
+  color: rgb(128, 128, 128);
+  font-style: oblique;
 }
 .navbar-filter {
   background: none;

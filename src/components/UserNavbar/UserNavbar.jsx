@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./UserNavbar.css";
+import { CiSearch } from "react-icons/ci";
+import { VscSettings } from "react-icons/vsc";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -9,7 +11,7 @@ export default function Navbar() {
       <div className="navbar-left">
         <div className="logo-wrapper">
           <img
-            src=""
+            src="/public/images/logo.png"
             alt="Logo"
             className="navbar-logo"
             onClick={() => navigate("/testhome")}
@@ -18,13 +20,14 @@ export default function Navbar() {
       </div>
       <div className="navbar-center">
         <div className="search-wrapper">
+          <CiSearch size={18} className="search-icon" />
           <input
             type="text"
             placeholder="Ingrese nombre o modelo de auto..."
             className="navbar-search"
           />
           <button className="navbar-filter">
-            <img src="" alt="Filtro" />
+            <VscSettings size={18} className="search-icon" />
           </button>
         </div>
       </div>
