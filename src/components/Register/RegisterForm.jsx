@@ -31,11 +31,7 @@ const RegisterForm = () => {
   return (
     <div className="container">
       <nav className="navRegister">
-        <img
-          className="autoHeader"
-          src="https://s3-alpha-sig.figma.com/img/d1ab/d407/925ba1de8ebb96f996afb3d06d39aac3?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=DCr8hQQY1QJgj1ZGW-YPjU6P6Ls1jYMt~~AzOYOO-GAq2IaQM9QCdBIy4sIaPiVhQWTZwSW72Lx5kytW7VE3M8S~zvlS89wTSCCWEsZcc3WcU4kgiIp-F0RIVz-T9cc8xsVXJuxSBGEDA~e-VgDh0S1n-gKGv1XlqvLzzkjSgE7lEbMI5n4i5YOparI6Pti-v48nwv6NwhkGHxK9Ad7Xfod2mvSKA2HrCWdoPxH9mF~7MnncWCOMIjJchxsP4FXBQp6PdiLEXw~eClqwhcctDkSS7bbDbmi8oJWhb0sR2oywKh9TTD9lpgciBIwP3BDfvgDxL8CjXZtCzamE1RNYxQ__"
-          alt=""
-        />
+        <img className="autoHeader" src="public\images\autoNav.png" alt="" />
         <div className="divBusqueda">
           <button className="botonBuscar">
             <IoSearchOutline className="imagenBuscar"></IoSearchOutline>
