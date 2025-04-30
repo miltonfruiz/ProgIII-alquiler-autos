@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { MdDriveFileRenameOutline } from "react-icons/md"; // nombre
 import { MdMail } from "react-icons/md"; // mail
@@ -154,7 +155,7 @@ const RegisterForm = () => {
         <div className="divButton">
           <button className="buttonRegister">Registrarse</button>
           <p className="tienesCuenta">
-            ¿Ya tienes una cuenta? <a href="/loginForm">Iniciar seccion</a>
+            ¿Ya tienes una cuenta? <a href="/">Iniciar seccion</a>
           </p>
         </div>
       </form>
