@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import TestHome from "./components/TestHome/TestHome";
 import PasswordRecover from "./pages/PasswordRecover";
 import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUser";
+import UserProfile from "./pages/UserProfile";
 import { useState } from "react";
 
 function App() {
@@ -17,6 +18,14 @@ function App() {
           element={
             <ProtectedRouteUser isSigned={loggedIn}>
               <TestHome />
+            </ProtectedRouteUser>
+          }
+        />
+        <Route
+          path="/user-profile"
+          element={
+            <ProtectedRouteUser isSigned={loggedIn}>
+              <UserProfile />
             </ProtectedRouteUser>
           }
         />

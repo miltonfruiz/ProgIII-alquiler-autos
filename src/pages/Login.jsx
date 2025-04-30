@@ -26,7 +26,7 @@ const Login = ({ setLogged }) => {
       setErrores({});
       setLogged(true);
       setTimeout(() => {
-        navigate("/testhome");
+        navigate("/user-profile");
       }, 3000);
     }
   };

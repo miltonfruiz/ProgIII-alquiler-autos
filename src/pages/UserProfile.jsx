@@ -1,9 +1,10 @@
 import React from "react";
+import UserNavbar from "../components/UserNavbar/UserNavbar";
 
-const ProfileUser = () => {
+const UserProfile = () => {
   return (
     <div>
-      <p>Componente Menu</p>
+      <UserNavbar />
       <p>Componente Perfil</p>
       <p>Componente Mis Reservas</p>
       <p>Componente Reservas pasadas</p>
@@ -11,4 +12,4 @@ const ProfileUser = () => {
   );
 };
 
-export default ProfileUser;
+export default UserProfile;
