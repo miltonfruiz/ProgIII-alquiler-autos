@@ -5,14 +5,17 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const nameRegister = useRef(null);
-  const lastNameRegister = useRef(null);
-  const emailRegister = useRef(null);
-  const passwordRegister = useRef(null);
-  const verifyPasswordRegister = useRef(null);
-  const dniRegister = useRef(null);
-  const nacimientoRegister = useRef(null);
-  const licenciaRegister = useRef(null);
+  const useRefs = useRef({
+    nameRegister: null,
+    lastNameRegister: null,
+    emailRegister: null,
+    passwordRegister: null,
+    verifyPasswordRegister: null,
+    dniRegister: null,
+    nacimientoRegister: null,
+    licenciaRegister: null,
+  });
+
   const [errores, setErrores] = useState({});
   const navigate = useNavigate();
 
@@ -31,17 +34,14 @@ const Register = () => {
     const erroresRegister = RegisterValidation({ datos: formRegister });
 
     if (Object.keys(erroresRegister).length > 0) {
-      const asignadoFocus = (error) => {
-        if (erroresRegister.error && `${error}Register`.current) {
-          `${error}Register`.current.focus();
+      arrayErrores.map((index, error) => {
+        if (error in erroresRegister && useRefs[index].current) {
+          useRefs[index].current.focus();
         }
-      };
-
-      for (const error of arrayErrores) {
-        asignadoFocus(error);
-      }
+      });
 
       setErrores(erroresRegister);
+      console.log(errores);
     } else {
       setErrores({});
     }
@@ -53,14 +53,7 @@ const Register = () => {
         onSubmit={handleSubmit}
         errores={errores}
         refs={{
-          nameRegister,
-          lastNameRegister,
-          emailRegister,
-          passwordRegister,
-          verifyPasswordRegister,
-          dniRegister,
-          nacimientoRegister,
-          licenciaRegister,
+          useRefs,
         }}
       />
     </div>
