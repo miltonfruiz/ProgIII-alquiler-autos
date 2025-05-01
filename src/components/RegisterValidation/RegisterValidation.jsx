@@ -1,51 +1,54 @@
 const RegisterValidation = ({ datos }) => {
   const errores = {};
 
+  console.log(datos);
+
   if (!datos.name.trim()) {
-    errores.name = "El nombre es obligatorio";
+    errores.name = "* El nombre es obligatorio";
   } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.name)) {
-    errores.name = "Solo se permiten letras";
+    errores.name = "* Solo se permiten letras";
   }
 
   if (!datos.lastName.trim()) {
-    errores.lastName = "El nombre es obligatorio";
+    errores.lastName = "* El nombre es obligatorio";
   } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.lastName)) {
-    errores.lastName = "Solo se permiten letras";
+    errores.lastName = "* Solo se permiten letras";
   }
 
   if (!datos.email.trim()) {
-    errores.email = "El email es obligatorio";
+    errores.email = "* El email es obligatorio";
   } else if (!/\S+@\S+\.\S+/.test(datos.email)) {
-    errores.email = "El email no es válido";
+    errores.email = "* El email no es válido";
   }
 
   if (!datos.password.trim()) {
-    errores.password = "La contraseña es obligatoria";
+    errores.password = "* La contraseña es obligatoria";
   } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(datos.password)) {
-    errores.password = "Mínimo 8 caracteres, incluyendo letras y números";
+    errores.password = "* Mínimo 8 caracteres, incluyendo letras y números";
   }
 
   if (!datos.verifyPassword.trim()) {
-    errores.verifyPassword = "La contraseña es obligatoria";
+    errores.verifyPassword = "* La contraseña es obligatoria";
   } else if (
     !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(datos.verifyPassword)
   ) {
-    errores.verifyPassword = "Mínimo 8 caracteres, incluyendo letras y números";
+    errores.verifyPassword =
+      "* Mínimo 8 caracteres, incluyendo letras y números";
   }
 
   if (datos.password != datos.verifyPassword) {
-    errores.verifyPassword = "Las contraseñas deben ser iguales";
+    errores.verifyPassword = "* Las contraseñas deben ser iguales";
   }
 
   if (!datos.dni.trim()) {
-    errores.dni = "el dni es obligatorio";
+    errores.dni = "* el dni es obligatorio";
   } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datos.dni)) {
     errores.dni =
-      "el dni debe tener entre 6 y 8 caracteres y no puede tener letras ni espacios";
+      "* el dni debe tener entre 6 y 8 caracteres y no puede tener letras ni espacios";
   }
 
   if (!datos.nacimiento.trim()) {
-    errores.nacimiento = "la fecha de nacimiento es obligatoria";
+    errores.nacimiento = "* la fecha de nacimiento es obligatoria";
   }
 
   if (!datos.licencia.trim()) {

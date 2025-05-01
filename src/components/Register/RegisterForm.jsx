@@ -69,7 +69,11 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.nameRegister}
             />
-            {errores.name ? <p>{errores.name}</p> : null}
+            {errores.name ? (
+              <p className={`error-message ${errores.name ? "visible" : ""}`}>
+                {errores.name}
+              </p>
+            ) : null}
           </div>
 
           <div>
@@ -83,7 +87,13 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.lastNameRegister}
             />
-            {errores.lastName ? <p>{errores.lastName}</p> : null}
+            {errores.lastName ? (
+              <p
+                className={`error-message ${errores.lastName ? "visible" : ""}`}
+              >
+                {errores.lastName}
+              </p>
+            ) : null}
           </div>
 
           <div>
@@ -97,7 +107,11 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.emailRegister}
             />
-            {errores.email ? <p>{errores.email}</p> : null}
+            {errores.email ? (
+              <p className={`error-message ${errores.email ? "visible" : ""}`}>
+                {errores.email}
+              </p>
+            ) : null}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -110,7 +124,13 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.passwordRegister}
             />
-            {errores.password ? <p>{errores.password}</p> : null}
+            {errores.password ? (
+              <p
+                className={`error-message ${errores.password ? "visible" : ""}`}
+              >
+                {errores.password}
+              </p>
+            ) : null}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -123,7 +143,15 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.verifyPasswordRegister}
             />
-            {errores.verifyPassword ? <p>{errores.verifyPassword}</p> : null}
+            {errores.verifyPassword ? (
+              <p
+                className={`error-message ${
+                  errores.verifyPassword ? "visible" : ""
+                }`}
+              >
+                {errores.verifyPassword}
+              </p>
+            ) : null}
           </div>
 
           <div>
@@ -137,7 +165,11 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.dniRegister}
             />
-            {errores.dni ? <p>{errores.dni}</p> : null}
+            {errores.dni ? (
+              <p className={`error-message ${errores.dni ? "visible" : ""}`}>
+                {errores.dni}
+              </p>
+            ) : null}
           </div>
 
           <div>
@@ -151,7 +183,15 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.nacimientoRegister}
             />
-            {errores.nacimiento ? <p>{errores.nacimiento}</p> : null}
+            {errores.nacimiento ? (
+              <p
+                className={`error-message ${
+                  errores.nacimiento ? "visible" : ""
+                }`}
+              >
+                {errores.nacimiento}
+              </p>
+            ) : null}
           </div>
 
           <div>
@@ -165,7 +205,13 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.licenciaRegister}
             />
-            {errores.licencia ? <p>{errores.licencia}</p> : null}
+            {errores.licencia ? (
+              <p
+                className={`error-message ${errores.licencia ? "visible" : ""}`}
+              >
+                {errores.licencia}
+              </p>
+            ) : null}
           </div>
         </div>
         <div className="divButton">

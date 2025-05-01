@@ -144,6 +144,20 @@ img {
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
+.error-message {
+  height: 1rem;
+  color: red;
+  font-size: 0.72rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.error-message.visible {
+  opacity: 1;
+}
+
 .gridRegister {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
