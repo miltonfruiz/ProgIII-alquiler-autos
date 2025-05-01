@@ -24,7 +24,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
   });
 
   function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.values });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
   function handleSubmit(e) {
