@@ -5,16 +5,16 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const useRefs = useRef({
-    nameRegister: null,
-    lastNameRegister: null,
-    emailRegister: null,
-    passwordRegister: null,
-    verifyPasswordRegister: null,
-    dniRegister: null,
-    nacimientoRegister: null,
-    licenciaRegister: null,
-  });
+  const useRefs = {
+    nameRegister: useRef(null),
+    lastNameRegister: useRef(null),
+    emailRegister: useRef(null),
+    passwordRegister: useRef(null),
+    verifyPasswordRegister: useRef(null),
+    dniRegister: useRef(null),
+    nacimientoRegister: useRef(null),
+    licenciaRegister: useRef(null),
+  };
 
   const [errores, setErrores] = useState({});
   const navigate = useNavigate();
@@ -34,14 +34,13 @@ const Register = () => {
     const erroresRegister = RegisterValidation({ datos: formRegister });
 
     if (Object.keys(erroresRegister).length > 0) {
-      arrayErrores.map((index, error) => {
-        if (error in erroresRegister && useRefs[index].current) {
-          useRefs[index].current.focus();
+      arrayErrores.forEach((error) => {
+        const keyRef = `${error}Register`;
+        if (erroresRegister[error] && useRefs[keyRef].current) {
+          useRefs[keyRef].current.focus();
         }
       });
-
       setErrores(erroresRegister);
-      console.log(errores);
     } else {
       setErrores({});
     }

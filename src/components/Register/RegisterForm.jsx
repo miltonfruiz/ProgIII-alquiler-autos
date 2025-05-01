@@ -69,7 +69,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.nameRegister}
             />
-            {errores.name && <p>{errores.name}</p>}
+            {errores.name ? <p>{errores.name}</p> : null}
           </div>
 
           <div>
@@ -83,7 +83,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.lastNameRegister}
             />
-            {errores.lastName && <p>{errores.lastName}</p>}
+            {errores.lastName ? <p>{errores.lastName}</p> : null}
           </div>
 
           <div>
@@ -97,7 +97,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.emailRegister}
             />
-            {errores.email && <p>{errores.email}</p>}
+            {errores.email ? <p>{errores.email}</p> : null}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -110,7 +110,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.passwordRegister}
             />
-            {errores.password && <p>{errores.password}</p>}
+            {errores.password ? <p>{errores.password}</p> : null}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -123,7 +123,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.verifyPasswordRegister}
             />
-            {errores.verifyPassword && <p>{errores.verifyPassword}</p>}
+            {errores.verifyPassword ? <p>{errores.verifyPassword}</p> : null}
           </div>
 
           <div>
@@ -137,7 +137,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.dniRegister}
             />
-            {errores.dni && <p>{errores.dni}</p>}
+            {errores.dni ? <p>{errores.dni}</p> : null}
           </div>
 
           <div>
@@ -151,7 +151,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.nacimientoRegister}
             />
-            {errores.nacimiento && <p>{errores.nacimiento}</p>}
+            {errores.nacimiento ? <p>{errores.nacimiento}</p> : null}
           </div>
 
           <div>
@@ -165,7 +165,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
               onChange={handleChange}
               ref={refs.useRefs.licenciaRegister}
             />
-            {errores.licencia && <p>{errores.licencia}</p>}
+            {errores.licencia ? <p>{errores.licencia}</p> : null}
           </div>
         </div>
         <div className="divButton">
