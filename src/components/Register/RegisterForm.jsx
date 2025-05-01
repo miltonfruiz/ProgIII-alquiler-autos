@@ -178,7 +178,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
             <input
               className="inputRegister"
               placeholder="DD / MM / AAAA"
-              name="Nacimiento"
+              name="nacimiento"
               type="date"
               onChange={handleChange}
               ref={refs.useRefs.nacimientoRegister}

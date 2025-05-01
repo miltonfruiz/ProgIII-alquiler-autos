@@ -42,7 +42,11 @@ const Register = () => {
       });
       setErrores(erroresRegister);
     } else {
+      toast.success("¡Usuario registrado correctamente!");
       setErrores({});
+      setTimeout(() => {
+        navigate("/testhome");
+      }, 3000);
     }
   };
 
@@ -55,6 +59,7 @@ const Register = () => {
           useRefs,
         }}
       />
+      <ToastContainer position="top-right" autoClose={4000}></ToastContainer>
     </div>
   );
 };
