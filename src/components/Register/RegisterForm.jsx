@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { MdDriveFileRenameOutline } from "react-icons/md"; // nombre
 import { MdMail } from "react-icons/md"; // mail
@@ -12,7 +11,7 @@ import { BiCar } from "react-icons/bi"; // auto
 import { LuUserRound } from "react-icons/lu"; // persona
 import { VscSettings } from "react-icons/vsc"; // settings
 
-const RegisterForm = ({ handleSubmit, errores, refs }) => {
+const RegisterForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -29,8 +28,8 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
   }
 
   function handleSubmit(e) {
-    e.preventDefault;
-    handleSubmit(formData);
+    e.preventDefault();
+    onSubmit(formData);
   }
 
   return (
@@ -54,7 +53,7 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
         <BiCar title="Autos" className="imagenAuto"></BiCar>
         <LuUserRound title="Usuarios" className="imagenPersona"></LuUserRound>
       </nav>
-      <form className="formRegister" action="">
+      <form className="formRegister" action="" onSubmit={handleSubmit}>
         <h1 className="titleRegister">Registrarse</h1>
         <div className="gridRegister">
           <div>
@@ -68,8 +67,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="name"
               type="text"
               onChange={handleChange}
+              ref={refs.nameRegister}
             />
-            {errores.name ? <p style={{ color: red }}>{errores.name}</p> : null}
+            {errores.name && <p>{errores.name}</p>}
           </div>
 
           <div>
@@ -81,10 +81,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="lastName"
               type="text"
               onChange={handleChange}
+              ref={refs.lastNameRegister}
             />
-            {errores.lastName ? (
-              <p style={{ color: red }}>{errores.lastName}</p>
-            ) : null}
+            {errores.lastName && <p>{errores.lastName}</p>}
           </div>
 
           <div>
@@ -96,10 +95,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="email"
               type="email"
               onChange={handleChange}
+              ref={refs.emailRegister}
             />
-            {errores.email ? (
-              <p style={{ color: red }}>{errores.email}</p>
-            ) : null}
+            {errores.email && <p>{errores.email}</p>}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -110,10 +108,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="password"
               type="password"
               onChange={handleChange}
+              ref={refs.passwordRegister}
             />
-            {errores.password ? (
-              <p style={{ color: red }}>{errores.password}</p>
-            ) : null}
+            {errores.password && <p>{errores.password}</p>}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -124,10 +121,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="verifyPassword"
               type="password"
               onChange={handleChange}
+              ref={refs.verifyPasswordRegister}
             />
-            {errores.verifyPassword ? (
-              <p style={{ color: red }}>{errores.verifyPassword}</p>
-            ) : null}
+            {errores.verifyPassword && <p>{errores.verifyPassword}</p>}
           </div>
 
           <div>
@@ -139,8 +135,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="dni"
               type="text"
               onChange={handleChange}
+              ref={refs.dniRegister}
             />
-            {errores.dni ? <p style={{ color: red }}>{errores.dni}</p> : null}
+            {errores.dni && <p>{errores.dni}</p>}
           </div>
 
           <div>
@@ -152,10 +149,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="Nacimiento"
               type="date"
               onChange={handleChange}
+              ref={refs.nacimientoRegister}
             />
-            {errores.nacimiento ? (
-              <p style={{ color: red }}>{errores.nacimiento}</p>
-            ) : null}
+            {errores.nacimiento && <p>{errores.nacimiento}</p>}
           </div>
 
           <div>
@@ -167,10 +163,9 @@ const RegisterForm = ({ handleSubmit, errores, refs }) => {
               name="licencia"
               type="text"
               onChange={handleChange}
+              ref={refs.licenciaRegister}
             />
-            {errores.licencia ? (
-              <p style={{ color: red }}>{errores.licencia}</p>
-            ) : null}
+            {errores.licencia && <p>{errores.licencia}</p>}
           </div>
         </div>
         <div className="divButton">

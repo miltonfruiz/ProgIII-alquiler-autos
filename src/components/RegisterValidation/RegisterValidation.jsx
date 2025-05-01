@@ -1,5 +1,3 @@
-import React from "react";
-
 const RegisterValidation = ({ datos }) => {
   const errores = {};
 
@@ -56,6 +54,7 @@ const RegisterValidation = ({ datos }) => {
     errores.licencia =
       "la licencia no puede tener letras ni caracteres especiales";
   }
+  return errores;
 };
 
 export default RegisterValidation;

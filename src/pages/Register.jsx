@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import RegisterForm from "../components/Register/RegisterForm";
 import RegisterValidation from "../components/RegisterValidation/RegisterValidation";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,22 +17,22 @@ const Register = () => {
   const navigate = useNavigate();
 
   const arrayErrores = [
-    name,
-    lastName,
-    email,
-    password,
-    verifyPassword,
-    dni,
-    nacimiento,
-    licencia,
+    "name",
+    "lastName",
+    "email",
+    "password",
+    "verifyPassword",
+    "dni",
+    "nacimiento",
+    "licencia",
   ];
 
   const handleSubmit = (formRegister) => {
-    const erroresRegister = RegisterValidation({ formRegister });
+    const erroresRegister = RegisterValidation({ datos: formRegister });
 
-    if (Object.keys(erroresRegister).lenght > 0) {
+    if (Object.keys(erroresRegister).length > 0) {
       const asignadoFocus = (error) => {
-        if (erroresRegister.error && error.current()) {
+        if (erroresRegister.error && `${error}Register`.current) {
           `${error}Register`.current.focus();
         }
       };
@@ -40,20 +40,17 @@ const Register = () => {
       for (const error of arrayErrores) {
         asignadoFocus(error);
       }
+
       setErrores(erroresRegister);
     } else {
-      toast.success("¡Usuario registrado correctamente!");
       setErrores({});
-      setTimeout(() => {
-        navigate("/testhome");
-      }, 3000);
     }
   };
 
   return (
     <div>
       <RegisterForm
-        handleSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         errores={errores}
         refs={{
           nameRegister,
