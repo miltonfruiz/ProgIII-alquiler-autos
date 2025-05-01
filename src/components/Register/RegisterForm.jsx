@@ -12,7 +12,7 @@ import { BiCar } from "react-icons/bi"; // auto
 import { LuUserRound } from "react-icons/lu"; // persona
 import { VscSettings } from "react-icons/vsc"; // settings
 
-const RegisterForm = () => {
+const RegisterForm = ({ handleSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -26,6 +26,11 @@ const RegisterForm = () => {
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.values });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault;
+    handleSubmit(formData);
   }
 
   return (
@@ -64,6 +69,7 @@ const RegisterForm = () => {
               type="text"
               onChange={handleChange}
             />
+            {errores.name ? <p style={{ color: red }}>{errores.name}</p> : null}
           </div>
 
           <div>
@@ -76,6 +82,9 @@ const RegisterForm = () => {
               type="text"
               onChange={handleChange}
             />
+            {errores.lastName ? (
+              <p style={{ color: red }}>{errores.lastName}</p>
+            ) : null}
           </div>
 
           <div>
@@ -88,6 +97,9 @@ const RegisterForm = () => {
               type="email"
               onChange={handleChange}
             />
+            {errores.email ? (
+              <p style={{ color: red }}>{errores.email}</p>
+            ) : null}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -99,6 +111,9 @@ const RegisterForm = () => {
               type="password"
               onChange={handleChange}
             />
+            {errores.password ? (
+              <p style={{ color: red }}>{errores.password}</p>
+            ) : null}
           </div>
           <div>
             <RiLockPasswordFill id="icono"></RiLockPasswordFill>
@@ -110,6 +125,9 @@ const RegisterForm = () => {
               type="password"
               onChange={handleChange}
             />
+            {errores.verifyPassword ? (
+              <p style={{ color: red }}>{errores.verifyPassword}</p>
+            ) : null}
           </div>
 
           <div>
@@ -122,6 +140,7 @@ const RegisterForm = () => {
               type="text"
               onChange={handleChange}
             />
+            {errores.dni ? <p style={{ color: red }}>{errores.dni}</p> : null}
           </div>
 
           <div>
@@ -134,6 +153,9 @@ const RegisterForm = () => {
               type="date"
               onChange={handleChange}
             />
+            {errores.nacimiento ? (
+              <p style={{ color: red }}>{errores.nacimiento}</p>
+            ) : null}
           </div>
 
           <div>
@@ -146,6 +168,9 @@ const RegisterForm = () => {
               type="text"
               onChange={handleChange}
             />
+            {errores.licencia ? (
+              <p style={{ color: red }}>{errores.licencia}</p>
+            ) : null}
           </div>
         </div>
         <div className="divButton">

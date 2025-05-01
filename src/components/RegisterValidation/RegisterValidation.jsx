@@ -1,6 +1,6 @@
 import React from "react";
 
-const Validation = ({ datos }) => {
+const RegisterValidation = ({ datos }) => {
   const errores = {};
 
   if (!datos.name.trim()) {
