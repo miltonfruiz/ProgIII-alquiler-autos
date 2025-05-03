@@ -7,7 +7,7 @@ import { useState } from "react";
 import RegisterForm from "./components/Register/RegisterForm";
 import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
-
+import CarPayment from "./components/CarPayment/CarPayment";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
@@ -35,6 +35,7 @@ function App() {
             </ProtectedRouteUser>
           }
         />
+        <Route path="/carPayment" element={<CarPayment></CarPayment>}></Route>
       </Routes>
     </BrowserRouter>
   );

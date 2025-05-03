@@ -6,10 +6,7 @@ import { RiLockPasswordFill } from "react-icons/ri"; // contraseña
 import { IoCalendar } from "react-icons/io5"; // fecha nacimiento
 import { HiIdentification } from "react-icons/hi2"; // dni
 import { TbLicense } from "react-icons/tb"; // licencia
-import { IoSearchOutline } from "react-icons/io5"; // buscador
-import { BiCar } from "react-icons/bi"; // auto
-import { LuUserRound } from "react-icons/lu"; // persona
-import { VscSettings } from "react-icons/vsc"; // settings
+import Header from "../Header/Header";
 
 const RegisterForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
@@ -34,25 +31,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
 
   return (
     <div className="container">
-      <nav className="navRegister">
-        <img className="autoHeader" src="public\images\autoNav.png" alt="" />
-        <div className="divBusqueda">
-          <button className="botonBuscar">
-            <IoSearchOutline className="imagenBuscar"></IoSearchOutline>
-          </button>
-          <input
-            className="barraBusqueda"
-            type="search"
-            placeholder="Buscar algo aqui"
-          />
-          <button className="botonSettings">
-            <VscSettings className="settings"></VscSettings>
-          </button>
-        </div>
-
-        <BiCar title="Autos" className="imagenAuto"></BiCar>
-        <LuUserRound title="Usuarios" className="imagenPersona"></LuUserRound>
-      </nav>
+      <Header></Header>
       <form className="formRegister" action="" onSubmit={handleSubmit}>
         <h1 className="titleRegister">Registrarse</h1>
         <div className="gridRegister">
