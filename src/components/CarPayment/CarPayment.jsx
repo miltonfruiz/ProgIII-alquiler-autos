@@ -7,22 +7,30 @@ const CarPayment = () => {
     <div>
       <Header></Header>
       <div className="DatosFacturacion">
-        <h2>Datos Facturacion</h2>
-        <h3>introduce tus datos de facturacion</h3>
-        <p>Paso 1 de 3</p>
-        <label htmlFor="">Nombre</label>
-        <input type="text" />
-        <label htmlFor="">Apellido</label>
-        <input type="text" />
-        <label htmlFor="">Numero de telefono</label>
-        <input type="text" />
-        <label htmlFor="">DNI</label>
-        <input type="text" />
+        <h2 className="titleDatos">Datos Facturacion</h2>
+        <h3 className="subtituloDatos">introduce tus datos de facturacion</h3>
+        <p className="paso1">Paso 1 de 3</p>
+        <label htmlFor="" className="labelDatos">
+          Nombre
+        </label>
+        <input type="text" className="inputDatos" />
+        <label htmlFor="" className="labelDatos">
+          Apellido
+        </label>
+        <input type="text" className="inputDatos" />
+        <label htmlFor="" className="labelDatos">
+          Numero de telefono
+        </label>
+        <input type="text" className="inputDatos" />
+        <label htmlFor="" className="labelDatos">
+          DNI
+        </label>
+        <input type="text" className="inputDatos" />
       </div>
       <div className="metodoPago">
-        <h2>Metodo de Pago</h2>
-        <h3>Introduce tu metodo de pago</h3>
-        <p>Paso 2 de 3</p>
+        <h2 className="tituloMetodo">Metodo de Pago</h2>
+        <h3 className="subtituloMetodo">Introduce tu metodo de pago</h3>
+        <p className="paso2">Paso 2 de 3</p>
         <div className="ingresoTarjeta">
           <select name="" id="">
             <option value="">Seleccione una opcion</option>
@@ -31,28 +39,40 @@ const CarPayment = () => {
             <opcion value="opcion 3">American express</opcion>
             <opcion value="opcion 4">Tarjeta de debito</opcion>
           </select>
-          <label htmlFor="">Nombre de Tarjeta</label>
-          <input type="text" />
-          <label htmlFor="">Fecha de Expiracion</label>
-          <input type="date" />
-          <label htmlFor="">Nombre del titular</label>
-          <input type="text" />
-          <label htmlFor="">CVC</label>
-          <input type="text" />
+          <label htmlFor="" className="labelMetodo">
+            Nombre de Tarjeta
+          </label>
+          <input type="text" className="inputMetodo" />
+          <label htmlFor="" className="labelMetodo">
+            Fecha de Expiracion
+          </label>
+          <input type="date" className="inputMetodo" />
+          <label htmlFor="" className="labelMetodo">
+            Nombre del titular
+          </label>
+          <input type="text" className="inputMetodo" />
+          <label htmlFor="" className="labelMetodo">
+            CVC
+          </label>
+          <input type="text" className="inputMetodo" />
         </div>
-        <div>
-          <p>Transferencia Bancaria</p>
+        <div className="cajaTransferenciaBancaria">
+          <p className="transferenciaBancaria">Transferencia Bancaria</p>
         </div>
       </div>
       <div className="infoImportante">
-        <h2>Informacion Importante</h2>
-        <h3>Lee atentamente esta informacion de utilidad</h3>
-        <p>Paso 3 de 3</p>
+        <h2 className="tituloInfo">Informacion Importante</h2>
+        <h3 className="subtituloInfo">
+          Lee atentamente esta informacion de utilidad
+        </h3>
+        <p className="paso3">Paso 3 de 3</p>
         <div className="seguroDelAuto">
-          <h2>Seguro del auto</h2>
+          <h2 className="tituloSeguro">Seguro del auto</h2>
           <ul>
-            <li>Todos los autos incluyen un seguro contra terceros.</li>
-            <li>
+            <li className="liSeguroAuto">
+              Todos los autos incluyen un seguro contra terceros.
+            </li>
+            <li className="liSeguroAuto">
               El seguro no cubre daños ocacionados por negligencia del
               conductor.
             </li>
@@ -60,36 +80,46 @@ const CarPayment = () => {
         </div>
 
         <div className="entregaYdevolucion">
-          <h2>Entrega y Devolucion</h2>
+          <h2 className="tituloEntrega">Entrega y Devolucion</h2>
           <ul>
-            <li>El auto debe devolverse con el mismo nivel de combustible.</li>
-            <li>Hay una hora de tolerancia para la devolucion.</li>
+            <li className="liEntrega">
+              El auto debe devolverse con el mismo nivel de combustible.
+            </li>
+            <li className="liEntrega">
+              Hay una hora de tolerancia para la devolucion.
+            </li>
           </ul>
         </div>
 
         <div className="requisitosAlRetirar">
-          <h2>Requisitos al retirar</h2>
+          <h2 className="TituloRequisitos">Requisitos al retirar</h2>
           <ul>
-            <li>Presentar dni y licencia de conducir vigente.</li>
-            <li>Ser mayor de 21 años.</li>
+            <li className="liRequisitos">
+              Presentar dni y licencia de conducir vigente.
+            </li>
+            <li className="liRequisitos">Ser mayor de 21 años.</li>
           </ul>
         </div>
         <input type="checkbox" />
       </div>
       <aside>
         <div className="resumenDeAlquiler">
-          <h2>Resumen de Alquiler</h2>
-          <h3>
+          <h2 className="tituloResumen">Resumen de Alquiler</h2>
+          <h3 className="subtituloResumen">
             Los precios pueden variar dependiendo de la duracion del alquiler y
             del precio de su coche de alquiler.
           </h3>
-          <img src="public\images\camionetaCarPayment.png" alt="" />
-          <div>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
+          <img
+            className="imagenResumen"
+            src="public\images\camionetaCarPayment.png"
+            alt=""
+          />
+          <div className="valoracionResumen">
+            <FaStar className="estrella" />
+            <FaStar className="estrella" />
+            <FaStar className="estrella" />
+            <FaStar className="estrella" />
+            <FaStar className="estrella" />
             <p>valoracion</p>
           </div>
           <div className="linea"></div>
@@ -97,16 +127,19 @@ const CarPayment = () => {
             //para que sea una linea hay q ponerle
             // un height de 1px
           }
-          <p>Subtotal</p>
-          <p>$290.000</p>
-          <p>Impuestos</p>
-          <p>$34.000</p>
-          <h2>Precio final de renta</h2>
-          <h3>Precio total con impuestos obligatorios</h3>
-          <p>$324.000</p>
+          <p className="tituloSubtotal">Subtotal</p>
+          <p className="subtotal">$290.000</p>
+          <p className="tituloImpuestos">Impuestos</p>
+          <p className="impuestos">$34.000</p>
+          <h2 className="tituloPrecioFinal">Precio final de renta</h2>
+          <h3 className="subtituloPrecioFinal">
+            Precio total con impuestos obligatorios
+          </h3>
+          <p className="precioFinal">$324.000</p>
         </div>
       </aside>
-      <button>Rentar ahora</button> <button>Cancelar</button>
+      <button className="botonRentar">Rentar ahora</button>
+      <button className="botonCancelar">Cancelar</button>
     </div>
   );
 };
