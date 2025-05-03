@@ -6,15 +6,27 @@ import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUs
 import { useState } from "react";
 import RegisterForm from "./components/Register/RegisterForm";
 import Register from "./pages/Register";
+import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [registerIn, setRegisterIn] = useState(false);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login setLogged={setLoggedIn} />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoutesRegister registerIn={registerIn}>
+              <Login setLogged={setLoggedIn} />
+            </ProtectedRoutesRegister>
+          }
+        />
         <Route path="/password-recover" element={<PasswordRecover />} />
-        <Route path="/register" element={<Register></Register>}></Route>
+        <Route
+          path="/register"
+          element={<Register setRegisterIn={setRegisterIn}></Register>}
+        ></Route>
         <Route
           path="/testhome"
           element={
