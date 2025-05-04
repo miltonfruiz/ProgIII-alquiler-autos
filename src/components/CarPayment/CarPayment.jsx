@@ -32,7 +32,7 @@ const CarPayment = () => {
         <h3 className="subtituloMetodo">Introduce tu metodo de pago</h3>
         <p className="paso2">Paso 2 de 3</p>
         <div className="ingresoTarjeta">
-          <select name="" id="">
+          <select name="" id="" className="selectMetodo">
             <option value="">Seleccione una opcion</option>
             <option value="opcion 1">Visa</option>
             <opcion value="opcion 2">Mastercard</opcion>
@@ -78,7 +78,6 @@ const CarPayment = () => {
             </li>
           </ul>
         </div>
-
         <div className="entregaYdevolucion">
           <h2 className="tituloEntrega">Entrega y Devolucion</h2>
           <ul>
@@ -90,7 +89,6 @@ const CarPayment = () => {
             </li>
           </ul>
         </div>
-
         <div className="requisitosAlRetirar">
           <h2 className="TituloRequisitos">Requisitos al retirar</h2>
           <ul>
@@ -100,7 +98,8 @@ const CarPayment = () => {
             <li className="liRequisitos">Ser mayor de 21 años.</li>
           </ul>
         </div>
-        <input type="checkbox" />
+        <input type="checkbox" className="aceptoTerminos" />{" "}
+        <p className="textoAcepto">Acepto Terminos y condiciones</p>
       </div>
       <aside>
         <div className="resumenDeAlquiler">
@@ -114,13 +113,14 @@ const CarPayment = () => {
             src="public\images\camionetaCarPayment.png"
             alt=""
           />
+          <p className="nombreAutos">Volkswagen T-Cross</p>
           <div className="valoracionResumen">
             <FaStar className="estrella" />
             <FaStar className="estrella" />
             <FaStar className="estrella" />
             <FaStar className="estrella" />
             <FaStar className="estrella" />
-            <p>valoracion</p>
+            <p className="valoracion">valoracion</p>
           </div>
           <div className="linea"></div>
           {
