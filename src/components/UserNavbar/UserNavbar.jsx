@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./UserNavbar.css";
-import { CiSearch } from "react-icons/ci";
-import { VscSettings } from "react-icons/vsc";
+import { CiSearch, CiEdit } from "react-icons/ci";
+import { VscSettings, VscColorMode } from "react-icons/vsc";
 import { FaCar, FaUserEdit } from "react-icons/fa";
+import { IoLanguage } from "react-icons/io5";
+import { FiLogOut } from "react-icons/fi";
 
 export default function UserNavbar() {
   const navigate = useNavigate();
@@ -57,12 +59,19 @@ export default function UserNavbar() {
             <FaUserEdit className="faUserEdit-icon" />
             {showDropdown && (
               <div className="dropdown-menu">
-                <button onClick={changeLanguage}>Idioma</button>
-                <button onClick={toggleTheme}>Modo oscuro / claro</button>
-                <button onClick={() => navigate("/user-profile")}>
-                  Editar perfil
+                <button onClick={changeLanguage}>
+                  <IoLanguage className="icon-item-profile" /> Idioma
                 </button>
-                <button onClick={handleLogout}>Cerrar sesión</button>
+                <button onClick={toggleTheme}>
+                  <VscColorMode className="icon-item-profile" /> Modo oscuro /
+                  claro
+                </button>
+                <button onClick={() => navigate("/user-profile")}>
+                  <CiEdit className="icon-item-profile" /> Editar perfil
+                </button>
+                <button onClick={handleLogout}>
+                  <FiLogOut className="icon-item-profile" /> Cerrar sesión
+                </button>
               </div>
             )}
           </div>
