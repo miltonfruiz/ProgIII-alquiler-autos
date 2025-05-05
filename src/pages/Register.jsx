@@ -4,7 +4,7 @@ import RegisterValidation from "../components/RegisterValidation/RegisterValidat
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ setRegisterIn }) => {
   const useRefs = {
     nameRegister: useRef(null),
     lastNameRegister: useRef(null),
@@ -44,6 +44,7 @@ const Register = () => {
     } else {
       toast.success("¡Usuario registrado correctamente!");
       setErrores({});
+      setRegisterIn(true);
       setTimeout(() => {
         navigate("/testhome");
       }, 3000);

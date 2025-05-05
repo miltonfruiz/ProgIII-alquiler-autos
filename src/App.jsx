@@ -7,16 +7,29 @@ import UserProfile from "./pages/UserProfile";
 import { useState } from "react";
 import RegisterForm from "./components/Register/RegisterForm";
 import Register from "./pages/Register";
+import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
+import CarPayment from "./components/CarPayment/CarPayment";
 import Cars from "./pages/Cars";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [registerIn, setRegisterIn] = useState(false);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login setLogged={setLoggedIn} />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoutesRegister registerIn={registerIn}>
+              <Login setLogged={setLoggedIn} />
+            </ProtectedRoutesRegister>
+          }
+        />
         <Route path="/password-recover" element={<PasswordRecover />} />
-        <Route path="/register" element={<Register></Register>}></Route>
+        <Route
+          path="/register"
+          element={<Register setRegisterIn={setRegisterIn}></Register>}
+        ></Route>
         <Route
           path="/testhome"
           element={
@@ -25,6 +38,7 @@ function App() {
             </ProtectedRouteUser>
           }
         />
+        <Route path="/carPayment" element={<CarPayment></CarPayment>}></Route>
         <Route
           path="/user-profile"
           element={
