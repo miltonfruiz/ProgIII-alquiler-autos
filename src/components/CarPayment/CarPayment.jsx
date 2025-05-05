@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 const CarPayment = () => {
   return (
-    <div>
+    <div className="contenedor">
       <Header></Header>
       <div className="DatosFacturacion">
         <h2 className="titleDatos">Datos Facturacion</h2>
