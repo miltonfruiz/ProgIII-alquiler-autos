@@ -7,6 +7,7 @@ import UserProfile from "./pages/UserProfile";
 import { useState } from "react";
 import RegisterForm from "./components/Register/RegisterForm";
 import Register from "./pages/Register";
+import Cars from "./pages/Cars";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,6 +33,7 @@ function App() {
             </ProtectedRouteUser>
           }
         />
+        <Route path="/cars" element={<Cars></Cars>} />
       </Routes>
     </BrowserRouter>
   );
