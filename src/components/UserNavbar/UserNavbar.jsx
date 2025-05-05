@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./UserNavbar.css";
 import { CiSearch } from "react-icons/ci";
 import { VscSettings } from "react-icons/vsc";
+import { FaCar, FaUserEdit } from "react-icons/fa";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -35,12 +36,12 @@ export default function Navbar() {
         <div className="icon-wrapper">
           <div className="cars-container">
             <Link to="/cars">
-              <img src="" alt="Autos" className="navbar-icon" />
+              <FaCar className="faCar-icon" />
             </Link>
           </div>
           <div className="user-container">
             <Link to="/user-profile">
-              <img src="" alt="Perfil" className="navbar-icon" />
+              <FaUserEdit className="faUserEdit-icon" />
             </Link>
           </div>
         </div>

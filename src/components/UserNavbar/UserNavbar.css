@@ -37,7 +37,7 @@
 .icon-wrapper {
   display: flex;
   gap: 40px;
-  padding: 0px 100px;
+  padding: 0px 120px;
 }
 .user-container,
 .cars-container {
@@ -72,9 +72,10 @@
   display: flex;
   gap: 20px;
 }
-.navbar-icon {
+.faUserEdit-icon,
+.faCar-icon {
   height: 24px;
-  width: 24px;
+  width: auto;
   cursor: pointer;
-  filter: invert(100%);
+  color: white;
 }
