@@ -3,9 +3,11 @@ import Login from "./pages/Login";
 import TestHome from "./components/TestHome/TestHome";
 import PasswordRecover from "./pages/PasswordRecover";
 import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUser";
+import UserProfile from "./pages/UserProfile";
 import { useState } from "react";
 import RegisterForm from "./components/Register/RegisterForm";
 import Register from "./pages/Register";
+import Cars from "./pages/Cars";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,6 +25,15 @@ function App() {
             </ProtectedRouteUser>
           }
         />
+        <Route
+          path="/user-profile"
+          element={
+            <ProtectedRouteUser isSigned={loggedIn}>
+              <UserProfile />
+            </ProtectedRouteUser>
+          }
+        />
+        <Route path="/cars" element={<Cars></Cars>} />
       </Routes>
     </BrowserRouter>
   );
