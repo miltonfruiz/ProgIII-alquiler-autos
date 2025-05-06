@@ -1,291 +1,282 @@
 .contenedor {
-  background-color: #929292;
+  background-color: #f0f0f0;
 }
 
 .DatosFacturacion {
-  width: 971px;
-  height: 350px;
-  top: 182px;
-  left: 104px;
+  width: 60.688em;
+  height: 21.875em;
+  border-radius: 0.625em;
+  background-color: #ffffff;
+  margin: 1em;
 }
 
 .titleDatos {
-  top: 10px;
-  left: 41px;
+  margin: 1em;
 }
 
 .subtituloDatos {
-  top: 43px;
-  left: 46px;
+  margin: 1em;
 }
 
 .paso1 {
-  top: 16px;
-  left: 864px;
+  margin: 1em;
 }
 
 .labelDatos {
+  margin: 1em;
 }
 
 .inputDatos {
-  width: 350px;
-  height: 50px;
-  top: 31px;
-  left: 10px;
+  width: 21.875em;
+  height: 3.125em;
+  background-color: #f0f0f0;
+  margin: 1em;
 }
 
 .metodoPago {
-  width: 971px;
-  height: 510px;
-  top: -4px;
-  border-radius: 10px;
+  width: 60.688em;
+  height: 31.875em;
+  background-color: #ffffff;
+  border-radius: 0.625em;
+  margin: 1em;
 }
 
 .tituloMetodo {
-  top: 10px;
-  left: 41px;
+  margin: 1em;
 }
 
 .subtituloMetodo {
-  top: 43px;
-  left: 46px;
+  margin: 1em;
 }
 
 .paso2 {
-  top: 20px;
-  left: 864px;
+  margin: 1em;
 }
 
 .ingresoTarjeta {
-  width: 875px;
-  height: 308px;
-  top: 85px;
-  left: 48px;
-  border-radius: 10px;
+  width: 54.688em;
+  height: 19.25em;
+  background-color: #f0f0f0;
+  border-radius: 0.625em;
+  margin: 1em;
 }
 
 .selectMetodo {
-  width: 135px;
-  height: 20px;
+  width: 8.438em;
+  height: 1.25em;
+  margin: 1em;
 }
 
 .labelMetodo {
+  margin: 1em;
 }
 
 .inputMetodo {
-  width: 362px;
-  height: 56px;
-  top: 36px;
-  border-radius: 10px;
+  width: 22.625em;
+  height: 3.5em;
+  margin: 1em;
+  border-radius: 0.625em;
 }
 
 .cajaTransferenciaBancaria {
-  width: 875px;
-  height: 60px;
-  top: 411px;
-  left: 48px;
-  border-radius: 10px;
+  width: 54.688em;
+  height: 3.75em;
+  background-color: #f0f0f0;
+  border-radius: 0.625em;
+  margin: 1em;
 }
 
 .transferenciaBancaria {
+  margin: 1em;
 }
 
 .infoImportante {
-  width: 973px;
-  height: 545px;
-  border-radius: 10px;
+  width: 60.813em;
+  height: 34.063em;
+  border-radius: 0.625em;
+  background-color: #ffffff;
+  margin: 1em;
 }
 
 .tituloInfo {
-  top: 17px;
-  left: 41px;
+  margin: 1em;
 }
 
 .subtituloInfo {
-  top: 49px;
-  left: 46px;
+  margin: 1em;
 }
 
 .paso3 {
-  top: 26px;
-  left: 864px;
+  margin: 1em;
 }
 
 .seguroDelAuto {
-  width: 973px;
-  height: 545px;
-  border-radius: 10px;
+  width: 60.813em;
+  height: 34.063em;
+  border-radius: 0.625em;
+  margin: 1em;
 }
 
 .tituloSeguro {
+  margin: 1em;
 }
 
 .liSeguroAuto {
+  margin: 1em;
 }
 
 .entregaYdevolucion {
-  width: 573px;
-  height: 90px;
-  top: 1307px;
-  left: 170px;
+  width: 35.938em;
+  height: 5.625em;
+  margin: 1em;
 }
 
 .tituloEntrega {
+  margin: 1em;
 }
 
 .liEntrega {
+  margin: 1em;
 }
 
 .requisitosAlRetirar {
-  width: 436px;
-  height: 90px;
-  top: 1433px;
-  left: 170px;
+  width: 27.25em;
+  height: 5.625em;
+  margin: 1em;
 }
 
 .TituloRequisitos {
+  margin: 1em;
 }
 
 .liRequisitos {
+  margin: 1em;
 }
 
 .aceptoTerminos {
-  width: 25px;
-  height: 25px;
-  top: 478px;
-  left: 65px;
-  border-radius: 5px;
-  border: solid black 1px;
+  width: 1.563em;
+  height: 1.563em;
+  border-radius: 0.313;
+  border: solid black 0.063;
+  margin: 1em;
 }
 
 .textoAcepto {
-  top: 478px;
-  left: 102px;
+  margin: 1em;
 }
 
 .resumenDeAlquiler {
-  top: 178px;
-  left: 1134px;
-  border-radius: 10px;
+  border-radius: 0.625em;
+  background-color: #ffffff;
+  margin: 1em;
 }
 
 .tituloResumen {
-  top: 198px;
-  left: 1161px;
+  margin: 1em;
 }
 
 .subtituloResumen {
-  top: 234px;
-  left: 1168px;
+  margin: 1em;
 }
 
 .imagenResumen {
-  width: 179.82px;
-  height: 86px;
-  top: 327px;
-  left: 1168px;
+  width: 11.239em;
+  height: 5.375em;
+  margin: 1em;
 }
 
 .nombreAutos {
-  top: 326px;
-  left: 1362px;
   font-family: "Poppins";
   font-weight: 600;
-  font-size: 22px;
+  font-size: 1.375em;
+  margin: 1em;
 }
 
 .valoracionResumen {
-  width: 108px;
+  width: 6.75em;
   height: 20px;
-  gap: 2px;
+  gap: 0.125em;
+  margin: 1em;
 }
 
 .estrella {
-  width: 20px;
-  height: 20px;
+  width: 1.25em;
+  height: 1.25em;
+  margin: 1em;
 }
 
 .valoracion {
+  margin: 1em;
 }
 
 .linea {
-  width: 446px;
-  height: 1px;
-  top: 444px;
-  left: 1161px;
-  border: solid #000000 1px;
+  width: 27.875em;
+  height: 0.063em;
+  border: solid #000000 0.063em;
+  margin: 1em;
 }
 
 .tituloSubtotal {
-  top: 462px;
-  left: 1165px;
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.25em;
+  margin: 1em;
 }
 
 .subtotal {
-  top: 462px;
-  left: 1512px;
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.25em;
+  margin: 1em;
 }
 
 .tituloImpuestos {
-  top: 504px;
-  left: 1165px;
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.25em;
+  margin: 1em;
 }
 
 .impuestos {
-  top: 504px;
-  left: 1523px;
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.25em;
+  margin: 1em;
 }
 
 .tituloPrecioFinal {
-  top: 601px;
-  left: 1161px;
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.25em;
+  margin: 1em;
 }
 
 .subtituloPrecioFinal {
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 14px;
-  top: 631px;
-  left: 1261px;
+  font-size: 0.875em;
+  margin: 1em;
 }
 
 .precioFinal {
-  top: 610px;
-  left: 1481px;
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 28px;
+  font-size: 1.75em;
+  margin: 1em;
 }
 
 .botonRentar {
-  width: 300px;
-  height: 70px;
-  top: 1684px;
-  left: 106px;
-  border-radius: 10px;
+  width: 18.75em;
+  height: 4.375em;
+  border-radius: 0.625em;
   background-color: #5939f2;
+  margin: 1em;
 }
 
 .botonCancelar {
-  width: 300px;
-  height: 70px;
-  top: 1684px;
-  left: 777px;
-  border-radius: 10px;
+  width: 18.75em;
+  height: 4.375em;
+  border-radius: 0.625em;
   border: solid black 1px;
+  margin: 1em;
 }
