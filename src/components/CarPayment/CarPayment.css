@@ -10,29 +10,21 @@
 }
 
 .titleDatos {
-  width: 245px;
-  height: 36px;
   top: 10px;
   left: 41px;
 }
 
 .subtituloDatos {
-  width: 236px;
-  height: 21px;
   top: 43px;
   left: 46px;
 }
 
 .paso1 {
-  width: 79px;
-  height: 23px;
   top: 16px;
   left: 864px;
 }
 
 .labelDatos {
-  width: 56px;
-  height: 21px;
 }
 
 .inputDatos {
@@ -50,22 +42,16 @@
 }
 
 .tituloMetodo {
-  width: 192px;
-  height: 36px;
   top: 10px;
   left: 41px;
 }
 
 .subtituloMetodo {
-  width: 208px;
-  height: 21px;
   top: 43px;
   left: 46px;
 }
 
 .paso2 {
-  width: 83px;
-  height: 23px;
   top: 20px;
   left: 864px;
 }
@@ -84,8 +70,6 @@
 }
 
 .labelMetodo {
-  width: 140px;
-  height: 20px;
 }
 
 .inputMetodo {
@@ -104,8 +88,6 @@
 }
 
 .transferenciaBancaria {
-  width: 168px;
-  height: 20px;
 }
 
 .infoImportante {
@@ -115,22 +97,16 @@
 }
 
 .tituloInfo {
-  width: 280px;
-  height: 36px;
   top: 17px;
   left: 41px;
 }
 
 .subtituloInfo {
-  width: 321px;
-  height: 21px;
   top: 49px;
   left: 46px;
 }
 
 .paso3 {
-  width: 83px;
-  height: 23px;
   top: 26px;
   left: 864px;
 }
@@ -183,30 +159,22 @@
 }
 
 .textoAcepto {
-  width: 244px;
-  height: 24px;
   top: 478px;
   left: 102px;
 }
 
 .resumenDeAlquiler {
-  width: 500px;
-  height: 550px;
   top: 178px;
   left: 1134px;
   border-radius: 10px;
 }
 
 .tituloResumen {
-  width: 249px;
-  height: 36px;
   top: 198px;
   left: 1161px;
 }
 
 .subtituloResumen {
-  width: 432px;
-  height: 42px;
   top: 234px;
   left: 1168px;
 }
@@ -219,8 +187,6 @@
 }
 
 .nombreAutos {
-  width: 225px;
-  height: 33px;
   top: 326px;
   left: 1362px;
   font-family: "Poppins";
@@ -240,8 +206,6 @@
 }
 
 .valoracion {
-  width: 71px;
-  height: 20px;
 }
 
 .linea {
@@ -249,11 +213,10 @@
   height: 1px;
   top: 444px;
   left: 1161px;
+  border: solid #000000 1px;
 }
 
 .tituloSubtotal {
-  width: 83px;
-  height: 30px;
   top: 462px;
   left: 1165px;
   font-family: "Poppins";
@@ -262,8 +225,6 @@
 }
 
 .subtotal {
-  width: 91px;
-  height: 30px;
   top: 462px;
   left: 1512px;
   font-family: "Poppins";
@@ -272,8 +233,6 @@
 }
 
 .tituloImpuestos {
-  width: 104px;
-  height: 30px;
   top: 504px;
   left: 1165px;
   font-family: "Poppins";
@@ -282,8 +241,6 @@
 }
 
 .impuestos {
-  width: 79px;
-  height: 30px;
   top: 504px;
   left: 1523px;
   font-family: "Poppins";
@@ -292,8 +249,6 @@
 }
 
 .tituloPrecioFinal {
-  width: 194px;
-  height: 30px;
   top: 601px;
   left: 1161px;
   font-family: "Poppins";
@@ -305,15 +260,11 @@
   font-family: "Poppins";
   font-weight: 500;
   font-size: 14px;
-  width: 266px;
-  height: 21px;
   top: 631px;
   left: 1261px;
 }
 
 .precioFinal {
-  width: 126px;
-  height: 42px;
   top: 610px;
   left: 1481px;
   font-family: "Poppins";
