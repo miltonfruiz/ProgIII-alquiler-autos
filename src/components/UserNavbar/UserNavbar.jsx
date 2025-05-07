@@ -96,8 +96,12 @@ export default function UserNavbar() {
                 className="dropdown-menu"
                 onClick={(e) => e.stopPropagation()}
               >
-                <button onClick={() => setShowLanguages((prev) => !prev)}>
-                  <IoLanguage className="icon-item-profile" /> Idioma
+                <button
+                  className={`fade-button ${fade ? "fade-out" : ""}`}
+                  onClick={() => setShowLanguages((prev) => !prev)}
+                >
+                  <IoLanguage className="icon-item-profile" />{" "}
+                  {t("navbar.language")}
                 </button>
                 {showLanguages && (
                   <div className="submenu">
@@ -105,15 +109,15 @@ export default function UserNavbar() {
                       <button
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={
+                        className={`navbar-language ${
                           lang.code === currentLang ? "active-language" : ""
-                        }
+                        }${fade ? " fade-out" : ""}`}
                       >
                         <Flag
                           code={lang.flag}
                           style={{ width: "20px", marginRight: "8px" }}
                         />
-                        {lang.name}
+                        {t(`navbar.language_${lang.code}`) || lang.name}
                         {lang.code === currentLang && (
                           <IoMdCheckmark
                             size={14}
@@ -125,7 +129,10 @@ export default function UserNavbar() {
                   </div>
                 )}
 
-                <button onClick={toggleTheme}>
+                <button
+                  className={`fade-button ${fade ? "fade-out" : ""}`}
+                  onClick={toggleTheme}
+                >
                   {theme === "dark" ? (
                     <>
                       <FiSun className="icon-item-profile" />{" "}
@@ -138,12 +145,25 @@ export default function UserNavbar() {
                     </>
                   )}
                 </button>
-                <button onClick={() => navigate("/user-profile")}>
-                  <CiEdit className="icon-item-profile" />{" "}
+                <button
+                  onClick={() => {
+                    setFade(true);
+                    setTimeout(() => navigate("/user-profile"), 300); // esperar la transición
+                  }}
+                  className={`fade-button ${fade ? "fade-out" : ""}`}
+                >
+                  <CiEdit className="icon-item-profile" />
                   {t("navbar.editProfile")}
                 </button>
-                <button onClick={handleLogout}>
-                  <FiLogOut className="icon-item-profile" />{" "}
+
+                <button
+                  onClick={() => {
+                    setFade(true);
+                    setTimeout(() => handleLogout(), 300); // esperar la transición
+                  }}
+                  className={`fade-button ${fade ? "fade-out" : ""}`}
+                >
+                  <FiLogOut className="icon-item-profile" />
                   {t("navbar.logout")}
                 </button>
               </div>

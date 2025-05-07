@@ -2,6 +2,9 @@
   "navbar": {
     "searchPlaceholder": "Enter car name or model...",
     "language": "Language",
+    "language_es": "Spanish",
+    "language_en": "English",
+    "language_pt": "Portuguese",
     "themeLight": "Light Mode",
     "themeDark": "Dark Mode",
     "editProfile": "Edit Profile",

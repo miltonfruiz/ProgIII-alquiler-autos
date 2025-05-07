@@ -159,7 +159,9 @@
   background-color: #ddd;
   font-weight: bold;
 }
-.navbar-search {
+.fade-button,
+.navbar-search,
+.navbar-language {
   transition: all 0.3s ease;
   opacity: 1;
 }
@@ -167,7 +169,12 @@
 .navbar-search.fade-out {
   opacity: 0;
 }
-
+.navbar-language.fade-out {
+  opacity: 0;
+}
+.fade-button.fade-out {
+  opacity: 0;
+}
 /*--------------------------------*/
 body.dark .navbar {
   background-color: black;
