@@ -2,7 +2,8 @@
   "navbar": {
     "searchPlaceholder": "Digite o nome ou modelo do carro...",
     "language": "Idioma",
-    "theme": "Modo escuro / claro",
+    "themeLight": "Modo claro",
+    "themeDark": "Modo escuro",
     "editProfile": "Editar perfil",
     "logout": "Sair"
   }

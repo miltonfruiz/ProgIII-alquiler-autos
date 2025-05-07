@@ -97,6 +97,7 @@
   min-width: 160px;
 }
 .dropdown-menu button {
+  border-radius: 8px;
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -110,6 +111,7 @@
   transition: background 0.2s;
 }
 .dropdown-menu button:hover {
+  width: 95%;
   color: white;
   border-radius: 8px;
   background-color: #5e49d8;
@@ -117,6 +119,56 @@
 .icon-item-profile {
   margin-right: 5px;
 }
+.dropdown-submenu {
+  position: relative;
+}
+.submenu {
+  position: absolute;
+  top: 0;
+  right: 101%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+}
+.submenu button {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  color: #333;
+  margin: 4px;
+  transition: background 0.2s;
+}
+.submenu button:hover {
+  width: 95%;
+  color: white;
+  border-radius: 8px;
+  background-color: #5e49d8;
+}
+.active-language {
+  background-color: #ddd;
+  font-weight: bold;
+}
+.navbar-search {
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.navbar-search.fade-out {
+  opacity: 0;
+}
+
+/*--------------------------------*/
 body.dark .navbar {
   background-color: black;
 }
@@ -128,6 +180,17 @@ body.dark .dropdown-menu button {
   color: white;
 }
 body.dark .dropdown-menu button:hover {
+  background-color: white;
+  color: black;
+}
+body.dark .submenu {
+  background-color: black;
+  border: 1px solid white;
+}
+body.dark .submenu button {
+  color: white;
+}
+body.dark .submenu button:hover {
   background-color: white;
   color: black;
 }

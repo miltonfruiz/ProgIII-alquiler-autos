@@ -7,20 +7,29 @@ import { FaCar, FaUserEdit } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 import { FiLogOut, FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "../Mode/Mode";
+import { useTranslation } from "react-i18next";
+import Flag from "react-world-flags";
+import { IoMdCheckmark } from "react-icons/io";
 
 export default function UserNavbar() {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const { theme, toggleTheme } = useTheme();
+  const [showLanguages, setShowLanguages] = useState(false);
+  const { t, i18n } = useTranslation();
+  const [fade, setFade] = useState(false);
+
+  const languages = [
+    { code: "es", name: "Español", flag: "AR" },
+    { code: "en", name: "English", flag: "US" },
+    { code: "pt", name: "Português", flag: "BR" },
+  ];
 
   const handleLogout = () => {
     // lógica para cerrar sesión
     console.log("Cerrando sesión...");
     navigate("/login");
-  };
-  const changeLanguage = () => {
-    console.log("Cambiar idioma");
   };
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -33,6 +42,20 @@ export default function UserNavbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const changeLanguage = (lang) => {
+    setFade(true);
+    setTimeout(() => {
+      i18n.changeLanguage(lang);
+      localStorage.setItem("lang", lang);
+      setFade(false);
+    }, 150);
+  };
+  useEffect(() => {
+    if (!showDropdown) {
+      setShowLanguages(false);
+    }
+  }, [showDropdown]);
+  const currentLang = i18n.language;
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -50,8 +73,8 @@ export default function UserNavbar() {
           <CiSearch size={18} className="search-icon" />
           <input
             type="text"
-            placeholder="Ingrese nombre o modelo de auto..."
-            className="navbar-search"
+            placeholder={t("navbar.searchPlaceholder")}
+            className={`navbar-search ${fade ? "fade-out" : ""}`}
           />
           <button className="navbar-filter">
             <VscSettings size={18} className="search-icon" />
@@ -73,25 +96,55 @@ export default function UserNavbar() {
                 className="dropdown-menu"
                 onClick={(e) => e.stopPropagation()}
               >
-                <button onClick={changeLanguage}>
+                <button onClick={() => setShowLanguages((prev) => !prev)}>
                   <IoLanguage className="icon-item-profile" /> Idioma
                 </button>
+                {showLanguages && (
+                  <div className="submenu">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => changeLanguage(lang.code)}
+                        className={
+                          lang.code === currentLang ? "active-language" : ""
+                        }
+                      >
+                        <Flag
+                          code={lang.flag}
+                          style={{ width: "20px", marginRight: "8px" }}
+                        />
+                        {lang.name}
+                        {lang.code === currentLang && (
+                          <IoMdCheckmark
+                            size={14}
+                            style={{ marginLeft: "8px" }}
+                          />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 <button onClick={toggleTheme}>
                   {theme === "dark" ? (
                     <>
-                      <FiSun className="icon-item-profile" /> Modo claro
+                      <FiSun className="icon-item-profile" />{" "}
+                      {t("navbar.themeLight")}
                     </>
                   ) : (
                     <>
-                      <FiMoon className="icon-item-profile" /> Modo oscuro
+                      <FiMoon className="icon-item-profile" />{" "}
+                      {t("navbar.themeDark")}
                     </>
                   )}
                 </button>
                 <button onClick={() => navigate("/user-profile")}>
-                  <CiEdit className="icon-item-profile" /> Editar perfil
+                  <CiEdit className="icon-item-profile" />{" "}
+                  {t("navbar.editProfile")}
                 </button>
                 <button onClick={handleLogout}>
-                  <FiLogOut className="icon-item-profile" /> Cerrar sesión
+                  <FiLogOut className="icon-item-profile" />{" "}
+                  {t("navbar.logout")}
                 </button>
               </div>
             )}
