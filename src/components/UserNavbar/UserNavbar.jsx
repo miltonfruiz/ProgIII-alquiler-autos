@@ -148,7 +148,7 @@ export default function UserNavbar() {
                 <button
                   onClick={() => {
                     setFade(true);
-                    setTimeout(() => navigate("/user-profile"), 300); // esperar la transición
+                    setTimeout(() => navigate("/user-profile"), 300);
                   }}
                   className={`fade-button ${fade ? "fade-out" : ""}`}
                 >
@@ -159,7 +159,7 @@ export default function UserNavbar() {
                 <button
                   onClick={() => {
                     setFade(true);
-                    setTimeout(() => handleLogout(), 300); // esperar la transición
+                    setTimeout(() => handleLogout(), 300);
                   }}
                   className={`fade-button ${fade ? "fade-out" : ""}`}
                 >
