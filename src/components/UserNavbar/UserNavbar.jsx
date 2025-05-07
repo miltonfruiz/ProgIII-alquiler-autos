@@ -1,27 +1,38 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./UserNavbar.css";
 import { CiSearch, CiEdit } from "react-icons/ci";
 import { VscSettings, VscColorMode } from "react-icons/vsc";
 import { FaCar, FaUserEdit } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiSun, FiMoon } from "react-icons/fi";
+import { useTheme } from "../Mode/Mode";
 
 export default function UserNavbar() {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const { theme, toggleTheme } = useTheme();
+
   const handleLogout = () => {
     // lógica para cerrar sesión
     console.log("Cerrando sesión...");
     navigate("/login");
   };
-  const toggleTheme = () => {
-    // lógica para modo claro/oscuro
-    console.log("Modo oscuro/claro");
-  };
   const changeLanguage = () => {
     console.log("Cambiar idioma");
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -52,19 +63,29 @@ export default function UserNavbar() {
           <Link to="/cars">
             <FaCar className="faCar-icon" />
           </Link>
-          <div
-            className="user-dropdown"
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            <FaUserEdit className="faUserEdit-icon" />
+          <div className="user-dropdown" ref={dropdownRef}>
+            <FaUserEdit
+              className="faUserEdit-icon"
+              onClick={() => setShowDropdown((prev) => !prev)}
+            />
             {showDropdown && (
-              <div className="dropdown-menu">
+              <div
+                className="dropdown-menu"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button onClick={changeLanguage}>
                   <IoLanguage className="icon-item-profile" /> Idioma
                 </button>
                 <button onClick={toggleTheme}>
-                  <VscColorMode className="icon-item-profile" /> Modo oscuro /
-                  claro
+                  {theme === "dark" ? (
+                    <>
+                      <FiSun className="icon-item-profile" /> Modo claro
+                    </>
+                  ) : (
+                    <>
+                      <FiMoon className="icon-item-profile" /> Modo oscuro
+                    </>
+                  )}
                 </button>
                 <button onClick={() => navigate("/user-profile")}>
                   <CiEdit className="icon-item-profile" /> Editar perfil

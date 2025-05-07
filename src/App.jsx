@@ -17,14 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoutesRegister registerIn={registerIn}>
-              <Login setLogged={setLoggedIn} />
-            </ProtectedRoutesRegister>
-          }
-        />
+        <Route path="/" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/password-recover" element={<PasswordRecover />} />
         <Route
           path="/register"

@@ -106,12 +106,28 @@
   cursor: pointer;
   font-size: 12px;
   color: #333;
+  margin: 4px;
   transition: background 0.2s;
 }
 .dropdown-menu button:hover {
+  color: white;
   border-radius: 8px;
-  background-color: #f1f1f1;
+  background-color: #5e49d8;
 }
 .icon-item-profile {
   margin-right: 5px;
+}
+body.dark .navbar {
+  background-color: black;
+}
+body.dark .dropdown-menu {
+  background-color: black;
+  border: 1px solid white;
+}
+body.dark .dropdown-menu button {
+  color: white;
+}
+body.dark .dropdown-menu button:hover {
+  background-color: white;
+  color: black;
 }
