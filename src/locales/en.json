@@ -1,0 +1,9 @@
+{
+  "navbar": {
+    "searchPlaceholder": "Enter car name or model...",
+    "language": "Language",
+    "theme": "Dark / Light Mode",
+    "editProfile": "Edit Profile",
+    "logout": "Logout"
+  }
+}
