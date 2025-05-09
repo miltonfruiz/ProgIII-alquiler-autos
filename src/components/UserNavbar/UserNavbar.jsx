@@ -2,13 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import "./UserNavbar.css";
 import { CiSearch, CiEdit } from "react-icons/ci";
-import { FaCar, FaUserEdit } from "react-icons/fa";
+import { FaCar, FaUserEdit, FaHome } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 import { FiLogOut, FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "../Mode/Mode";
 import { useTranslation } from "react-i18next";
 import Flag from "react-world-flags";
 import { IoMdCheckmark } from "react-icons/io";
+import { BsCalendarDateFill } from "react-icons/bs";
 
 export default function UserNavbar() {
   const navigate = useNavigate();
@@ -79,8 +80,17 @@ export default function UserNavbar() {
       </div>
       <div className="navbar-right">
         <div className="icon-wrapper">
+          <Link to="/testhome">
+            <FaHome title="Inicio" className="faHome-icon" />
+          </Link>
+          <Link to="/reservations">
+            <BsCalendarDateFill
+              title="Mis Reservas"
+              className="BsCalendarDateFill-icon"
+            />
+          </Link>
           <Link to="/cars">
-            <FaCar className="faCar-icon" />
+            <FaCar title="Tienda de Autos" className="faCar-icon" />
           </Link>
           <div className="user-dropdown" ref={dropdownRef}>
             <FaUserEdit

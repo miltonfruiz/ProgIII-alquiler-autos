@@ -66,12 +66,17 @@
   display: flex;
   gap: 20px;
 }
+.BsCalendarDateFill-icon,
+.faHome-icon,
 .faUserEdit-icon,
 .faCar-icon {
   height: 24px;
   width: auto;
   cursor: pointer;
   color: white;
+}
+.BsCalendarDateFill-icon {
+  height: 22px;
 }
 .user-dropdown {
   position: relative;
