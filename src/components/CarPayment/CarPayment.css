@@ -4,7 +4,7 @@
 
 .DatosFacturacion {
   width: 45rem;
-  height: 12rem;
+  height: 20rem;
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
@@ -21,20 +21,35 @@
 }
 
 .paso1 {
-  margin: 1rem;
   font-size: 15px;
+  position: absolute;
+  margin-left: 38rem;
+  margin-top: -4rem;
 }
 
 .labelDatos {
-  margin: 1rem;
+  margin: 2rem;
   font-size: 15px;
 }
 
 .inputDatos {
-  width: 10rem;
-  height: 1.5rem;
+  width: 15rem;
+  height: 2.5rem;
   background-color: #f0f0f0;
   margin: 1rem;
+  border-radius: 0.6rem;
+  border: none;
+  padding-left: 0.5rem;
+}
+
+.gridDatosFacturacion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 5.2em 5.2em;
+  gap: 0.6em;
+}
+
+.cajaInputDatos {
 }
 
 .metodoPago {
@@ -79,10 +94,18 @@
 }
 
 .inputMetodo {
-  width: 10rem;
-  height: 1.5rem;
+  width: 15rem;
+  height: 2.5rem;
   margin: 1rem;
-  border-radius: 0.7rem;
+  border-radius: 0.6rem;
+  border: none;
+}
+
+.gridDatosTarjeta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 5.2em 5.2em;
+  gap: 0.6em;
 }
 
 .cajaTransferenciaBancaria {
@@ -99,7 +122,7 @@
 
 .infoImportante {
   width: 45rem;
-  height: 30rem;
+  height: 35rem;
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
@@ -121,7 +144,6 @@
 
 .seguroDelAuto {
   width: 60rem;
-  height: 34rem;
   border-radius: 0.7rem;
   margin: 1rem;
 }
@@ -135,8 +157,6 @@
 }
 
 .entregaYdevolucion {
-  width: 35rem;
-  height: 5rem;
   margin: 1rem;
 }
 
@@ -146,6 +166,11 @@
 
 .liEntrega {
   margin: 1rem;
+}
+
+.cajaAceptoTerminos {
+  display: flex;
+  margin: 3rem;
 }
 
 .requisitosAlRetirar {
@@ -167,16 +192,15 @@
   height: 1rem;
   border-radius: 0.313;
   border: solid black 0.063;
-  margin: 1rem;
+  margin-right: 0.5rem;
 }
 
 .textoAcepto {
-  margin: 1rem;
 }
 
 .resumenDeAlquiler {
   width: 30rem;
-  height: 12rem;
+  height: 40rem;
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
@@ -205,20 +229,17 @@
 }
 
 .valoracionResumen {
+  display: flex;
+  overflow: visible;
   width: 6rem;
-  height: 20px;
-  gap: 0.125rem;
-  margin: 1rem;
 }
 
 .estrella {
   width: 1rem;
   height: 1rem;
-  margin: 1rem;
 }
 
 .valoracion {
-  margin: 1rem;
 }
 
 .linea {
