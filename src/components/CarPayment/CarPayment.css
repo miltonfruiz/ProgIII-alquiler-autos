@@ -1,5 +1,10 @@
-.contenedor {
+.contenedorGeneral {
   background-color: #f0f0f0;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: row;
 }
 
 .DatosFacturacion {
