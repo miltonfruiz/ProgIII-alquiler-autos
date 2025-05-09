@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 import CarPayment from "./components/CarPayment/CarPayment";
 import Cars from "./pages/Cars";
+import Welcome from "./pages/Welcome";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -41,6 +42,7 @@ function App() {
           }
         />
         <Route path="/cars" element={<Cars></Cars>} />
+        <Route path="/presentation" element={<Welcome />} />
       </Routes>
     </BrowserRouter>
   );

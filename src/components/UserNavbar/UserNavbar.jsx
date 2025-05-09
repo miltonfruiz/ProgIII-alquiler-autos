@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 import Flag from "react-world-flags";
 import { IoMdCheckmark } from "react-icons/io";
 import { BsCalendarDateFill } from "react-icons/bs";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function UserNavbar() {
   const navigate = useNavigate();
@@ -25,11 +27,20 @@ export default function UserNavbar() {
     { code: "en", name: "English", flag: "US" },
     { code: "pt", name: "Português", flag: "BR" },
   ];
-
   const handleLogout = () => {
-    // lógica para cerrar sesión
-    console.log("Cerrando sesión...");
-    navigate("/login");
+    localStorage.removeItem("lang");
+    localStorage.removeItem("token");
+    localStorage.removeItem("theme");
+    window.location.reload();
+    toast.success("Cerrando Sesión...", {
+      position: "top-right",
+      autoClose: 2000,
+      theme: theme === "dark" ? "dark" : "light",
+    });
+
+    setTimeout(() => {
+      navigate("/presentation");
+    }, 4000);
   };
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -134,7 +145,6 @@ export default function UserNavbar() {
                     ))}
                   </div>
                 )}
-
                 <button
                   className={`fade-button ${fade ? "fade-out" : ""}`}
                   onClick={toggleTheme}
@@ -161,7 +171,6 @@ export default function UserNavbar() {
                   <CiEdit className="icon-item-profile" />
                   {t("navbar.editProfile")}
                 </button>
-
                 <button
                   onClick={() => {
                     setFade(true);
@@ -177,6 +186,7 @@ export default function UserNavbar() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </nav>
   );
 }
