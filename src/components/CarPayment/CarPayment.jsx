@@ -123,10 +123,7 @@ const CarPayment = () => {
             <p className="valoracion">valoracion</p>
           </div>
           <div className="linea"></div>
-          {
-            //para que sea una linea hay q ponerle
-            // un height de 1px
-          }
+
           <p className="tituloSubtotal">Subtotal</p>
           <p className="subtotal">$290.000</p>
           <p className="tituloImpuestos">Impuestos</p>
