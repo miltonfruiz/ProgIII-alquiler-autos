@@ -58,12 +58,6 @@
   color: rgb(128, 128, 128);
   font-style: oblique;
 }
-.navbar-filter {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-}
 .navbar-filter img {
   height: 20px;
   width: 20px;

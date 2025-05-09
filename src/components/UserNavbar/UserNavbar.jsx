@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import "./UserNavbar.css";
 import { CiSearch, CiEdit } from "react-icons/ci";
-import { VscSettings, VscColorMode } from "react-icons/vsc";
 import { FaCar, FaUserEdit } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 import { FiLogOut, FiSun, FiMoon } from "react-icons/fi";
@@ -76,9 +75,6 @@ export default function UserNavbar() {
             placeholder={t("navbar.searchPlaceholder")}
             className={`navbar-search ${fade ? "fade-out" : ""}`}
           />
-          <button className="navbar-filter">
-            <VscSettings size={18} className="search-icon" />
-          </button>
         </div>
       </div>
       <div className="navbar-right">
