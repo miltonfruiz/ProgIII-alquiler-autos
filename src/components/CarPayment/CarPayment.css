@@ -230,8 +230,8 @@
 
 .valoracionResumen {
   display: flex;
-  overflow: visible;
-  width: 6rem;
+  flex-direction: row;
+  margin-left: 0.4rem;
 }
 
 .estrella {
@@ -240,6 +240,8 @@
 }
 
 .valoracion {
+  font-size: 0.8rem;
+  margin-left: 0.4rem;
 }
 
 .linea {

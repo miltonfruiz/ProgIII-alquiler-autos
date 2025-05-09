@@ -84,9 +84,13 @@ const CarPayment = () => {
           <div className="gridDatosTarjeta">
             <div className="cajaInputTarjeta">
               <label htmlFor="" className="labelMetodo">
-                Nombre de Tarjeta
+                Numero de Tarjeta
               </label>
-              <input type="text" className="inputMetodo" />
+              <input
+                type="text"
+                className="inputMetodo"
+                placeholder="Numero de tarjeta"
+              />
             </div>
             <div className="cajaInputTarjeta">
               <label htmlFor="" className="labelMetodo">
@@ -98,13 +102,17 @@ const CarPayment = () => {
               <label htmlFor="" className="labelMetodo">
                 Nombre del titular
               </label>
-              <input type="text" className="inputMetodo" />
+              <input
+                type="text"
+                className="inputMetodo"
+                placeholder="Nombre completo"
+              />
             </div>
             <div className="cajaInputTarjeta">
               <label htmlFor="" className="labelMetodo">
                 CVC
               </label>
-              <input type="text" className="inputMetodo" />
+              <input type="text" className="inputMetodo" placeholder="CVC" />
             </div>
           </div>
         </div>
