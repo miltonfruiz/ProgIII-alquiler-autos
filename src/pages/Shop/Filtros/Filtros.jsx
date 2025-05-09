@@ -2,24 +2,26 @@ import React, { useState } from "react";
 import styles from "./Filtros.module.css";
 
 const categorias = [
-  { nombre: "Económico", cantidad: 10 },
-  { nombre: "Estándar", cantidad: 12 },
-  { nombre: "SUV", cantidad: 16 },
-  { nombre: "Full Size", cantidad: 20 },
+  { nombre: "Económico", cantidad: 4 },
+  { nombre: "Estándar", cantidad: 1 },
+  { nombre: "SUV", cantidad: 1 },
+  { nombre: "Full Size", cantidad: 3 },
 ];
 
 const marcas = [
-  { nombre: "Volkswagen", cantidad: 10 },
-  { nombre: "Fiat", cantidad: 12 },
-  { nombre: "Chevrolet", cantidad: 16 },
-  { nombre: "Toyota", cantidad: 20 },
-  { nombre: "Peugot", cantidad: 20 },
+  { nombre: "Volkswagen", cantidad: 2 },
+  { nombre: "Fiat", cantidad: 1 },
+  { nombre: "Chevrolet", cantidad: 1 },
+  { nombre: "Toyota", cantidad: 3 },
+  { nombre: "Peugot", cantidad: 2 },
 ];
 
-function Filtros() {
-  const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
-  const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
-
+function Filtros({
+  categoriasSeleccionadas,
+  setCategoriasSeleccionadas,
+  marcasSeleccionadas,
+  setMarcasSeleccionadas,
+}) {
   const handleCategoriaChange = (nombre) => {
     setCategoriasSeleccionadas((prev) =>
       prev.includes(nombre)
@@ -50,7 +52,7 @@ function Filtros() {
                 <input
                   type="checkbox"
                   value={categoria.nombre}
-                  checked={categoriasSeleccionadas.includes(categoria.nombre)}
+                  checked={categoriasSeleccionadas.includes(categoria.nombre)} // GUARDA EL CHECK EN EL ARRAY DE CATEGORIAS
                   onChange={() => handleCategoriaChange(categoria.nombre)}
                 />
                 {categoria.nombre} ({categoria.cantidad})
@@ -68,7 +70,7 @@ function Filtros() {
                 <input
                   type="checkbox"
                   value={marca.nombre}
-                  checked={marcasSeleccionadas.includes(marca.nombre)}
+                  checked={marcasSeleccionadas.includes(marca.nombre)} // GUARDA EL CHECK EN EL ARRAY DE MARCAS
                   onChange={() => handleMarcaChange(marca.nombre)}
                 />
                 {marca.nombre} ({marca.cantidad})

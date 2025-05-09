@@ -4,15 +4,29 @@
   flex-direction: column;
   padding: 1.3rem;
   width: 300px;
-  height: 380px;
+  height: 400px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   background-color: #fff;
   border-radius: 10px;
 }
 
 .cardTitle {
+  font-weight: 500;
+
   font-size: 1.3rem;
+  margin: 0;
+}
+
+.carType {
+  font-size: 0.9rem;
+  font-weight: 400;
   margin-top: 0;
+  color: #2b2b2b98;
+}
+
+.headConteiner {
+  display: flex;
+  flex-direction: column;
 }
 
 .cardImage {

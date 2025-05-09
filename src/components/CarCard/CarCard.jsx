@@ -3,10 +3,20 @@ import styles from "./CarCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faRoad } from "@fortawesome/free-solid-svg-icons";
 
-const CarCard = ({ name, image, passengers, transmission, price }) => {
+const CarCard = ({
+  name,
+  category,
+  image,
+  passengers,
+  transmission,
+  price,
+}) => {
   return (
     <div className={styles.cardConteiner}>
-      <p className={styles.cardTitle}>{name}</p>
+      <div className={styles.headConteiner}>
+        <p className={styles.cardTitle}>{name}</p>
+        <p className={styles.carType}>{category}</p>
+      </div>
       <img className={styles.cardImage} src={image} alt={name} />
       <div className={styles.cardDataCar}>
         <span className={styles.cardCapacity}>
