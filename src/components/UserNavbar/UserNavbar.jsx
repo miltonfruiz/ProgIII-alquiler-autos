@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import "./UserNavbar.css";
 import { CiSearch, CiEdit } from "react-icons/ci";
@@ -21,6 +21,8 @@ export default function UserNavbar() {
   const [showLanguages, setShowLanguages] = useState(false);
   const { t, i18n } = useTranslation();
   const [fade, setFade] = useState(false);
+  const location = useLocation();
+  const isOnEditProfile = location.pathname === "/user-profile";
 
   const languages = [
     { code: "es", name: "Español", flag: "AR" },
@@ -163,14 +165,17 @@ export default function UserNavbar() {
                 </button>
                 <button
                   onClick={() => {
-                    setFade(true);
-                    setTimeout(() => navigate("/user-profile"), 300);
+                    if (!isOnEditProfile) {
+                      setFade(true);
+                      setTimeout(() => navigate("/user-profile"), 300);
+                    }
                   }}
                   className={`fade-button ${fade ? "fade-out" : ""}`}
                 >
                   <CiEdit className="icon-item-profile" />
                   {t("navbar.editProfile")}
                 </button>
+
                 <button
                   onClick={() => {
                     setFade(true);
