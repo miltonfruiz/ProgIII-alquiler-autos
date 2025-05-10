@@ -1,11 +1,12 @@
 import React from "react";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
+import MyProfile from "../components/MyProfile/MyProfile";
 
 const UserProfile = () => {
   return (
     <div>
       <UserNavbar />
-      <p>Componente Perfil</p>
+      <MyProfile />
       <p>Componente Mis Reservas</p>
       <p>Componente Reservas pasadas</p>
     </div>

@@ -33,7 +33,6 @@ export default function UserNavbar() {
     localStorage.removeItem("lang");
     localStorage.removeItem("token");
     localStorage.removeItem("theme");
-    window.location.reload();
     toast.success("Cerrando Sesión...", {
       position: "top-right",
       autoClose: 2000,
@@ -175,7 +174,6 @@ export default function UserNavbar() {
                   <CiEdit className="icon-item-profile" />
                   {t("navbar.editProfile")}
                 </button>
-
                 <button
                   onClick={() => {
                     setFade(true);
