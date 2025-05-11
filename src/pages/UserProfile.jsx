@@ -1,4 +1,3 @@
-import React from "react";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
 import MyProfile from "../components/MyProfile/MyProfile";
 

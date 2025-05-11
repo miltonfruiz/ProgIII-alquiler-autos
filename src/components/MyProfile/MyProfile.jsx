@@ -1,25 +1,48 @@
-import React from "react";
+import "./MyProfile.css";
+import { useNavigate } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
+import { ImProfile } from "react-icons/im";
+import { FaSignature } from "react-icons/fa6";
+import { MdDateRange } from "react-icons/md";
+import { FaRegAddressCard, FaCarSide } from "react-icons/fa";
 
-function MyProfile() {
+export default function MyProfile() {
+  const navigate = useNavigate();
+  const handleEditProfile = () => {
+    navigate("/user-profile");
+  };
   return (
-    <div>
-      <div>
+    <div className="profile-header">
+      <h1 className="profile-title">
+        <ImProfile className="imProfile-icon" />
+        Mis Datos
+      </h1>
+      <div className="profile-content">
         <img
-          src="images/profile.png"
-          alt="foto perfil"
+          src="/images/profile.png"
+          alt="Foto de perfil"
           className="img-profile"
         />
-        <div>
-          <h2>Maria San Juan</h2>
-          <p>Fecha Nacimiento: 20/03/1992</p>
-          <p>DNI: 39.484.200</p>
-          <p>Nº licencia: 39489200</p>
-          <a href="#">Editar perfil</a>
+        <div className="profile-details">
+          <h2>
+            <FaSignature className="icon-date" /> Maria San Juan
+          </h2>
+          <p>
+            <MdDateRange className="icon-date" /> Fecha de Nacimiento:
+            20/03/1992
+          </p>
+          <p>
+            <FaRegAddressCard className="icon-date" /> DNI: 39.484.200
+          </p>
+          <p>
+            <FaCarSide className="icon-date" /> Nº Licencia: 39489200
+          </p>
+          <button className="edit-button" onClick={handleEditProfile}>
+            <FiEdit className="fiEdit-icon" />
+            Editar Perfil
+          </button>
         </div>
       </div>
-      <button>Cerrar sesión</button>
     </div>
   );
 }
-
-export default MyProfile;
