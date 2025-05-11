@@ -5,6 +5,7 @@
 .contenedor {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .DatosFacturacion {
@@ -13,27 +14,29 @@
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
+  padding: 1em;
 }
 
 .titleDatos {
-  margin: 1rem;
+  margin-left: 1rem;
   font-size: 24px;
 }
 
 .subtituloDatos {
-  margin: 1rem;
+  margin-left: 1rem;
   font-size: 14px;
+  color: #90a3bf;
 }
 
 .paso1 {
   font-size: 15px;
   position: absolute;
-  margin-left: 38rem;
+  margin-left: 37rem;
   margin-top: -4rem;
+  color: #90a3bf;
 }
 
 .labelDatos {
-  margin: 2rem;
   font-size: 15px;
 }
 
@@ -41,7 +44,6 @@
   width: 15rem;
   height: 2.5rem;
   background-color: #f0f0f0;
-  margin: 1rem;
   border-radius: 0.6rem;
   border: none;
   padding-left: 0.5rem;
@@ -52,9 +54,13 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 5.2em 5.2em;
   gap: 0.6em;
+  margin-left: 3em;
+  margin-top: 2em;
 }
 
 .cajaInputDatos {
+  display: flex;
+  flex-direction: column;
 }
 
 .metodoPago {
@@ -63,20 +69,26 @@
   background-color: #ffffff;
   border-radius: 0.7rem;
   margin: 1rem;
+  padding: 1em;
 }
 
 .tituloMetodo {
-  margin: 1rem;
+  margin-left: 1rem;
 }
 
 .subtituloMetodo {
-  margin: 1rem;
+  margin-left: 1rem;
   font-size: 14px;
+  color: #90a3bf;
 }
 
 .paso2 {
   margin: 1rem;
   font-size: 15px;
+  position: absolute;
+  margin-left: 37rem;
+  margin-top: -4rem;
+  color: #90a3bf;
 }
 
 .ingresoTarjeta {
@@ -85,25 +97,38 @@
   background-color: #f0f0f0;
   border-radius: 0.7rem;
   margin: 1rem;
+  margin-left: 3em;
 }
 
+.seleccion {
+  margin-left: 1rem;
+}
 .selectMetodo {
-  width: 8rem;
-  height: 1rem;
+  width: 12rem;
+  height: 1.5rem;
   margin: 1rem;
+  margin-left: 5rem;
+
+  font-weight: 600;
+}
+
+.logosTarjeta {
+  height: 2.2rem;
+  width: 2.2rem;
+  margin-bottom: -0.8rem;
+  margin-left: 1rem;
 }
 
 .labelMetodo {
-  margin: 1rem;
   font-size: 15px;
 }
 
 .inputMetodo {
   width: 15rem;
   height: 2.5rem;
-  margin: 1rem;
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   border: none;
+  padding-left: 1rem;
 }
 
 .gridDatosTarjeta {
@@ -111,6 +136,12 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 5.2em 5.2em;
   gap: 0.6em;
+  padding: 2rem;
+}
+
+.cajaInputTarjeta {
+  display: flex;
+  flex-direction: column;
 }
 
 .cajaTransferenciaBancaria {
@@ -118,11 +149,13 @@
   height: 3rem;
   background-color: #f0f0f0;
   border-radius: 0.7rem;
-  margin: 1rem 1rem 1rem 1rem;
+  margin: 1rem 1rem 1rem 3rem;
+  display: flex;
 }
 
 .transferenciaBancaria {
-  margin: 1rem;
+  margin: auto;
+  margin-left: 2rem;
 }
 
 .infoImportante {
@@ -131,20 +164,26 @@
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
+  padding: 1rem;
 }
 
 .tituloInfo {
-  margin: 1rem;
+  margin-left: 1rem;
 }
 
 .subtituloInfo {
-  margin: 1rem;
+  margin-left: 1rem;
   font-size: 14px;
+  color: #90a3bf;
 }
 
 .paso3 {
   margin: 1rem;
   font-size: 15px;
+  position: absolute;
+  margin-left: 37rem;
+  margin-top: -4rem;
+  color: #90a3bf;
 }
 
 .seguroDelAuto {
@@ -175,7 +214,13 @@
 
 .cajaAceptoTerminos {
   display: flex;
-  margin: 3rem;
+  margin-top: 4rem;
+}
+
+.aceptoTerminos {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 0.2rem;
 }
 
 .requisitosAlRetirar {
@@ -205,21 +250,26 @@
 
 .resumenDeAlquiler {
   width: 30rem;
-  height: 40rem;
+  height: 33rem;
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
+  padding: 1rem;
 }
 
 .tituloResumen {
-  margin: 1rem;
+  margin-left: 1rem;
 }
 
 .subtituloResumen {
-  margin: 1rem;
+  margin-left: 1rem;
   font-size: 14px;
+  color: #90a3bf;
 }
-
+.cajaValoracionAuto {
+  display: flex;
+  flex-direction: row;
+}
 .imagenResumen {
   width: 11rem;
   height: 5rem;
@@ -237,6 +287,22 @@
   display: flex;
   flex-direction: row;
   margin-left: 0.4rem;
+  margin-left: 1rem;
+}
+
+.cajaSubtotal {
+  display: flex;
+  flex-direction: row;
+}
+
+.cajaImpuestos {
+  display: flex;
+  flex-direction: row;
+}
+
+.cajaPrecioFinal {
+  display: flex;
+  flex-direction: row;
 }
 
 .estrella {
@@ -260,28 +326,32 @@
   font-family: "Poppins";
   font-weight: 500;
   font-size: 1.25rem;
-  margin: 1rem;
+  margin: 0.7rem;
+  color: #90a3bf;
 }
 
 .subtotal {
   font-family: "Poppins";
   font-weight: 500;
   font-size: 1.25rem;
-  margin: 1rem;
+  margin: 0.7rem;
+  margin-left: 14.5rem;
 }
 
 .tituloImpuestos {
   font-family: "Poppins";
   font-weight: 500;
   font-size: 1.25rem;
-  margin: 1rem;
+  margin: 0.7rem;
+  color: #90a3bf;
 }
 
 .impuestos {
   font-family: "Poppins";
   font-weight: 500;
   font-size: 1.25rem;
-  margin: 1rem;
+  margin: 0.7rem;
+  margin-left: 14rem;
 }
 
 .tituloPrecioFinal {
@@ -296,6 +366,7 @@
   font-weight: 500;
   font-size: 0.875rem;
   margin: 1rem;
+  color: #90a3bf;
 }
 
 .precioFinal {
@@ -309,9 +380,10 @@
   width: 18rem;
   height: 4rem;
   border-radius: 0.7rem;
-  background-color: #5939f2;
+  background-color: #6366f1;
   margin: 1rem;
   color: #ffffff;
+  transition: 0.3s;
 }
 
 .botonCancelar {
@@ -320,4 +392,14 @@
   border-radius: 0.7rem;
   border: solid black 1px;
   margin: 1rem;
+  transition: 0.2s;
+}
+
+.botonRentar:hover {
+  background-color: #473fdb;
+}
+
+.botonCancelar:hover {
+  background-color: #e90303ab;
+  color: #ffffff;
 }
