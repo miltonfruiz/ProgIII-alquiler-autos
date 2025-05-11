@@ -1,15 +1,51 @@
+import { useState, useRef } from "react";
 import "./MyProfile.css";
-import { useNavigate } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { ImProfile } from "react-icons/im";
 import { FaSignature } from "react-icons/fa6";
-import { MdDateRange } from "react-icons/md";
-import { FaRegAddressCard, FaCarSide } from "react-icons/fa";
+import { MdDateRange, MdOutlineCancel } from "react-icons/md";
+import { FaRegAddressCard, FaCarSide, FaRegSave } from "react-icons/fa";
 
 export default function MyProfile() {
-  const navigate = useNavigate();
-  const handleEditProfile = () => {
-    navigate("/user-profile");
+  const [editMode, setEditMode] = useState(false);
+  const [animateOut, setAnimateOut] = useState(false);
+  const [profileData, setProfileData] = useState({
+    nombre: "Maria San Juan",
+    nacimiento: "1992-03-20",
+    dni: "39484200",
+    licencia: "39489200",
+  });
+  const [profileImage, setProfileImage] = useState("/images/profile.png");
+  const fileInputRef = useRef(null);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(URL.createObjectURL(file));
+    }
+  };
+  const triggerImageSelect = () => {
+    if (fileInputRef.current) fileInputRef.current.click();
+  };
+
+  const handleChange = (e) => {
+    setProfileData({ ...profileData, [e.target.name]: e.target.value });
+  };
+  const handleEditToggle = () => {
+    setEditMode(true);
+  };
+  const handleSave = () => {
+    setAnimateOut(true);
+    setTimeout(() => {
+      setAnimateOut(false);
+      setEditMode(false);
+    }, 100);
+  };
+  const handleCancel = () => {
+    setAnimateOut(true);
+    setTimeout(() => {
+      setAnimateOut(false);
+      setEditMode(false);
+    }, 100);
   };
   return (
     <div className="profile-header">
@@ -18,29 +54,101 @@ export default function MyProfile() {
         Mis Datos
       </h1>
       <div className="profile-content">
-        <img
-          src="/images/profile.png"
-          alt="Foto de perfil"
-          className="img-profile"
-        />
+        <div className="profile-image-wrapper">
+          <img
+            src={profileImage}
+            alt="Foto de perfil"
+            className={`img-profile ${editMode ? "editable-img" : ""}`}
+            onClick={editMode ? triggerImageSelect : undefined}
+            style={{ cursor: editMode ? "pointer" : "default" }}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={fileInputRef}
+            onChange={handleImageChange}
+          />
+        </div>
+
         <div className="profile-details">
           <h2>
-            <FaSignature className="icon-date" /> Maria San Juan
+            <FaSignature className="icon-date" />
+            {editMode ? (
+              <input
+                type="text"
+                name="nombre"
+                value={profileData.nombre}
+                onChange={handleChange}
+                className={animateOut ? "fade-out" : "fade-in"}
+              />
+            ) : (
+              profileData.nombre
+            )}
           </h2>
           <p>
-            <MdDateRange className="icon-date" /> Fecha de Nacimiento:
-            20/03/1992
+            <MdDateRange className="icon-date" />
+            Fecha de Nacimiento:{" "}
+            {editMode ? (
+              <input
+                type="date"
+                name="nacimiento"
+                value={profileData.nacimiento}
+                onChange={handleChange}
+                className={animateOut ? "fade-out" : "fade-in"}
+              />
+            ) : (
+              new Date(profileData.nacimiento).toLocaleDateString("es-AR")
+            )}
           </p>
           <p>
-            <FaRegAddressCard className="icon-date" /> DNI: 39.484.200
+            <FaRegAddressCard className="icon-date" />
+            DNI:{" "}
+            {editMode ? (
+              <input
+                type="text"
+                name="dni"
+                value={profileData.dni}
+                onChange={handleChange}
+                className={animateOut ? "fade-out" : "fade-in"}
+              />
+            ) : (
+              profileData.dni
+            )}
           </p>
           <p>
-            <FaCarSide className="icon-date" /> Nº Licencia: 39489200
+            <FaCarSide className="icon-date" />
+            Nº Licencia:{" "}
+            {editMode ? (
+              <input
+                type="text"
+                name="licencia"
+                value={profileData.licencia}
+                onChange={handleChange}
+                className={animateOut ? "fade-out" : "fade-in"}
+              />
+            ) : (
+              profileData.licencia
+            )}
           </p>
-          <button className="edit-button" onClick={handleEditProfile}>
-            <FiEdit className="fiEdit-icon" />
-            Editar Perfil
-          </button>
+
+          {editMode ? (
+            <div
+              className={`edit-actions ${animateOut ? "fade-out" : "fade-in"}`}
+            >
+              <button className="save-button" onClick={handleSave}>
+                <FaRegSave className="icon-edits" /> Guardar
+              </button>
+              <button className="cancel-button" onClick={handleCancel}>
+                <MdOutlineCancel className="icon-edits" /> Cancelar
+              </button>
+            </div>
+          ) : (
+            <button className="edit-button fade-in" onClick={handleEditToggle}>
+              <FiEdit className="fiEdit-icon" />
+              Editar Perfil
+            </button>
+          )}
         </div>
       </div>
     </div>

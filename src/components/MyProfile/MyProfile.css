@@ -73,3 +73,95 @@
 .icon-date {
   margin-right: 5px;
 }
+.profile-details input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-left: 8px;
+}
+.save-button {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.cancel-button {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.cancel-button:hover {
+  background-color: #c82333;
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.3s ease forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.profile-details input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+}
+.edit-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+}
+.save-button,
+.cancel-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.save-button:hover {
+  background-color: #218838;
+}
+.fade-out {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeOut 0.3s ease forwards;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.icon-edits {
+  font-size: 13px;
+  margin-right: 4px;
+}
+.profile-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.img-profile.editable-img:hover {
+  box-shadow: 0 0 0 3px #5e49d8;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+}
