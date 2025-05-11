@@ -40,7 +40,7 @@ const CarPayment = () => {
                 <input
                   type="text"
                   className="inputDatos"
-                  placeholder="Nombre"
+                  placeholder="Tu nombre"
                 />
               </div>
               <div className="cajaInputDatos">
@@ -50,7 +50,7 @@ const CarPayment = () => {
                 <input
                   type="text"
                   className="inputDatos"
-                  placeholder="Apellido"
+                  placeholder="Tu apellido"
                 />
               </div>
               <div className="cajaInputDatos">

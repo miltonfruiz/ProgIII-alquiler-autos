@@ -38,6 +38,8 @@
 
 .labelDatos {
   font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
 }
 
 .inputDatos {
@@ -46,7 +48,7 @@
   background-color: #f0f0f0;
   border-radius: 0.6rem;
   border: none;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
 .gridDatosFacturacion {
@@ -121,6 +123,8 @@
 
 .labelMetodo {
   font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
 }
 
 .inputMetodo {
