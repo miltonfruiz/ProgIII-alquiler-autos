@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "searchPlaceholder": "Ingrese nombre o modelo de auto...",
+    "language": "Idioma",
+    "language_es": "Español",
+    "language_en": "Inglés",
+    "language_pt": "Portugués",
+    "themeLight": "Modo claro",
+    "themeDark": "Modo oscuro",
+    "editProfile": "Editar perfil",
+    "logout": "Cerrar sesión"
+  }
+}

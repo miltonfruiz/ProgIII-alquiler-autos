@@ -1,0 +1,146 @@
+.login-form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+.login-title {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  color: #111827;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+.form-group input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 50%;
+  background-color: #6366f1;
+  color: white;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.login-button:hover {
+  background-color: #4f46e5;
+}
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+.register-link a {
+  color: #6366f1;
+  text-decoration: none;
+}
+.register-link a:hover {
+  text-decoration: underline;
+}
+#password,
+#email {
+  letter-spacing: 0.05rem;
+  font-style: oblique;
+  font-size: 0.75rem;
+  background-color: rgba(128, 128, 128, 0.075);
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+.label-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.error-message {
+  height: 1rem;
+  color: red;
+  font-size: 0.72rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.error-message.visible {
+  opacity: 1;
+}
+.label-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+.button-container .login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+.forgot-password {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.forgot-password a {
+  color: #6366f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+  color: #4f46e5;
+  text-decoration: underline;
+}
+.forgot-password-link {
+  text-align: right;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+.forgot-password-link a {
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.forgot-password-link a:hover {
+  text-decoration: underline;
+}
