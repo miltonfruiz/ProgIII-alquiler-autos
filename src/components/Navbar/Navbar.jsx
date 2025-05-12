@@ -7,7 +7,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   return (
-    <div className={styles.navBarConteiner}>
+    <nav className={styles.navBarConteiner}>
       <img
         className={styles.logoMarca}
         src={carLogo}
@@ -21,7 +21,7 @@ function Navbar() {
           <FontAwesomeIcon icon={faUser} />
         </a>
       </div>
-    </div>
+    </nav>
   );
 }
 
