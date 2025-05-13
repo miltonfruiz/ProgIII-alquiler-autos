@@ -1,6 +1,6 @@
+
 /* -------- Reset básico y tipografía -------- */
 :root {
-  font-family: "Poppins", sans-serif;
   --transition: all 0.2s ease;
   --bg-color: #f9fafb;
   --text-color: #1f2937;
@@ -13,6 +13,16 @@
   background-color: #f9fafb;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* SosaRama */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Avenir, Helvetica, Arial, sans-serif;
+  background-color: #f6f7f9;
+  color: #212121;
+  padding-top: 50px;
 }
 body.dark {
   --bg-color: #1e1e1e;
@@ -36,12 +46,44 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 a {
-  color: #2563eb;
+  color: #646cff;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
+
+/* Links */
 a:hover {
   color: #1d4ed8;
+}
+
+/* Botones */
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  background-color: #1a1a1a;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+}
+button:hover {
+  border: 1px solid #646cff;
+}
+
+/* Ajustes para light mode opcional */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ffffff;
+    color: #213547;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+    color: black;
+  }
 }
 button {
   cursor: pointer;

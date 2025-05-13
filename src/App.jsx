@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import TestHome from "./components/TestHome/TestHome";
@@ -11,6 +12,16 @@ import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/Protec
 import CarPayment from "./components/CarPayment/CarPayment";
 import Cars from "./pages/Cars";
 import Welcome from "./pages/Welcome";
+
+//SosaRama
+import Home from "./pages/Home/Home";
+import Shop from "./pages/Shop/Shop";
+
+// function App() {
+//   return (
+//     <>
+//       <Shop />
+//     </>
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);

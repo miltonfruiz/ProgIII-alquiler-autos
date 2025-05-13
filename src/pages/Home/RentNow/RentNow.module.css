@@ -1,0 +1,99 @@
+/* .rentNowSection {
+  margin: 50px 0 0 150px;
+}
+
+.rentNowImage {
+  width: 1620px;
+}
+
+.imageConteiner {
+  position: relative;
+}
+
+.rentNowTitle {
+  color: #edefff;
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.rentNowText {
+  color: #edefff;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.rentNowButton {
+  color: #fff;
+  cursor: pointer;
+  padding: 25px 200px;
+  background-color: #7a77ff;
+  border-radius: 10px;
+} */
+
+.rentNowSection {
+  margin: 50px 0 120px 150px;
+  position: relative;
+}
+
+.rentNowImage {
+  width: 100%;
+  max-width: 1620px;
+  display: block;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.overlayContent {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+.textContent {
+  margin-bottom: 30px;
+}
+
+.rentNowContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.rentNowTitle {
+  color: #edefff;
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.rentNowText {
+  color: #edefff;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.rentNowButton {
+  color: #fff;
+  cursor: pointer;
+  padding: 15px 60px;
+  background-color: #9ea4ff;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+
+  transition: background-color 0.3s ease;
+}
+
+.rentNowButton:hover {
+  background-color: #7371fc;
+}

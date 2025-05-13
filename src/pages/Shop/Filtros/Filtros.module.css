@@ -1,0 +1,74 @@
+body {
+  padding-top: 0;
+  overflow-y: hidden;
+}
+
+.filtrosConteiner {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filtrosSection {
+  margin-left: 2.438rem;
+}
+
+.titleSection {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.checkBoxSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.checkBoxSection input[type="checkbox"] {
+  appearance: none;
+  margin-right: 0.8rem;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #90a3bf;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+.checkBoxSection input[type="checkbox"]:checked {
+  background-color: #5939f2;
+  border-color: #5939f2;
+}
+
+.checkBoxSection input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: -2px;
+  left: 1px;
+}
+
+.categoriasFilter,
+.marcaFilter label {
+  color: #596780;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.typeTitle {
+  font-size: 0.9rem;
+  color: #dde2ff;
+  font-weight: 400;
+}
+
+.marcaFilter h4 {
+  margin-top: 50px;
+}
