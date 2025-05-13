@@ -1,12 +1,12 @@
-import peugeot208 from "../assets/cars/peugeot208.png";
-import toyotaCorolla from "../assets/cars/toyotaCorolla.png";
-import peugeot408 from "../assets/cars/peugeot408.png";
-import volksGol from "../assets/cars/volkswagenGol.png";
-import chevroletPrisma from "../assets/cars/chevroletPrisma.png";
-import toyotaEtios from "../assets/toyota_etios.png";
-import toyotaEtiosSedan from "../assets/toyota_etios-sedan.png";
-import fiatCronos from "../assets/fiat-cronos.png";
-import vwTcross from "../assets/vw-t-cross.png";
+import peugeot208 from "../assets/images/cars/peugeot208.png";
+import toyotaCorolla from "../assets/images/cars/toyotaCorolla.png";
+import peugeot408 from "../assets/images/cars/peugeot408.png";
+import volksGol from "../assets/images/cars/volkswagenGol.png";
+import chevroletPrisma from "../assets/images/cars/chevroletPrisma.png";
+import toyotaEtios from "../assets/images/cars/toyota_etios.png";
+import toyotaEtiosSedan from "../assets/images/cars/toyota_etios-sedan.png";
+import fiatCronos from "../assets/images/cars/fiat-cronos.png";
+import vwTcross from "../assets/images/cars/vw-t-cross.png";
 
 const mockCars = [
   {
@@ -57,7 +57,7 @@ const mockCars = [
     passengers: 5,
     transmission: "Automático",
     price: 69200,
-    brand: "Peugot",
+    brand: "Peugeot",
   },
   {
     id: 6,
@@ -97,7 +97,7 @@ const mockCars = [
     passengers: 5,
     transmission: "Manual",
     price: 73500,
-    brand: "Peugot",
+    brand: "Peugeot",
   },
 ];
 

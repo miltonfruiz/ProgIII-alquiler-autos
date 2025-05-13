@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Recomendados.module.css";
-import toyotaCar from "../../../assets/toyota_etios.png";
+import toyotaCar from "../../../assets/images/cars/toyota_etios.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faRoad } from "@fortawesome/free-solid-svg-icons";

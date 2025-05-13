@@ -10,6 +10,7 @@ body,
   background-color: #f6f7f9;
   color: #212121;
   padding-top: 50px;
+  overflow: auto;
 }
 
 /* Links */
@@ -34,19 +35,4 @@ button {
 }
 button:hover {
   border: 1px solid #646cff;
-}
-
-/* Ajustes para light mode opcional */
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: #ffffff;
-    color: #213547;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-    color: black;
-  }
 }
