@@ -3,8 +3,9 @@ import "./MyProfile.css";
 import { FiEdit } from "react-icons/fi";
 import { ImProfile } from "react-icons/im";
 import { FaSignature } from "react-icons/fa6";
-import { MdDateRange, MdOutlineCancel } from "react-icons/md";
-import { FaRegAddressCard, FaCarSide, FaRegSave } from "react-icons/fa";
+import { MdDateRange, MdCancel } from "react-icons/md";
+import { FaRegAddressCard, FaCarSide, FaSave, FaEdit } from "react-icons/fa";
+import { AiFillEdit } from "react-icons/ai";
 
 export default function MyProfile() {
   const [editMode, setEditMode] = useState(false);
@@ -16,6 +17,9 @@ export default function MyProfile() {
     licencia: "39489200",
   });
   const [profileImage, setProfileImage] = useState("/images/profile.png");
+  const [originalProfileData, setOriginalProfileData] = useState({});
+  const [originalProfileImage, setOriginalProfileImage] =
+    useState(profileImage);
   const fileInputRef = useRef(null);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -26,11 +30,12 @@ export default function MyProfile() {
   const triggerImageSelect = () => {
     if (fileInputRef.current) fileInputRef.current.click();
   };
-
   const handleChange = (e) => {
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
   };
   const handleEditToggle = () => {
+    setOriginalProfileData(profileData);
+    setOriginalProfileImage(profileImage);
     setEditMode(true);
   };
   const handleSave = () => {
@@ -43,6 +48,8 @@ export default function MyProfile() {
   const handleCancel = () => {
     setAnimateOut(true);
     setTimeout(() => {
+      setProfileData(originalProfileData);
+      setProfileImage(originalProfileImage);
       setAnimateOut(false);
       setEditMode(false);
     }, 100);
@@ -62,6 +69,11 @@ export default function MyProfile() {
             onClick={editMode ? triggerImageSelect : undefined}
             style={{ cursor: editMode ? "pointer" : "default" }}
           />
+          {editMode && (
+            <div className="edit-icon-overlay" onClick={triggerImageSelect}>
+              <AiFillEdit className="camera-icon" />
+            </div>
+          )}
           <input
             type="file"
             accept="image/*"
@@ -70,7 +82,6 @@ export default function MyProfile() {
             onChange={handleImageChange}
           />
         </div>
-
         <div className="profile-details">
           <h2>
             <FaSignature className="icon-date" />
@@ -137,15 +148,15 @@ export default function MyProfile() {
               className={`edit-actions ${animateOut ? "fade-out" : "fade-in"}`}
             >
               <button className="save-button" onClick={handleSave}>
-                <FaRegSave className="icon-edits" /> Guardar
+                <FaSave className="icon-edits" /> Guardar
               </button>
               <button className="cancel-button" onClick={handleCancel}>
-                <MdOutlineCancel className="icon-edits" /> Cancelar
+                <MdCancel className="icon-edits" /> Cancelar
               </button>
             </div>
           ) : (
             <button className="edit-button fade-in" onClick={handleEditToggle}>
-              <FiEdit className="fiEdit-icon" />
+              <FaEdit className="FaEdit-icon" />
               Editar Perfil
             </button>
           )}

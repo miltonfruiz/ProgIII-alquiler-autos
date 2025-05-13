@@ -63,7 +63,7 @@
 .edit-button:hover {
   background-color: #4935bd;
 }
-.fiEdit-icon {
+.FaEdit-icon {
   font-size: 13px;
 }
 .imProfile-icon {
@@ -72,13 +72,6 @@
 }
 .icon-date {
   margin-right: 5px;
-}
-.profile-details input {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  margin-left: 8px;
 }
 .save-button {
   display: flex;
@@ -126,6 +119,11 @@
   margin-left: 8px;
   transition: all 0.3s ease;
 }
+.profile-details input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
 .edit-actions {
   margin-top: 16px;
   display: flex;
@@ -159,9 +157,20 @@
 }
 .profile-image-wrapper {
   position: relative;
-  display: inline-block;
+  width: fit-content;
+}
+.edit-icon-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 12px;
+  padding: 8px;
+  cursor: pointer;
+}
+.camera-icon {
+  color: white;
+  font-size: 17px;
 }
 .img-profile.editable-img:hover {
-  box-shadow: 0 0 0 3px #5e49d8;
+  box-shadow: 0 0 0 2px #6366f1;
   transition: opacity 0.3s ease, box-shadow 0.3s ease;
 }
