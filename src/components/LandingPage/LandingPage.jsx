@@ -49,14 +49,16 @@ const LandingPage = () => {
           <button className="buttonLogin">Inicio Sección</button>
         </div>
 
-        <div className="containerDesign">
-          <p className="textDesign">
-            Diseñado por: Milton Ruiz, Juan Sosa ,Branco Antuña
-          </p>
-        </div>
+        <div className="footer">
+          <div className="containerDesign">
+            <p className="textDesign">
+              Diseñado por: Milton Ruiz, Juan Sosa ,Branco Antuña
+            </p>
+          </div>
 
-        <div className="containerCopyright">
-          <p className="copyright">© 2025 Todos los derechos reservados</p>
+          <div className="containerCopyright">
+            <p className="copyright">© 2025 Todos los derechos reservados</p>
+          </div>
         </div>
       </div>
     </div>
