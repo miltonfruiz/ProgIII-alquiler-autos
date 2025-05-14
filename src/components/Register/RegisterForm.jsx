@@ -7,6 +7,7 @@ import { IoCalendar } from "react-icons/io5"; // fecha nacimiento
 import { HiIdentification } from "react-icons/hi2"; // dni
 import { TbLicense } from "react-icons/tb"; // licencia
 import Header from "../Header/Header";
+import "./RegisterForm.css";
 
 const RegisterForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,6 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
 
   return (
     <div className="container">
-      <Header></Header>
       <form className="formRegister" action="" onSubmit={handleSubmit}>
         <h1 className="titleRegister">Registrarse</h1>
         <div className="gridRegister">
