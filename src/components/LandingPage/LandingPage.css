@@ -1,0 +1,57 @@
+.container {
+  background-color: #444444;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.containerH1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerSocial {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.containerP {
+  margin: 1rem 4rem 1rem 4rem;
+}
+
+.containerSocialP {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3rem;
+}
+
+.containerButton {
+  display: flex;
+  justify-content: center;
+  margin: 5rem 4rem 3rem 4rem;
+}
+
+.footer {
+  margin: 5rem 3rem 0rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.titleLanding {
+}
+
+.textWelcome {
+}
+
+.buttonRegisterLanding {
+}
+
+.buttonLogin {
+}
+
+.textDesign {
+}
+
+.copyright {
+}

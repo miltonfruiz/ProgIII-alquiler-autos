@@ -6,6 +6,7 @@ import { FaCcMastercard } from "react-icons/fa6";
 import { SiAmericanexpress } from "react-icons/si";
 import { IoCard } from "react-icons/io5";
 import { useState } from "react";
+import "./CarPayment.css";
 
 const CarPayment = () => {
   const [imgTarjetas, setImgTarjetas] = useState("visa");
