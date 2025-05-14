@@ -9,44 +9,46 @@ import { IoLogoWhatsapp } from "react-icons/io";
 const LandingPage = () => {
   return (
     <div>
-      <div className="container">
+      <div className="containerLanding">
         <div className="containerH1">
           <h1 className="titleLanding">Alquileres de autos</h1>
         </div>
         <div className="containerSocialP">
           <div className="containerSocial">
             <Link to="https://www.instagram.com/">
-              <FaInstagram />
+              <FaInstagram className="logo" />
             </Link>
             <Link to="https://x.com/explore">
-              <FaTwitter />
+              <FaTwitter className="logo" />
             </Link>
             <Link to="https://www.facebook.com/?locale=es_ES">
-              <FaFacebook />
+              <FaFacebook className="logo" />
             </Link>
             <Link to="https://web.whatsapp.com/">
-              <IoLogoWhatsapp />
+              <IoLogoWhatsapp className="logo" />
             </Link>
           </div>
-          <div className="containerP">
-            <p className="textWelcome">
-              Bienvenidos a la pagina de Alquileres de autos. Aqui podras
-              encontrar el auto que desees a un precio de alquiler accesible
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium rem voluptatem reiciendis nesciunt quaerat, deleniti
-              delectus dolore aperiam praesentium pariatur, eius aut consequatur
-              ut saepe consequuntur. Deserunt, asperiores? Maiores, atque. Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. A, voluptatum
-              quas. Blanditiis necessitatibus pariatur dolorem amet dolorum
-              delectus quaerat. Rem maiores quisquam dolores ipsa incidunt autem
-              esse blanditiis minus laboriosam!
-            </p>
+          <div className="containerPbutton">
+            <div className="containerP">
+              <p className="textWelcome">
+                Bienvenidos a la pagina de Alquileres de autos. Aqui podras
+                encontrar el auto que desees a un precio de alquiler accesible
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusantium rem voluptatem reiciendis nesciunt quaerat, deleniti
+                delectus dolore aperiam praesentium pariatur, eius aut
+                consequatur ut saepe consequuntur. Deserunt, asperiores?
+                Maiores, atque. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. A, voluptatum quas. Blanditiis necessitatibus
+                pariatur dolorem amet dolorum delectus quaerat. Rem maiores
+                quisquam dolores ipsa incidunt autem esse blanditiis minus
+                laboriosam!
+              </p>
+            </div>
+            <div className="containerButton">
+              <button className="buttonRegisterLanding">Registrarse</button>
+              <button className="buttonLogin">Inicio Sección</button>
+            </div>
           </div>
-        </div>
-
-        <div className="containerButton">
-          <button className="buttonRegisterLanding">Registrarse</button>
-          <button className="buttonLogin">Inicio Sección</button>
         </div>
 
         <div className="footer">
