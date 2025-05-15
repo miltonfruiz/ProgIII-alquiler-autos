@@ -28,8 +28,8 @@ function Shop() {
 
   return (
     <>
+      <Navbar />
       <main className={styles.mainContainer}>
-        <Navbar />
         <Filtros
           categoriasSeleccionadas={categoriasSeleccionadas}
           setCategoriasSeleccionadas={setCategoriasSeleccionadas}

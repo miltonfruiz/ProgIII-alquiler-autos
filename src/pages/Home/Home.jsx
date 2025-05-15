@@ -6,6 +6,7 @@ import Recomendados from "./Recomendados/Recomendados";
 import WhyUs from "./WhyUs/WhyUs";
 import Opiniones from "./Opiniones/Opiniones";
 import RentNow from "./RentNow/RentNow";
+import mockRecomendados from "../../data/mockRecomendados";
 
 function Home() {
   return (
@@ -13,7 +14,7 @@ function Home() {
       <Navbar />
       <Hero />
       <Categorias />
-      <Recomendados />
+      <Recomendados autos={mockRecomendados} />
       <WhyUs />
       <Opiniones />
       <RentNow />

@@ -1,9 +1,6 @@
-/* Sistema de estrellas */
-.starRating {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 8px;
+.opinionesSection {
+  width: 1550px;
+  margin: 50px 150px 0 150px;
 }
 
 .filledStar {
@@ -29,13 +26,9 @@
   color: #666;
 }
 
-.opinionesSection {
-  width: 1550px;
-  margin: 50px 150px 0 150px;
-}
-
 .opinionesConteiner {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   row-gap: 6.25rem;
@@ -45,10 +38,8 @@
 
 .opinionesCard {
   display: flex;
-  width: 450px;
-  height: 210px;
   gap: 1rem;
-  padding: 1.25rem;
+  padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background: #fff;
@@ -56,15 +47,23 @@
 
 .cardContent {
   margin-left: 1.25rem;
-  width: 370px;
+  width: 400px;
   display: flex;
   flex-direction: column;
 }
 
 .cardRating {
   margin-top: auto;
-  margin-bottom: 10px;
 }
+
+/* Sistema de estrellas */
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
 .profilePicConteiner {
   flex-shrink: 0;
 }

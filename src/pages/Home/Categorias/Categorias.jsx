@@ -21,7 +21,7 @@ function Categorias() {
             <span className={styles.priceUnit}> Día</span>
           </p>
           <div className={styles.cardButton}>
-            <a href="#">Ver Mas</a>
+            <a href="#">Ver Más</a>
           </div>
         </div>
 

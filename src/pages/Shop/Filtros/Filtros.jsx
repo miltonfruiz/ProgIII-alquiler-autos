@@ -13,7 +13,7 @@ const marcas = [
   { nombre: "Fiat", cantidad: 1 },
   { nombre: "Chevrolet", cantidad: 1 },
   { nombre: "Toyota", cantidad: 3 },
-  { nombre: "Peugot", cantidad: 2 },
+  { nombre: "Peugeot", cantidad: 2 },
 ];
 
 function Filtros({

@@ -2,9 +2,8 @@
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  margin-left: 5.5rem;
+  margin-left: 3rem;
   margin-right: 7rem;
-  margin-top: 1.5rem;
 }
 
 .headCatalogo {
@@ -33,7 +32,7 @@
 }
 
 .carsSection {
-  margin-bottom: 10rem;
+  margin-bottom: 2rem;
 }
 
 /* CARDS */
@@ -41,15 +40,13 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
   gap: 100px;
-  overflow-y: hidden;
 }
 
 .cardConteiner {
-  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   padding: 1.3rem;
-  width: 300px;
+  width: 340px;
   height: 380px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   background-color: #fff;

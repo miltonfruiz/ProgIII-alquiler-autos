@@ -9,7 +9,7 @@ function WhyUs() {
         <img
           className={styles.imagenConsensionaria}
           src={imagenConcesionaria}
-          alt=""
+          alt="Concesionaria"
         />
         <div className={styles.whyUsText}>
           <span className={styles.trustText}>

@@ -15,7 +15,7 @@ function Navbar() {
       ></img>
       <div className={styles.iconsConteiner}>
         <a href="#" className={styles.carIcon}>
-          <FontAwesomeIcon icon={faCar} />
+          Shop
         </a>
         <a href="#" className={styles.userIcon}>
           <FontAwesomeIcon icon={faUser} />

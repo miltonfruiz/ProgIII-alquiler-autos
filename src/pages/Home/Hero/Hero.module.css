@@ -1,7 +1,7 @@
 .heroSection {
-  width: 1550px;
+  width: 1610px;
   height: 550px;
-  margin: 50px 150px 0 150px;
+  margin: 100px 50px 50px 150px;
   display: flex;
   justify-content: space-between;
   background-color: #6555fd;

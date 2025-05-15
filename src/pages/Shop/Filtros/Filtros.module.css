@@ -1,15 +1,14 @@
-body {
-  padding-top: 0;
-  overflow-y: hidden;
-}
-
 .filtrosConteiner {
   background-color: #fff;
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #0000003a;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .filtrosSection {

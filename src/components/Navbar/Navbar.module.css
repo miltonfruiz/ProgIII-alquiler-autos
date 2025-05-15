@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 150px;
+  padding-left: 150px;
 }
 
 .iconsConteiner {
@@ -16,7 +16,7 @@
   gap: 2rem; /* separa los íconos */
   align-items: center;
   z-index: 1100; /* más alto que la navbar */
-  margin-right: 10rem;
+  margin-right: 3rem;
 }
 
 .logoMarca {
