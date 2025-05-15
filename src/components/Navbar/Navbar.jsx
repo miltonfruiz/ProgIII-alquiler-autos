@@ -5,21 +5,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
+import { Link } from "react-router-dom";
+
 function Navbar() {
   return (
     <nav className={styles.navBarConteiner}>
-      <img
-        className={styles.logoMarca}
-        src={carLogo}
-        alt="logo de la marca"
-      ></img>
+      <Link to="/home">
+        <img
+          className={styles.logoMarca}
+          src={carLogo}
+          alt="logo de la marca"
+        ></img>
+      </Link>
+
       <div className={styles.iconsConteiner}>
-        <a href="#" className={styles.carIcon}>
+        <Link to="/shop" className={styles.carIcon}>
           Shop
-        </a>
-        <a href="#" className={styles.userIcon}>
+        </Link>
+        <Link to="/profile" className={styles.userIcon}>
           <FontAwesomeIcon icon={faUser} />
-        </a>
+        </Link>
       </div>
     </nav>
   );

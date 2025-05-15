@@ -15,9 +15,8 @@ function Hero() {
             Reservá tu auto en segundos y disfrutá del camino sin preocupaciones
           </p>
         </div>
-
         <div className={styles.btnConteiner}>
-          <a href="#">Rentar ya</a>
+          <a href="#">Rentar ya</a> {/* aqui hay que validar que este logeado*/}
         </div>
       </div>
       <div className={styles.carImgConteiner}>

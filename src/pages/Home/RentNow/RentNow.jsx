@@ -17,7 +17,8 @@ function RentNow() {
           </span>
         </div>
         <div className={styles.rentNowButtonConteiner}>
-          <a className={styles.rentNowButton}>Reservar ahora</a>
+          <a className={styles.rentNowButton}>Reservar ahora</a>{" "}
+          {/* aqui hay que validar que este logeado*/}
         </div>
       </div>
     </section>
