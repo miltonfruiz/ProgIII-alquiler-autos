@@ -41,7 +41,7 @@ function App() {
           }
         />
         <Route path="/cars" element={<Cars></Cars>} />
-        <Route path="/presentation" element={<Landing></Landing>} />
+        <Route path="/landing" element={<Landing></Landing>} />
       </Routes>
     </BrowserRouter>
   );

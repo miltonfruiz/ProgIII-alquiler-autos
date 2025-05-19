@@ -4,8 +4,9 @@
   width: 85%;
   height: 90%;
   margin: 2rem auto 2rem auto;
-  box-shadow: 10px 10px 10px 10px #83838340;
-  border-radius: 10rem;
+  box-shadow: 10px 10px 10px 10px #00000040;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
 .containerH1 {
@@ -71,7 +72,7 @@
   border: none;
   border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s;
   margin: 2em;
@@ -91,15 +92,29 @@
 }
 
 .textContenido {
-  margin: 4rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 6rem;
   border: solid #3a2180c2 2px;
   padding: 2rem 4rem 2rem 4rem;
   background-color: #ffffff;
   border-radius: 0.3rem;
+  overflow: hidden;
 }
 
 .ulPorqueElegirnos {
   list-style-type: none;
+  margin: 1rem 0 1rem 0;
+}
+
+.ulDestaca {
+  list-style-type: none;
+  margin: 1rem 0 1rem 0;
+}
+
+.bContenido {
+  margin: 1rem 0 1rem 0;
 }
 
 .logo {
