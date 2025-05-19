@@ -4,8 +4,8 @@
   width: 85%;
   height: 90%;
   margin: 2rem auto 2rem auto;
-  border-radius: 1rem;
   box-shadow: 10px 10px 10px 10px #83838340;
+  border-radius: 10rem;
 }
 
 .containerH1 {
@@ -18,6 +18,7 @@
   font-size: 3rem;
   margin: 1rem;
   color: azure;
+  text-align: justify;
 }
 
 .containerSocial {
@@ -85,15 +86,16 @@
 }
 
 .containerContenido {
-  border: solid #ffffff00 2px;
-  background-color: #4338cad1;
+  border: solid #3a2180c2 2px;
+  background-image: url("src/assets/imagenFondoVioleta2.jpg");
 }
 
 .textContenido {
   margin: 4rem;
-  border: solid #ffffff00 2px;
+  border: solid #3a2180c2 2px;
   padding: 2rem 4rem 2rem 4rem;
   background-color: #ffffff;
+  border-radius: 0.3rem;
 }
 
 .logo {

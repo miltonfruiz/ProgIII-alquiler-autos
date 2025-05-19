@@ -42,23 +42,49 @@ const LandingPage = () => {
           </div>
         </div>
         <div className="containerContenido">
-          <p className="textContenido">
-            ¿Por qué elegirnos? ✅ Autos de última generación: Desde económicos
-            hasta premium, todos en perfecto estado. ✅ Flexibilidad: Alquileres
-            por horas, días o meses, adaptados a tus necesidades. ✅ Reserva
-            online: Simple, segura y en pocos clics. ✅ Asistencia 24/7: Soporte
-            en ruta para que viajes con tranquilidad. ✅ Precios transparentes:
-            Sin cargos ocultos, con seguro básico incluido. Destaca con nosotros
-            📍 Retiro y entrega sin demoras en aeropuertos y sucursales
-            estratégicas. 🚗 Kilometraje ilimitado en la mayoría de nuestros
-            vehículos. 💳 Múltiples métodos de pago y opciones de garantía. ¡Tu
-            viaje comienza aquí! Explora nuestras promociones, compara modelos y
-            reserva hoy mismo. Con [Nombre de tu Empresa], la libertad de
-            moverte está a solo un clic de distancia. 📞 Contáctanos: [Teléfono]
-            | ✉ Email: [Correo] | 🌐 Visítanos: [Dirección o enlace a redes
-            sociales]. [Nombre de tu Empresa] – Más que un alquiler, una
-            experiencia sin límites
-          </p>
+          <div className="textContenido">
+            <h3>¿Por qué elegirnos?</h3>
+            <ul>
+              <li>
+                ✅Autos de última generación: Desde económicos hasta premium,
+                todos en perfecto estado.
+              </li>
+              <li>
+                ✅ Flexibilidad: Alquileres por horas, días o meses, adaptados a
+                tus necesidades.
+              </li>
+              <li>✅ Reserva online: Simple, segura y en pocos clics.</li>
+              <li>
+                ✅ Asistencia 24/7: Soporte en ruta para que viajes con
+                tranquilidad.
+              </li>
+              <li>
+                ✅ Precios transparentes: Sin cargos ocultos, con seguro básico
+                incluido.
+              </li>
+            </ul>
+            <h4>Destaca con nosotros</h4>
+            <p>
+              📍 Retiro y entrega sin demoras en aeropuertos y sucursales
+              estratégicas.
+            </p>
+            <p>🚗 Kilometraje ilimitado en la mayoría de nuestros vehículos.</p>
+            <p>💳 Múltiples métodos de pago y opciones de garantía.</p>
+            <p>
+              ¡Tu viaje comienza aquí! Explora nuestras promociones, compara
+              modelos y reserva hoy mismo.
+            </p>
+            <p>
+              Con [Nombre de tu Empresa], la libertad de moverte está a solo un
+              clic de distancia.
+            </p>
+            <p>📞 Contáctanos: [Teléfono] | ✉ Email: [Correo] |</p>
+            <p>🌐 Visítanos: [Dirección o enlace a redes sociales].</p>
+            <p>
+              [Nombre de tu Empresa] – Más que un alquiler, una experiencia sin
+              límites
+            </p>
+          </div>
         </div>
         <div className="footer">
           <div className="containerSocial">
