@@ -5,8 +5,18 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
-
+import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  function handlerRegister() {
+    navigate("/register");
+  }
+
+  function handlerLogin() {
+    navigate("/");
+  }
+
   return (
     <div>
       <div className="containerLanding">
@@ -70,8 +80,12 @@ const LandingPage = () => {
           </Link>
         </div>
         <div className="containerButton">
-          <button className="buttonRegisterLanding">Registrarse</button>
-          <button className="buttonLogin">Inicio Sección</button>
+          <button className="buttonRegisterLanding" onClick={handlerRegister}>
+            Registrarse
+          </button>
+          <button className="buttonLogin" onClick={handlerLogin}>
+            Inicio Sección
+          </button>
         </div>
         <div className="footer">
           <div className="containerDesign">

@@ -26,11 +26,12 @@
   margin: 1rem auto 1rem auto;
   width: 100%;
   height: 90%;
-  background-image: url("src/assets/fondoAuto.jpg");
+  background-image: url("src/assets/imagenAutoLlave.png");
   background-size: cover;
   padding: 1rem;
   color: rgb(255, 255, 255);
   border-radius: 0.5rem;
+  padding: 1rem 3rem 1rem 3rem;
 }
 
 .containerButton {
