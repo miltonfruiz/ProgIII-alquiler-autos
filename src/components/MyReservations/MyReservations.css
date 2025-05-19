@@ -31,26 +31,67 @@
 }
 .reservation-card {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   background-color: white;
-  padding: 1rem;
+  padding: 1.2rem;
   border-radius: 0.75rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, max-height 0.3s ease;
+  max-height: 170px;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
-.reservation-card:hover {
-  transform: scale(1.01);
+.reservation-card.expanded {
+  max-height: 350px;
 }
 .car-image {
-  width: 100px;
-  height: 60px;
+  width: 160px;
+  height: auto;
   object-fit: cover;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
 }
 .reservation-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.extra-details {
+  margin-top: 0.5rem;
+  color: #444;
+  font-size: 0.95rem;
+  animation: fadeInDetails 0.3s ease-in-out;
+}
+@keyframes fadeInDetails {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reservation-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+.toggle-details-button {
+  background-color: #6366f1;
+  color: white;
+  padding: 10px 16px;
+  font-size: 11px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  transition: background 0.3s ease;
+}
+.toggle-details-button:hover {
+  background-color: #4f46e5;
 }
 .reservation-info h2 {
   margin: 0;

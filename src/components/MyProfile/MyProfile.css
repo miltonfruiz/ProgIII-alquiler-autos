@@ -13,6 +13,7 @@
   margin-bottom: 22px;
 }
 .profile-content {
+  padding: 1.2rem;
   display: flex;
   align-items: center;
   gap: 32px;
@@ -23,7 +24,7 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #5e49d8;
+  border: 3px solid #6366f1;
 }
 .profile-details {
   flex: 1;
@@ -47,7 +48,7 @@
 }
 .edit-button {
   font-size: 11px;
-  background-color: #5e49d8;
+  background-color: #6366f1;
   color: white;
   padding: 10px 16px;
   border: none;
@@ -61,7 +62,7 @@
   width: 15%;
 }
 .edit-button:hover {
-  background-color: #4935bd;
+  background-color: #4f46e5;
 }
 .FaEdit-icon {
   font-size: 13px;
