@@ -1,0 +1,45 @@
+.navBarConteiner {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background-color: #7a77ff;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 150px;
+}
+
+.iconsConteiner {
+  display: flex;
+  gap: 2rem; /* separa los íconos */
+  align-items: center;
+  z-index: 1100; /* más alto que la navbar */
+  margin-right: 3rem;
+}
+
+.logoMarca {
+  width: 125px;
+  height: 100px;
+}
+
+.iconsConteiner a {
+  color: white;
+  font-size: 30px;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+
+.iconsConteiner a:hover {
+  color: #21174f;
+  transform: scale(1.2);
+}
+
+.carIcon {
+  margin-right: 5rem;
+}
+
+.userIcon {
+  margin-right: 150px;
+}

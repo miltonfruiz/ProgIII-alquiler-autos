@@ -1,0 +1,124 @@
+.catalogoSection {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  margin-left: 3rem;
+  margin-right: 7rem;
+}
+
+.headCatalogo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.found {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.headCatalogo button {
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  color: #7a77ff;
+  text-decoration: underline;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  margin-right: 1rem;
+}
+
+.carsSection {
+  margin-bottom: 2rem;
+}
+
+/* CARDS */
+.recomendadosConteiner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  gap: 100px;
+}
+
+.cardConteiner {
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem;
+  width: 340px;
+  height: 380px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.cardTitle {
+  font-size: 1.3rem;
+  margin-top: 0;
+}
+
+.cardImage {
+  width: 230px;
+  height: 110px;
+  margin: 40px auto 0 auto;
+  display: block;
+}
+
+.cardDataCar {
+  display: flex;
+  justify-content: space-between;
+  color: #90a3bf;
+  font-weight: 500;
+  margin: 10px 10px 0 0;
+}
+
+.cardLabel {
+  font-weight: 500;
+  color: #90a3bf;
+  margin-bottom: 0;
+  margin-top: 2.5rem;
+}
+
+.cardPrice {
+  margin-top: 3rem;
+}
+
+.priceValue {
+  color: #1a202c;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.priceUnit {
+  font-weight: 500;
+  color: #d4d5ff;
+}
+
+/* Button */
+
+.cardButton {
+  background-color: #9ea4ff;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardButton:hover {
+  background-color: #7371fc;
+}
+
+.cardButton a {
+  color: #fff;
+  padding: 15px 100px;
+}
+
+.iconUsers {
+  margin-right: 6px;
+}
+
+.iconRoad {
+  margin-right: 6px;
+}

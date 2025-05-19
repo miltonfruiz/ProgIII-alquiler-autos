@@ -1,0 +1,125 @@
+.overlayConteiner {
+  margin-top: 100px;
+  position: relative;
+  left: 30%;
+  height: 600px;
+  width: 750px;
+  border-radius: 1rem;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.08);
+  color: #1a202c;
+}
+
+.overlayContent {
+  padding: 2.5rem;
+}
+
+.overlayTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.carReserva {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.reservaInfo {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.carSelected {
+  font-weight: 400;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+
+/* PRECIO */
+
+.text {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.precio {
+  font-size: 1Wrem;
+}
+
+/* Botones */
+
+.btnsConteiner {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 100px;
+}
+
+.btnsConteiner button {
+  margin-top: 2rem;
+  width: 250px;
+  height: 60px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.btnCancelar {
+  all: unset;
+  color: red;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btnCancelar:hover {
+  color: rgb(145, 2, 2);
+}
+
+.btnPagar {
+  border-radius: 15px;
+  background-color: #9ea4ff;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btnPagar:hover {
+  background-color: #7371fc;
+}
+
+/* INPUTS */
+
+.inputConteiner {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelInput {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.inputDate {
+  width: 25rem;
+  height: 3rem;
+  background-color: #eeeeee;
+  border-radius: 0.6em;
+  padding: 1em;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s;
+  margin-bottom: 1.5rem;
+}
+
+.inputDate:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}

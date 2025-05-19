@@ -12,6 +12,12 @@ import CarPayment from "./components/CarPayment/CarPayment";
 import Cars from "./pages/Cars";
 import LandingPage from "./components/LandingPage/LandingPage";
 
+//Sosa
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home/Home";
+import Shop from "./pages/Shop/Shop";
+import Overlay from "./components/Overlay/Overlay";
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
@@ -24,14 +30,7 @@ function App() {
           path="/register"
           element={<Register setRegisterIn={setRegisterIn}></Register>}
         ></Route>
-        <Route
-          path="/testhome"
-          element={
-            <ProtectedRouteUser isSigned={loggedIn}>
-              <TestHome />
-            </ProtectedRouteUser>
-          }
-        />
+        <Route path="/home" element={<Home />} />
         <Route path="/carPayment" element={<CarPayment></CarPayment>}></Route>
         <Route
           path="/user-profile"
@@ -41,7 +40,7 @@ function App() {
             </ProtectedRouteUser>
           }
         />
-        <Route path="/cars" element={<Cars></Cars>} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/presentation" element={<LandingPage></LandingPage>} />
       </Routes>
     </BrowserRouter>

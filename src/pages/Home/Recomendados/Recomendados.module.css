@@ -1,0 +1,112 @@
+.recomendadosSection {
+  margin: 50px 150px 0 150px;
+}
+
+.titleConteiner {
+  color: #1a202c;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.titleConteiner h3 {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.titleConteiner p {
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-top: 0;
+}
+
+.recomendadosConteiner {
+  display: flex;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  gap: 50px;
+  margin-left: 20px;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ccc transparent;
+  height: 480px;
+}
+
+.cardConteiner {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem;
+  width: 320px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.cardTitle {
+  font-size: 1.3rem;
+  margin-top: 0;
+}
+
+.cardImage {
+  width: 230px;
+  height: 110px;
+  margin: 40px auto 0 auto;
+  display: block;
+}
+
+.cardDataCar {
+  display: flex;
+  justify-content: space-between;
+  color: #90a3bf;
+  font-weight: 500;
+  margin: 10px 10px 0 0;
+}
+
+.cardLabel {
+  font-weight: 500;
+  color: #90a3bf;
+  margin-bottom: 0;
+  margin-top: 2.5rem;
+}
+
+.cardPrice {
+  margin-top: 3rem;
+}
+
+.priceValue {
+  color: #1a202c;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.priceUnit {
+  font-weight: 500;
+  color: #d4d5ff;
+}
+
+/* Button */
+
+.cardButton {
+  background-color: #9ea4ff;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardButton:hover {
+  background-color: #7371fc;
+}
+
+.cardButton a {
+  color: #fff;
+  padding: 15px 100px;
+}
+
+.iconUsers {
+  margin-right: 6px;
+}
+
+.iconRoad {
+  margin-right: 6px;
+}
