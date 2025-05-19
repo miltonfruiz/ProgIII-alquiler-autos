@@ -21,12 +21,13 @@
 
 .recomendadosConteiner {
   display: flex;
-  overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
   gap: 50px;
   margin-left: 20px;
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: #ccc transparent;
+  height: 480px;
 }
 
 .cardConteiner {

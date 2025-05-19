@@ -1,28 +1,4 @@
-/* Estructura base */
-/* VIEJO INDEX SOSA */
-
-/* html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", Avenir, Helvetica, Arial, sans-serif;
-  background-color: #f6f7f9;
-  color: #212121;
-  padding-top: 50px;
-  overflow: auto;
-} */
-
-/* Links */
-a {
-  color: #646cff;
-  text-decoration: none;
-}
-
-/* MAIN INDEX PROBANDO */
-
+/* -------- Reset básico y tipografía -------- */
 :root {
   font-family: "Poppins", sans-serif;
   --transition: all 0.2s ease;
@@ -40,18 +16,15 @@ a {
 
   padding-top: 50px;
 }
-
 body.dark {
   --bg-color: #1e1e1e;
   --text-color: #f5f5f5;
   --link-color: #60a5fa;
   --link-hover-color: #3b82f6;
 }
-
 /* -------- Etiquetas -------- */
 * {
   box-sizing: border-box;
-
   margin: 0;
   padding: 0;
 }
@@ -65,6 +38,37 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Links Sosa-Color bien*/
+a {
+  color: #646cff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #1d4ed8;
+}
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+/* -------- Tipografía -------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
 /* -------- Diseño responsive -------- */
 img {
   max-width: 100%;
