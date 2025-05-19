@@ -2,8 +2,8 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const ProtectedRoutesRegister = ({ registerIn, children }) => {
-  if (!registerIn) {
+const ProtectedRoutesRegister = ({ isRegister, children }) => {
+  if (!isRegister) {
     toast.error(`Debes registrarte para poder navegar a esta página`);
     return (
       <>
