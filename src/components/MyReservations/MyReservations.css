@@ -95,3 +95,20 @@
     transform: translateY(0);
   }
 }
+.reservation-scroll-wrapper {
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+.reservation-scroll-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+.reservation-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+.reservation-scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
