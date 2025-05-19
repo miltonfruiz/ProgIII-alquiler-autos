@@ -10,8 +10,7 @@ import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 import CarPayment from "./components/CarPayment/CarPayment";
 import Cars from "./pages/Cars";
-import LandingPage from "./components/LandingPage/LandingPage";
-
+import Landing from "./pages/Landing";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
@@ -42,7 +41,7 @@ function App() {
           }
         />
         <Route path="/cars" element={<Cars></Cars>} />
-        <Route path="/presentation" element={<LandingPage></LandingPage>} />
+        <Route path="/presentation" element={<Landing></Landing>} />
       </Routes>
     </BrowserRouter>
   );
