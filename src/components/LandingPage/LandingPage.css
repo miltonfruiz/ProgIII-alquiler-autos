@@ -11,8 +11,14 @@
 
 .containerH1 {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: left;
+}
+
+.titleLanding {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 3rem;
+  margin: 1rem;
 }
 
 .containerSocial {
@@ -26,26 +32,36 @@
   margin: 1rem auto 1rem auto;
   width: 100%;
   height: 90%;
-  background-image: url("src/assets/imagenAutoLlave.png");
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url("src/assets/imagenAutoLlave.png");
   background-size: cover;
-  padding: 1rem;
-  color: rgb(255, 255, 255);
   border-radius: 0.5rem;
-  padding: 1rem 3rem 1rem 3rem;
+  padding: 3rem;
+}
+
+.textWelcome {
+  font-family: Poppins;
+  font-weight: 600;
+  text-align: justify;
+  color: #ffffff;
 }
 
 .containerButton {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 2rem auto 2rem auto;
-  width: 30%;
+  width: 100%;
 }
 
 .buttonRegisterLanding,
 .buttonLogin {
-  height: 3.2rem;
+  height: 4rem;
   gap: 0.3rem;
-  width: 40%;
+  width: 10rem;
   background-color: #6366f1;
   color: white;
   padding: 0.7rem;
@@ -55,7 +71,7 @@
   font-size: 0.75rem;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 1em;
+  margin: 2em;
 }
 
 .buttonRegisterLanding:hover {
@@ -77,14 +93,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.titleLanding {
-  font-family: Poppins;
-}
-
-.textWelcome {
-  font-family: Poppins;
-  font-weight: 600;
 }
 
 .textDesign {

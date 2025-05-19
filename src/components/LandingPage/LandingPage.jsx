@@ -25,44 +25,26 @@ const LandingPage = () => {
         </div>
         <div className="containerP">
           <p className="textWelcome">
-            Bienvenidos a la pagina de Alquileres de autos. Aqui podras
-            encontrar el auto que desees a un precio de alquiler accesible Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Accusantium rem
-            voluptatem reiciendis nesciunt quaerat, deleniti delectus dolore
-            aperiam praesentium pariatur, eius aut consequatur ut saepe
-            consequuntur. Deserunt, asperiores? Maiores, atque. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. A, voluptatum quas.
-            Blanditiis necessitatibus pariatur dolorem amet dolorum delectus
-            quaerat. Rem maiores quisquam dolores ipsa incidunt autem esse
-            blanditiis minus laboriosam! Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Enim rem illo eum consectetur placeat atque
-            suscipit perspiciatis et ipsam cum, ipsum voluptas repudiandae ea
-            modi quibusdam illum omnis excepturi explicabo! Lorem ipsum dolor
-            sit, amet consectetur adipisicing elit. Et Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Facere qui error facilis fugiat
-            id quo, eum consequuntur ducimus laudantium dolorum, sequi nisi
-            repellendus eveniet harum illo esse. Ad, iure aspernatur? Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi
-            corrupti ad, quos at eos rerum fuga porro molestiae voluptatem
-            harum, velit facere provident ea repellat quis. Dolorum, a adipisci.
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            ea minus nihil consequuntur voluptas laboriosam, voluptatem rerum
-            quasi eos provident voluptates nobis debitis obcaecati
-            necessitatibus maiores, pariatur sint nostrum sequi. Lorem ipsum
-            dolor sit, amet consectetur adipisicing elit. Nihil asperiores aut
-            velit iure et mollitia adipisci animi ut at deleniti, nostrum,
-            perferendis, temporibus distinctio earum suscipit blanditiis rem
-            similique itaque. Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Nostrum sed dignissimos quia quo fugit harum non optio
-            inventore mollitia quod blanditiis, ab perferendis, quis
-            perspiciatis voluptas dolorum sint nulla. Quasi? Lorem ipsum dolor,
-            sit amet consectetur adipisicing elit. Rerum obcaecati dicta fugit
-            error corporis hic harum. Natus exercitationem voluptas ducimus iste
-            est. Fuga, modi. Similique rem id possimus reprehenderit provident!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel quod
-            numquam, ipsum repellat voluptate dolorum veritatis cum similique
-            facilis quisquam voluptatum consequatur reiciendis fugit at
-            molestiae tempore. Perferendis, officiis repudiandae.
+            ¡Bienvenidos a [Nombre de tu Empresa]– Tu Solución en Alquiler de
+            Autos! ¿Necesitas un auto confiable para tus viajes de negocios,
+            vacaciones o simplemente moverte con libertad? En [Nombre de tu
+            Empresa], te ofrecemos una flota moderna, precios competitivos y un
+            servicio personalizado para que tu experiencia de alquiler sea
+            rápida, fácil y sin complicaciones. ¿Por qué elegirnos? ✅ Autos de
+            última generación: Desde económicos hasta premium, todos en perfecto
+            estado. ✅ Flexibilidad: Alquileres por horas, días o meses,
+            adaptados a tus necesidades. ✅ Reserva online: Simple, segura y en
+            pocos clics. ✅ Asistencia 24/7: Soporte en ruta para que viajes con
+            tranquilidad. ✅ Precios transparentes: Sin cargos ocultos, con
+            seguro básico incluido. Destaca con nosotros 📍 Retiro y entrega sin
+            demoras en aeropuertos y sucursales estratégicas. 🚗 Kilometraje
+            ilimitado en la mayoría de nuestros vehículos. 💳 Múltiples métodos
+            de pago y opciones de garantía. ¡Tu viaje comienza aquí! Explora
+            nuestras promociones, compara modelos y reserva hoy mismo. Con
+            [Nombre de tu Empresa], la libertad de moverte está a solo un clic
+            de distancia. 📞 Contáctanos: [Teléfono] | ✉ Email: [Correo] | 🌐
+            Visítanos: [Dirección o enlace a redes sociales]. [Nombre de tu
+            Empresa] – Más que un alquiler, una experiencia sin límites
           </p>
         </div>
         <div className="containerSocial">
