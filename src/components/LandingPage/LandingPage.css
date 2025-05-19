@@ -98,6 +98,10 @@
   border-radius: 0.3rem;
 }
 
+.ulPorqueElegirnos {
+  list-style-type: none;
+}
+
 .logo {
   width: 1.5rem;
   height: 1.5rem;

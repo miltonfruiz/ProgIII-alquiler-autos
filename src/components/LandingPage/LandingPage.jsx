@@ -44,7 +44,7 @@ const LandingPage = () => {
         <div className="containerContenido">
           <div className="textContenido">
             <h3>¿Por qué elegirnos?</h3>
-            <ul>
+            <ul className="ulPorqueElegirnos">
               <li>
                 ✅Autos de última generación: Desde económicos hasta premium,
                 todos en perfecto estado.
