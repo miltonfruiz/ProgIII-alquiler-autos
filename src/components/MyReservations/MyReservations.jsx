@@ -1,9 +1,13 @@
 import { useState } from "react";
 import "./MyReservations.css";
-import { FaCarSide } from "react-icons/fa";
+import { FaCarSide, FaHandHoldingUsd } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoPricetagSharp } from "react-icons/io5";
+import { TbTax } from "react-icons/tb";
+import { HiDocumentCurrencyDollar } from "react-icons/hi2";
+import { BsCashCoin } from "react-icons/bs";
 
 export default function MyReservations() {
   const [reservations, setReservations] = useState([
@@ -12,54 +16,77 @@ export default function MyReservations() {
       auto: "Toyota Corolla",
       fecha: "2025-06-12",
       imagen: "/images/volkswagen.png",
-      detalles:
-        "Reserva con seguro completo, kilometraje libre y asistencia 24hs.",
+      precio: 35000,
+      impuestos: 7350,
+      metodoPago: "Tarjeta de crédito",
+      facturacion: "Factura A",
+      total: 42350,
     },
     {
       id: 2,
       auto: "Peugeot 208",
       fecha: "2025-07-01",
       imagen: "/images/volkswagen.png",
-      detalles: "Incluye GPS, seguro parcial y límite de 300 km diarios.",
+      precio: 30000,
+      impuestos: 6300,
+      metodoPago: "Mercado Pago",
+      facturacion: "Factura B",
+      total: 36300,
     },
     {
       id: 3,
       auto: "Volkswagen Gol",
       fecha: "2025-07-15",
       imagen: "/images/volkswagen.png",
-      detalles: "Auto económico. Ideal para viajes cortos dentro de la ciudad.",
+      precio: 20000,
+      impuestos: 5300,
+      metodoPago: "Tarjeta de crédito",
+      facturacion: "Factura B",
+      total: 36300,
     },
     {
       id: 4,
       auto: "Toyota Corolla",
       fecha: "2025-06-12",
       imagen: "/images/volkswagen.png",
-      detalles:
-        "Reserva con seguro completo, kilometraje libre y asistencia 24hs.",
+      precio: 25000,
+      impuestos: 5000,
+      metodoPago: "Mercado Pago",
+      facturacion: "Factura B",
+      total: 36300,
     },
     {
       id: 5,
       auto: "Peugeot 208",
       fecha: "2025-07-01",
       imagen: "/images/volkswagen.png",
-      detalles: "Incluye GPS, seguro parcial y límite de 300 km diarios.",
+      precio: 35000,
+      impuestos: 7300,
+      metodoPago: "Tarjeta de crédito",
+      facturacion: "Factura B",
+      total: 36300,
     },
     {
       id: 6,
       auto: "Volkswagen Gol",
       fecha: "2025-07-15",
       imagen: "/images/volkswagen.png",
-      detalles: "Auto económico. Ideal para viajes cortos dentro de la ciudad.",
+      precio: 27000,
+      impuestos: 2800,
+      metodoPago: "Mercado Pago",
+      facturacion: "Factura B",
+      total: 36300,
     },
   ]);
-
-  const [expandedCard, setExpandedCard] = useState(null);
+  const [expandedIds, setExpandedIds] = useState([]);
   const handleDelete = (id) => {
     const nuevasReservas = reservations.filter((res) => res.id !== id);
     setReservations(nuevasReservas);
   };
   const toggleExpand = (id) => {
-    setExpandedCard(expandedCard === id ? null : id);
+    setExpandedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
   };
   return (
     <div className="reservation-container">
@@ -67,6 +94,9 @@ export default function MyReservations() {
         <FaCarSide className="car-myreservations" />
         Mis Reservas
       </h1>
+      <h6 className="reservation-subtitle">
+        Mantente al tanto de tus reservas
+      </h6>
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
           {reservations.length === 0 ? (
@@ -74,9 +104,8 @@ export default function MyReservations() {
           ) : (
             reservations.map((res) => (
               <div
-                key={res.id}
                 className={`reservation-card myreservations-fade-in ${
-                  expandedCard === res.id ? "expanded" : ""
+                  expandedIds.includes(res.id) ? "expanded" : ""
                 }`}
               >
                 <img src={res.imagen} alt={res.auto} className="car-image" />
@@ -86,23 +115,38 @@ export default function MyReservations() {
                     <MdDateRange className="data-myreservations" />
                     Fecha: {new Date(res.fecha).toLocaleDateString("es-AR")}
                   </p>
-                  {expandedCard === res.id && (
-                    <div className="extra-details">
-                      <p>{res.detalles}</p>
-                    </div>
-                  )}
+                  <div className="extra-details">
+                    <p>
+                      <IoPricetagSharp />
+                      Precio base: ${res.precio.toLocaleString()}
+                    </p>
+                    <p>
+                      <TbTax /> Impuestos: ${res.impuestos.toLocaleString()}
+                    </p>
+                    <p>
+                      <FaHandHoldingUsd />
+                      Método de pago: {res.metodoPago}
+                    </p>
+                    <p>
+                      <HiDocumentCurrencyDollar />
+                      Tipo de facturación: {res.facturacion}
+                    </p>
+                    <p>
+                      <BsCashCoin /> Total: ${res.total.toLocaleString()}
+                    </p>
+                  </div>
                   <div className="reservation-actions">
                     <button
-                      className="toggle-details-button"
                       onClick={() => toggleExpand(res.id)}
+                      className="toggle-details-button"
                     >
-                      {expandedCard === res.id ? (
+                      {expandedIds.includes(res.id) ? (
                         <>
-                          <IoIosArrowUp /> Ver menos
+                          <IoIosArrowUp /> Ocultar info
                         </>
                       ) : (
                         <>
-                          <IoIosArrowDown /> Más info
+                          <IoIosArrowDown /> Ver detalles
                         </>
                       )}
                     </button>

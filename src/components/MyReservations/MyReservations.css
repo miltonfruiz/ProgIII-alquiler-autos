@@ -13,6 +13,15 @@
   align-items: center;
   gap: 0.5rem;
   color: #333;
+  margin-bottom: 12px;
+}
+.reservation-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #333;
   margin-bottom: 22px;
 }
 .car-myreservations {
@@ -25,6 +34,7 @@
   gap: 1rem;
 }
 .no-reservations {
+  font-size: 12px;
   text-align: center;
   color: #777;
   font-style: italic;
@@ -37,13 +47,16 @@
   padding: 1.2rem;
   border-radius: 0.75rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, max-height 0.3s ease;
+  transition: transform 0.2s ease, max-height 0.4s ease,
+    padding-bottom 0.4s ease;
   max-height: 170px;
   overflow: hidden;
   flex-wrap: wrap;
+  position: relative;
 }
 .reservation-card.expanded {
   max-height: 350px;
+  padding-bottom: 1.8rem;
 }
 .car-image {
   width: 160px;
@@ -55,11 +68,37 @@
   display: flex;
   flex-direction: column;
 }
+.reservation-info h2 {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  margin-bottom: 8px;
+  color: #222;
+}
+.reservation-info p {
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  color: #555;
+  font-size: 12px;
+}
 .extra-details {
-  margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(5px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease;
+  margin: 6px 0;
   color: #444;
-  font-size: 0.95rem;
-  animation: fadeInDetails 0.3s ease-in-out;
+}
+.extra-details p {
+  color: #555;
+  font-size: 12px;
+}
+.reservation-card.expanded .extra-details {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 200px;
 }
 @keyframes fadeInDetails {
   from {
@@ -93,12 +132,6 @@
 .toggle-details-button:hover {
   background-color: #4f46e5;
 }
-.reservation-info h2 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #222;
-}
-
 .reservation-info p {
   margin: 0.25rem 0 0 0;
   color: #555;
