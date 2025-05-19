@@ -20,7 +20,7 @@ const LandingPage = () => {
   return (
     <div>
       <div className="containerLanding">
-        <div className="container">
+        <div className="containerHeader">
           <div className="containerH1">
             <h1 className="titleLanding">Alquileres de autos</h1>
           </div>
