@@ -69,7 +69,7 @@
 
 .metodoPago {
   width: 45rem;
-  height: 30rem;
+  min-height: 10rem;
   background-color: #ffffff;
   border-radius: 0.7rem;
   margin: 1rem;
@@ -98,7 +98,7 @@
 
 .ingresoTarjeta {
   width: 35rem;
-  height: 18rem;
+  min-height: 3rem;
   background-color: #f0f0f0;
   border-radius: 0.7rem;
   margin: 1rem;
@@ -159,17 +159,58 @@
 
 .cajaTransferenciaBancaria {
   width: 35rem;
-  height: 3rem;
+  min-height: 3rem;
   background-color: #f0f0f0;
   border-radius: 0.7rem;
   margin: 1rem 1rem 1rem 3rem;
   display: flex;
+  flex-direction: column;
 }
 
 .eleccionTranferencia {
   position: absolute;
   margin-left: 5px;
-  margin-top: 17px;
+}
+
+.containterEleccionTransfer {
+  margin-top: 5rem;
+}
+
+.conteinerTransferencia {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.conteinerInputsTransfer {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+.tituloTransferencia {
+  margin-top: 1rem;
+}
+
+.labelTransferencia {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.inputTransferencia {
+  width: 15rem;
+  height: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 0.6rem;
+  border: none;
+  padding-left: 1rem;
+}
+
+.labelInputTranfer {
+  margin: 0.7rem;
 }
 
 .transferenciaBancaria {

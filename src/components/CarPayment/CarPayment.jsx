@@ -11,6 +11,23 @@ import "./CarPayment.css";
 const CarPayment = () => {
   const [imgTarjetas, setImgTarjetas] = useState("visa");
 
+  const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
+  const [seleccionCbu, setSeleccionCbu] = useState(false);
+
+  function handlerTarjeta(e) {
+    if (e.target.value) {
+      setSeleccionCbu(false);
+      setSeleccionTarjeta(true);
+    }
+  }
+
+  function handlerCbu(e) {
+    if (e.target.value) {
+      setSeleccionTarjeta(false);
+      setSeleccionCbu(true);
+    }
+  }
+
   function handlerImagenes(e) {
     if (e.target.value == "visa") {
       setImgTarjetas("visa");
@@ -86,6 +103,7 @@ const CarPayment = () => {
                 name="opcion"
                 value="1"
                 className="eleccionTarjeta"
+                onChange={handlerTarjeta}
               />
               <label htmlFor="seleccion" className="seleccion">
                 Seleccione una tarjeta
@@ -110,53 +128,90 @@ const CarPayment = () => {
               )}
               {imgTarjetas == "debito" && <IoCard className="logosTarjeta" />}
 
-              <div className="gridDatosTarjeta">
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    Numero de Tarjeta
-                  </label>
-                  <input
-                    type="text"
-                    className="inputMetodo"
-                    placeholder="Numero de tarjeta"
-                  />
+              {seleccionTarjeta && (
+                <div className="gridDatosTarjeta">
+                  <div className="cajaInputTarjeta">
+                    <label htmlFor="" className="labelMetodo">
+                      Numero de Tarjeta
+                    </label>
+                    <input
+                      type="text"
+                      className="inputMetodo"
+                      placeholder="Numero de tarjeta"
+                    />
+                  </div>
+                  <div className="cajaInputTarjeta">
+                    <label htmlFor="" className="labelMetodo">
+                      Fecha de Expiracion
+                    </label>
+                    <input type="date" className="inputMetodo" />
+                  </div>
+                  <div className="cajaInputTarjeta">
+                    <label htmlFor="" className="labelMetodo">
+                      Nombre del titular
+                    </label>
+                    <input
+                      type="text"
+                      className="inputMetodo"
+                      placeholder="Nombre completo"
+                    />
+                  </div>
+                  <div className="cajaInputTarjeta">
+                    <label htmlFor="" className="labelMetodo">
+                      CVC
+                    </label>
+                    <input
+                      type="text"
+                      className="inputMetodo"
+                      placeholder="CVC"
+                    />
+                  </div>
                 </div>
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    Fecha de Expiracion
-                  </label>
-                  <input type="date" className="inputMetodo" />
-                </div>
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    Nombre del titular
-                  </label>
-                  <input
-                    type="text"
-                    className="inputMetodo"
-                    placeholder="Nombre completo"
-                  />
-                </div>
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    CVC
-                  </label>
-                  <input
-                    type="text"
-                    className="inputMetodo"
-                    placeholder="CVC"
-                  />
-                </div>
-              </div>
+              )}
             </div>
+
             <div className="cajaTransferenciaBancaria">
-              <input
-                type="radio"
-                name="opcion"
-                value="2"
-                className="eleccionTranferencia"
-              />
-              <p className="transferenciaBancaria">Transferencia Bancaria</p>
+              <div className="containterEleccionTransfer">
+                <input
+                  type="radio"
+                  name="opcion"
+                  value="2"
+                  className="eleccionTranferencia"
+                  onChange={handlerCbu}
+                />
+                <p className="transferenciaBancaria">Transferencia Bancaria</p>
+              </div>
+
+              {seleccionCbu && (
+                <div className="conteinerTransferencia">
+                  <h3 className="tituloTransferencia">
+                    Ingrese su cbu o su alias
+                  </h3>
+                  <div className="conteinerInputsTransfer">
+                    <div className="labelInputTranfer">
+                      <label htmlFor="" className="labelTransferencia">
+                        Ingrese su cbu
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="ingrese su cbu"
+                        className="inputTransferencia"
+                      />
+                    </div>
+
+                    <div className="labelInputTranfer">
+                      <label htmlFor="" className="labelTransferencia">
+                        Ingrese su alias
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Ingrese su alias"
+                        className="inputTransferencia"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="infoImportante">
