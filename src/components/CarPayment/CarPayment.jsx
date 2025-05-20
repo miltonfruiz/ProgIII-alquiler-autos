@@ -81,6 +81,12 @@ const CarPayment = () => {
             <h3 className="subtituloMetodo">Introduce tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
             <div className="ingresoTarjeta">
+              <input
+                type="radio"
+                name="opcion"
+                value="1"
+                className="eleccionTarjeta"
+              />
               <label htmlFor="seleccion" className="seleccion">
                 Seleccione una tarjeta
               </label>
@@ -144,6 +150,12 @@ const CarPayment = () => {
               </div>
             </div>
             <div className="cajaTransferenciaBancaria">
+              <input
+                type="radio"
+                name="opcion"
+                value="2"
+                className="eleccionTranferencia"
+              />
               <p className="transferenciaBancaria">Transferencia Bancaria</p>
             </div>
           </div>
