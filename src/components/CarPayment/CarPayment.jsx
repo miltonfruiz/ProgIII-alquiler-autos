@@ -14,6 +14,30 @@ const CarPayment = () => {
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
 
+  const [file, setFile] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  function handlerDragOver(e) {
+    e.preventDefault();
+    setIsDragging(true);
+  }
+
+  function handlerDragLeave(e) {
+    setIsDragging(false);
+  }
+
+  function handlerDrop(e) {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    setFile(file);
+  }
+
+  function handlerSeleccion(e) {
+    if (e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  }
+
   function handlerTarjeta(e) {
     if (e.target.value) {
       setSeleccionCbu(false);
@@ -97,74 +121,86 @@ const CarPayment = () => {
             <h2 className="tituloMetodo">Metodo de Pago</h2>
             <h3 className="subtituloMetodo">Introduce tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
+            <h3>Elige una de las siguientes opciones</h3>
             <div className="ingresoTarjeta">
-              <input
-                type="radio"
-                name="opcion"
-                value="1"
-                className="eleccionTarjeta"
-                onChange={handlerTarjeta}
-              />
-              <label htmlFor="seleccion" className="seleccion">
-                Seleccione una tarjeta
-              </label>
-              <select
-                name=""
-                id="seleccion"
-                className="selectMetodo"
-                onChange={handlerImagenes}
-              >
-                <option value="visa">Visa</option>
-                <option value="mastercard">Mastercard</option>
-                <option value="american">American express</option>
-                <option value="debito">Tarjeta de debito</option>
-              </select>
-              {imgTarjetas == "visa" && <RiVisaLine className="logosTarjeta" />}
-              {imgTarjetas == "mastercard" && (
-                <FaCcMastercard className="logosTarjeta" />
-              )}
-              {imgTarjetas == "american" && (
-                <SiAmericanexpress className="logosTarjeta" />
-              )}
-              {imgTarjetas == "debito" && <IoCard className="logosTarjeta" />}
+              <div className="seleccionTarjeta">
+                <input
+                  type="radio"
+                  name="opcion"
+                  value="1"
+                  className="eleccionTarjeta"
+                  onChange={handlerTarjeta}
+                />
+                <label htmlFor="" className="labelTarjeta">
+                  Pago con tarjeta
+                </label>
+              </div>
 
               {seleccionTarjeta && (
-                <div className="gridDatosTarjeta">
-                  <div className="cajaInputTarjeta">
-                    <label htmlFor="" className="labelMetodo">
-                      Numero de Tarjeta
-                    </label>
-                    <input
-                      type="text"
-                      className="inputMetodo"
-                      placeholder="Numero de tarjeta"
-                    />
-                  </div>
-                  <div className="cajaInputTarjeta">
-                    <label htmlFor="" className="labelMetodo">
-                      Fecha de Expiracion
-                    </label>
-                    <input type="date" className="inputMetodo" />
-                  </div>
-                  <div className="cajaInputTarjeta">
-                    <label htmlFor="" className="labelMetodo">
-                      Nombre del titular
-                    </label>
-                    <input
-                      type="text"
-                      className="inputMetodo"
-                      placeholder="Nombre completo"
-                    />
-                  </div>
-                  <div className="cajaInputTarjeta">
-                    <label htmlFor="" className="labelMetodo">
-                      CVC
-                    </label>
-                    <input
-                      type="text"
-                      className="inputMetodo"
-                      placeholder="CVC"
-                    />
+                <div>
+                  <label htmlFor="seleccion" className="seleccion">
+                    Seleccione una tarjeta
+                  </label>
+                  <select
+                    name=""
+                    id="seleccion"
+                    className="selectMetodo"
+                    onChange={handlerImagenes}
+                  >
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    <option value="american">American express</option>
+                    <option value="debito">Tarjeta de debito</option>
+                  </select>
+                  {imgTarjetas == "visa" && (
+                    <RiVisaLine className="logosTarjeta" />
+                  )}
+                  {imgTarjetas == "mastercard" && (
+                    <FaCcMastercard className="logosTarjeta" />
+                  )}
+                  {imgTarjetas == "american" && (
+                    <SiAmericanexpress className="logosTarjeta" />
+                  )}
+                  {imgTarjetas == "debito" && (
+                    <IoCard className="logosTarjeta" />
+                  )}
+                  <div className="gridDatosTarjeta">
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        Numero de Tarjeta
+                      </label>
+                      <input
+                        type="text"
+                        className="inputMetodo"
+                        placeholder="Numero de tarjeta"
+                      />
+                    </div>
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        Fecha de Expiracion
+                      </label>
+                      <input type="date" className="inputMetodo" />
+                    </div>
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        Nombre del titular
+                      </label>
+                      <input
+                        type="text"
+                        className="inputMetodo"
+                        placeholder="Nombre completo"
+                      />
+                    </div>
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        CVC
+                      </label>
+                      <input
+                        type="text"
+                        className="inputMetodo"
+                        placeholder="CVC"
+                      />
+                    </div>
                   </div>
                 </div>
               )}
@@ -179,36 +215,48 @@ const CarPayment = () => {
                   className="eleccionTranferencia"
                   onChange={handlerCbu}
                 />
-                <p className="transferenciaBancaria">Transferencia Bancaria</p>
+                <p className="transferenciaBancaria">
+                  Pago con Transferencia Bancaria
+                </p>
               </div>
 
               {seleccionCbu && (
                 <div className="conteinerTransferencia">
                   <h3 className="tituloTransferencia">
-                    Ingrese su cbu o su alias
+                    Transfiera a esta cuenta
                   </h3>
-                  <div className="conteinerInputsTransfer">
-                    <div className="labelInputTranfer">
-                      <label htmlFor="" className="labelTransferencia">
-                        Ingrese su cbu
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="ingrese su cbu"
-                        className="inputTransferencia"
-                      />
+                  <div className="conteinerTransfer">
+                    <div className="containerCbuTransfer">
+                      <h3>CBU</h3>
+                      <p>1430001717001234567890</p>
                     </div>
 
-                    <div className="labelInputTranfer">
-                      <label htmlFor="" className="labelTransferencia">
-                        Ingrese su alias
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Ingrese su alias"
-                        className="inputTransferencia"
-                      />
+                    <div className="containerCbuTransfer">
+                      <h3>Alias</h3>
+                      <p>autos.alquiler.mpago</p>
                     </div>
+                  </div>
+                  <div
+                    className={`containerArrastre ${
+                      isDragging ? `Activo` : ``
+                    }`}
+                    onDragOver={handlerDragOver}
+                    onDragLeave={handlerDragLeave}
+                    onDrop={handlerDrop}
+                  >
+                    {file ? (
+                      <p className="">Archivo cargado: {file.name}</p>
+                    ) : (
+                      <p className="">
+                        Arrastre el comprobante aqui o seleccione un archivo
+                      </p>
+                    )}
+
+                    <input
+                      type="file"
+                      className="comprobante"
+                      onChange={handlerSeleccion}
+                    />
                   </div>
                 </div>
               )}
