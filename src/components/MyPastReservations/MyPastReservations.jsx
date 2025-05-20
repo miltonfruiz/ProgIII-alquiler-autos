@@ -1,102 +1,123 @@
 import { useState } from "react";
+import "./MyPastReservations.css";
+import "../MyReservations/MyReservations.css";
+import { FaHistory, FaStar } from "react-icons/fa";
+import { MdDateRange } from "react-icons/md";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoPricetagSharp } from "react-icons/io5";
+import { TbTax } from "react-icons/tb";
+import { HiDocumentCurrencyDollar } from "react-icons/hi2";
+import { BsCashCoin } from "react-icons/bs";
 
 export default function MyPastReservations() {
-  const [pastReservations] = useState([
+  const [pastReservations, setPastReservations] = useState([
     {
       id: 1,
       auto: "Renault Logan",
-      fecha: "2024-12-01",
-      imagen: "/images/renault.png",
-      precio: 28000,
-      impuestos: 5900,
+      fecha: "2025-04-10",
+      imagen: "/images/volkswagen.png",
+      precio: 25000,
+      impuestos: 4500,
       metodoPago: "Tarjeta de débito",
       facturacion: "Factura A",
-      total: 33900,
+      total: 29500,
     },
     {
       id: 2,
-      auto: "Ford Fiesta",
-      fecha: "2024-11-15",
-      imagen: "/images/ford.png",
-      precio: 22000,
-      impuestos: 4600,
-      metodoPago: "Transferencia",
-      facturacion: "Factura B",
-      total: 26600,
-    },
-    {
-      id: 3,
-      auto: "Chevrolet Onix",
-      fecha: "2024-10-10",
-      imagen: "/images/onix.png",
-      precio: 24000,
-      impuestos: 5100,
+      auto: "Fiat Cronos",
+      fecha: "2025-03-22",
+      imagen: "/images/volkswagen.png",
+      precio: 32000,
+      impuestos: 6500,
       metodoPago: "Mercado Pago",
       facturacion: "Factura B",
-      total: 29100,
-    },
-    {
-      id: 4,
-      auto: "Volkswagen Gol",
-      fecha: "2024-09-05",
-      imagen: "/images/gol.png",
-      precio: 21000,
-      impuestos: 4300,
-      metodoPago: "Efectivo",
-      facturacion: "Factura C",
-      total: 25300,
-    },
-    {
-      id: 5,
-      auto: "Toyota Etios",
-      fecha: "2024-08-25",
-      imagen: "/images/etios.png",
-      precio: 26000,
-      impuestos: 5500,
-      metodoPago: "Tarjeta de crédito",
-      facturacion: "Factura A",
-      total: 31500,
-    },
-    {
-      id: 6,
-      auto: "Fiat Cronos",
-      fecha: "2024-07-15",
-      imagen: "/images/cronos.png",
-      precio: 23000,
-      impuestos: 4800,
-      metodoPago: "Transferencia",
-      facturacion: "Factura B",
-      total: 27800,
+      total: 38500,
     },
   ]);
-  return (
-    <div>
-      <h1>Reservas Finalizadas</h1>
-      <h6>Consulta el historial de tus reservas completadas</h6>
-      <div>
-        {pastReservations.length === 0 ? (
-          <p>No tienes reservas anteriores.</p>
-        ) : (
-          pastReservations.map((res) => (
-            <div key={res.id}>
-              <img src={res.imagen} alt={res.auto} />
-              <div>
-                <h2>{res.auto}</h2>
-                <p>Fecha: {new Date(res.fecha).toLocaleDateString("es-AR")}</p>
-                <p>Precio base: ${res.precio.toLocaleString()}</p>
-                <p>Impuestos: ${res.impuestos.toLocaleString()}</p>
-                <p>Método de pago: {res.metodoPago}</p>
-                <p>Facturación: {res.facturacion}</p>
-                <p>Total: ${res.total.toLocaleString()}</p>
 
-                <div>
-                  <button>Ver detalles</button>
-                  <button>Calificar</button>
+  const [expandedIds, setExpandedIds] = useState([]);
+
+  const toggleExpand = (id) => {
+    setExpandedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const handleRate = (id) => {
+    alert(`Reserva ${id} lista para calificar (funcionalidad futura).`);
+  };
+
+  return (
+    <div className="reservation-container">
+      <h1 className="reservation-title">
+        <FaHistory className="history-mypastreservations" />
+        Reservas Finalizadas
+      </h1>
+      <h6 className="reservation-subtitle">
+        Consulta y califica tus reservas anteriores
+      </h6>
+      <div className="reservation-scroll-wrapper">
+        <div className="reservation-list">
+          {pastReservations.length === 0 ? (
+            <p className="no-reservations">No hay reservas finalizadas.</p>
+          ) : (
+            pastReservations.map((res) => (
+              <div
+                key={res.id}
+                className={`reservation-card myreservations-fade-in ${
+                  expandedIds.includes(res.id) ? "expanded" : ""
+                }`}
+              >
+                <img src={res.imagen} alt={res.auto} className="car-image" />
+                <div className="reservation-info">
+                  <h2>{res.auto}</h2>
+                  <p>
+                    <MdDateRange className="data-myreservations" />
+                    Fecha: {new Date(res.fecha).toLocaleDateString("es-AR")}
+                  </p>
+                  <div className="extra-details">
+                    <p>
+                      <IoPricetagSharp />
+                      Precio base: ${res.precio.toLocaleString()}
+                    </p>
+                    <p>
+                      <TbTax /> Impuestos: ${res.impuestos.toLocaleString()}
+                    </p>
+                    <p>
+                      <HiDocumentCurrencyDollar />
+                      Tipo de facturación: {res.facturacion}
+                    </p>
+                    <p>
+                      <BsCashCoin /> Total: ${res.total.toLocaleString()}
+                    </p>
+                  </div>
+                  <div className="reservation-actions">
+                    <button
+                      onClick={() => toggleExpand(res.id)}
+                      className="toggle-details-button"
+                    >
+                      {expandedIds.includes(res.id) ? (
+                        <>
+                          <IoIosArrowUp /> Ocultar info
+                        </>
+                      ) : (
+                        <>
+                          <IoIosArrowDown /> Ver detalles
+                        </>
+                      )}
+                    </button>
+                    <button
+                      className="toggle-rate-button"
+                      onClick={() => handleRate(res.id)}
+                    >
+                      <FaStar /> Calificar
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        )}
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
