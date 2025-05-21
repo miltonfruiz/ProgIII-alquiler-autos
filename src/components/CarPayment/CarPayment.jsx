@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Header from "../Header/Header";
 import { FaStar } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
@@ -16,6 +16,8 @@ const CarPayment = () => {
 
   const [file, setFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  const inputRef = useRef(null);
 
   function handlerDragOver(e) {
     e.preventDefault();
@@ -50,6 +52,10 @@ const CarPayment = () => {
       setSeleccionTarjeta(false);
       setSeleccionCbu(true);
     }
+  }
+
+  function handleRefInput() {
+    inputRef.current.click();
   }
 
   function handlerImagenes(e) {
@@ -256,7 +262,12 @@ const CarPayment = () => {
                       type="file"
                       className="comprobante"
                       onChange={handlerSeleccion}
+                      style={{ display: "none" }}
+                      ref={inputRef}
                     />
+                    <button className="" onClick={handleRefInput}>
+                      Seleccione un archivo
+                    </button>
                   </div>
                 </div>
               )}
