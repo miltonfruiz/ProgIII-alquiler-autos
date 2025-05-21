@@ -64,16 +64,20 @@ const LandingPage = () => {
               </li>
             </ul>
             <h4>Destaca con nosotros</h4>
-            <p>
-              📍 Retiro y entrega sin demoras en aeropuertos y sucursales
-              estratégicas.
-            </p>
-            <p>🚗 Kilometraje ilimitado en la mayoría de nuestros vehículos.</p>
-            <p>💳 Múltiples métodos de pago y opciones de garantía.</p>
-            <p>
+            <ul className="ulDestaca">
+              <li>
+                📍 Retiro y entrega sin demoras en aeropuertos y sucursales
+                estratégicas.
+              </li>
+              <li>
+                🚗 Kilometraje ilimitado en la mayoría de nuestros vehículos.
+              </li>
+              <li>💳 Múltiples métodos de pago y opciones de garantía.</li>
+            </ul>
+            <b className="bContenido">
               ¡Tu viaje comienza aquí! Explora nuestras promociones, compara
               modelos y reserva hoy mismo.
-            </p>
+            </b>
             <p>
               Con [Nombre de tu Empresa], la libertad de moverte está a solo un
               clic de distancia.
