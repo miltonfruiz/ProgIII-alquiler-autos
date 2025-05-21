@@ -110,6 +110,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   placeholder="Tu nombre"
                   name="nombre"
                   onChange={handlerDatosFacturacion}
+                  value={datosFacturacion.nombre}
                   ref={refs.nombreRef}
                 />
                 {errores.nombre && <p>{errores.nombre}</p>}
@@ -124,6 +125,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   placeholder="Tu apellido"
                   name="apellido"
                   onChange={handlerDatosFacturacion}
+                  value={datosFacturacion.apellido}
                   ref={refs.apellidoRef}
                 />
                 {errores.apellido && <p>{errores.apellido}</p>}
@@ -138,6 +140,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   placeholder="5493333333333"
                   name="numeroTelefonico"
                   onChange={handlerDatosFacturacion}
+                  value={datosFacturacion.numeroTelefonico}
                   ref={refs.numeroTelefonicoRef}
                 />
                 {errores.numeroTelefonico && <p>{errores.numeroTelefonico}</p>}
@@ -152,6 +155,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   placeholder="4000000"
                   name="dni"
                   onChange={handlerDatosFacturacion}
+                  value={datosFacturacion.dni}
                   ref={refs.dniRef}
                 />
                 {errores.dni && <p>{errores.dni}</p>}
@@ -350,10 +354,12 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               <p className="textoAcepto">Acepto Terminos y condiciones</p>
             </div>
           </div>
-          <button className="botonRentar" onClick={handlerSubmit}>
+          <button type="submit" className="botonRentar" onClick={handlerSubmit}>
             Rentar ahora
           </button>
-          <button className="botonCancelar">Cancelar</button>
+          <button type="submit" className="botonCancelar">
+            Cancelar
+          </button>
         </div>
 
         <aside>
