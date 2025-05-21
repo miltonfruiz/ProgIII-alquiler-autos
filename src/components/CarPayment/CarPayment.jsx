@@ -238,7 +238,7 @@ const CarPayment = () => {
                   </div>
                   <div
                     className={`containerArrastre ${
-                      isDragging ? `Activo` : ``
+                      isDragging || file ? `Activo` : ``
                     }`}
                     onDragOver={handlerDragOver}
                     onDragLeave={handlerDragLeave}
