@@ -1,5 +1,5 @@
 const CarPaymentValidation = ({ datosFacturacion }) => {
-  errores = {};
+  const errores = {};
 
   if (!datosFacturacion.nombre?.trim()) {
     errores.nombre = "* debe ingresar el nombre";

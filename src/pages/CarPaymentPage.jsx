@@ -10,7 +10,7 @@ const CarPaymentPage = () => {
   const dniRef = useRef(null);
 
   function handlerSubmit(datosFacturacion) {
-    const errores = CarPaymentValidation({ datos: datosFacturacion });
+    const errores = CarPaymentValidation({ datosFacturacion });
 
     if (Object.keys(errores).length > 0) {
       if (errores.nombre && nombreRef.current) {

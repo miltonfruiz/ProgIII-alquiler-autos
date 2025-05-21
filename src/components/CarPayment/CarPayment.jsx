@@ -104,61 +104,73 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                 <label htmlFor="" className="labelDatos">
                   Nombre
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="Tu nombre"
-                  name="nombre"
-                  onChange={handlerDatosFacturacion}
-                  value={datosFacturacion.nombre}
-                  ref={refs.nombreRef}
-                />
-                {errores.nombre && <p>{errores.nombre}</p>}
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="Tu nombre"
+                    name="nombre"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.nombre}
+                    ref={refs.nombreRef}
+                  />
+                  {errores.nombre && <p className="error">{errores.nombre}</p>}
+                </div>
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
                   Apellido
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="Tu apellido"
-                  name="apellido"
-                  onChange={handlerDatosFacturacion}
-                  value={datosFacturacion.apellido}
-                  ref={refs.apellidoRef}
-                />
-                {errores.apellido && <p>{errores.apellido}</p>}
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="Tu apellido"
+                    name="apellido"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.apellido}
+                    ref={refs.apellidoRef}
+                  />
+                  {errores.apellido && (
+                    <p className="error">{errores.apellido}</p>
+                  )}
+                </div>
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
                   Numero de telefono
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="5493333333333"
-                  name="numeroTelefonico"
-                  onChange={handlerDatosFacturacion}
-                  value={datosFacturacion.numeroTelefonico}
-                  ref={refs.numeroTelefonicoRef}
-                />
-                {errores.numeroTelefonico && <p>{errores.numeroTelefonico}</p>}
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="5493333333333"
+                    name="numeroTelefonico"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.numeroTelefonico}
+                    ref={refs.numeroTelefonicoRef}
+                  />
+                  {errores.numeroTelefonico && (
+                    <p className="error">{errores.numeroTelefonico}</p>
+                  )}
+                </div>
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
                   DNI
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="4000000"
-                  name="dni"
-                  onChange={handlerDatosFacturacion}
-                  value={datosFacturacion.dni}
-                  ref={refs.dniRef}
-                />
-                {errores.dni && <p>{errores.dni}</p>}
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="4000000"
+                    name="dni"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.dni}
+                    ref={refs.dniRef}
+                  />
+                  {errores.dni && <p className="error">{errores.dni}</p>}
+                </div>
               </div>
             </div>
           </div>

@@ -53,6 +53,14 @@
   padding-left: 1rem;
 }
 
+.error {
+  height: 1rem;
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+}
+
 .gridDatosFacturacion {
   display: grid;
   grid-template-columns: 1fr 1fr;
