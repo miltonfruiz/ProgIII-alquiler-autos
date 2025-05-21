@@ -8,7 +8,14 @@ import { IoCard } from "react-icons/io5";
 import { useState } from "react";
 import "./CarPayment.css";
 
-const CarPayment = () => {
+const CarPayment = ({ onSubmit, errores, refs }) => {
+  const [datosFacturacion, setDatosFacturacion] = useState({
+    nombre: "",
+    apellido: "",
+    numeroTelefonico: "",
+    dni: "",
+  });
+
   const [imgTarjetas, setImgTarjetas] = useState("visa");
 
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
@@ -18,6 +25,18 @@ const CarPayment = () => {
   const [isDragging, setIsDragging] = useState(false);
 
   const inputRef = useRef(null);
+
+  function handlerDatosFacturacion(e) {
+    setDatosFacturacion({
+      ...datosFacturacion,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function handlerSubmit(e) {
+    e.preventDefault();
+    onSubmit(datosFacturacion);
+  }
 
   function handlerDragOver(e) {
     e.preventDefault();
@@ -89,7 +108,11 @@ const CarPayment = () => {
                   type="text"
                   className="inputDatos"
                   placeholder="Tu nombre"
+                  name="nombre"
+                  onChange={handlerDatosFacturacion}
+                  ref={refs.nombreRef}
                 />
+                {errores.nombre && <p>{errores.nombre}</p>}
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
@@ -99,7 +122,11 @@ const CarPayment = () => {
                   type="text"
                   className="inputDatos"
                   placeholder="Tu apellido"
+                  name="apellido"
+                  onChange={handlerDatosFacturacion}
+                  ref={refs.apellidoRef}
                 />
+                {errores.apellido && <p>{errores.apellido}</p>}
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
@@ -109,7 +136,11 @@ const CarPayment = () => {
                   type="text"
                   className="inputDatos"
                   placeholder="5493333333333"
+                  name="numeroTelefonico"
+                  onChange={handlerDatosFacturacion}
+                  ref={refs.numeroTelefonicoRef}
                 />
+                {errores.numeroTelefonico && <p>{errores.numeroTelefonico}</p>}
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
@@ -119,15 +150,18 @@ const CarPayment = () => {
                   type="text"
                   className="inputDatos"
                   placeholder="4000000"
+                  name="dni"
+                  onChange={handlerDatosFacturacion}
+                  ref={refs.dniRef}
                 />
+                {errores.dni && <p>{errores.dni}</p>}
               </div>
             </div>
           </div>
           <div className="metodoPago">
             <h2 className="tituloMetodo">Metodo de Pago</h2>
-            <h3 className="subtituloMetodo">Introduce tu metodo de pago</h3>
+            <h3 className="subtituloMetodo">Elije tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
-            <h3>Elige una de las siguientes opciones</h3>
             <div className="ingresoTarjeta">
               <div className="seleccionTarjeta">
                 <input
@@ -316,7 +350,9 @@ const CarPayment = () => {
               <p className="textoAcepto">Acepto Terminos y condiciones</p>
             </div>
           </div>
-          <button className="botonRentar">Rentar ahora</button>
+          <button className="botonRentar" onClick={handlerSubmit}>
+            Rentar ahora
+          </button>
           <button className="botonCancelar">Cancelar</button>
         </div>
 
