@@ -15,24 +15,68 @@ export default function MyPastReservations() {
     {
       id: 1,
       auto: "Renault Logan",
-      fecha: "2025-04-10",
+      fecha: "2024-12-01",
       imagen: "/images/volkswagen.png",
-      precio: 25000,
-      impuestos: 4500,
+      precio: 28000,
+      impuestos: 5900,
       metodoPago: "Tarjeta de débito",
       facturacion: "Factura A",
-      total: 29500,
+      total: 33900,
     },
     {
       id: 2,
-      auto: "Fiat Cronos",
-      fecha: "2025-03-22",
+      auto: "Ford Fiesta",
+      fecha: "2024-11-15",
       imagen: "/images/volkswagen.png",
-      precio: 32000,
-      impuestos: 6500,
+      precio: 22000,
+      impuestos: 4600,
+      metodoPago: "Transferencia",
+      facturacion: "Factura B",
+      total: 26600,
+    },
+    {
+      id: 3,
+      auto: "Chevrolet Onix",
+      fecha: "2024-10-10",
+      imagen: "/images/volkswagen.png",
+      precio: 24000,
+      impuestos: 5100,
       metodoPago: "Mercado Pago",
       facturacion: "Factura B",
-      total: 38500,
+      total: 29100,
+    },
+    {
+      id: 4,
+      auto: "Volkswagen Gol",
+      fecha: "2024-09-05",
+      imagen: "/images/volkswagen.png",
+      precio: 21000,
+      impuestos: 4300,
+      metodoPago: "Efectivo",
+      facturacion: "Factura C",
+      total: 25300,
+    },
+    {
+      id: 5,
+      auto: "Toyota Etios",
+      fecha: "2024-08-25",
+      imagen: "/images/volkswagen.png",
+      precio: 26000,
+      impuestos: 5500,
+      metodoPago: "Tarjeta de crédito",
+      facturacion: "Factura A",
+      total: 31500,
+    },
+    {
+      id: 6,
+      auto: "Fiat Cronos",
+      fecha: "2024-07-15",
+      imagen: "/images/volkswagen.png",
+      precio: 23000,
+      impuestos: 4800,
+      metodoPago: "Transferencia",
+      facturacion: "Factura B",
+      total: 27800,
     },
   ]);
   const [ratings, setRatings] = useState({});
@@ -73,6 +117,7 @@ export default function MyPastReservations() {
   const submitRating = (id) => {
     const { stars, comment } = ratings[id];
     toast.success("¡Gracias por tu calificación!");
+
     setRatings((prev) => ({
       ...prev,
       [id]: {
@@ -81,6 +126,7 @@ export default function MyPastReservations() {
       },
     }));
   };
+
   return (
     <div className="reservation-container">
       <h1 className="reservation-title">
@@ -144,12 +190,18 @@ export default function MyPastReservations() {
                         </>
                       )}
                     </button>
-                    <button
-                      className="toggle-rate-button"
-                      onClick={() => setModalReservaId(res.id)}
-                    >
-                      <FaStar /> Calificar
-                    </button>
+                    {ratings[res.id]?.stars ? (
+                      <button className="rated-button" disabled>
+                        <FaStar style={{ color: "#fbc02d" }} /> Ya calificado
+                      </button>
+                    ) : (
+                      <button
+                        className="toggle-rate-button"
+                        onClick={() => setModalReservaId(res.id)}
+                      >
+                        <FaStar /> Calificar
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -158,7 +210,7 @@ export default function MyPastReservations() {
           {modalReservaId && (
             <div className="modal-overlay">
               <div className="modal-content">
-                <h2>
+                <h2 className="calification-title">
                   Calificar:{" "}
                   {
                     pastReservations.find((res) => res.id === modalReservaId)
