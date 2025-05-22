@@ -100,6 +100,10 @@ img {
   border-radius: 0.6em;
   padding: 2em 3em;
   box-shadow: 10px 10px 10px 10px #83838340;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .titleRegister {
@@ -144,6 +148,53 @@ img {
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
+@media (width >= 1760px) {
+  .inputRegister {
+    width: 26rem;
+    height: 3em;
+    background-color: #c3d4e966;
+    border-radius: 0.6em;
+    padding: 1em;
+    border: none;
+    border: 1px solid #d1d5db;
+    box-shadow: 0.085em 0.085em 0.085em 0.085em #211b5c36;
+    transition: border-color 0.3s;
+  }
+}
+
+@media (width <= 1277px) {
+  .inputRegister {
+    width: 16rem;
+    height: 3em;
+    background-color: #c3d4e966;
+    border-radius: 0.6em;
+    padding: 1em;
+    border: none;
+    border: 1px solid #d1d5db;
+    box-shadow: 0.085em 0.085em 0.085em 0.085em #211b5c36;
+    transition: border-color 0.3s;
+  }
+}
+
+@media (width <= 825px) {
+  .inputRegister {
+    width: 14rem;
+    height: 3em;
+    background-color: #c3d4e966;
+    border-radius: 0.6em;
+    padding: 1em;
+    border: none;
+    border: 1px solid #d1d5db;
+    box-shadow: 0.085em 0.085em 0.085em 0.085em #211b5c36;
+    transition: border-color 0.3s;
+  }
+}
+
+.containerLabelInput {
+  display: flex;
+  flex-direction: column;
+}
+
 .error-message {
   height: 1rem;
   color: red;
@@ -160,10 +211,29 @@ img {
 
 .gridRegister {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: minmax(50px, 1fr) minmax(50px, 1fr) minmax(200px, 1fr);
   grid-template-rows: 5.2em 5.2em 5.2em;
   gap: 0.6em;
 }
+@media (width <= 1085px) {
+  .gridRegister {
+    display: grid;
+    grid-template-columns: minmax(50px, 1fr) minmax(50px, 1fr);
+    grid-template-rows: 5.2em 5.2em 5.2em 5.2em 5.2em;
+    gap: 0.2em;
+    align-items: center;
+  }
+}
+
+@media (width <= 792px) {
+  .gridRegister {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .divButton {
   display: flex;
   flex-direction: column;
@@ -175,14 +245,14 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
-  width: 15%;
+  width: 40%;
   background-color: #6366f1;
   color: white;
   padding: 0.7rem;
   border: none;
   border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top: 1em;

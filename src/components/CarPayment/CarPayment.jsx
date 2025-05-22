@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Header from "../Header/Header";
 import { FaStar } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
@@ -8,8 +8,74 @@ import { IoCard } from "react-icons/io5";
 import { useState } from "react";
 import "./CarPayment.css";
 
-const CarPayment = () => {
+const CarPayment = ({ onSubmit, errores, refs }) => {
+  const [datosFacturacion, setDatosFacturacion] = useState({
+    nombre: "",
+    apellido: "",
+    numeroTelefonico: "",
+    dni: "",
+  });
+
   const [imgTarjetas, setImgTarjetas] = useState("visa");
+
+  const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
+  const [seleccionCbu, setSeleccionCbu] = useState(false);
+
+  const [file, setFile] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const inputRef = useRef(null);
+
+  function handlerDatosFacturacion(e) {
+    setDatosFacturacion({
+      ...datosFacturacion,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function handlerSubmit(e) {
+    e.preventDefault();
+    onSubmit(datosFacturacion);
+  }
+
+  function handlerDragOver(e) {
+    e.preventDefault();
+    setIsDragging(true);
+  }
+
+  function handlerDragLeave(e) {
+    setIsDragging(false);
+  }
+
+  function handlerDrop(e) {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    setFile(file);
+  }
+
+  function handlerSeleccion(e) {
+    if (e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  }
+
+  function handlerTarjeta(e) {
+    if (e.target.value) {
+      setSeleccionCbu(false);
+      setSeleccionTarjeta(true);
+    }
+  }
+
+  function handlerCbu(e) {
+    if (e.target.value) {
+      setSeleccionTarjeta(false);
+      setSeleccionCbu(true);
+    }
+  }
+
+  function handleRefInput() {
+    inputRef.current.click();
+  }
 
   function handlerImagenes(e) {
     if (e.target.value == "visa") {
@@ -38,113 +104,223 @@ const CarPayment = () => {
                 <label htmlFor="" className="labelDatos">
                   Nombre
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="Tu nombre"
-                />
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="Tu nombre"
+                    name="nombre"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.nombre}
+                    ref={refs.nombreRef}
+                  />
+                  {errores.nombre && <p className="error">{errores.nombre}</p>}
+                </div>
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
                   Apellido
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="Tu apellido"
-                />
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="Tu apellido"
+                    name="apellido"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.apellido}
+                    ref={refs.apellidoRef}
+                  />
+                  {errores.apellido && (
+                    <p className="error">{errores.apellido}</p>
+                  )}
+                </div>
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
                   Numero de telefono
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="5493333333333"
-                />
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="5493333333333"
+                    name="numeroTelefonico"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.numeroTelefonico}
+                    ref={refs.numeroTelefonicoRef}
+                  />
+                  {errores.numeroTelefonico && (
+                    <p className="error">{errores.numeroTelefonico}</p>
+                  )}
+                </div>
               </div>
               <div className="cajaInputDatos">
                 <label htmlFor="" className="labelDatos">
                   DNI
                 </label>
-                <input
-                  type="text"
-                  className="inputDatos"
-                  placeholder="4000000"
-                />
+                <div>
+                  <input
+                    type="text"
+                    className="inputDatos"
+                    placeholder="4000000"
+                    name="dni"
+                    onChange={handlerDatosFacturacion}
+                    value={datosFacturacion.dni}
+                    ref={refs.dniRef}
+                  />
+                  {errores.dni && <p className="error">{errores.dni}</p>}
+                </div>
               </div>
             </div>
           </div>
           <div className="metodoPago">
             <h2 className="tituloMetodo">Metodo de Pago</h2>
-            <h3 className="subtituloMetodo">Introduce tu metodo de pago</h3>
+            <h3 className="subtituloMetodo">Elije tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
             <div className="ingresoTarjeta">
-              <label htmlFor="seleccion" className="seleccion">
-                Seleccione una tarjeta
-              </label>
-              <select
-                name=""
-                id="seleccion"
-                className="selectMetodo"
-                onChange={handlerImagenes}
-              >
-                <option value="visa">Visa</option>
-                <option value="mastercard">Mastercard</option>
-                <option value="american">American express</option>
-                <option value="debito">Tarjeta de debito</option>
-              </select>
-              {imgTarjetas == "visa" && <RiVisaLine className="logosTarjeta" />}
-              {imgTarjetas == "mastercard" && (
-                <FaCcMastercard className="logosTarjeta" />
-              )}
-              {imgTarjetas == "american" && (
-                <SiAmericanexpress className="logosTarjeta" />
-              )}
-              {imgTarjetas == "debito" && <IoCard className="logosTarjeta" />}
-
-              <div className="gridDatosTarjeta">
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    Numero de Tarjeta
-                  </label>
-                  <input
-                    type="text"
-                    className="inputMetodo"
-                    placeholder="Numero de tarjeta"
-                  />
-                </div>
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    Fecha de Expiracion
-                  </label>
-                  <input type="date" className="inputMetodo" />
-                </div>
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    Nombre del titular
-                  </label>
-                  <input
-                    type="text"
-                    className="inputMetodo"
-                    placeholder="Nombre completo"
-                  />
-                </div>
-                <div className="cajaInputTarjeta">
-                  <label htmlFor="" className="labelMetodo">
-                    CVC
-                  </label>
-                  <input
-                    type="text"
-                    className="inputMetodo"
-                    placeholder="CVC"
-                  />
-                </div>
+              <div className="seleccionTarjeta">
+                <input
+                  type="radio"
+                  name="opcion"
+                  value="1"
+                  className="eleccionTarjeta"
+                  onChange={handlerTarjeta}
+                />
+                <label htmlFor="" className="labelTarjeta">
+                  Pago con tarjeta
+                </label>
               </div>
+
+              {seleccionTarjeta && (
+                <div>
+                  <label htmlFor="seleccion" className="seleccion">
+                    Seleccione una tarjeta
+                  </label>
+                  <select
+                    name=""
+                    id="seleccion"
+                    className="selectMetodo"
+                    onChange={handlerImagenes}
+                  >
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    <option value="american">American express</option>
+                    <option value="debito">Tarjeta de debito</option>
+                  </select>
+                  {imgTarjetas == "visa" && (
+                    <RiVisaLine className="logosTarjeta" />
+                  )}
+                  {imgTarjetas == "mastercard" && (
+                    <FaCcMastercard className="logosTarjeta" />
+                  )}
+                  {imgTarjetas == "american" && (
+                    <SiAmericanexpress className="logosTarjeta" />
+                  )}
+                  {imgTarjetas == "debito" && (
+                    <IoCard className="logosTarjeta" />
+                  )}
+                  <div className="gridDatosTarjeta">
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        Numero de Tarjeta
+                      </label>
+                      <input
+                        type="text"
+                        className="inputMetodo"
+                        placeholder="Numero de tarjeta"
+                      />
+                    </div>
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        Fecha de Expiracion
+                      </label>
+                      <input type="date" className="inputMetodo" />
+                    </div>
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        Nombre del titular
+                      </label>
+                      <input
+                        type="text"
+                        className="inputMetodo"
+                        placeholder="Nombre completo"
+                      />
+                    </div>
+                    <div className="cajaInputTarjeta">
+                      <label htmlFor="" className="labelMetodo">
+                        CVC
+                      </label>
+                      <input
+                        type="text"
+                        className="inputMetodo"
+                        placeholder="CVC"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
+
             <div className="cajaTransferenciaBancaria">
-              <p className="transferenciaBancaria">Transferencia Bancaria</p>
+              <div className="containterEleccionTransfer">
+                <input
+                  type="radio"
+                  name="opcion"
+                  value="2"
+                  className="eleccionTranferencia"
+                  onChange={handlerCbu}
+                />
+                <p className="transferenciaBancaria">
+                  Pago con Transferencia Bancaria
+                </p>
+              </div>
+
+              {seleccionCbu && (
+                <div className="conteinerTransferencia">
+                  <h3 className="tituloTransferencia">
+                    Transfiera a esta cuenta
+                  </h3>
+                  <div className="conteinerTransfer">
+                    <div className="containerCbuTransfer">
+                      <h3>CBU</h3>
+                      <p>1430001717001234567890</p>
+                    </div>
+
+                    <div className="containerCbuTransfer">
+                      <h3>Alias</h3>
+                      <p>autos.alquiler.mpago</p>
+                    </div>
+                  </div>
+                  <div
+                    className={`containerArrastre ${
+                      isDragging || file ? `Activo` : ``
+                    }`}
+                    onDragOver={handlerDragOver}
+                    onDragLeave={handlerDragLeave}
+                    onDrop={handlerDrop}
+                  >
+                    {file ? (
+                      <p className="">Archivo cargado: {file.name}</p>
+                    ) : (
+                      <p className="">
+                        Arrastre el comprobante aqui o seleccione un archivo
+                      </p>
+                    )}
+
+                    <input
+                      type="file"
+                      className="comprobante"
+                      onChange={handlerSeleccion}
+                      style={{ display: "none" }}
+                      ref={inputRef}
+                    />
+                    <button className="" onClick={handleRefInput}>
+                      Seleccione un archivo
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="infoImportante">
@@ -190,8 +366,12 @@ const CarPayment = () => {
               <p className="textoAcepto">Acepto Terminos y condiciones</p>
             </div>
           </div>
-          <button className="botonRentar">Rentar ahora</button>
-          <button className="botonCancelar">Cancelar</button>
+          <button type="submit" className="botonRentar" onClick={handlerSubmit}>
+            Rentar ahora
+          </button>
+          <button type="submit" className="botonCancelar">
+            Cancelar
+          </button>
         </div>
 
         <aside>
