@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./MyPastReservations.css";
 import "../MyReservations/MyReservations.css";
 import { FaHistory, FaHandHoldingUsd, FaStar } from "react-icons/fa";
@@ -9,6 +9,7 @@ import { TbTax } from "react-icons/tb";
 import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
+import ModalValidation from "../ModalValidation/ModalValidation";
 
 export default function MyPastReservations() {
   const [pastReservations] = useState([
@@ -82,19 +83,16 @@ export default function MyPastReservations() {
   const [ratings, setRatings] = useState({});
   const [modalReservaId, setModalReservaId] = useState(null);
   const [expandedIds, setExpandedIds] = useState([]);
+  const commentRef = useRef(null);
+  const starsRef = useRef(null);
+  const [modalErrores, setModalErrores] = useState({});
+  const isRated = (id) => {
+    return ratings[id]?.stars > 0 && ratings[id]?.comment?.trim().length > 0;
+  };
   const toggleExpand = (id) => {
     setExpandedIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
-  };
-  const toggleRating = (id) => {
-    setRatings((prev) => ({
-      ...prev,
-      [id]: {
-        ...(prev[id] || { stars: 0, comment: "", showForm: false }),
-        showForm: !prev[id]?.showForm,
-      },
-    }));
   };
   const handleStarClick = (id, value) => {
     setRatings((prev) => ({
@@ -114,19 +112,36 @@ export default function MyPastReservations() {
       },
     }));
   };
-  const submitRating = (id) => {
-    const { stars, comment } = ratings[id];
+  const handleRating = (id, formData) => {
+    const errorValidation = ModalValidation({ datos: formData });
+    if (Object.keys(errorValidation).length > 0) {
+      if (errorValidation.comment && commentRef.current) {
+        commentRef.current.focus();
+      } else if (errorValidation.stars && starsRef.current) {
+        starsRef.current.focus();
+      }
+      setModalErrores((prev) => ({
+        ...prev,
+        [id]: errorValidation,
+      }));
+      return;
+    }
     toast.success("¡Gracias por tu calificación!");
-
     setRatings((prev) => ({
       ...prev,
       [id]: {
         ...prev[id],
+        stars: formData.stars,
+        comment: formData.comment,
         showForm: false,
       },
     }));
+    setModalReservaId(null);
+    setModalErrores((prev) => ({
+      ...prev,
+      [id]: {},
+    }));
   };
-
   return (
     <div className="reservation-container">
       <h1 className="reservation-title">
@@ -190,9 +205,10 @@ export default function MyPastReservations() {
                         </>
                       )}
                     </button>
-                    {ratings[res.id]?.stars ? (
+                    {isRated(res.id) ? (
                       <button className="rated-button" disabled>
-                        <FaStar style={{ color: "#fbc02d" }} /> Ya calificado
+                        <FaStar className="icon-disabled" />
+                        Ya has calificado el auto
                       </button>
                     ) : (
                       <button
@@ -210,46 +226,74 @@ export default function MyPastReservations() {
           {modalReservaId && (
             <div className="modal-overlay">
               <div className="modal-content">
-                <h2 className="calification-title">
-                  Calificar:{" "}
-                  {
-                    pastReservations.find((res) => res.id === modalReservaId)
-                      ?.auto
-                  }
-                </h2>
-                <div className="stars">
-                  {[1, 2, 3, 4, 5].map((value) => (
-                    <FaStar
-                      key={value}
-                      onClick={() => handleStarClick(modalReservaId, value)}
-                      className={`star-icon ${
-                        value <= (ratings[modalReservaId]?.stars || 0)
-                          ? "selected"
-                          : ""
-                      }`}
-                    />
-                  ))}
+                <div className="calification-group">
+                  <h2 className="calification-title">
+                    Calificar{" "}
+                    {
+                      pastReservations.find((r) => r.id === modalReservaId)
+                        ?.auto
+                    }
+                  </h2>
+                  <div className="stars">
+                    {[1, 2, 3, 4, 5].map((value) => (
+                      <FaStar
+                        ref={starsRef}
+                        key={value}
+                        onClick={() => handleStarClick(modalReservaId, value)}
+                        className={`star-icon ${
+                          value <= (ratings[modalReservaId]?.stars || 0)
+                            ? "selected"
+                            : ""
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span
+                    className={`error-input ${
+                      modalErrores[modalReservaId]?.stars ? "visible" : ""
+                    }`}
+                  >
+                    {modalErrores[modalReservaId]?.stars || ""}
+                  </span>
                 </div>
+
                 <textarea
+                  ref={commentRef}
                   placeholder="Ingrese comentario..."
                   value={ratings[modalReservaId]?.comment || ""}
                   onChange={(e) =>
                     handleCommentChange(modalReservaId, e.target.value)
                   }
                 />
+                <span
+                  className={`error-input ${
+                    modalErrores[modalReservaId]?.comment ? "visible" : ""
+                  }`}
+                >
+                  {modalErrores[modalReservaId]?.comment || ""}
+                </span>
+
                 <div className="modal-actions">
                   <button
+                    onClick={() =>
+                      handleRating(modalReservaId, {
+                        stars: ratings[modalReservaId]?.stars || 0,
+                        comment: ratings[modalReservaId]?.comment || "",
+                      })
+                    }
                     className="submit-rating-button"
-                    onClick={() => {
-                      submitRating(modalReservaId);
-                      setModalReservaId(null);
-                    }}
                   >
                     <IoSend /> Enviar
                   </button>
                   <button
                     className="cancel-rating-button"
-                    onClick={() => setModalReservaId(null)}
+                    onClick={() => {
+                      setModalReservaId(null);
+                      setModalErrores((prev) => ({
+                        ...prev,
+                        [modalReservaId]: {},
+                      }));
+                    }}
                   >
                     <MdOutlineCancel /> Cancelar
                   </button>
