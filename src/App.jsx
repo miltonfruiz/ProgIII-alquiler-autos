@@ -16,7 +16,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Shop from "./pages/Shop/Shop";
-import Overlay from "./components/Overlay/Overlay";
+import Modal from "./components/Modal/Modal";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);

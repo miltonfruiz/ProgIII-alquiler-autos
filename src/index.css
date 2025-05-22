@@ -75,3 +75,10 @@ img {
   height: auto;
   display: block;
 }
+
+/* ESTILOS PARA OVERLAY */
+
+.bloquear-scroll {
+  overflow-y: hidden;
+  background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CarCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faRoad } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +10,11 @@ const CarCard = ({
   passengers,
   transmission,
   price,
+  onRent,
 }) => {
+  function CarCard({ onRent, ...props }) {
+    const [activo, setActivo] = useState(false);
+  } // ← Correcto, está dentro del componente
   return (
     <div className={styles.cardConteiner}>
       <div className={styles.headConteiner}>
@@ -35,7 +39,7 @@ const CarCard = ({
         <span className={styles.priceUnit}> Día</span>
       </p>
       <div className={styles.cardButton}>
-        <a href="#">Rentar</a>
+        <button onClick={onRent}>Rentar</button>
       </div>
     </div>
   );

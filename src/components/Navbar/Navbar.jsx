@@ -22,7 +22,7 @@ function Navbar() {
         <Link to="/shop" className={styles.carIcon}>
           Shop
         </Link>
-        <Link to="/profile" className={styles.userIcon}>
+        <Link to="/register" className={styles.userIcon}>
           <FontAwesomeIcon icon={faUser} />
         </Link>
       </div>

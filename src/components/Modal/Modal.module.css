@@ -1,12 +1,26 @@
+.overlayBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5); /* Oscurece el fondo */
+
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .overlayConteiner {
-  margin-top: 100px;
   position: relative;
-  left: 30%;
-  height: 600px;
+  height: 650px;
   width: 750px;
   border-radius: 1rem;
-  background: rgb(255, 255, 255);
+  background: white;
   box-shadow: 0 4px 22px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
   color: #1a202c;
 }
 
@@ -24,21 +38,22 @@
 
 .carReserva {
   margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
   margin-bottom: 1.5rem;
 }
 
 .reservaInfo {
   display: flex;
-  align-items: center;
   font-weight: 500;
   font-size: 1.25rem;
 }
 
 .carSelected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 400;
   margin-left: 0.5rem;
+  margin-bottom: 0;
   font-size: 1rem;
 }
 
@@ -50,7 +65,7 @@
 }
 
 .precio {
-  font-size: 1Wrem;
+  font-size: 1rem;
 }
 
 /* Botones */
@@ -90,8 +105,15 @@
   transition: background-color 0.3s ease;
 }
 
-.btnPagar:hover {
+.btnPagar:hover:not(:disabled) {
   background-color: #7371fc;
+
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btnPagar:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 /* INPUTS */
@@ -115,11 +137,40 @@
   border: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: border-color 0.3s;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .inputDate:focus {
   outline: none;
   border-color: #6366f1;
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* STYLE ERRORS */
+
+.errorMessage {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: rem;
+  margin-bottom: 0.6rem;
+  height: 0;
+  transition: height 0.3s ease;
+}
+
+.errorMessage.visible {
+  height: auto;
+}
+.errorContainer {
+  min-height: 1.2rem; /* Espacio reservado */
+  position: relative;
+}
+
+/* BTN DISABLED */
+
+.btnPagar:disabled {
+  background-color: #a5a5a5;
+  color: #f0f0f0;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
