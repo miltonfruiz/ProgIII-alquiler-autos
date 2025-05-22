@@ -1,0 +1,177 @@
+.profile-header {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 22px 32px;
+  max-width: 1100px;
+  margin: 20px auto;
+}
+.profile-title {
+  font-size: 23px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 22px;
+}
+.profile-content {
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.img-profile {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #6366f1;
+}
+.profile-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.profile-details h2 {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  margin-bottom: 8px;
+  color: #222;
+}
+.profile-details p {
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  color: #555;
+  font-size: 12px;
+}
+.edit-button {
+  font-size: 11px;
+  background-color: #6366f1;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  transition: background 0.3s ease;
+  width: 15%;
+}
+.edit-button:hover {
+  background-color: #4f46e5;
+}
+.FaEdit-icon {
+  font-size: 13px;
+}
+.imProfile-icon {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.icon-date {
+  margin-right: 5px;
+}
+.save-button {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.cancel-button {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.cancel-button:hover {
+  background-color: #c82333;
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.3s ease forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.profile-details input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+}
+.profile-details input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+.edit-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+}
+.save-button,
+.cancel-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.save-button:hover {
+  background-color: #218838;
+}
+.fade-out {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeOut 0.3s ease forwards;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.icon-edits {
+  font-size: 13px;
+  margin-right: 4px;
+}
+.profile-image-wrapper {
+  position: relative;
+  width: fit-content;
+}
+.edit-icon-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 12px;
+  padding: 8px;
+  cursor: pointer;
+}
+.camera-icon {
+  color: white;
+  font-size: 17px;
+}
+.img-profile.editable-img:hover {
+  box-shadow: 0 0 0 2px #6366f1;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+}
