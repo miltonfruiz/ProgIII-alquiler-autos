@@ -26,6 +26,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
 
   const inputRef = useRef(null);
 
+  const eleccionTarjetaRef = useRef(null);
+  const eleccionTransferRef = useRef(null);
+
   function handlerDatosFacturacion(e) {
     setDatosFacturacion({
       ...datosFacturacion,
@@ -87,6 +90,14 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     } else {
       setImgTarjetas("debito");
     }
+  }
+
+  function handlerClickTarjeta() {
+    eleccionTarjetaRef.current.click();
+  }
+
+  function handlerClickTransferencia() {
+    eleccionTransferRef.current.click();
   }
   return (
     <div className="contenedorGeneral">
@@ -178,7 +189,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             <h2 className="tituloMetodo">Metodo de Pago</h2>
             <h3 className="subtituloMetodo">Elije tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
-            <div className="ingresoTarjeta">
+            <div className="ingresoTarjeta" onClick={handlerClickTarjeta}>
               <div className="seleccionTarjeta">
                 <input
                   type="radio"
@@ -186,6 +197,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   value="1"
                   className="eleccionTarjeta"
                   onChange={handlerTarjeta}
+                  ref={eleccionTarjetaRef}
                 />
                 <label htmlFor="" className="labelTarjeta">
                   Pago con tarjeta
@@ -262,7 +274,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               )}
             </div>
 
-            <div className="cajaTransferenciaBancaria">
+            <div
+              className="cajaTransferenciaBancaria"
+              onClick={handlerClickTransferencia}
+            >
               <div className="containterEleccionTransfer">
                 <input
                   type="radio"
@@ -270,6 +285,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   value="2"
                   className="eleccionTranferencia"
                   onChange={handlerCbu}
+                  ref={eleccionTransferRef}
                 />
                 <p className="transferenciaBancaria">
                   Pago con Transferencia Bancaria
