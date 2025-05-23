@@ -8,16 +8,16 @@ import Opiniones from "./Opiniones/Opiniones";
 import RentNow from "./RentNow/RentNow";
 import mockRecomendados from "../../data/mockRecomendados";
 
-function Home() {
+function Home({ loggedIn }) {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Categorias />
+      <Hero loggedIn={loggedIn} />
+      <Categorias loggedIn={loggedIn} />
       <Recomendados autos={mockRecomendados} />
       <WhyUs />
       <Opiniones />
-      <RentNow />
+      <RentNow loggedIn={loggedIn} />
       <Footer />
     </>
   );

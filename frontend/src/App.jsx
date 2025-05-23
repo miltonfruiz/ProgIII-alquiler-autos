@@ -30,7 +30,7 @@ function App() {
           path="/register"
           element={<Register setRegisterIn={setRegisterIn}></Register>}
         ></Route>
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home loggedIn={loggedIn} />} />
         <Route path="/carPayment" element={<CarPayment></CarPayment>}></Route>
         <Route
           path="/user-profile"

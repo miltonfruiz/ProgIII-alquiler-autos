@@ -1,11 +1,23 @@
-import React from "react";
+import React, { use } from "react";
 import styles from "./Categorias.module.css";
 import economicCar from "../../../assets/images/cars/toyota_etios.png";
 import estandarCar from "../../../assets/images/cars/fiat-cronos.png";
 import suvCar from "../../../assets/images/cars/vw-t-cross.png";
 import fullSizeCar from "../../../assets/images/cars/toyota_etios-sedan.png";
+import { useNavigate } from "react-router-dom";
 
-function Categorias() {
+function Categorias({ loggedIn }) {
+  const navigate = useNavigate();
+
+  const handleCategoriasClick = (categoria) => {
+    if (!loggedIn) {
+      navigate("/");
+      return;
+    }
+
+    navigate("/shop", { state: { categoriaSeleccionada: categoria } });
+  };
+
   return (
     <section className={styles.categoriesSection}>
       <div className={styles.titleConteiner}>
@@ -21,7 +33,9 @@ function Categorias() {
             <span className={styles.priceUnit}> Día</span>
           </p>
           <div className={styles.cardButton}>
-            <a href="#">Ver Más</a>
+            <button onClick={() => handleCategoriasClick("Económico")}>
+              Ver Más
+            </button>
           </div>
         </div>
 
@@ -38,7 +52,9 @@ function Categorias() {
             <span className={styles.priceUnit}> Día</span>
           </p>
           <div className={styles.cardButton}>
-            <a href="">Ver Mas</a>
+            <button onClick={() => handleCategoriasClick("Estándar")}>
+              Ver Más
+            </button>
           </div>
         </div>
 
@@ -51,7 +67,9 @@ function Categorias() {
             <span className={styles.priceUnit}> Día</span>
           </p>
           <div className={styles.cardButton}>
-            <a href="">Ver Mas</a>
+            <button onClick={() => handleCategoriasClick("SUV")}>
+              Ver Más
+            </button>
           </div>
         </div>
 
@@ -64,7 +82,9 @@ function Categorias() {
             <span className={styles.priceUnit}> Día</span>
           </p>
           <div className={styles.cardButton}>
-            <a href="">Ver Mas</a>
+            <button onClick={() => handleCategoriasClick("Full Size")}>
+              Ver Más
+            </button>
           </div>
         </div>
       </div>

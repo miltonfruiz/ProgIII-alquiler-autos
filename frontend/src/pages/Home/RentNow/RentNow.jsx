@@ -1,8 +1,19 @@
 import React from "react";
 import styles from "./RentNow.module.css";
 import rentCars from "../../../assets/rentCars.png";
+import { useNavigate } from "react-router-dom";
 
-function RentNow() {
+function RentNow({ loggedIn }) {
+  const navigate = useNavigate();
+
+  const handleRentNowClick = () => {
+    if (loggedIn) {
+      navigate("/shop");
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <section className={styles.rentNowSection}>
       <div className={styles.imageConteiner}>
@@ -17,7 +28,9 @@ function RentNow() {
           </span>
         </div>
         <div className={styles.rentNowButtonConteiner}>
-          <a className={styles.rentNowButton}>Reservar ahora</a>{" "}
+          <button className={styles.rentNowButton} onClick={handleRentNowClick}>
+            Reservar ahora
+          </button>
           {/* aqui hay que validar que este logeado*/}
         </div>
       </div>

@@ -45,11 +45,11 @@
   text-decoration: none;
 }
 
-.btnConteiner a:hover {
-  background-color: #7371fc;
+.btnConteiner button:hover {
+  background-color: #7f7df7;
 }
 
-.btnConteiner a {
+.btnConteiner button {
   color: #fff;
   background-color: #b2b2ff;
   padding: 30px 85px;

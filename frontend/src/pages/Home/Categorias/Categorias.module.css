@@ -68,22 +68,18 @@
 
 /* Button */
 
-.cardButton {
-  background-color: #9ea4ff;
-  text-align: center;
-  text-decoration: none;
-  padding: 15px;
-  border-radius: 5px;
-  transition: all 0.3s ease-in-out;
-  margin-top: 1rem;
-}
-
-.cardButton:hover {
+.cardButton button:hover {
   background-color: #7371fc;
 }
 
-.cardButton a {
+.cardButton button {
+  margin-top: 0.3rem;
+
   color: #fff;
+  padding: 20px 100px;
+  border-radius: 5px;
+  background-color: #9ea4ff;
+  transition: all 0.3s ease-in-out;
 }
 
 .estandarImage {
