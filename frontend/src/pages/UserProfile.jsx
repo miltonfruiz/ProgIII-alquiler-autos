@@ -1,13 +1,15 @@
-import React from "react";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
+import MyProfile from "../components/MyProfile/MyProfile";
+import MyReservations from "../components/MyReservations/MyReservations";
+import MyPastReservations from "../components/MyPastReservations/MyPastReservations";
 
 const UserProfile = () => {
   return (
     <div>
       <UserNavbar />
-      <p>Componente Perfil</p>
-      <p>Componente Mis Reservas</p>
-      <p>Componente Reservas pasadas</p>
+      <MyProfile />
+      <MyReservations />
+      <MyPastReservations />
     </div>
   );
 };

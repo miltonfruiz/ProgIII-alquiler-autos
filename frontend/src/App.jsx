@@ -8,9 +8,8 @@ import { useState } from "react";
 import RegisterForm from "./components/Register/RegisterForm";
 import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
-import CarPayment from "./components/CarPayment/CarPayment";
+import CarPaymentPage from "./pages/CarPaymentPage";
 import Cars from "./pages/Cars";
-import LandingPage from "./components/LandingPage/LandingPage";
 
 //Sosa
 import Navbar from "./components/Navbar/Navbar";
@@ -18,6 +17,7 @@ import Home from "./pages/Home/Home";
 import Shop from "./pages/Shop/Shop";
 import Modal from "./components/Modal/Modal";
 
+import Landing from "./pages/Landing";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
@@ -31,7 +31,11 @@ function App() {
           element={<Register setRegisterIn={setRegisterIn}></Register>}
         ></Route>
         <Route path="/home" element={<Home loggedIn={loggedIn} />} />
-        <Route path="/carPayment" element={<CarPayment></CarPayment>}></Route>
+        <Route
+          path="/carPayment"
+          element={<CarPaymentPage></CarPaymentPage>}
+        ></Route>
+
         <Route
           path="/user-profile"
           element={
@@ -41,7 +45,7 @@ function App() {
           }
         />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/presentation" element={<LandingPage></LandingPage>} />
+        <Route path="/landing" element={<Landing></Landing>} />
       </Routes>
     </BrowserRouter>
   );
