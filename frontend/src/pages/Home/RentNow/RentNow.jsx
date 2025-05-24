@@ -29,7 +29,7 @@ function RentNow({ loggedIn }) {
         </div>
         <div className={styles.rentNowButtonConteiner}>
           <button className={styles.rentNowButton} onClick={handleRentNowClick}>
-            Reservar ahora
+            Empezar ahora
           </button>
           {/* aqui hay que validar que este logeado*/}
         </div>

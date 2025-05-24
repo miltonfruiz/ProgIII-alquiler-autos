@@ -16,6 +16,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Shop from "./pages/Shop/Shop";
 import Modal from "./components/Modal/Modal";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import Landing from "./pages/Landing";
 function App() {
@@ -23,6 +24,7 @@ function App() {
   const [registerIn, setRegisterIn] = useState(false);
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/password-recover" element={<PasswordRecover />} />
