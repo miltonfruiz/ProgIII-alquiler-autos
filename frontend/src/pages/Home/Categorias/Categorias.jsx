@@ -14,7 +14,6 @@ function Categorias({ loggedIn }) {
       navigate("/");
       return;
     }
-
     navigate("/shop", { state: { categoriaSeleccionada: categoria } });
   };
 

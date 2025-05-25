@@ -7,7 +7,8 @@
 .container {
   margin: 0; /* Elimina márgenes por defecto */
   padding: 0; /* Elimina paddings por defecto */
-  min-height: 100vh; /* Opcional: cubre toda la pantalla */
+  margin-top: 10rem;
+  margin-bottom: 5rem;
 }
 img {
   max-width: 100%;
@@ -22,12 +23,6 @@ img {
   display: flex;
   justify-content: left;
   align-items: center;
-}
-
-.autoHeader {
-  width: 7.5em;
-  height: 6em;
-  margin-left: 6em;
 }
 
 .divBusqueda {
@@ -245,17 +240,17 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
-  width: 40%;
+  width: 100%;
   background-color: #6366f1;
   color: white;
-  padding: 0.7rem;
+  padding: 1rem;
   border: none;
   border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 .buttonRegister:hover {

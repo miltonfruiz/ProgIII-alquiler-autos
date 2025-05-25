@@ -51,8 +51,6 @@ function Modal({ auto, onClose }) {
 
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
-
-      return;
     }
     toast.success("¡Fechas seleccionadas correctamente!");
     setErrores({});
@@ -69,9 +67,21 @@ function Modal({ auto, onClose }) {
       !formData.fecha_fin
     )
       return 0;
+
     const inicio = new Date(formData.fecha_inicio);
     const fin = new Date(formData.fecha_fin);
-    const diffDias = Math.ceil((fin - inicio) / (1000 * 60 * 60 * 24)); // .ceil para redondear la cantidad de dias, el fin-inicio devuelve en MILISEG, (1000 * 60 * 60 * 24) identifica la cantidad de MILISEG en un dia
+
+    // Eliminar la hora para que no afecte el cálculo
+    const fechaInicio = new Date(
+      inicio.getFullYear(),
+      inicio.getMonth(),
+      inicio.getDate()
+    );
+    const fechaFin = new Date(fin.getFullYear(), fin.getMonth(), fin.getDate());
+
+    const diffDias =
+      Math.floor((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24)) + 1;
+    // .ceil para redondear la cantidad de dias, el fin-inicio devuelve en MILISEG, (1000 * 60 * 60 * 24) identifica la cantidad de MILISEG en un dia
     return diffDias > 0 ? diffDias * auto.price : 0;
   };
 

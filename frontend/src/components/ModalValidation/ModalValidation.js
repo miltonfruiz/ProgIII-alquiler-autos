@@ -10,9 +10,17 @@ const ModalValidation = (datos) => {
       errores.fecha_inicio = "Formato de fecha inválido";
     } else {
       const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0);
+      const dia = String(hoy.getDate()).padStart(2, "0");
+      const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+      const anio = hoy.getFullYear();
 
-      if (new Date(fecha_inicio) < hoy) {
+      const fechaHoyStr = `${dia}/${mes}/${anio}`;
+
+      const fechaStr = fechaHoyStr;
+      const [diaStr, mesStr, anioStr] = fechaStr.split("/"); // ⚠️ Nombres distintos
+      const fechaDate = new Date(anioStr, mesStr - 1, diaStr);
+
+      if (new Date(fecha_inicio) < fechaHoyStr) {
         errores.fecha_inicio = "Debe ingresar una fecha posterior a hoy";
       }
     }
@@ -26,9 +34,17 @@ const ModalValidation = (datos) => {
       errores.fecha_fin = "Formato de fecha inválido";
     } else {
       const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0);
+      const dia = String(hoy.getDate()).padStart(2, "0");
+      const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+      const anio = hoy.getFullYear();
 
-      if (new Date(fecha_fin) < hoy) {
+      const fechaHoyStr = `${dia}/${mes}/${anio}`;
+
+      const fechaStr = fechaHoyStr;
+      const [diaStr, mesStr, anioStr] = fechaStr.split("/"); // ⚠️ Nombres distintos
+      const fechaDate = new Date(anioStr, mesStr - 1, diaStr);
+
+      if (new Date(fecha_fin) < fechaHoyStr) {
         errores.fecha_fin = "Debe ingresar una fecha posterior a hoy";
       }
     }

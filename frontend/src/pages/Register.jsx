@@ -3,6 +3,8 @@ import RegisterForm from "../components/Register/RegisterForm";
 import RegisterValidation from "../components/RegisterValidation/RegisterValidation";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import UserNavbar from "../components/UserNavbar/UserNavbar";
+import Footer from "../components/Footer/Footer";
 
 const Register = ({ setRegisterIn }) => {
   const useRefs = {
@@ -53,6 +55,7 @@ const Register = ({ setRegisterIn }) => {
 
   return (
     <div>
+      <UserNavbar />
       <RegisterForm
         onSubmit={handleSubmit}
         errores={errores}
@@ -61,6 +64,7 @@ const Register = ({ setRegisterIn }) => {
         }}
       />
       <ToastContainer position="top-right" autoClose={4000}></ToastContainer>
+      <Footer />
     </div>
   );
 };

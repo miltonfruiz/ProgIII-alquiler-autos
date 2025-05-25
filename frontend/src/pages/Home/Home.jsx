@@ -7,11 +7,12 @@ import WhyUs from "./WhyUs/WhyUs";
 import Opiniones from "./Opiniones/Opiniones";
 import RentNow from "./RentNow/RentNow";
 import mockRecomendados from "../../data/mockRecomendados";
+import UserNavbar from "../../components/UserNavbar/UserNavbar";
 
 function Home({ loggedIn }) {
   return (
     <>
-      <Navbar />
+      <UserNavbar />
       <Hero loggedIn={loggedIn} />
       <Categorias loggedIn={loggedIn} />
       <Recomendados autos={mockRecomendados} />
