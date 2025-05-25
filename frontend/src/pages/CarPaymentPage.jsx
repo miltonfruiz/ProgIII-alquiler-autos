@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import CarPayment from "../components/CarPayment/CarPayment";
 import CarPaymentValidation from "../components/CarPaymentValidation/CarPaymentValidation";
+import UserNavbar from "../components/UserNavbar/UserNavbar";
+import Footer from "../components/Footer/Footer";
 
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
@@ -34,6 +36,7 @@ const CarPaymentPage = () => {
 
   return (
     <div>
+      <UserNavbar />
       <CarPayment
         onSubmit={handlerSubmit}
         errores={errores}

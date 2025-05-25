@@ -82,3 +82,7 @@ img {
   overflow-y: hidden;
   background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
 }
+
+.desbloquear-scroll {
+  overflow-y: auto;
+}

@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import Filtros from "../Shop/Filtros/Filtros";
 import styles from "./Shop.module.css";
 import { useLocation } from "react-router-dom";
+import UserNavbar from "../../components/UserNavbar/UserNavbar";
 
 function Shop() {
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
@@ -39,7 +40,7 @@ function Shop() {
 
   return (
     <>
-      <Navbar />
+      <UserNavbar />
       <main className={styles.mainContainer}>
         <Filtros
           categoriasSeleccionadas={categoriasSeleccionadas}
