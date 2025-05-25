@@ -11,11 +11,10 @@ function Categorias({ loggedIn }) {
 
   const handleCategoriasClick = (categoria) => {
     if (!loggedIn) {
-      navigate("/shop", { state: { categoriaSeleccionada: categoria } });
-
-      // navigate("/");
+      navigate("/");
       return;
     }
+    navigate("/shop", { state: { categoriaSeleccionada: categoria } });
   };
 
   return (
