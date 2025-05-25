@@ -4,55 +4,26 @@ import { Car } from "../src/models/Car.js";
 const router = Router();
 
 //------------------- Obtener todos los autos -------------------//
-router.get("/cars", async (req, res) => {
-  try {
-    const cars = await Car.findAll();
-    res.json(cars);
-  } catch (error) {
-    res.status(500).json({ message: "Error al obtener autos", error });
-  }
+router.get("/cars", (req, res) => {
+  res.send("Obteniendo libros");
 });
 //------------------- Obtener un auto por ID -------------------//
-router.get("/cars/:id", async (req, res) => {
-  try {
-    const car = await Car.findByPk(req.params.id);
-    if (!car) return res.status(404).json({ message: "Auto no encontrado" });
-    res.json(car);
-  } catch (error) {
-    res.status(500).json({ message: "Error al buscar auto", error });
-  }
+router.get("/cars/:id", (req, res) => {
+  const { id } = req.params;
+  res.send(`Obteniendo libro con id ${id}`);
 });
 //------------------- Crear un auto nuevo -------------------//
-router.post("/cars", async (req, res) => {
-  try {
-    const newCar = await Car.create(req.body);
-    res.status(201).json(newCar);
-  } catch (error) {
-    res.status(400).json({ message: "Error al crear auto", error });
-  }
+router.post("/cars", (req, res) => {
+  res.send("Creando libro");
 });
 //------------------- Actualizar un auto -------------------//
-router.put("/cars/:id", async (req, res) => {
-  try {
-    const car = await Car.findByPk(req.params.id);
-    if (!car) return res.status(404).json({ message: "Auto no encontrado" });
-
-    await car.update(req.body);
-    res.json(car);
-  } catch (error) {
-    res.status(400).json({ message: "Error al actualizar auto", error });
-  }
+router.put("/cars/:id", (req, res) => {
+  const { id } = req.params;
+  res.send(`Actualizando libro con id ${id}`);
 });
 //------------------- Eliminar un auto -------------------//
-router.delete("/cars/:id", async (req, res) => {
-  try {
-    const car = await Car.findByPk(req.params.id);
-    if (!car) return res.status(404).json({ message: "Auto no encontrado" });
-
-    await car.destroy();
-    res.json({ message: "Auto eliminado correctamente" });
-  } catch (error) {
-    res.status(500).json({ message: "Error al eliminar auto", error });
-  }
+router.delete("/cars/:id", (req, res) => {
+  const { id } = req.params;
+  res.send(`Borrando libro con id ${id}`);
 });
 export default router;
