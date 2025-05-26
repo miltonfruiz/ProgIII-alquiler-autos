@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { Car } from "../src/models/Car.js";
-
+import { carValidation } from "../src/middlewares/carValidation.js";
 const router = Router();
 
-//------------------- Obtener todos los autos -------------------//
+//------------------- Obtener autos -------------------//
 router.get("/cars", async (req, res) => {
   try {
     const cars = await Car.findAll();
@@ -12,7 +12,7 @@ router.get("/cars", async (req, res) => {
     res.status(500).json({ message: "Error al obtener autos", error });
   }
 });
-//------------------- Obtener un auto por ID -------------------//
+//------------------- Obtener auto por ID -------------------//
 router.get("/cars/:id", async (req, res) => {
   try {
     const car = await Car.findByPk(req.params.id);
@@ -22,8 +22,8 @@ router.get("/cars/:id", async (req, res) => {
     res.status(500).json({ message: "Error al buscar auto", error });
   }
 });
-//------------------- Crear un auto nuevo -------------------//
-router.post("/cars", async (req, res) => {
+//------------------- Crear auto -------------------//
+router.post("/cars", carValidation, async (req, res) => {
   try {
     const newCar = await Car.create(req.body);
     res.status(201).json(newCar);
@@ -31,8 +31,8 @@ router.post("/cars", async (req, res) => {
     res.status(400).json({ message: "Error al crear auto", error });
   }
 });
-//------------------- Actualizar un auto -------------------//
-router.put("/cars/:id", async (req, res) => {
+//------------------- Actualizar auto -------------------//
+router.put("/cars/:id", carValidation, async (req, res) => {
   try {
     const car = await Car.findByPk(req.params.id);
     if (!car) return res.status(404).json({ message: "Auto no encontrado" });
@@ -42,7 +42,7 @@ router.put("/cars/:id", async (req, res) => {
     res.status(400).json({ message: "Error al actualizar auto", error });
   }
 });
-//------------------- Eliminar un auto -------------------//
+//------------------- Eliminar auto -------------------//
 router.delete("/cars/:id", async (req, res) => {
   try {
     const car = await Car.findByPk(req.params.id);

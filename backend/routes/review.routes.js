@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { Review } from "../src/models/Review.js";
 import { Car } from "../src/models/Car.js";
+import { reviewValidation } from "../src/middlewares/reviewValidation.js";
 
 const router = Router();
 
 //------------------- Crear comentario -------------------//
-router.post("/reviews", async (req, res) => {
+router.post("/reviews", reviewValidation, async (req, res) => {
   try {
     const { carId, username, rating, comment } = req.body;
     const review = await Review.create({ carId, username, rating, comment });

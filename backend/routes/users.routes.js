@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { User } from "../src/models/User.js";
+import { userValidation } from "../src/middlewares/userValidation.js";
 
 const router = Router();
 
 //------------------- Crear usuario -------------------//
-router.post("/users", async (req, res) => {
+router.post("/users", userValidation, async (req, res) => {
   try {
     const {
       nombre,
