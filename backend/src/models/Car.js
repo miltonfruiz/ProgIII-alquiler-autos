@@ -57,6 +57,11 @@ export const Car = sequelize.define(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    state: {
+      type: DataTypes.ENUM("disponible", "no disponible"),
+      allowNull: false,
+      defaultValue: "disponible",
+    },
   },
   {
     timestamps: false,

@@ -4,26 +4,53 @@ import { Car } from "../src/models/Car.js";
 const router = Router();
 
 //------------------- Obtener todos los autos -------------------//
-router.get("/cars", (req, res) => {
-  res.send("Obteniendo auto");
+router.get("/cars", async (req, res) => {
+  try {
+    const cars = await Car.findAll();
+    res.json(cars);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener autos", error });
+  }
 });
 //------------------- Obtener un auto por ID -------------------//
-router.get("/cars/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`Obteniendo auto con id ${id}`);
+router.get("/cars/:id", async (req, res) => {
+  try {
+    const car = await Car.findByPk(req.params.id);
+    if (!car) return res.status(404).json({ message: "Auto no encontrado" });
+    res.json(car);
+  } catch (error) {
+    res.status(500).json({ message: "Error al buscar auto", error });
+  }
 });
 //------------------- Crear un auto nuevo -------------------//
-router.post("/cars", (req, res) => {
-  res.send("Creando auto");
+router.post("/cars", async (req, res) => {
+  try {
+    const newCar = await Car.create(req.body);
+    res.status(201).json(newCar);
+  } catch (error) {
+    res.status(400).json({ message: "Error al crear auto", error });
+  }
 });
 //------------------- Actualizar un auto -------------------//
-router.put("/cars/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`Actualizando auto con id ${id}`);
+router.put("/cars/:id", async (req, res) => {
+  try {
+    const car = await Car.findByPk(req.params.id);
+    if (!car) return res.status(404).json({ message: "Auto no encontrado" });
+    await car.update(req.body);
+    res.json(car);
+  } catch (error) {
+    res.status(400).json({ message: "Error al actualizar auto", error });
+  }
 });
 //------------------- Eliminar un auto -------------------//
-router.delete("/cars/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`Borrando auto con id ${id}`);
+router.delete("/cars/:id", async (req, res) => {
+  try {
+    const car = await Car.findByPk(req.params.id);
+    if (!car) return res.status(404).json({ message: "Auto no encontrado" });
+    await car.destroy();
+    res.json({ message: "Auto eliminado correctamente" });
+  } catch (error) {
+    res.status(500).json({ message: "Error al eliminar auto", error });
+  }
 });
 export default router;
