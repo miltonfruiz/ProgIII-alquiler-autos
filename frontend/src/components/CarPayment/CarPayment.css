@@ -137,7 +137,7 @@ body.dark .metodoPago {
 body.dark .ingresoTarjeta {
   background-color: #000000;
   outline: solid 1px #ffffff;
-  box-shadow: 10px 10px 5px 1px #ffffff5d;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
 }
 
 .seleccion {
@@ -212,6 +212,12 @@ body.dark .ingresoTarjeta {
   cursor: pointer;
 }
 
+body.dark .cajaTransferenciaBancaria {
+  background-color: #000000;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
+  outline: solid 1px #ffffff;
+}
+
 .labelTarjeta {
   margin: auto;
   margin-left: 1.5rem;
@@ -262,6 +268,10 @@ body.dark .ingresoTarjeta {
   min-height: 10rem;
   box-shadow: 4px 4px 4px 4px rgba(82, 0, 0, 0.541);
   border-radius: 1rem;
+}
+
+body.dark .containerArrastre {
+  background-color: #000000;
 }
 
 .containerArrastre.Activo {

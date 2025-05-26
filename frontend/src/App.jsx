@@ -5,7 +5,6 @@ import PasswordRecover from "./pages/PasswordRecover";
 import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUser";
 import UserProfile from "./pages/UserProfile";
 import { useState } from "react";
-import RegisterForm from "./components/Register/RegisterForm";
 import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 import CarPaymentPage from "./pages/CarPaymentPage";

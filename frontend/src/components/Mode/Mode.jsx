@@ -8,7 +8,7 @@ export const Mode = ({ children }) => {
     return localTheme || "light";
   }); // esto es para que cuando se cargue la pagina se inicialize con el tema que habiamos elegido en el pasado. por defecto light
   useEffect(() => {
-    document.body.className = theme; // le añade al body la classname 'theme'
+    document.body.className = theme; // le añade al body la classname con el valor que posee el useEffect "theme"
     localStorage.setItem("theme", theme); // guarda el valor actual de theme en el localstorage en la clave theme con setItem()
   }, [theme]); // el useEffect se ejecuta cuando cambia theme
   const toggleTheme = () => {
@@ -19,4 +19,4 @@ export const Mode = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(Theme); //
+export const useTheme = () => useContext(Theme); // guardamos el contexto theme en una variable useTheme para que sea usada de esa manera en los componentes que deseemos usarla
