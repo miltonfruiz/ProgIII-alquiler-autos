@@ -111,7 +111,6 @@
   border-radius: 0.7rem;
   margin: 1rem;
   margin-left: 3em;
-  cursor: pointer;
 }
 
 .seleccion {
@@ -183,7 +182,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  cursor: pointer;
 }
 
 .labelTarjeta {
