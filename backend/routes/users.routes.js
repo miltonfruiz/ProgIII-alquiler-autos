@@ -26,7 +26,6 @@ router.post("/users", async (req, res) => {
       nacimiento,
       licencia,
     });
-
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
