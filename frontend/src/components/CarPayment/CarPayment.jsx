@@ -347,7 +347,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             </h3>
             <p className="paso3">Paso 3 de 3</p>
             <div className="seguroDelAuto">
-              <h2 className="tituloSeguro">Seguro del auto</h2>
+              <h2 className="tituloSeguro">🛡️ Seguro del auto</h2>
               <ul>
                 <li className="liSeguroAuto">
                   Todos los autos incluyen un seguro contra terceros.
@@ -359,7 +359,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </ul>
             </div>
             <div className="entregaYdevolucion">
-              <h2 className="tituloEntrega">Entrega y Devolucion</h2>
+              <h2 className="tituloEntrega">🕒 Entrega y Devolucion</h2>
               <ul>
                 <li className="liEntrega">
                   El auto debe devolverse con el mismo nivel de combustible.
@@ -370,7 +370,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </ul>
             </div>
             <div className="requisitosAlRetirar">
-              <h2 className="TituloRequisitos">Requisitos al retirar</h2>
+              <h2 className="TituloRequisitos">📍 Requisitos al retirar</h2>
               <ul>
                 <li className="liRequisitos">
                   Presentar dni y licencia de conducir vigente.

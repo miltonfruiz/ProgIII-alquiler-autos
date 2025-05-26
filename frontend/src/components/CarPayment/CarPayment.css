@@ -36,12 +36,14 @@ body.dark .DatosFacturacion {
 
 .titleDatos {
   margin-left: 1rem;
-  font-size: 24px;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .subtituloDatos {
-  margin-left: 1rem;
-  font-size: 14px;
+  margin: 0.3rem 0 0 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
   color: #90a3bf;
 }
 
@@ -107,11 +109,14 @@ body.dark .metodoPago {
 
 .tituloMetodo {
   margin-left: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .subtituloMetodo {
-  margin-left: 1rem;
-  font-size: 14px;
+  margin: 0.3rem 0 0 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
   color: #90a3bf;
 }
 
@@ -305,11 +310,14 @@ body.dark .infoImportante {
 
 .tituloInfo {
   margin-left: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .subtituloInfo {
-  margin-left: 1rem;
-  font-size: 14px;
+  font-weight: 400;
+  margin: 0.3rem 0 0 1.5rem;
+  font-size: 0.875rem;
   color: #90a3bf;
 }
 
@@ -325,32 +333,39 @@ body.dark .infoImportante {
 .seguroDelAuto {
   width: 60rem;
   border-radius: 0.7rem;
-  margin: 1rem;
+  margin: 2rem 0 0 1rem;
 }
 
 .tituloSeguro {
   margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 .liSeguroAuto {
-  margin: 1rem;
+  margin-left: 2.7rem;
+  font-weight: 500;
 }
 
 .entregaYdevolucion {
-  margin: 1rem;
+  margin: 2rem 0 0 1rem;
 }
 
 .tituloEntrega {
   margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 .liEntrega {
-  margin: 1rem;
+  margin-left: 2.7rem;
+  font-weight: 500;
 }
 
 .cajaAceptoTerminos {
   display: flex;
-  margin-top: 4rem;
+  margin-top: 3rem;
+  margin: 3rem 0 0 2rem;
 }
 
 .aceptoTerminos {
@@ -362,15 +377,18 @@ body.dark .infoImportante {
 .requisitosAlRetirar {
   width: 27rem;
   height: 5rem;
-  margin: 1rem;
+  margin: 2rem 0 0 1rem;
 }
 
 .TituloRequisitos {
   margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 .liRequisitos {
-  margin: 1rem;
+  margin-left: 2.7rem;
+  font-weight: 500;
 }
 
 .aceptoTerminos {
@@ -379,9 +397,6 @@ body.dark .infoImportante {
   border-radius: 0.313;
   border: solid black 0.063;
   margin-right: 0.5rem;
-}
-
-.textoAcepto {
 }
 
 .resumenDeAlquiler {
@@ -400,11 +415,14 @@ body.dark .resumenDeAlquiler {
 
 .tituloResumen {
   margin-left: 1rem;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 
 .subtituloResumen {
-  margin-left: 1rem;
-  font-size: 14px;
+  margin: 0.3rem 0 1.5rem 1.5rem;
+  font-weight: 400;
+  font-size: 0.875rem;
   color: #90a3bf;
 }
 .cajaValoracionAuto {
@@ -459,8 +477,9 @@ body.dark .resumenDeAlquiler {
 .linea {
   width: 27rem;
   height: 0.063rem;
-  border: solid #000000 0.063rem;
-  margin: 1rem;
+  border: solid #d9d9d9 0.1rem;
+  border-radius: 5px;
+  margin: 1rem 0 1rem 0.5rem;
 }
 
 body.dark .linea {
@@ -469,9 +488,9 @@ body.dark .linea {
 
 .tituloSubtotal {
   font-family: "Poppins";
-  font-weight: 500;
+  font-weight: 00;
   font-size: 1.25rem;
-  margin: 0.7rem;
+  margin: 0.75rem 0 0 0.75rem;
   color: #90a3bf;
 }
 
@@ -485,9 +504,9 @@ body.dark .linea {
 
 .tituloImpuestos {
   font-family: "Poppins";
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1.25rem;
-  margin: 0.7rem;
+  margin: 0.3rem 0 0 0.75rem;
   color: #90a3bf;
 }
 
@@ -495,7 +514,7 @@ body.dark .linea {
   font-family: "Poppins";
   font-weight: 500;
   font-size: 1.25rem;
-  margin: 0.7rem;
+  margin: 0.3rem 0 1rem 0.75rem;
   margin-left: 14rem;
 }
 
@@ -503,14 +522,14 @@ body.dark .linea {
   font-family: "Poppins";
   font-weight: 500;
   font-size: 1.25rem;
-  margin: 1rem;
+  margin: 1rem 0 0 1rem;
 }
 
 .subtituloPrecioFinal {
   font-family: "Poppins";
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.875rem;
-  margin: 1rem;
+  margin: 0.3rem 0 0 1.5rem;
   color: #90a3bf;
 }
 
