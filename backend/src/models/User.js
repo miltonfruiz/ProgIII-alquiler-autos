@@ -1,66 +1,57 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-export const Car = sequelize.define(
-  "Car",
+export const User = sequelize.define(
+  "User",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    nombre: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    category: {
+    apellido: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    passengers: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    transmission: {
+    correo: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
-    price: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    brand: {
+    contraseña: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    date: {
+    repetirContraseña: {
+      type: DataTypes.VIRTUAL,
+      allowNull: false,
+      validate: {
+        equalsPassword(value) {
+          if (value !== this.contraseña) {
+            throw new Error("Las contraseñas no coinciden");
+          }
+        },
+      },
+    },
+    dni: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    nacimiento: {
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
-    tax: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    paymentMethod: {
+    licencia: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    billing: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    total: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    state: {
-      type: DataTypes.ENUM("disponible", "no disponible"),
-      allowNull: false,
-      defaultValue: "disponible",
     },
   },
   {
