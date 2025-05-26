@@ -12,6 +12,18 @@ export const Review = sequelize.define(
     carId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "Car",
+        key: "id",
+      },
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "User",
+        key: "id",
+      },
     },
     username: {
       type: DataTypes.STRING,
