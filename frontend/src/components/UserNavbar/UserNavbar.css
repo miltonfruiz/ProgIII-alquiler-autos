@@ -3,8 +3,14 @@
   align-items: center;
   justify-content: space-between;
   background-color: #5e49d8;
-  padding: 2px 24px;
+  padding: 10px 24px;
   color: white;
+
+  /* estilos sosa para navbar Fija en la pagina */
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
 }
 .navbar-left .navbar-logo {
   width: 80px;

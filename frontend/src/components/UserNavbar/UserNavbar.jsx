@@ -76,7 +76,7 @@ export default function UserNavbar() {
             src="/images/logo.png"
             alt="Logo"
             className="navbar-logo"
-            onClick={() => navigate("/testhome")}
+            onClick={() => navigate("/home")}
           />
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function UserNavbar() {
       </div>
       <div className="navbar-right">
         <div className="icon-wrapper">
-          <Link to="/testhome">
+          <Link to="/home">
             <FaHome title="Inicio" className="faHome-icon" />
           </Link>
           <Link to="/reservations">
@@ -101,7 +101,9 @@ export default function UserNavbar() {
               className="BsCalendarDateFill-icon"
             />
           </Link>
-          <Link to="/cars">
+          <Link to="/shop">
+            {" "}
+            {/* cambio link al correcto */}
             <FaCar title="Tienda de Autos" className="faCar-icon" />
           </Link>
           <div className="user-dropdown" ref={dropdownRef}>

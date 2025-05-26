@@ -99,9 +99,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   function handlerClickTransferencia() {
     eleccionTransferRef.current.click();
   }
+  document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
+
   return (
     <div className="contenedorGeneral">
-      <Header></Header>
       <div className="contenedor">
         <div className="contenedorIzquierda">
           <div className="DatosFacturacion">
