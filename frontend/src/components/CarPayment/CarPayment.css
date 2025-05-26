@@ -1,6 +1,11 @@
 .contenedorGeneral {
-  color: #000000;
+  margin: 0;
+  padding: 0;
   height: 1400px;
+}
+
+body.dark .contenedorGeneral {
+  background-color: rgb(37, 32, 32);
 }
 
 .contenedor {
@@ -11,6 +16,10 @@
   height: 100%;
 }
 
+body.dark .contenedor {
+  background-color: rgb(37, 32, 32);
+}
+
 .DatosFacturacion {
   width: 45rem;
   height: 20rem;
@@ -19,6 +28,10 @@
   margin: 1rem;
   padding: 1em;
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
+}
+
+body.dark .DatosFacturacion {
+  background-color: black;
 }
 
 .titleDatos {
@@ -88,6 +101,10 @@
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
 }
 
+body.dark .metodoPago {
+  background-color: #000000;
+}
+
 .tituloMetodo {
   margin-left: 1rem;
 }
@@ -115,6 +132,12 @@
   margin: 1rem;
   margin-left: 3em;
   cursor: pointer;
+}
+
+body.dark .ingresoTarjeta {
+  background-color: #000000;
+  outline: solid 1px #ffffff;
+  box-shadow: 10px 10px 5px 1px #ffffff5d;
 }
 
 .seleccion {
@@ -266,6 +289,10 @@
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
 }
 
+body.dark .infoImportante {
+  background-color: black;
+}
+
 .tituloInfo {
   margin-left: 1rem;
 }
@@ -357,6 +384,10 @@
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
 }
 
+body.dark .resumenDeAlquiler {
+  background-color: black;
+}
+
 .tituloResumen {
   margin-left: 1rem;
 }
@@ -420,6 +451,10 @@
   height: 0.063rem;
   border: solid #000000 0.063rem;
   margin: 1rem;
+}
+
+body.dark .linea {
+  border: solid #ffffff 0.063rem;
 }
 
 .tituloSubtotal {
