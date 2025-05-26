@@ -6,6 +6,7 @@ import "./models/Review.js";
 import "./models/index.js";
 import carsRoutes from "../routes/cars.routes.js";
 import reviewsRoutes from "../routes/review.routes.js";
+import usersRoutes from "../routes/users.routes.js";
 
 const app = express();
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(express.json());
 try {
   app.use(carsRoutes);
   app.use(reviewsRoutes);
+  app.use(usersRoutes);
   await sequelize.sync();
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
