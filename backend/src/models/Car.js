@@ -59,6 +59,6 @@ export const Car = sequelize.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
