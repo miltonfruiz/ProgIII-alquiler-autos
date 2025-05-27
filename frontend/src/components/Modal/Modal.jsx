@@ -52,6 +52,17 @@ function Modal({ auto, onClose }) {
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
     }
+
+    //AQUI GUARDO LOS DATOS DEL AUTO PARA PASARLO AL CARPAYMENT
+    const datosAlquiler = {
+      auto: auto,
+      fecha_inicio: formData.fecha_inicio,
+      fecha_fin: formData.fecha_fin,
+      total: calcularTotal(),
+    };
+
+    localStorage.setItem("datosAlquiler", JSON.stringify(datosAlquiler));
+
     toast.success("¡Fechas seleccionadas correctamente!");
     setErrores({});
     // setRegisterIn(true);

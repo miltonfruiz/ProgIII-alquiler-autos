@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./RentNow.module.css";
-import rentCars from "../../../assets/rentCars.png";
+import rentCars from "../../../../public/images/rentCars.png";
 import { useNavigate } from "react-router-dom";
 
 function RentNow({ loggedIn }) {

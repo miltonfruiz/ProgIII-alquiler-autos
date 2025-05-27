@@ -91,6 +91,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
 
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
+  //LOS DATOS DEL ALQUILER VIENEN DEL MODAL
+  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
   return (
     <div className="contenedorGeneral">
       <div className="contenedor">
@@ -386,11 +388,11 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             <div className="cajaValoracionAuto">
               <img
                 className="imagenResumen"
-                src="public\images\camionetaCarPayment.png"
+                src={datosAlquiler?.auto.image}
                 alt=""
               />
               <div className="cajaExtrellasNombre">
-                <p className="nombreAutos">Volkswagen T-Cross</p>
+                <p className="nombreAutos">{datosAlquiler?.auto.name}</p>
                 <div className="valoracionResumen">
                   <FaStar className="estrella" />
                   <FaStar className="estrella" />
@@ -405,7 +407,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             <div className="linea"></div>
             <div className="cajaSubtotal">
               <p className="tituloSubtotal">Subtotal</p>
-              <p className="subtotal">$290.000</p>
+              <p className="subtotal">
+                ${datosAlquiler?.total.toLocaleString()}
+              </p>
             </div>
             <div className="cajaImpuestos">
               <p className="tituloImpuestos">Impuestos</p>
@@ -419,7 +423,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                 </h3>
               </div>
 
-              <p className="precioFinal">$324.000</p>
+              <p className="precioFinal">
+                ${(datosAlquiler?.total + 34000).toLocaleString()}
+              </p>
             </div>
           </div>
         </aside>
