@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CarsAdmin.css";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaEdit, FaClipboardList } from "react-icons/fa";
 
 const CarsAdmin = () => {
   const [cars, setCars] = useState([]);
@@ -16,7 +18,7 @@ const CarsAdmin = () => {
     paymentMethod: "",
     billing: "",
     total: 0,
-    status: "disponible",
+    state: "Disponible",
   });
   useEffect(() => {
     fetch("http://localhost:3000/cars")
@@ -58,18 +60,20 @@ const CarsAdmin = () => {
         paymentMethod: "",
         billing: "",
         total: 0,
-        status: "disponible",
+        state: "Disponible",
       });
     } catch (error) {
       console.error("Error al crear auto:", error);
     }
   };
-
   return (
     <div className="admin-cars-container">
-      <h2>Lista de Autos</h2>
+      <h2 className="admin-h2-text">
+        <FaClipboardList /> Lista de Autos
+      </h2>
+
       <table>
-        <thead>
+        <thead className="admin-thead">
           <tr>
             <th>Nombre</th>
             <th>Categoría</th>
@@ -83,27 +87,40 @@ const CarsAdmin = () => {
         </thead>
         <tbody>
           {cars.map((car) => (
-            <tr key={car.id}>
-              <td>{car.name}</td>
-              <td>{car.category}</td>
-              <td>${car.price}</td>
-              <td>{car.transmission}</td>
-              <td>{car.passengers}</td>
-              <td>{car.brand}</td>
-              <td>{car.status}</td>
-              <td>
-                <button onClick={() => handleDelete(car.id)}>Eliminar</button>
-                <button
-                  onClick={() => alert("Funcionalidad editar en desarrollo")}
-                >
-                  Editar
-                </button>
-              </td>
-            </tr>
+            <>
+              <tr key={car.id} className="administration-row">
+                <td>{car.name}</td>
+                <td>{car.category}</td>
+                <td>${car.price}</td>
+                <td>{car.transmission}</td>
+                <td>{car.passengers}</td>
+                <td>{car.brand}</td>
+                <td>{car.state}</td>
+                <td className="button-actions">
+                  <button
+                    className="administration-button-edit"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert("Funcionalidad editar en desarrollo");
+                    }}
+                  >
+                    <FaEdit className="adm-icon-edit" /> Editar
+                  </button>
+                  <button
+                    className="administration-button-delete"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(car.id);
+                    }}
+                  >
+                    <RiDeleteBin6Line className="adm-icon-delete" /> Eliminar
+                  </button>
+                </td>
+              </tr>
+            </>
           ))}
         </tbody>
       </table>
-
       <h2>Crear nuevo auto</h2>
       <form onSubmit={handleCreate} className="car-form">
         <input

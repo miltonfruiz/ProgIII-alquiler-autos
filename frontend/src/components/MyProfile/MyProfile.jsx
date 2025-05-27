@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import "./MyProfile.css";
-import { FiEdit } from "react-icons/fi";
 import { ImProfile } from "react-icons/im";
 import { FaSignature } from "react-icons/fa6";
 import { MdDateRange, MdCancel } from "react-icons/md";
