@@ -8,12 +8,19 @@ import { IoCard } from "react-icons/io5";
 import { useState } from "react";
 import "./CarPayment.css";
 
-const CarPayment = ({ onSubmit, errores, refs }) => {
+const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
     nombre: "",
     apellido: "",
     numeroTelefonico: "",
     dni: "",
+  });
+
+  const [datosTarjeta, setDatosTarjeta] = useState({
+    numeroTarjeta: "",
+    fechaTarjeta: "",
+    nombreTarjeta: "",
+    cvc: "",
   });
 
   const [imgTarjetas, setImgTarjetas] = useState("visa");
@@ -23,7 +30,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
 
   const [file, setFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
-
+  const [choicePayment, setChoicePayment] = useState(false);
   const inputRef = useRef(null);
 
   const eleccionTarjetaRef = useRef(null);
@@ -36,9 +43,22 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     });
   }
 
+  function handlerDatosTarjeta(e) {
+    setDatosTarjeta({
+      ...datosTarjeta,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   function handlerSubmit(e) {
     e.preventDefault();
     onSubmit(datosFacturacion);
+    onChoice(choicePayment);
+    if (choicePayment == "tarjeta") {
+      onDataPayment(datosTarjeta);
+    } else if (choicePayment == "transferencia") {
+      onDataPayment(file);
+    }
   }
 
   function handlerDragOver(e) {
@@ -53,13 +73,15 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   function handlerDrop(e) {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    setFile(file);
+    setFile((prevFile) => file);
+    console.log(file);
   }
 
   function handlerSeleccion(e) {
     if (e.target.files[0]) {
-      setFile(e.target.files[0]);
+      setFile((prevFile) => e.target.files[0]);
     }
+    console.log(file);
   }
 
   function handlerTarjeta(e) {
@@ -94,10 +116,12 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
 
   function handlerClickTarjeta() {
     eleccionTarjetaRef.current.click();
+    setChoicePayment(() => "tarjeta");
   }
 
   function handlerClickTransferencia() {
     eleccionTransferRef.current.click();
+    setChoicePayment(() => "transferencia");
   }
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
@@ -235,40 +259,77 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   )}
                   <div className="gridDatosTarjeta">
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        Numero de Tarjeta
-                      </label>
-                      <input
-                        type="text"
-                        className="inputMetodo"
-                        placeholder="Numero de tarjeta"
-                      />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          Numero de Tarjeta
+                        </label>
+                        <input
+                          type="text"
+                          className="inputMetodo"
+                          placeholder="Numero de tarjeta"
+                          name="numeroTarjeta"
+                          value={datosTarjeta.numeroTarjeta}
+                          onChange={handlerDatosTarjeta}
+                        />
+                      </div>
+
+                      {errores.numeroTarjeta && (
+                        <p className="error">{errores.numeroTarjeta}</p>
+                      )}
                     </div>
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        Fecha de Expiracion
-                      </label>
-                      <input type="date" className="inputMetodo" />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          Fecha de Expiracion
+                        </label>
+                        <input
+                          type="date"
+                          className="inputMetodo"
+                          name="fechaTarjeta"
+                          value={datosTarjeta.fechaTarjeta}
+                          onChange={handlerDatosTarjeta}
+                        />
+                      </div>
+
+                      {errores.fechaTarjeta && (
+                        <p className="error">{errores.fechaTarjeta}</p>
+                      )}
                     </div>
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        Nombre del titular
-                      </label>
-                      <input
-                        type="text"
-                        className="inputMetodo"
-                        placeholder="Nombre completo"
-                      />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          Nombre del titular
+                        </label>
+                        <input
+                          type="text"
+                          className="inputMetodo"
+                          placeholder="Nombre completo"
+                          name="nombreTarjeta"
+                          value={datosTarjeta.nombreTarjeta}
+                          onChange={handlerDatosTarjeta}
+                        />
+                      </div>
+
+                      {errores.nombreTarjeta && (
+                        <p className="error">{errores.nombreTarjeta}</p>
+                      )}
                     </div>
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        CVC
-                      </label>
-                      <input
-                        type="text"
-                        className="inputMetodo"
-                        placeholder="CVC"
-                      />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          CVC
+                        </label>
+                        <input
+                          type="text"
+                          className="inputMetodo"
+                          placeholder="CVC"
+                          name="cvc"
+                          value={datosTarjeta.cvc}
+                          onChange={handlerDatosTarjeta}
+                        />
+                      </div>
+
+                      {errores.cvc && <p className="error">{errores.cvc}</p>}
                     </div>
                   </div>
                 </div>
@@ -336,9 +397,13 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                       Seleccione un archivo
                     </button>
                   </div>
+                  {errores.noComprobante && (
+                    <p className="error">{errores.noComprobante}</p>
+                  )}
                 </div>
               )}
             </div>
+            {errores.noChoice && <p className="error">{errores.noChoice}</p>}
           </div>
           <div className="infoImportante">
             <h2 className="tituloInfo">Informacion Importante</h2>

@@ -1,4 +1,4 @@
-const CarPaymentValidation = ({ datosFacturacion }) => {
+export const CarPaymentValidation = ({ datosFacturacion }) => {
   const errores = {};
 
   if (!datosFacturacion.nombre?.trim()) {
@@ -21,7 +21,7 @@ const CarPaymentValidation = ({ datosFacturacion }) => {
 
   if (!datosFacturacion?.dni.trim()) {
     errores.dni = "* debe ingresar su dni";
-  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datos.dni)) {
+  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datosFacturacion.dni)) {
     errores.dni = "* ingrese un dni valido";
   }
 
