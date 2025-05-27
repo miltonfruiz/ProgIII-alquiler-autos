@@ -8,7 +8,16 @@ import { IoCard } from "react-icons/io5";
 import { useState } from "react";
 import "./CarPayment.css";
 
-const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
+const CarPayment = ({
+  onSubmit,
+  onChoice,
+  onDataPayment,
+  errores,
+  cardErrors,
+  voucherErrors,
+  choiceErrors,
+  refs,
+}) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
     nombre: "",
     apellido: "",
@@ -28,7 +37,7 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [choicePayment, setChoicePayment] = useState(false);
   const inputRef = useRef(null);
@@ -74,14 +83,12 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     setFile((prevFile) => file);
-    console.log(file);
   }
 
   function handlerSeleccion(e) {
     if (e.target.files[0]) {
       setFile((prevFile) => e.target.files[0]);
     }
-    console.log(file);
   }
 
   function handlerTarjeta(e) {
@@ -273,8 +280,8 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
                         />
                       </div>
 
-                      {errores.numeroTarjeta && (
-                        <p className="error">{errores.numeroTarjeta}</p>
+                      {cardErrors.numeroTarjeta && (
+                        <p className="error">{cardErrors.numeroTarjeta}</p>
                       )}
                     </div>
                     <div className="cajaInputTarjeta">
@@ -291,8 +298,8 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
                         />
                       </div>
 
-                      {errores.fechaTarjeta && (
-                        <p className="error">{errores.fechaTarjeta}</p>
+                      {cardErrors.fechaTarjeta && (
+                        <p className="error">{cardErrors.fechaTarjeta}</p>
                       )}
                     </div>
                     <div className="cajaInputTarjeta">
@@ -310,8 +317,8 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
                         />
                       </div>
 
-                      {errores.nombreTarjeta && (
-                        <p className="error">{errores.nombreTarjeta}</p>
+                      {cardErrors.nombreTarjeta && (
+                        <p className="error">{cardErrors.nombreTarjeta}</p>
                       )}
                     </div>
                     <div className="cajaInputTarjeta">
@@ -329,7 +336,9 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
                         />
                       </div>
 
-                      {errores.cvc && <p className="error">{errores.cvc}</p>}
+                      {cardErrors.cvc && (
+                        <p className="error">{cardErrors.cvc}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -397,13 +406,11 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
                       Seleccione un archivo
                     </button>
                   </div>
-                  {errores.noComprobante && (
-                    <p className="error">{errores.noComprobante}</p>
-                  )}
+                  {voucherErrors && <p className="error">{voucherErrors}</p>}
                 </div>
               )}
             </div>
-            {errores.noChoice && <p className="error">{errores.noChoice}</p>}
+            {choiceErrors && <p className="error">{choiceErrors}</p>}
           </div>
           <div className="infoImportante">
             <h2 className="tituloInfo">Informacion Importante</h2>
@@ -448,10 +455,10 @@ const CarPayment = ({ onSubmit, onChoice, onDataPayment, errores, refs }) => {
               <p className="textoAcepto">Acepto Terminos y condiciones</p>
             </div>
           </div>
-          <button type="submit" className="botonRentar" onClick={handlerSubmit}>
+          <button type="button" className="botonRentar" onClick={handlerSubmit}>
             Rentar ahora
           </button>
-          <button type="submit" className="botonCancelar">
+          <button type="button" className="botonCancelar">
             Cancelar
           </button>
         </div>

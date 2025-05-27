@@ -8,6 +8,12 @@ import { CarPaymentCardValidation } from "../components/CarPaymentCardValidation
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({}); // los errores tienen que estar todos separados porque si no cuando los limpiamos hay inconsistencias
 
+  const [cardErrors, setCardErrors] = useState({});
+
+  const [voucherErrors, setvoucherErrors] = useState("");
+
+  const [choiceErrors, setchoiceErrors] = useState("");
+
   const nombreRef = useRef(null);
   const apellidoRef = useRef(null);
   const numeroTelefonicoRef = useRef(null);
@@ -43,7 +49,10 @@ const CarPaymentPage = () => {
   }
 
   function pasarDatosTarjeta(datos) {
+    // el problema esta en que no se cambia el valor de dataPayment
+    console.log(datos); // datos se esta pasando correctamente. tanto para transferencia como para el formulario
     setDataPayment(() => datos);
+    console.log(dataPayment);
   }
 
   function handlerPaymentChoice(choicePayment) {
@@ -64,82 +73,41 @@ const CarPaymentPage = () => {
           if (cardErrors.cvc && cvcRef.current) {
             cvcRef.current.focus();
           }
-          setErrores((errores) => ({
-            ...errores,
-            ...cardErrors,
-          }));
 
-          setErrores((errores) => ({
-            ...errores,
-            ["noChoice"]: "",
-          }));
-          setErrores((errores) => ({
-            ...errores,
-            ["noComprobante"]: "",
-          }));
+          setchoiceErrors("");
+
+          setvoucherErrors("");
+
+          setCardErrors(cardErrors);
         } else {
-          cardErrors.forEach((key) => {
-            key = "";
-          });
-
-          setErrores((errores) => ({
-            ...errores,
-            ...cardErrors,
-          }));
+          setCardErrors({});
 
           // aca iria un  reactToatify
         }
       } else if (choicePayment == "transferencia") {
         if (Object.keys(dataPayment).length == 0) {
-          setErrores((errores) => ({
-            ...errores,
-            ["noComprobante"]:
-              "* debe ingresar el comprobante de pago para poder efectuar el pago",
-          }));
+          setchoiceErrors("");
 
-          setErrores((errores) => ({
-            ...errores,
-            ["noChoice"]: "",
-          }));
+          setCardErrors({});
 
-          cardErrors.forEach((key) => {
-            key = "";
-          });
-
-          setErrores((errores) => ({
-            ...errores,
-            ...cardErrors,
-          }));
+          setvoucherErrors(
+            "* debe ingresar el comprobante de pago para poder efectuar el pago"
+          );
         } else {
-          errores.forEach((key) => {
-            key = "";
-          });
+          setvoucherErrors(() => "");
 
-          setErrores((errores) => ({
-            ...errores,
-          }));
+          setchoiceErrors("");
+
+          setCardErrors({});
           // aca iria un reactToastify
         }
       }
     } else {
-      setErrores((errores) => ({
-        ...errores,
-        ["noChoice"]: "* elija un metodo de pago para poder pagar",
-      }));
+      setvoucherErrors("");
 
-      setErrores((errores) => ({
-        ...errores,
-        ["noComprobante"]: "",
-      }));
+      setCardErrors({});
 
-      cardErrors.forEach((key) => {
-        key = "";
-      });
-
-      setErrores((errores) => ({
-        ...errores,
-        ...cardErrors,
-      }));
+      setchoiceErrors("* elija un metodo de pago para poder pagar");
     }
   }
 
@@ -151,6 +119,9 @@ const CarPaymentPage = () => {
         onChoice={handlerPaymentChoice}
         onDataPayment={pasarDatosTarjeta}
         errores={errores}
+        cardErrors={cardErrors}
+        voucherErrors={voucherErrors}
+        choiceErrors={choiceErrors}
         refs={{ nombreRef, apellidoRef, numeroTelefonicoRef, dniRef }}
       />
     </div>
