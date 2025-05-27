@@ -21,12 +21,15 @@ const CarsAdmin = () => {
   useEffect(() => {
     fetch("http://localhost:3000/cars")
       .then((res) => res.json())
-      .then((data) => setCars(data))
+      .then((data) => setCars([...data]))
       .catch((err) => console.error("Error al traer autos:", err));
   }, []);
+
   const handleDelete = async (id) => {
     try {
-      await fetch(`/cars/${id}`, { method: "DELETE" });
+      await fetch(`http://localhost:3000/cars/${id}`, {
+        method: "DELETE",
+      });
       setCars(cars.filter((car) => car.id !== id));
     } catch (error) {
       console.error("Error al eliminar auto:", error);
@@ -35,7 +38,7 @@ const CarsAdmin = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/cars", {
+      const res = await fetch("http://localhost:3000/cars", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCar),
