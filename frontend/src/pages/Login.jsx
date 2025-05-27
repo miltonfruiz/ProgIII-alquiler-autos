@@ -26,11 +26,25 @@ const Login = ({ setLogged }) => {
       toast.success("¡Usuario ingresado correctamente!");
       setErrores({});
       setLogged(true);
+
       setTimeout(() => {
-        navigate("/home");
-      }, 3000);
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify({ email: FormData.email, password: FormData.password })
+        );
+
+        if (
+          FormData.email.trim() === "admin@test.com" &&
+          FormData.password.trim() === "admin123"
+        ) {
+          navigate("/administration");
+        } else {
+          navigate("/login");
+        }
+      }, 2000);
     }
   };
+
   return (
     <div className="login-page">
       <UserNavbar />

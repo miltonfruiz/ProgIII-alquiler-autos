@@ -1,7 +1,7 @@
 export function adminValidation(req, res, next) {
-  const { usuario, contraseña } = req.body;
+  const { correo, contraseña } = req.body;
 
-  if (usuario === "admin" && contraseña === "admin") {
+  if (correo === "admin@test.com" && contraseña === "admin123") {
     next();
   } else {
     res
