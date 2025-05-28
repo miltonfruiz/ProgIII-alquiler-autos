@@ -18,6 +18,9 @@ import Modal from "./components/Modal/Modal";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import Landing from "./pages/Landing";
+import Administration from "./pages/Administration";
+import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRouteAdmin";
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
@@ -26,6 +29,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Login setLogged={setLoggedIn} />} />
+        <Route path="/login" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/password-recover" element={<PasswordRecover />} />
         <Route
           path="/register"
@@ -47,6 +51,15 @@ function App() {
         />
         <Route path="/shop" element={<Shop />} />
         <Route path="/landing" element={<Landing></Landing>} />
+        <Route
+          path="/administration"
+          element={
+            <ProtectedRouteAdmin>
+              {" "}
+              <Administration />{" "}
+            </ProtectedRouteAdmin>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
