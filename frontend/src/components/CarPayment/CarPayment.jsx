@@ -8,16 +8,7 @@ import { IoCard } from "react-icons/io5";
 import { useState } from "react";
 import "./CarPayment.css";
 
-const CarPayment = ({
-  onSubmit,
-  onChoice,
-  onDataPayment,
-  errores,
-  cardErrors,
-  voucherErrors,
-  choiceErrors,
-  refs,
-}) => {
+const CarPayment = ({ onSubmit, errores, refs }) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
     nombre: "",
     apellido: "",
@@ -61,12 +52,11 @@ const CarPayment = ({
 
   function handlerSubmit(e) {
     e.preventDefault();
-    onSubmit(datosFacturacion);
-    onChoice(choicePayment);
-    if (choicePayment == "tarjeta") {
-      onDataPayment(datosTarjeta);
+
+    if (choicePayment == "tarjeta" || !choicePayment) {
+      onSubmit(datosFacturacion, datosTarjeta, choicePayment);
     } else if (choicePayment == "transferencia") {
-      onDataPayment(file);
+      onSubmit(datosFacturacion, file, choicePayment);
     }
   }
 
@@ -122,13 +112,13 @@ const CarPayment = ({
   }
 
   function handlerClickTarjeta() {
-    eleccionTarjetaRef.current.click();
     setChoicePayment(() => "tarjeta");
+    eleccionTarjetaRef.current.click();
   }
 
   function handlerClickTransferencia() {
-    eleccionTransferRef.current.click();
     setChoicePayment(() => "transferencia");
+    eleccionTransferRef.current.click();
   }
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
@@ -277,11 +267,12 @@ const CarPayment = ({
                           name="numeroTarjeta"
                           value={datosTarjeta.numeroTarjeta}
                           onChange={handlerDatosTarjeta}
+                          ref={refs.numeroTarjetaRef}
                         />
                       </div>
 
-                      {cardErrors.numeroTarjeta && (
-                        <p className="error">{cardErrors.numeroTarjeta}</p>
+                      {errores.numeroTarjeta && (
+                        <p className="error">{errores.numeroTarjeta}</p>
                       )}
                     </div>
                     <div className="cajaInputTarjeta">
@@ -295,11 +286,12 @@ const CarPayment = ({
                           name="fechaTarjeta"
                           value={datosTarjeta.fechaTarjeta}
                           onChange={handlerDatosTarjeta}
+                          ref={refs.fechaTarjetaRef}
                         />
                       </div>
 
-                      {cardErrors.fechaTarjeta && (
-                        <p className="error">{cardErrors.fechaTarjeta}</p>
+                      {errores.fechaTarjeta && (
+                        <p className="error">{errores.fechaTarjeta}</p>
                       )}
                     </div>
                     <div className="cajaInputTarjeta">
@@ -314,11 +306,12 @@ const CarPayment = ({
                           name="nombreTarjeta"
                           value={datosTarjeta.nombreTarjeta}
                           onChange={handlerDatosTarjeta}
+                          ref={refs.nombreTarjetaRef}
                         />
                       </div>
 
-                      {cardErrors.nombreTarjeta && (
-                        <p className="error">{cardErrors.nombreTarjeta}</p>
+                      {errores.nombreTarjeta && (
+                        <p className="error">{errores.nombreTarjeta}</p>
                       )}
                     </div>
                     <div className="cajaInputTarjeta">
@@ -333,12 +326,11 @@ const CarPayment = ({
                           name="cvc"
                           value={datosTarjeta.cvc}
                           onChange={handlerDatosTarjeta}
+                          ref={refs.cvcRef}
                         />
                       </div>
 
-                      {cardErrors.cvc && (
-                        <p className="error">{cardErrors.cvc}</p>
-                      )}
+                      {errores.cvc && <p className="error">{errores.cvc}</p>}
                     </div>
                   </div>
                 </div>
@@ -348,8 +340,14 @@ const CarPayment = ({
             <div
               className="cajaTransferenciaBancaria"
               onClick={handlerClickTransferencia}
+              tabIndex={-1}
+              ref={refs.errorEleccionRef}
             >
-              <div className="containterEleccionTransfer">
+              <div
+                className="containterEleccionTransfer"
+                ref={refs.comprobanteRef}
+                tabIndex={-1}
+              >
                 <input
                   type="radio"
                   name="opcion"
@@ -406,11 +404,15 @@ const CarPayment = ({
                       Seleccione un archivo
                     </button>
                   </div>
-                  {voucherErrors && <p className="error">{voucherErrors}</p>}
+                  {errores.comprobante && (
+                    <p className="error">{errores.comprobante}</p>
+                  )}
                 </div>
               )}
             </div>
-            {choiceErrors && <p className="error">{choiceErrors}</p>}
+            {errores.errorEleccion && (
+              <p className="error">{errores.errorEleccion}</p>
+            )}
           </div>
           <div className="infoImportante">
             <h2 className="tituloInfo">Informacion Importante</h2>

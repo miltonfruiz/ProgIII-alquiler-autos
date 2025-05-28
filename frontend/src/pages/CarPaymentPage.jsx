@@ -1,33 +1,34 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import CarPayment from "../components/CarPayment/CarPayment";
 import CarPaymentValidation from "../components/CarPaymentValidation/CarPaymentValidation";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
-import { CarPaymentCardValidation } from "../components/CarPaymentCardValidation/CarPaymentCardValidation";
+import { CiNoWaitingSign } from "react-icons/ci";
 
 const CarPaymentPage = () => {
-  const [errores, setErrores] = useState({}); // los errores tienen que estar todos separados porque si no cuando los limpiamos hay inconsistencias
-
-  const [cardErrors, setCardErrors] = useState({});
-
-  const [voucherErrors, setvoucherErrors] = useState("");
-
-  const [choiceErrors, setchoiceErrors] = useState("");
+  const [errores, setErrores] = useState({});
 
   const nombreRef = useRef(null);
   const apellidoRef = useRef(null);
   const numeroTelefonicoRef = useRef(null);
   const dniRef = useRef(null);
 
+  const errorEleccionRef = useRef(null);
   const numeroTarjetaRef = useRef(null);
   const fechaTarjetaRef = useRef(null);
   const nombreTarjetaRef = useRef(null);
   const cvcRef = useRef(null);
+  const comprobanteRef = useRef(null);
 
-  const [dataPayment, setDataPayment] = useState({});
-
-  function handlerSubmit(datosFacturacion) {
-    const errores = CarPaymentValidation({ datosFacturacion });
+  function handlerSubmit(datosFacturacion, datosPago, choicePayment) {
+    console.log(datosFacturacion);
+    console.log(datosPago);
+    console.log(choicePayment);
+    const errores = CarPaymentValidation({
+      datosFacturacion,
+      datosPago,
+      choicePayment,
+    });
 
     if (Object.keys(errores).length > 0) {
       if (errores.nombre && nombreRef.current) {
@@ -42,72 +43,28 @@ const CarPaymentPage = () => {
       if (errores.dni && dniRef.current) {
         dniRef.current.focus();
       }
+      if (errores.errorEleccion && errorEleccionRef.current) {
+        errorEleccionRef.current.focus();
+      }
+      if (errores.numeroTarjeta && numeroTarjetaRef.current) {
+        numeroTarjetaRef.current.focus();
+      }
+      if (errores.fechaTarjeta && fechaTarjetaRef.current) {
+        fechaTarjetaRef.current.focus();
+      }
+      if (errores.nombreTarjeta && nombreTarjetaRef.current) {
+        nombreTarjetaRef.current.focus();
+      }
+      if (errores.cvc && cvcRef.current) {
+        cvcRef.current.focus();
+      }
+      if (errores.comprobante && comprobanteRef.current) {
+        comprobanteRef.current.focus();
+      }
+
       setErrores(() => errores);
     } else {
       setErrores({});
-    }
-  }
-
-  function pasarDatosTarjeta(datos) {
-    // el problema esta en que no se cambia el valor de dataPayment
-    console.log(datos); // datos se esta pasando correctamente. tanto para transferencia como para el formulario
-    setDataPayment(() => datos);
-    console.log(dataPayment);
-  }
-
-  function handlerPaymentChoice(choicePayment) {
-    if (choicePayment) {
-      if (choicePayment == "tarjeta") {
-        const cardErrors = CarPaymentCardValidation({ dataPayment });
-
-        if (Object.keys(cardErrors).length > 0) {
-          if (cardErrors.numeroTarjeta && numeroTarjetaRef.current) {
-            numeroTarjetaRef.current.focus();
-          }
-          if (cardErrors.fechaTarjeta && fechaTarjetaRef.current) {
-            fechaTarjetaRef.current.focus();
-          }
-          if (cardErrors.nombreTarjeta && nombreTarjetaRef.current) {
-            nombreTarjetaRef.current.focus();
-          }
-          if (cardErrors.cvc && cvcRef.current) {
-            cvcRef.current.focus();
-          }
-
-          setchoiceErrors("");
-
-          setvoucherErrors("");
-
-          setCardErrors(cardErrors);
-        } else {
-          setCardErrors({});
-
-          // aca iria un  reactToatify
-        }
-      } else if (choicePayment == "transferencia") {
-        if (Object.keys(dataPayment).length == 0) {
-          setchoiceErrors("");
-
-          setCardErrors({});
-
-          setvoucherErrors(
-            "* debe ingresar el comprobante de pago para poder efectuar el pago"
-          );
-        } else {
-          setvoucherErrors(() => "");
-
-          setchoiceErrors("");
-
-          setCardErrors({});
-          // aca iria un reactToastify
-        }
-      }
-    } else {
-      setvoucherErrors("");
-
-      setCardErrors({});
-
-      setchoiceErrors("* elija un metodo de pago para poder pagar");
     }
   }
 
@@ -116,13 +73,19 @@ const CarPaymentPage = () => {
       <UserNavbar />
       <CarPayment
         onSubmit={handlerSubmit}
-        onChoice={handlerPaymentChoice}
-        onDataPayment={pasarDatosTarjeta}
         errores={errores}
-        cardErrors={cardErrors}
-        voucherErrors={voucherErrors}
-        choiceErrors={choiceErrors}
-        refs={{ nombreRef, apellidoRef, numeroTelefonicoRef, dniRef }}
+        refs={{
+          nombreRef,
+          apellidoRef,
+          numeroTelefonicoRef,
+          dniRef,
+          errorEleccionRef,
+          numeroTarjetaRef,
+          fechaTarjetaRef,
+          nombreTarjetaRef,
+          cvcRef,
+          comprobanteRef,
+        }}
       />
     </div>
   );
