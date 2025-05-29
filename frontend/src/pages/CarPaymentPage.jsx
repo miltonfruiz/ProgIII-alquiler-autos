@@ -4,6 +4,7 @@ import CarPaymentValidation from "../components/CarPaymentValidation/CarPaymentV
 import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
 import { CiNoWaitingSign } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
 
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
@@ -21,6 +22,19 @@ const CarPaymentPage = () => {
     comprobanteRef: useRef(null),
   };
 
+  const arrayErrores = [
+    "nombre",
+    "apellido",
+    "numeroTelefonico",
+    "dni",
+    "errorEleccion",
+    "numeroTarjeta",
+    "fechaTarjeta",
+    "nombreTarjeta",
+    "cvc",
+    "comprobante",
+  ];
+
   function handlerSubmit(datosFacturacion, datosPago, choicePayment) {
     const errores = CarPaymentValidation({
       datosFacturacion,
@@ -29,39 +43,16 @@ const CarPaymentPage = () => {
     });
 
     if (Object.keys(errores).length > 0) {
-      if (errores.nombre && useRefs[nombreRef].current) {
-        nombreRef.current.focus();
-      }
-      if (errores.apellido && useRefs[apellidoRef].current) {
-        apellidoRef.current.focus();
-      }
-      if (errores.numeroTelefonico && useRefs[numeroTelefonicoRef].current) {
-        numeroTelefonicoRef.current.focus();
-      }
-      if (errores.dni && dniRef.current) {
-        dniRef.current.focus();
-      }
-      if (errores.errorEleccion && useRefs[errorEleccionRef].current) {
-        errorEleccionRef.current.focus();
-      }
-      if (errores.numeroTarjeta && useRefs[numeroTarjetaRef].current) {
-        numeroTarjetaRef.current.focus();
-      }
-      if (errores.fechaTarjeta && useRefs[fechaTarjetaRef].current) {
-        fechaTarjetaRef.current.focus();
-      }
-      if (errores.nombreTarjeta && useRefs[nombreTarjetaRef].current) {
-        nombreTarjetaRef.current.focus();
-      }
-      if (errores.cvc && cvcRef.current) {
-        cvcRef.current.focus();
-      }
-      if (errores.comprobante && useRefs[comprobanteRef].current) {
-        comprobanteRef.current.focus();
-      }
+      arrayErrores.forEach((error) => {
+        const keyRef = `${error}Ref`;
+        if (errores[error] && useRefs[keyRef].current) {
+          useRefs[keyRef].current.focus();
+        }
+      });
 
-      setErrores(() => errores);
+      setErrores(errores);
     } else {
+      toast.success("¡auto rentado!");
       setErrores({});
     }
   }
@@ -76,6 +67,7 @@ const CarPaymentPage = () => {
           useRefs,
         }}
       />
+      <ToastContainer position="top-right" autoClose={4000}></ToastContainer>
     </div>
   );
 };
