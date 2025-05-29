@@ -29,34 +29,34 @@ const CarPaymentPage = () => {
     });
 
     if (Object.keys(errores).length > 0) {
-      if (errores.nombre && nombreRef.current) {
+      if (errores.nombre && useRefs[nombreRef].current) {
         nombreRef.current.focus();
       }
-      if (errores.apellido && apellidoRef.current) {
+      if (errores.apellido && useRefs[apellidoRef].current) {
         apellidoRef.current.focus();
       }
-      if (errores.numeroTelefonico && numeroTelefonicoRef.current) {
+      if (errores.numeroTelefonico && useRefs[numeroTelefonicoRef].current) {
         numeroTelefonicoRef.current.focus();
       }
       if (errores.dni && dniRef.current) {
         dniRef.current.focus();
       }
-      if (errores.errorEleccion && errorEleccionRef.current) {
+      if (errores.errorEleccion && useRefs[errorEleccionRef].current) {
         errorEleccionRef.current.focus();
       }
-      if (errores.numeroTarjeta && numeroTarjetaRef.current) {
+      if (errores.numeroTarjeta && useRefs[numeroTarjetaRef].current) {
         numeroTarjetaRef.current.focus();
       }
-      if (errores.fechaTarjeta && fechaTarjetaRef.current) {
+      if (errores.fechaTarjeta && useRefs[fechaTarjetaRef].current) {
         fechaTarjetaRef.current.focus();
       }
-      if (errores.nombreTarjeta && nombreTarjetaRef.current) {
+      if (errores.nombreTarjeta && useRefs[nombreTarjetaRef].current) {
         nombreTarjetaRef.current.focus();
       }
       if (errores.cvc && cvcRef.current) {
         cvcRef.current.focus();
       }
-      if (errores.comprobante && comprobanteRef.current) {
+      if (errores.comprobante && useRefs[comprobanteRef].current) {
         comprobanteRef.current.focus();
       }
 
