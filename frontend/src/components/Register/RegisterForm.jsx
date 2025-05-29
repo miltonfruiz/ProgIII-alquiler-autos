@@ -243,7 +243,6 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
           </p>
         </div>
       </form>
-      <p className="login-footer">© 2025 Todos los derechos reservados</p>
     </div>
   );
 };

@@ -1,6 +1,11 @@
 .contenedorGeneral {
-  color: #000000;
+  margin: 0;
+  padding: 0;
   height: 1400px;
+}
+
+body.dark .contenedorGeneral {
+  background-color: rgb(37, 32, 32);
 }
 
 .contenedor {
@@ -11,6 +16,10 @@
   height: 100%;
 }
 
+body.dark .contenedor {
+  background-color: rgb(37, 32, 32);
+}
+
 .DatosFacturacion {
   width: 45rem;
   height: 20rem;
@@ -19,6 +28,10 @@
   margin: 1rem;
   padding: 1em;
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
+}
+
+body.dark .DatosFacturacion {
+  background-color: black;
 }
 
 .titleDatos {
@@ -90,6 +103,10 @@
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
 }
 
+body.dark .metodoPago {
+  background-color: #000000;
+}
+
 .tituloMetodo {
   margin-left: 1rem;
   font-size: 1.5rem;
@@ -119,6 +136,13 @@
   border-radius: 0.7rem;
   margin: 1rem;
   margin-left: 3em;
+  cursor: pointer;
+}
+
+body.dark .ingresoTarjeta {
+  background-color: #000000;
+  outline: solid 1px #ffffff;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
 }
 
 .seleccion {
@@ -190,6 +214,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
+}
+
+body.dark .cajaTransferenciaBancaria {
+  background-color: #000000;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
+  outline: solid 1px #ffffff;
 }
 
 .labelTarjeta {
@@ -244,6 +275,10 @@
   border-radius: 1rem;
 }
 
+body.dark .containerArrastre {
+  background-color: #000000;
+}
+
 .containerArrastre.Activo {
   border: solid #00791a 2px;
   box-shadow: 4px 4px 4px 4px rgba(0, 122, 31, 0.247);
@@ -267,6 +302,10 @@
   margin-top: 2rem;
   padding: 1rem;
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
+}
+
+body.dark .infoImportante {
+  background-color: black;
 }
 
 .tituloInfo {
@@ -370,6 +409,10 @@
   box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
 }
 
+body.dark .resumenDeAlquiler {
+  background-color: black;
+}
+
 .tituloResumen {
   margin-left: 1rem;
   font-weight: 500;
@@ -437,6 +480,10 @@
   border: solid #d9d9d9 0.1rem;
   border-radius: 5px;
   margin: 1rem 0 1rem 0.5rem;
+}
+
+body.dark .linea {
+  border: solid #ffffff 0.063rem;
 }
 
 .tituloSubtotal {
