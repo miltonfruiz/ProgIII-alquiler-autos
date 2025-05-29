@@ -282,5 +282,4 @@ const CarsAdmin = () => {
     </div>
   );
 };
-
 export default CarsAdmin;
