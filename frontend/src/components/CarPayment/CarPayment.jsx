@@ -145,7 +145,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="nombre"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.nombre}
-                    ref={refs.nombreRef}
+                    ref={refs.useRefs.nombreRef}
                   />
                   {errores.nombre && <p className="error">{errores.nombre}</p>}
                 </div>
@@ -162,7 +162,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="apellido"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.apellido}
-                    ref={refs.apellidoRef}
+                    ref={refs.useRefs.apellidoRef}
                   />
                   {errores.apellido && (
                     <p className="error">{errores.apellido}</p>
@@ -181,7 +181,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="numeroTelefonico"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.numeroTelefonico}
-                    ref={refs.numeroTelefonicoRef}
+                    ref={refs.useRefs.numeroTelefonicoRef}
                   />
                   {errores.numeroTelefonico && (
                     <p className="error">{errores.numeroTelefonico}</p>
@@ -200,7 +200,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="dni"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.dni}
-                    ref={refs.dniRef}
+                    ref={refs.useRefs.dniRef}
                   />
                   {errores.dni && <p className="error">{errores.dni}</p>}
                 </div>
@@ -267,7 +267,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                           name="numeroTarjeta"
                           value={datosTarjeta.numeroTarjeta}
                           onChange={handlerDatosTarjeta}
-                          ref={refs.numeroTarjetaRef}
+                          ref={refs.useRefs.numeroTarjetaRef}
                         />
                       </div>
 
@@ -286,7 +286,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                           name="fechaTarjeta"
                           value={datosTarjeta.fechaTarjeta}
                           onChange={handlerDatosTarjeta}
-                          ref={refs.fechaTarjetaRef}
+                          ref={refs.useRefs.fechaTarjetaRef}
                         />
                       </div>
 
@@ -306,7 +306,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                           name="nombreTarjeta"
                           value={datosTarjeta.nombreTarjeta}
                           onChange={handlerDatosTarjeta}
-                          ref={refs.nombreTarjetaRef}
+                          ref={refs.useRefs.nombreTarjetaRef}
                         />
                       </div>
 
@@ -326,7 +326,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                           name="cvc"
                           value={datosTarjeta.cvc}
                           onChange={handlerDatosTarjeta}
-                          ref={refs.cvcRef}
+                          ref={refs.useRefs.cvcRef}
                         />
                       </div>
 
@@ -341,11 +341,11 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               className="cajaTransferenciaBancaria"
               onClick={handlerClickTransferencia}
               tabIndex={-1}
-              ref={refs.errorEleccionRef}
+              ref={refs.useRefs.errorEleccionRef}
             >
               <div
                 className="containterEleccionTransfer"
-                ref={refs.comprobanteRef}
+                ref={refs.useRefs.comprobanteRef}
                 tabIndex={-1}
               >
                 <input

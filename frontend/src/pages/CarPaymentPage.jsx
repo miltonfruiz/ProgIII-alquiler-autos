@@ -8,22 +8,20 @@ import { CiNoWaitingSign } from "react-icons/ci";
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
 
-  const nombreRef = useRef(null);
-  const apellidoRef = useRef(null);
-  const numeroTelefonicoRef = useRef(null);
-  const dniRef = useRef(null);
-
-  const errorEleccionRef = useRef(null);
-  const numeroTarjetaRef = useRef(null);
-  const fechaTarjetaRef = useRef(null);
-  const nombreTarjetaRef = useRef(null);
-  const cvcRef = useRef(null);
-  const comprobanteRef = useRef(null);
+  const useRefs = {
+    nombreRef: useRef(null),
+    apellidoRef: useRef(null),
+    numeroTelefonicoRef: useRef(null),
+    dniRef: useRef(null),
+    errorEleccionRef: useRef(null),
+    numeroTarjetaRef: useRef(null),
+    fechaTarjetaRef: useRef(null),
+    nombreTarjetaRef: useRef(null),
+    cvcRef: useRef(null),
+    comprobanteRef: useRef(null),
+  };
 
   function handlerSubmit(datosFacturacion, datosPago, choicePayment) {
-    console.log(datosFacturacion);
-    console.log(datosPago);
-    console.log(choicePayment);
     const errores = CarPaymentValidation({
       datosFacturacion,
       datosPago,
@@ -75,16 +73,7 @@ const CarPaymentPage = () => {
         onSubmit={handlerSubmit}
         errores={errores}
         refs={{
-          nombreRef,
-          apellidoRef,
-          numeroTelefonicoRef,
-          dniRef,
-          errorEleccionRef,
-          numeroTarjetaRef,
-          fechaTarjetaRef,
-          nombreTarjetaRef,
-          cvcRef,
-          comprobanteRef,
+          useRefs,
         }}
       />
     </div>
