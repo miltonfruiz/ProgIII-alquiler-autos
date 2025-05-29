@@ -76,4 +76,7 @@ export function payValidation(req, res, next) {
         "* debe ingresar el comprobante de pago para poder efectuar el pago";
     }
   }
+  if (!acceptableTerms) {
+    errores.acceptableTerms = "* marque el terminos y condiciones";
+  }
 }
