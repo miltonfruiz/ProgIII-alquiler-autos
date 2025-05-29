@@ -6,15 +6,15 @@ const router = Router();
 
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
-router.post("/pays", async (req, res) => {
+router.post("/pays", payValidation, async (req, res) => {
   try {
     const {
       userId,
       carId,
       reservationId,
-      subtotal,
+      price,
+      dias_totales,
       tax,
-      total,
       cardType,
       paymentMethod,
       cardNumber,
@@ -25,7 +25,9 @@ router.post("/pays", async (req, res) => {
       acceptableTerms,
     } = req.body;
 
-    //consultar bien si aca deberia tomar los valores de price del auto, y dias_totales y con eso sacar los valores de subtotal y total o eso se hace desde el front
+    const subtotal = price * dias_totales;
+
+    const total = tax + subtotal;
 
     if (paymentMethod == "tarjeta") {
       const pay = await Pay.create({

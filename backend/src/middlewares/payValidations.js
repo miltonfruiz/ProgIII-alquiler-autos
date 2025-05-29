@@ -18,30 +18,6 @@ export function payValidation(req, res, next) {
 
   const errores = {};
 
-  if (!userId) {
-    errores.userId = "* el id del usuario es obligatorio";
-  }
-
-  if (!carId) {
-    errores.carId = "* el id del auto es obligatorio";
-  }
-
-  if (!reservationId) {
-    errores.reservationId = "* el id de la reserva es obligatorio";
-  }
-
-  if (!subtotal) {
-    errores.dni = "* el subtotal es obligatorio";
-  }
-
-  if (!tax) {
-    errores.tax = "* los impuestos son obligatorios";
-  }
-
-  if (!total) {
-    errores.total = "* el total es obligatorio";
-  }
-
   if (!cardType) {
     errores.cardType = "* seleccione el tipo de tarjeta";
   }
