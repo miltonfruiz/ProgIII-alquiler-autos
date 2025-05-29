@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Header from "../Header/Header";
 import { FaStar } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
 import { FaCcMastercard } from "react-icons/fa6";
