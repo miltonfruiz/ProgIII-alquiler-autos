@@ -10,16 +10,31 @@
   justify-content: center;
   gap: 0.5rem;
   color: #333;
-  margin-bottom: 12px;
+  margin-top: 25px;
+  margin-bottom: 15px;
 }
-table {
+.table-cars-admin {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+}
+.table-container {
+  padding: 22px auto;
+  margin: 20px auto;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.admin-container-table {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 22px 32px;
+  margin: 10px auto;
   max-width: 1100px;
-  margin: 40px auto;
-  border-collapse: collapse;
   border: 1px solid #d1d5db;
 }
 .admin-thead {
@@ -40,7 +55,10 @@ tbody td {
   text-align: center;
 }
 tbody td {
-  padding: 8px 16px;
+  padding: 6px 16px;
+}
+.button-actions {
+  border-collapse: collapse;
 }
 .administration-row {
   text-align: center;
@@ -71,6 +89,9 @@ td {
   transition: background 0.3s ease;
   margin-right: 7px;
 }
+.administration-button-edit:hover {
+  background-color: #4f46e5;
+}
 .administration-button-delete {
   font-size: 11px;
   background-color: #ff4d4f;
@@ -83,6 +104,9 @@ td {
   align-items: center;
   gap: 8px;
   transition: background 0.3s ease;
+}
+.administration-button-delete:hover {
+  background-color: #d9363e;
 }
 .adm-icon-delete,
 .adm-icon-edit {
@@ -112,4 +136,113 @@ td {
 
 .car-form button:hover {
   background-color: #059669;
+}
+.admin-toolbar {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: 1100px;
+  margin: 10px auto;
+  gap: 0.5rem;
+}
+.search-input {
+  color: #6b7280;
+  flex: 1;
+  max-width: 350px;
+  font-size: 12px;
+  font-style: italic;
+  padding: 11px 14px 10px 36px;
+  border: 1px solid #d1d5db;
+  border-radius: 18px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.search-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+.search-icon-admin {
+  position: absolute;
+  top: 50%;
+  left: 39px;
+  transform: translateY(-50%);
+  font-size: 17px;
+  color: #6b7280;
+  pointer-events: none;
+}
+.create-button {
+  font-size: 11px;
+  background-color: #10b981;
+  color: white;
+  padding: 10px 36px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s ease;
+  margin-right: 7px;
+}
+.create-button:hover {
+  background-color: #059669;
+}
+.backup-button {
+  font-size: 11px;
+  background-color: #ffc107;
+  color: white;
+  padding: 10px 36px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s ease;
+  margin-right: 7px;
+}
+.backup-button:hover {
+  background-color: #e0a800;
+}
+.modal-overlay-cars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content-cars {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.cancel-button-cars {
+  grid-column: span 2;
+  background-color: #f87171;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.cancel-button-cars:hover {
+  background-color: #ef4444;
 }
