@@ -49,7 +49,7 @@ export const Pay = sequelize.define("Pay", {
   },
   cardType: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   paymentMethod: {
     type: DataTypes.ENUM("transferencia", "tarjeta"),

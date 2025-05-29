@@ -54,7 +54,6 @@ router.post("/pays", payValidation, async (req, res) => {
         subtotal,
         total,
         tax,
-        cardType,
         paymentMethod,
         voucher,
         acceptableTerms,
