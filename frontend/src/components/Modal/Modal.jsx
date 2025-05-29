@@ -99,7 +99,13 @@ function Modal({ auto, onClose }) {
   console.log(errores);
 
   return (
-    <div className={styles.overlayBack} onClick={onClose}>
+    <div
+      className={styles.overlayBack}
+      onClick={() => {
+        localStorage.removeItem("datosAlquiler");
+        onClose();
+      }}
+    >
       <div
         className={styles.overlayConteiner}
         onClick={(e) => e.stopPropagation()}
@@ -172,7 +178,13 @@ function Modal({ auto, onClose }) {
             </div>
 
             <div className={styles.btnsConteiner}>
-              <button className={styles.btnCancelar} onClick={onClose}>
+              <button
+                className={styles.btnCancelar}
+                onClick={() => {
+                  localStorage.removeItem("datosAlquiler");
+                  onClose(); // cerrás el modal
+                }}
+              >
                 Cancelar
               </button>
               <button
