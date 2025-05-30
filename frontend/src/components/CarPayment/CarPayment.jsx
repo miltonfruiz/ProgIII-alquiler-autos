@@ -1,11 +1,17 @@
 import React, { useRef } from "react";
-import { FaStar } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
 import { FaCcMastercard } from "react-icons/fa6";
 import { SiAmericanexpress } from "react-icons/si";
 import { IoCard } from "react-icons/io5";
 import { useState } from "react";
 import "./CarPayment.css";
+import {
+  objetosFormPersona,
+  objetosFormTarjeta,
+  objetosTarjetas,
+} from "./ObjetosCarPayment.jsx";
+import InfoImportante from "./InfoImportante.jsx";
+import ResumenDeAlquiler from "./ResumenDeAlquiler.jsx";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
@@ -40,6 +46,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
       ...datosFacturacion,
       [e.target.name]: e.target.value,
     });
+    onDatos(datosFacturacion);
   }
 
   function handlerDatosTarjeta(e) {
@@ -99,15 +106,11 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   }
 
   function handlerImagenes(e) {
-    if (e.target.value == "visa") {
-      setImgTarjetas("visa");
-    } else if (e.target.value == "mastercard") {
-      setImgTarjetas("mastercard");
-    } else if (e.target.value == "american") {
-      setImgTarjetas("american");
-    } else {
-      setImgTarjetas("debito");
-    }
+    objetosTarjetas.map((tarjeta) => {
+      if (e.target.value == tarjeta.value) {
+        setImgTarjetas(tarjeta.value);
+      }
+    });
   }
 
   function handlerClickTarjeta() {
@@ -132,78 +135,29 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             </h3>
             <p className="paso1">Paso 1 de 3</p>
             <div className="gridDatosFacturacion">
-              <div className="cajaInputDatos">
-                <label htmlFor="" className="labelDatos">
-                  Nombre
-                </label>
-                <div>
-                  <input
-                    type="text"
-                    className="inputDatos"
-                    placeholder="Tu nombre"
-                    name="nombre"
-                    onChange={handlerDatosFacturacion}
-                    value={datosFacturacion.nombre}
-                    ref={refs.useRefs.nombreRef}
-                  />
-                  {errores.nombre && <p className="error">{errores.nombre}</p>}
-                </div>
-              </div>
-              <div className="cajaInputDatos">
-                <label htmlFor="" className="labelDatos">
-                  Apellido
-                </label>
-                <div>
-                  <input
-                    type="text"
-                    className="inputDatos"
-                    placeholder="Tu apellido"
-                    name="apellido"
-                    onChange={handlerDatosFacturacion}
-                    value={datosFacturacion.apellido}
-                    ref={refs.useRefs.apellidoRef}
-                  />
-                  {errores.apellido && (
-                    <p className="error">{errores.apellido}</p>
-                  )}
-                </div>
-              </div>
-              <div className="cajaInputDatos">
-                <label htmlFor="" className="labelDatos">
-                  Numero de telefono
-                </label>
-                <div>
-                  <input
-                    type="text"
-                    className="inputDatos"
-                    placeholder="5493333333333"
-                    name="numeroTelefonico"
-                    onChange={handlerDatosFacturacion}
-                    value={datosFacturacion.numeroTelefonico}
-                    ref={refs.useRefs.numeroTelefonicoRef}
-                  />
-                  {errores.numeroTelefonico && (
-                    <p className="error">{errores.numeroTelefonico}</p>
-                  )}
-                </div>
-              </div>
-              <div className="cajaInputDatos">
-                <label htmlFor="" className="labelDatos">
-                  DNI
-                </label>
-                <div>
-                  <input
-                    type="text"
-                    className="inputDatos"
-                    placeholder="4000000"
-                    name="dni"
-                    onChange={handlerDatosFacturacion}
-                    value={datosFacturacion.dni}
-                    ref={refs.useRefs.dniRef}
-                  />
-                  {errores.dni && <p className="error">{errores.dni}</p>}
-                </div>
-              </div>
+              {objetosFormPersona.map((input) => {
+                return (
+                  <div className="cajaInputDatos">
+                    <label htmlFor="" className="labelDatos">
+                      {input.label}
+                    </label>
+                    <div>
+                      <input
+                        type="text"
+                        className="inputDatos"
+                        placeholder={input.placeholder}
+                        name={input.name}
+                        onChange={handlerDatosFacturacion}
+                        value={datosFacturacion[input.name]}
+                        ref={refs.useRefs[`${input.name}Ref`]}
+                      />
+                      {errores[input.name] && (
+                        <p className="error">{errores[input.name]}</p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="metodoPago">
@@ -236,11 +190,13 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     className="selectMetodo"
                     onChange={handlerImagenes}
                   >
-                    <option value="visa">Visa</option>
-                    <option value="mastercard">Mastercard</option>
-                    <option value="american">American express</option>
-                    <option value="debito">Tarjeta de debito</option>
+                    {objetosTarjetas.map((tarjeta) => {
+                      return (
+                        <option value={tarjeta.value}>{tarjeta.nombre}</option>
+                      );
+                    })}
                   </select>
+
                   {imgTarjetas == "visa" && (
                     <RiVisaLine className="logosTarjeta" />
                   )}
@@ -254,83 +210,29 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     <IoCard className="logosTarjeta" />
                   )}
                   <div className="gridDatosTarjeta">
-                    <div className="cajaInputTarjeta">
-                      <div>
-                        <label htmlFor="" className="labelMetodo">
-                          Numero de Tarjeta
-                        </label>
-                        <input
-                          type="text"
-                          className="inputMetodo"
-                          placeholder="Numero de tarjeta"
-                          name="numeroTarjeta"
-                          value={datosTarjeta.numeroTarjeta}
-                          onChange={handlerDatosTarjeta}
-                          ref={refs.useRefs.numeroTarjetaRef}
-                        />
-                      </div>
-
-                      {errores.numeroTarjeta && (
-                        <p className="error">{errores.numeroTarjeta}</p>
-                      )}
-                    </div>
-                    <div className="cajaInputTarjeta">
-                      <div>
-                        <label htmlFor="" className="labelMetodo">
-                          Fecha de Expiracion
-                        </label>
-                        <input
-                          type="date"
-                          className="inputMetodo"
-                          name="fechaTarjeta"
-                          value={datosTarjeta.fechaTarjeta}
-                          onChange={handlerDatosTarjeta}
-                          ref={refs.useRefs.fechaTarjetaRef}
-                        />
-                      </div>
-
-                      {errores.fechaTarjeta && (
-                        <p className="error">{errores.fechaTarjeta}</p>
-                      )}
-                    </div>
-                    <div className="cajaInputTarjeta">
-                      <div>
-                        <label htmlFor="" className="labelMetodo">
-                          Nombre del titular
-                        </label>
-                        <input
-                          type="text"
-                          className="inputMetodo"
-                          placeholder="Nombre completo"
-                          name="nombreTarjeta"
-                          value={datosTarjeta.nombreTarjeta}
-                          onChange={handlerDatosTarjeta}
-                          ref={refs.useRefs.nombreTarjetaRef}
-                        />
-                      </div>
-
-                      {errores.nombreTarjeta && (
-                        <p className="error">{errores.nombreTarjeta}</p>
-                      )}
-                    </div>
-                    <div className="cajaInputTarjeta">
-                      <div>
-                        <label htmlFor="" className="labelMetodo">
-                          CVC
-                        </label>
-                        <input
-                          type="text"
-                          className="inputMetodo"
-                          placeholder="CVC"
-                          name="cvc"
-                          value={datosTarjeta.cvc}
-                          onChange={handlerDatosTarjeta}
-                          ref={refs.useRefs.cvcRef}
-                        />
-                      </div>
-
-                      {errores.cvc && <p className="error">{errores.cvc}</p>}
-                    </div>
+                    {objetosFormTarjeta.map((input) => {
+                      return (
+                        <div className="cajaInputTarjeta">
+                          <div>
+                            <label htmlFor="" className="labelMetodo">
+                              {input.label}
+                            </label>
+                            <input
+                              type="text"
+                              className="inputMetodo"
+                              placeholder={input.label}
+                              name={input.name}
+                              value={datosTarjeta[input.name]}
+                              onChange={handlerDatosTarjeta}
+                              ref={refs.useRefs[`${input.name}Ref`]}
+                            />
+                          </div>
+                          {errores[input.name] && (
+                            <p className="error">{errores[input.name]}</p>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -413,49 +315,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               <p className="error">{errores.errorEleccion}</p>
             )}
           </div>
-          <div className="infoImportante">
-            <h2 className="tituloInfo">Informacion Importante</h2>
-            <h3 className="subtituloInfo">
-              Lee atentamente esta informacion de utilidad
-            </h3>
-            <p className="paso3">Paso 3 de 3</p>
-            <div className="seguroDelAuto">
-              <h2 className="tituloSeguro">🛡️ Seguro del auto</h2>
-              <ul>
-                <li className="liSeguroAuto">
-                  Todos los autos incluyen un seguro contra terceros.
-                </li>
-                <li className="liSeguroAuto">
-                  El seguro no cubre daños ocacionados por negligencia del
-                  conductor.
-                </li>
-              </ul>
-            </div>
-            <div className="entregaYdevolucion">
-              <h2 className="tituloEntrega">🕒 Entrega y Devolucion</h2>
-              <ul>
-                <li className="liEntrega">
-                  El auto debe devolverse con el mismo nivel de combustible.
-                </li>
-                <li className="liEntrega">
-                  Hay una hora de tolerancia para la devolucion.
-                </li>
-              </ul>
-            </div>
-            <div className="requisitosAlRetirar">
-              <h2 className="TituloRequisitos">📍 Requisitos al retirar</h2>
-              <ul>
-                <li className="liRequisitos">
-                  Presentar dni y licencia de conducir vigente.
-                </li>
-                <li className="liRequisitos">Ser mayor de 21 años.</li>
-              </ul>
-            </div>
-            <div className="cajaAceptoTerminos">
-              <input type="checkbox" className="aceptoTerminos" />
-              <p className="textoAcepto">Acepto Terminos y condiciones</p>
-            </div>
-          </div>
+          <InfoImportante></InfoImportante>
           <button type="button" className="botonRentar" onClick={handlerSubmit}>
             Rentar ahora
           </button>
@@ -463,54 +323,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             Cancelar
           </button>
         </div>
-
-        <aside>
-          <div className="resumenDeAlquiler">
-            <h2 className="tituloResumen">Resumen de Alquiler</h2>
-            <h3 className="subtituloResumen">
-              Los precios pueden variar dependiendo de la duracion del alquiler
-              y del precio de su coche de alquiler.
-            </h3>
-            <div className="cajaValoracionAuto">
-              <img
-                className="imagenResumen"
-                src="public\images\camionetaCarPayment.png"
-                alt=""
-              />
-              <div className="cajaExtrellasNombre">
-                <p className="nombreAutos">Volkswagen T-Cross</p>
-                <div className="valoracionResumen">
-                  <FaStar className="estrella" />
-                  <FaStar className="estrella" />
-                  <FaStar className="estrella" />
-                  <FaStar className="estrella" />
-                  <FaStar className="estrella" />
-                  <p className="valoracion">valoracion</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="linea"></div>
-            <div className="cajaSubtotal">
-              <p className="tituloSubtotal">Subtotal</p>
-              <p className="subtotal">$290.000</p>
-            </div>
-            <div className="cajaImpuestos">
-              <p className="tituloImpuestos">Impuestos</p>
-              <p className="impuestos">$34.000</p>
-            </div>
-            <div className="cajaPrecioFinal">
-              <div>
-                <h2 className="tituloPrecioFinal">Precio final de renta</h2>
-                <h3 className="subtituloPrecioFinal">
-                  Precio total con impuestos obligatorios
-                </h3>
-              </div>
-
-              <p className="precioFinal">$324.000</p>
-            </div>
-          </div>
-        </aside>
+        <ResumenDeAlquiler></ResumenDeAlquiler>
       </div>
     </div>
   );
