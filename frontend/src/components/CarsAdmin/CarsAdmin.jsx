@@ -162,175 +162,178 @@ const CarsAdmin = () => {
               <IoSettingsSharp className="create-icon-cars" /> Crear auto
             </h2>
             <form onSubmit={handleCreate} className="car-form">
-              <div
-                className="cars-image-wrapper"
-                onClick={() =>
-                  document.getElementById("car-image-input").click()
-                }
-              >
-                {newCar.image ? (
-                  <img
-                    src={URL.createObjectURL(newCar.image)}
-                    alt="Vista previa"
-                    className="cars-preview-image"
+              <div className="image-inputs-container">
+                <div
+                  className="cars-image-wrapper"
+                  onClick={() =>
+                    document.getElementById("car-image-input").click()
+                  }
+                >
+                  {newCar.image ? (
+                    <img
+                      src={URL.createObjectURL(newCar.image)}
+                      alt="Vista previa"
+                      className="cars-preview-image"
+                    />
+                  ) : (
+                    <p className="cars-placeholder-text">
+                      Haz clic para subir una imagen
+                    </p>
+                  )}
+                  <AiFillEdit className="camera-icon" />
+                  <input
+                    id="car-image-input"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setNewCar({ ...newCar, image: file });
+                      }
+                    }}
+                    style={{ display: "none" }}
                   />
-                ) : (
-                  <p className="cars-placeholder-text">
-                    Haz clic para subir una imagen
-                  </p>
-                )}
-                <AiFillEdit className="camera-icon" />
-                <input
-                  id="car-image-input"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                      setNewCar({ ...newCar, image: file });
+                </div>
+                <div className="cars-inputs">
+                  <input
+                    type="text"
+                    placeholder="Nombre"
+                    value={newCar.name}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, name: e.target.value })
                     }
-                  }}
-                  style={{ display: "none" }}
-                />
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Categoría"
+                    value={newCar.category}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, category: e.target.value })
+                    }
+                    required
+                  />
+                  <input
+                    type="number"
+                    placeholder="Pasajeros"
+                    value={newCar.passengers}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, passengers: e.target.value })
+                    }
+                    required
+                  />
+                  <select
+                    value={newCar.transmission}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, transmission: e.target.value })
+                    }
+                  >
+                    <option value="" disabled>
+                      Transmisión
+                    </option>
+                    <option value="manual">Manual</option>
+                    <option value="automatica">Automatico</option>
+                  </select>
+                  <input
+                    type="number"
+                    placeholder="Precio"
+                    value={newCar.price}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, price: e.target.value })
+                    }
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Marca"
+                    value={newCar.brand}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, brand: e.target.value })
+                    }
+                    required
+                  />
+                  <input
+                    type="date"
+                    placeholder="Fecha"
+                    value={newCar.date}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, date: e.target.value })
+                    }
+                    required
+                  />
+                  <select
+                    value={newCar.tax}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, tax: e.target.value })
+                    }
+                  >
+                    <option value="" disabled>
+                      Impuesto
+                    </option>
+                    <option value="unica">Único</option>
+                    <option value="mensual">Mensual</option>
+                    <option value="anual">Anual</option>
+                  </select>
+                  <select
+                    value={newCar.paymentMethod}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, paymentMethod: e.target.value })
+                    }
+                  >
+                    <option value="" disabled>
+                      Método de Pago
+                    </option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Transferencia">Transferencia</option>
+                    <option value="Tarjeta de crédito">
+                      Tarjeta de crédito
+                    </option>
+                  </select>
+                  <input
+                    type="number"
+                    placeholder="Facturación"
+                    value={newCar.billing}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, billing: e.target.value })
+                    }
+                    required
+                  />
+                  <select
+                    value={newCar.status}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, status: e.target.value })
+                    }
+                  >
+                    <option value="" disabled>
+                      Estado
+                    </option>
+                    <option value="disponible">Disponible</option>
+                    <option value="no disponible">No disponible</option>
+                  </select>
+                  <input
+                    type="number"
+                    placeholder="Total"
+                    value={newCar.total}
+                    onChange={(e) =>
+                      setNewCar({ ...newCar, total: e.target.value })
+                    }
+                    required
+                  />
+                </div>
               </div>
-
-              <div className="cars-inputs">
-                <input
-                  type="text"
-                  placeholder="Nombre"
-                  value={newCar.name}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, name: e.target.value })
-                  }
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Categoría"
-                  value={newCar.category}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, category: e.target.value })
-                  }
-                  required
-                />
-                <input
-                  type="number"
-                  placeholder="Pasajeros"
-                  value={newCar.passengers}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, passengers: e.target.value })
-                  }
-                  required
-                />
-                <select
-                  value={newCar.transmission}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, transmission: e.target.value })
-                  }
+              <div className="cars-container-button">
+                <button className="create-button-cars" type="submit">
+                  <IoSend /> Crear
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="cancel-button-cars"
                 >
-                  <option value="" disabled>
-                    Transmisión
-                  </option>
-                  <option value="manual">Manual</option>
-                  <option value="automatica">Automatico</option>
-                </select>
-                <input
-                  type="number"
-                  placeholder="Precio"
-                  value={newCar.price}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, price: e.target.value })
-                  }
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Marca"
-                  value={newCar.brand}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, brand: e.target.value })
-                  }
-                  required
-                />
-                <input
-                  type="date"
-                  placeholder="Fecha"
-                  value={newCar.date}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, date: e.target.value })
-                  }
-                  required
-                />
-                <select
-                  value={newCar.tax}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, tax: e.target.value })
-                  }
-                >
-                  <option value="" disabled>
-                    Impuesto
-                  </option>
-                  <option value="unica">Único</option>
-                  <option value="mensual">Mensual</option>
-                  <option value="anual">Anual</option>
-                </select>
-                <select
-                  value={newCar.paymentMethod}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, paymentMethod: e.target.value })
-                  }
-                >
-                  <option value="" disabled>
-                    Método de Pago
-                  </option>
-                  <option value="Efectivo">Efectivo</option>
-                  <option value="Transferencia">Transferencia</option>
-                  <option value="Tarjeta de crédito">Tarjeta de crédito</option>
-                </select>
-                <input
-                  type="number"
-                  placeholder="Facturación"
-                  value={newCar.billing}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, billing: e.target.value })
-                  }
-                  required
-                />
-                <select
-                  value={newCar.status}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, status: e.target.value })
-                  }
-                >
-                  <option value="" disabled>
-                    Estado
-                  </option>
-                  <option value="disponible">Disponible</option>
-                  <option value="no disponible">No disponible</option>
-                </select>
-                <input
-                  type="number"
-                  placeholder="Total"
-                  value={newCar.total}
-                  onChange={(e) =>
-                    setNewCar({ ...newCar, total: e.target.value })
-                  }
-                  required
-                />
+                  <MdCancel className="cancel-icon-cars" /> Cancelar
+                </button>
               </div>
             </form>
-            <div className="cars-container-button">
-              <button className="create-button-cars" type="submit">
-                <IoSend /> Crear
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowModal(false)}
-                className="cancel-button-cars"
-              >
-                <MdCancel className="cancel-icon-cars" /> Cancelar
-              </button>
-            </div>
           </div>
         </div>
       )}

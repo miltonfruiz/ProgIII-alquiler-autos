@@ -228,7 +228,10 @@ td {
 }
 .car-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye los elementos */
+  height: 100%; /* Asegura que ocupe todo el alto del modal */
+
   gap: 2rem;
   background-color: #fff;
   padding: 1.5rem;
@@ -238,21 +241,16 @@ td {
   overflow-y: auto;
 }
 .cars-image-wrapper {
-  width: 100%;
-  height: auto;
-  max-height: 220px;
-  max-width: 220px;
-  aspect-ratio: 4 / 3;
+  width: 200px;
+  height: 200px;
+  background-color: #f0f0f0;
   border: 2px dashed #ccc;
-  border-radius: 8px;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background-color: #f9f9f9;
-  transition: border-color 0.2s ease;
+  cursor: pointer;
   position: relative;
+  border-radius: 8px;
 }
 .camera-icon {
   position: absolute;
@@ -288,7 +286,7 @@ td {
 .cars-inputs {
   flex: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
   gap: 12px;
 }
 .cars-inputs input,
@@ -316,23 +314,7 @@ td {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-.cars-inputs button:hover {
-  background-color: #059669;
-}
-.car-form button[type="submit"] {
-  grid-column: span 2;
-  padding: 12px;
-  background-color: #10b981;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.car-form button[type="submit"]:hover {
-  background-color: #059669;
-}
+
 .cancel-button-cars {
   background-color: #ff4d4f;
   font-size: 11px;
@@ -358,7 +340,7 @@ td {
   font-size: 11px;
   background-color: #10b981;
   color: white;
-  padding: 10px 36px;
+  padding: 10px 46px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -389,7 +371,7 @@ td {
 .cars-preview-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 8px;
 }
 .cars-placeholder-text {
@@ -401,4 +383,10 @@ td {
 .cars-container-button {
   display: flex;
   justify-content: end;
+}
+.image-inputs-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
 }
