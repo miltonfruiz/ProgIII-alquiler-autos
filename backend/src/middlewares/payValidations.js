@@ -55,4 +55,12 @@ export function payValidation(req, res, next) {
   if (!acceptableTerms) {
     errores.acceptableTerms = "* marque el terminos y condiciones";
   }
+
+  // Si hay errores, devolverlos
+  if (Object.keys(errores).length > 0) {
+    return res.status(400).json({ errores });
+  }
+
+  // Si todo está bien, continuar
+  next();
 }

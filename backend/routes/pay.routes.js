@@ -25,6 +25,11 @@ router.post("/pays", payValidation, async (req, res) => {
       acceptableTerms,
     } = req.body;
 
+    //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
+    await Reserva.update(
+      { estado_reserva: "confirmada" },
+      { where: { id_reserva: reservationId } }
+    );
     const subtotal = price * dias_totales;
 
     const total = tax + subtotal;

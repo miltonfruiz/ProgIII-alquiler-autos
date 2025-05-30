@@ -35,10 +35,6 @@ export const Reserva = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    precio_final: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
   },
   {
     timestamps: false,
