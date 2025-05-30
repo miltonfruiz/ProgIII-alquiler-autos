@@ -33,6 +33,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
 
+  const [stateTransition, setStateTransition] = useState("");
+
   const [file, setFile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [choicePayment, setChoicePayment] = useState(false);
@@ -91,6 +93,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     if (e.target.value) {
       setSeleccionCbu(false);
       setSeleccionTarjeta(true);
+      setTimeout(() => {
+        setStateTransition("tarjeta");
+      }, 100);
+      setStateTransition("");
     }
   }
 
@@ -98,6 +104,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     if (e.target.value) {
       setSeleccionTarjeta(false);
       setSeleccionCbu(true);
+      setTimeout(() => {
+        setStateTransition("tranferencia");
+      }, 100);
+      setStateTransition("");
     }
   }
 
@@ -185,7 +195,11 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </div>
 
               {seleccionTarjeta && (
-                <div>
+                <div
+                  className={`containerPago ${
+                    stateTransition ? "Visible" : ""
+                  }`}
+                >
                   <label htmlFor="seleccion" className="seleccion">
                     Seleccione una tarjeta
                   </label>
@@ -270,8 +284,11 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </div>
 
               {seleccionCbu && (
-                // aqui iria el componente de la transicion
-                <div className="conteinerTransferencia">
+                <div
+                  className={`conteinerTransferencia ${
+                    stateTransition ? "Visible" : ""
+                  }`}
+                >
                   <h3 className="tituloTransferencia">
                     Transfiera a esta cuenta
                   </h3>

@@ -156,7 +156,7 @@ body.dark .ingresoTarjeta {
   background-color: #000000;
   outline: solid 1px #ffffff;
   box-shadow: 3px 3px 6px 3px #ffffff5d;
-  transition: all 0.9s;
+  transition: all 0.3s;
 }
 
 body.dark .ingresoTarjetaClickeado {
@@ -232,7 +232,8 @@ body.dark .ingresoTarjeta:hover {
   flex-direction: column;
 }
 
-.cajaTransferenciaBancaria {
+.cajaTransferenciaBancaria,
+.cajaTransferenciaBancariaClickeado {
   width: 35rem;
   min-height: 3rem;
   background-color: #f0f0f0;
@@ -248,7 +249,7 @@ body.dark .cajaTransferenciaBancaria {
   background-color: #000000;
   box-shadow: 3px 3px 6px 3px #ffffff5d;
   outline: solid 1px #ffffff;
-  transition: all 0.9s;
+  transition: all 0.3s;
 }
 
 body.dark .cajaTransferenciaBancariaClickeado {
@@ -272,6 +273,15 @@ body.dark .cajaTransferenciaBancaria:hover {
   box-shadow: 3px 3px 6px 3px #69696988;
 }
 
+.containerPago {
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.containerPago.Visible {
+  opacity: 1;
+}
+
 .labelTarjeta {
   margin: auto;
   margin-left: 1.5rem;
@@ -291,6 +301,13 @@ body.dark .cajaTransferenciaBancaria:hover {
   align-items: center;
   flex-direction: column;
   margin-top: 0.5rem;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.conteinerTransferencia.Visible {
+  display: flex;
+  opacity: 1;
 }
 
 .conteinerTransfer {
