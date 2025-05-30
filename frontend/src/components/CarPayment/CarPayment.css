@@ -330,34 +330,19 @@ body.dark .infoImportante {
   color: #90a3bf;
 }
 
-.seguroDelAuto {
+.cajaItems {
   width: 60rem;
   border-radius: 0.7rem;
   margin: 2rem 0 0 1rem;
 }
 
-.tituloSeguro {
+.tituloItems {
   margin: 1rem;
   font-size: 1.25rem;
   font-weight: 500;
 }
 
-.liSeguroAuto {
-  margin-left: 2.7rem;
-  font-weight: 500;
-}
-
-.entregaYdevolucion {
-  margin: 2rem 0 0 1rem;
-}
-
-.tituloEntrega {
-  margin: 1rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-.liEntrega {
+.liItems {
   margin-left: 2.7rem;
   font-weight: 500;
 }
@@ -369,33 +354,11 @@ body.dark .infoImportante {
 }
 
 .aceptoTerminos {
-  width: 3rem;
-  height: 3rem;
-  margin-top: 0.2rem;
-}
-
-.requisitosAlRetirar {
-  width: 27rem;
-  height: 5rem;
-  margin: 2rem 0 0 1rem;
-}
-
-.TituloRequisitos {
-  margin: 1rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-.liRequisitos {
-  margin-left: 2.7rem;
-  font-weight: 500;
-}
-
-.aceptoTerminos {
   width: 1rem;
   height: 1rem;
   border-radius: 0.313;
   border: solid black 0.063;
+  margin-top: 0.2rem;
   margin-right: 0.5rem;
 }
 
