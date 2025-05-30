@@ -101,6 +101,11 @@ img {
   flex-direction: column;
 }
 
+body.dark .formRegister {
+  background-color: #000000;
+  border: solid #ffffff 1px;
+}
+
 .titleRegister {
   width: 13.2em;
   height: 1em;

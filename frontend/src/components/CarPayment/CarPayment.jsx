@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Header from "../Header/Header";
 import { FaStar } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
 import { FaCcMastercard } from "react-icons/fa6";
@@ -16,15 +15,25 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     dni: "",
   });
 
+  const [datosTarjeta, setDatosTarjeta] = useState({
+    numeroTarjeta: "",
+    fechaTarjeta: "",
+    nombreTarjeta: "",
+    cvc: "",
+  });
+
   const [imgTarjetas, setImgTarjetas] = useState("visa");
 
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-
+  const [choicePayment, setChoicePayment] = useState(false);
   const inputRef = useRef(null);
+
+  const eleccionTarjetaRef = useRef(null);
+  const eleccionTransferRef = useRef(null);
 
   function handlerDatosFacturacion(e) {
     setDatosFacturacion({
@@ -33,9 +42,21 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     });
   }
 
+  function handlerDatosTarjeta(e) {
+    setDatosTarjeta({
+      ...datosTarjeta,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   function handlerSubmit(e) {
     e.preventDefault();
-    onSubmit(datosFacturacion);
+
+    if (choicePayment == "tarjeta" || !choicePayment) {
+      onSubmit(datosFacturacion, datosTarjeta, choicePayment);
+    } else if (choicePayment == "transferencia") {
+      onSubmit(datosFacturacion, file, choicePayment);
+    }
   }
 
   function handlerDragOver(e) {
@@ -50,12 +71,12 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   function handlerDrop(e) {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    setFile(file);
+    setFile((prevFile) => file);
   }
 
   function handlerSeleccion(e) {
     if (e.target.files[0]) {
-      setFile(e.target.files[0]);
+      setFile((prevFile) => e.target.files[0]);
     }
   }
 
@@ -89,6 +110,15 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     }
   }
 
+  function handlerClickTarjeta() {
+    setChoicePayment(() => "tarjeta");
+    eleccionTarjetaRef.current.click();
+  }
+
+  function handlerClickTransferencia() {
+    setChoicePayment(() => "transferencia");
+    eleccionTransferRef.current.click();
+  }
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
   //LOS DATOS DEL ALQUILER VIENEN DEL MODAL
@@ -116,7 +146,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="nombre"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.nombre}
-                    ref={refs.nombreRef}
+                    ref={refs.useRefs.nombreRef}
                   />
                   {errores.nombre && <p className="error">{errores.nombre}</p>}
                 </div>
@@ -133,7 +163,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="apellido"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.apellido}
-                    ref={refs.apellidoRef}
+                    ref={refs.useRefs.apellidoRef}
                   />
                   {errores.apellido && (
                     <p className="error">{errores.apellido}</p>
@@ -152,7 +182,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="numeroTelefonico"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.numeroTelefonico}
-                    ref={refs.numeroTelefonicoRef}
+                    ref={refs.useRefs.numeroTelefonicoRef}
                   />
                   {errores.numeroTelefonico && (
                     <p className="error">{errores.numeroTelefonico}</p>
@@ -171,7 +201,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     name="dni"
                     onChange={handlerDatosFacturacion}
                     value={datosFacturacion.dni}
-                    ref={refs.dniRef}
+                    ref={refs.useRefs.dniRef}
                   />
                   {errores.dni && <p className="error">{errores.dni}</p>}
                 </div>
@@ -182,7 +212,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             <h2 className="tituloMetodo">Metodo de Pago</h2>
             <h3 className="subtituloMetodo">Elije tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
-            <div className="ingresoTarjeta">
+            <div className="ingresoTarjeta" onClick={handlerClickTarjeta}>
               <div className="seleccionTarjeta">
                 <input
                   type="radio"
@@ -190,6 +220,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   value="1"
                   className="eleccionTarjeta"
                   onChange={handlerTarjeta}
+                  ref={eleccionTarjetaRef}
                 />
                 <label htmlFor="" className="labelTarjeta">
                   Pago con tarjeta
@@ -226,54 +257,105 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   )}
                   <div className="gridDatosTarjeta">
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        Numero de Tarjeta
-                      </label>
-                      <input
-                        type="text"
-                        className="inputMetodo"
-                        placeholder="Numero de tarjeta"
-                      />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          Numero de Tarjeta
+                        </label>
+                        <input
+                          type="text"
+                          className="inputMetodo"
+                          placeholder="Numero de tarjeta"
+                          name="numeroTarjeta"
+                          value={datosTarjeta.numeroTarjeta}
+                          onChange={handlerDatosTarjeta}
+                          ref={refs.useRefs.numeroTarjetaRef}
+                        />
+                      </div>
+
+                      {errores.numeroTarjeta && (
+                        <p className="error">{errores.numeroTarjeta}</p>
+                      )}
                     </div>
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        Fecha de Expiracion
-                      </label>
-                      <input type="date" className="inputMetodo" />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          Fecha de Expiracion
+                        </label>
+                        <input
+                          type="date"
+                          className="inputMetodo"
+                          name="fechaTarjeta"
+                          value={datosTarjeta.fechaTarjeta}
+                          onChange={handlerDatosTarjeta}
+                          ref={refs.useRefs.fechaTarjetaRef}
+                        />
+                      </div>
+
+                      {errores.fechaTarjeta && (
+                        <p className="error">{errores.fechaTarjeta}</p>
+                      )}
                     </div>
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        Nombre del titular
-                      </label>
-                      <input
-                        type="text"
-                        className="inputMetodo"
-                        placeholder="Nombre completo"
-                      />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          Nombre del titular
+                        </label>
+                        <input
+                          type="text"
+                          className="inputMetodo"
+                          placeholder="Nombre completo"
+                          name="nombreTarjeta"
+                          value={datosTarjeta.nombreTarjeta}
+                          onChange={handlerDatosTarjeta}
+                          ref={refs.useRefs.nombreTarjetaRef}
+                        />
+                      </div>
+
+                      {errores.nombreTarjeta && (
+                        <p className="error">{errores.nombreTarjeta}</p>
+                      )}
                     </div>
                     <div className="cajaInputTarjeta">
-                      <label htmlFor="" className="labelMetodo">
-                        CVC
-                      </label>
-                      <input
-                        type="text"
-                        className="inputMetodo"
-                        placeholder="CVC"
-                      />
+                      <div>
+                        <label htmlFor="" className="labelMetodo">
+                          CVC
+                        </label>
+                        <input
+                          type="text"
+                          className="inputMetodo"
+                          placeholder="CVC"
+                          name="cvc"
+                          value={datosTarjeta.cvc}
+                          onChange={handlerDatosTarjeta}
+                          ref={refs.useRefs.cvcRef}
+                        />
+                      </div>
+
+                      {errores.cvc && <p className="error">{errores.cvc}</p>}
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            <div className="cajaTransferenciaBancaria">
-              <div className="containterEleccionTransfer">
+            <div
+              className="cajaTransferenciaBancaria"
+              onClick={handlerClickTransferencia}
+              tabIndex={-1}
+              ref={refs.useRefs.errorEleccionRef}
+            >
+              <div
+                className="containterEleccionTransfer"
+                ref={refs.useRefs.comprobanteRef}
+                tabIndex={-1}
+              >
                 <input
                   type="radio"
                   name="opcion"
                   value="2"
                   className="eleccionTranferencia"
                   onChange={handlerCbu}
+                  ref={eleccionTransferRef}
                 />
                 <p className="transferenciaBancaria">
                   Pago con Transferencia Bancaria
@@ -323,9 +405,15 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                       Seleccione un archivo
                     </button>
                   </div>
+                  {errores.comprobante && (
+                    <p className="error">{errores.comprobante}</p>
+                  )}
                 </div>
               )}
             </div>
+            {errores.errorEleccion && (
+              <p className="error">{errores.errorEleccion}</p>
+            )}
           </div>
           <div className="infoImportante">
             <h2 className="tituloInfo">Informacion Importante</h2>
@@ -370,10 +458,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               <p className="textoAcepto">Acepto Terminos y condiciones</p>
             </div>
           </div>
-          <button type="submit" className="botonRentar" onClick={handlerSubmit}>
+          <button type="button" className="botonRentar" onClick={handlerSubmit}>
             Rentar ahora
           </button>
-          <button type="submit" className="botonCancelar">
+          <button type="button" className="botonCancelar">
             Cancelar
           </button>
         </div>

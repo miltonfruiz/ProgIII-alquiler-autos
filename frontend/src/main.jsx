@@ -7,6 +7,10 @@ import "./components/Languages/Languages.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    {" "}
+    {
+      // se utiliza para detectar errores en la aplicacion
+    }
     <Mode>
       <App />
     </Mode>
