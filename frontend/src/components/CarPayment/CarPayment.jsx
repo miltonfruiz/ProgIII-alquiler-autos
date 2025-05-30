@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { FaStar } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
 import { FaCcMastercard } from "react-icons/fa6";
 import { SiAmericanexpress } from "react-icons/si";
@@ -9,9 +8,10 @@ import "./CarPayment.css";
 import {
   objetosFormPersona,
   objetosFormTarjeta,
-  objetosItems,
   objetosTarjetas,
 } from "./ObjetosCarPayment.jsx";
+import InfoImportante from "./InfoImportante.jsx";
+import ResumenDeAlquiler from "./ResumenDeAlquiler.jsx";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
@@ -46,6 +46,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
       ...datosFacturacion,
       [e.target.name]: e.target.value,
     });
+    onDatos(datosFacturacion);
   }
 
   function handlerDatosTarjeta(e) {
@@ -314,29 +315,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               <p className="error">{errores.errorEleccion}</p>
             )}
           </div>
-          <div className="infoImportante">
-            <h2 className="tituloInfo">Informacion Importante</h2>
-            <h3 className="subtituloInfo">
-              Lee atentamente esta informacion de utilidad
-            </h3>
-            <p className="paso3">Paso 3 de 3</p>
-            {objetosItems.map((items) => {
-              return (
-                <div className="cajaItems">
-                  <h2 className="tituloItems">{items.titulo}</h2>
-                  <ul>
-                    <li className="liItems">{items.primerItem}</li>
-                    <li className="liItems">{items.segundoItem}</li>
-                  </ul>
-                </div>
-              );
-            })}
-
-            <div className="cajaAceptoTerminos">
-              <input type="checkbox" className="aceptoTerminos" />
-              <p className="textoAcepto">Acepto Terminos y condiciones</p>
-            </div>
-          </div>
+          <InfoImportante></InfoImportante>
           <button type="button" className="botonRentar" onClick={handlerSubmit}>
             Rentar ahora
           </button>
@@ -344,53 +323,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             Cancelar
           </button>
         </div>
-
-        <aside>
-          <div className="resumenDeAlquiler">
-            <h2 className="tituloResumen">Resumen de Alquiler</h2>
-            <h3 className="subtituloResumen">
-              Los precios pueden variar dependiendo de la duracion del alquiler
-              y del precio de su coche de alquiler.
-            </h3>
-            <div className="cajaValoracionAuto">
-              <img
-                className="imagenResumen"
-                src="public\images\camionetaCarPayment.png"
-                alt=""
-              />
-              <div className="cajaExtrellasNombre">
-                <p className="nombreAutos">Volkswagen T-Cross</p>
-                <div className="valoracionResumen">
-                  {[0, 1, 2, 3, 4].map((estrella) => {
-                    return <FaStar className="estrella" />;
-                  })}
-
-                  <p className="valoracion">valoracion</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="linea"></div>
-            <div className="cajaSubtotal">
-              <p className="tituloSubtotal">Subtotal</p>
-              <p className="subtotal">$290.000</p>
-            </div>
-            <div className="cajaImpuestos">
-              <p className="tituloImpuestos">Impuestos</p>
-              <p className="impuestos">$34.000</p>
-            </div>
-            <div className="cajaPrecioFinal">
-              <div>
-                <h2 className="tituloPrecioFinal">Precio final de renta</h2>
-                <h3 className="subtituloPrecioFinal">
-                  Precio total con impuestos obligatorios
-                </h3>
-              </div>
-
-              <p className="precioFinal">$324.000</p>
-            </div>
-          </div>
-        </aside>
+        <ResumenDeAlquiler></ResumenDeAlquiler>
       </div>
     </div>
   );
