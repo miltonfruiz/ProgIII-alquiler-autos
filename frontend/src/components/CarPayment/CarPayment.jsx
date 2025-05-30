@@ -164,7 +164,12 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             <h2 className="tituloMetodo">Metodo de Pago</h2>
             <h3 className="subtituloMetodo">Elije tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
-            <div className="ingresoTarjeta" onClick={handlerClickTarjeta}>
+            <div
+              className={`ingresoTarjeta${
+                choicePayment == "tarjeta" ? "Clickeado" : ""
+              }`}
+              onClick={handlerClickTarjeta}
+            >
               <div className="seleccionTarjeta">
                 <input
                   type="radio"
@@ -239,7 +244,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             </div>
 
             <div
-              className="cajaTransferenciaBancaria"
+              className={`cajaTransferenciaBancaria${
+                choicePayment == "transferencia" ? "Clickeado" : ""
+              }`}
               onClick={handlerClickTransferencia}
               tabIndex={-1}
               ref={refs.useRefs.errorEleccionRef}
@@ -263,6 +270,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </div>
 
               {seleccionCbu && (
+                // aqui iria el componente de la transicion
                 <div className="conteinerTransferencia">
                   <h3 className="tituloTransferencia">
                     Transfiera a esta cuenta

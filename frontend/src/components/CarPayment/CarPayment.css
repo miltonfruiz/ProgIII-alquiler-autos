@@ -70,6 +70,9 @@ body.dark .DatosFacturacion {
   padding-left: 1rem;
 }
 
+body.dark .inputDatos {
+}
+
 .error {
   height: 1rem;
   color: red;
@@ -139,10 +142,34 @@ body.dark .metodoPago {
   cursor: pointer;
 }
 
+.ingresoTarjetaClickeado {
+  width: 35rem;
+  min-height: 3rem;
+  background-color: #f0f0f0;
+  border-radius: 0.7rem;
+  margin: 1rem;
+  margin-left: 3em;
+  cursor: pointer;
+}
+
 body.dark .ingresoTarjeta {
   background-color: #000000;
   outline: solid 1px #ffffff;
   box-shadow: 3px 3px 6px 3px #ffffff5d;
+  transition: all 0.9s;
+}
+
+body.dark .ingresoTarjetaClickeado {
+  background-color: #000000;
+  outline: solid 1px #ffffff;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
+}
+
+body.dark .ingresoTarjeta:hover {
+  color: #000000;
+  background-color: #fff;
+  outline: solid 1px #000000;
+  box-shadow: 3px 3px 6px 3px #69696988;
 }
 
 .seleccion {
@@ -221,6 +248,28 @@ body.dark .cajaTransferenciaBancaria {
   background-color: #000000;
   box-shadow: 3px 3px 6px 3px #ffffff5d;
   outline: solid 1px #ffffff;
+  transition: all 0.9s;
+}
+
+body.dark .cajaTransferenciaBancariaClickeado {
+  width: 35rem;
+  min-height: 3rem;
+  border-radius: 0.7rem;
+  margin: 1rem 1rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #000000;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
+  outline: solid 1px #ffffff;
+}
+
+body.dark .cajaTransferenciaBancaria:hover {
+  color: #000000;
+  background-color: #fff;
+  outline: solid 1px #000000;
+  box-shadow: 3px 3px 6px 3px #69696988;
 }
 
 .labelTarjeta {
@@ -511,6 +560,15 @@ body.dark .linea {
   margin: 1rem;
   color: #ffffff;
   transition: 0.3s;
+}
+
+body.dark .botonRentar {
+  background-color: #493569;
+  color: #000000;
+  transition: 0.3s;
+}
+body.dark .botonRentar:hover {
+  background-color: #7956b1;
 }
 
 .botonCancelar {
