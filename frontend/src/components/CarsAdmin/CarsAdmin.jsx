@@ -50,6 +50,14 @@ const CarsAdmin = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCar),
       });
+
+      if (!res.ok) {
+        const error = await res.json();
+        console.error("Error al crear auto:", error);
+        alert(`Error: ${error.message || "No se pudo crear el auto"}`);
+        return;
+      }
+
       const data = await res.json();
       setCars([...cars, data]);
       setShowModal(false);
@@ -72,9 +80,11 @@ const CarsAdmin = () => {
       console.error("Error al crear auto:", error);
     }
   };
+
   const filteredCars = cars.filter((car) =>
-    car.name.toLowerCase().includes(search.toLowerCase())
+    car.name?.toLowerCase().includes(search.toLowerCase())
   );
+
   return (
     <div className="admin-cars-container">
       <div className="admin-container-table">
@@ -299,9 +309,9 @@ const CarsAdmin = () => {
                     required
                   />
                   <select
-                    value={newCar.status}
+                    value={newCar.state}
                     onChange={(e) =>
-                      setNewCar({ ...newCar, status: e.target.value })
+                      setNewCar({ ...newCar, state: e.target.value })
                     }
                   >
                     <option value="" disabled>

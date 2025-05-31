@@ -16,6 +16,22 @@ export const Car = sequelize.define(
     category: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isIn: [
+          [
+            "Económico",
+            "Compacto",
+            "Estándar",
+            "Full-size",
+            "Premium",
+            "SUV",
+            "Pickup",
+            "Minivan",
+            "Deportivo",
+            "Eléctrico",
+          ],
+        ],
+      },
     },
     image: {
       type: DataTypes.STRING,
@@ -28,39 +44,48 @@ export const Car = sequelize.define(
     transmission: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isIn: [["Manual", "Automática"]],
+      },
     },
     price: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
     brand: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    date: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    tax: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    paymentMethod: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    billing: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    total: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
+      validate: {
+        isIn: [
+          [
+            "Kia",
+            "Chevrolet",
+            "Nissan",
+            "Hyundai",
+            "Toyota",
+            "Volskwagen",
+            "Honda",
+            "Mazda",
+            "BMW",
+            "Mercedes-Benz",
+            "Ford",
+            "Jeep",
+            "Chrysler",
+            "Dodge",
+            "Audi",
+            "Tesla",
+            "BYD",
+          ],
+        ],
+      },
     },
     state: {
-      type: DataTypes.ENUM("disponible", "no disponible"),
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "disponible",
+      defaultValue: "Disponible",
+      validate: {
+        isIn: [["Disponible", "No disponible"]],
+      },
     },
   },
   {
