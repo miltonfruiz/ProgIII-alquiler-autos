@@ -41,30 +41,35 @@ router.get("/cars/:id", async (req, res) => {
   }
 });
 //------------------- Crear auto -------------------//
-router.post("/cars", upload.single("image"), async (req, res) => {
-  try {
-    const { name, category, passengers, transmission, price, brand, estado } =
-      req.body;
+router.post(
+  "/cars",
+  upload.single("image"),
+  carValidation,
+  async (req, res) => {
+    try {
+      const { name, category, passengers, transmission, price, brand, estado } =
+        req.body;
 
-    const image = req.file ? `/uploads/${req.file.filename}` : null;
+      const image = req.file ? `/uploads/${req.file.filename}` : null;
 
-    const car = await Car.create({
-      name,
-      category,
-      passengers,
-      transmission,
-      price,
-      brand,
-      estado,
-      image,
-    });
-
-    res.status(201).json(car);
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ message: "Error al crear auto", error: err });
+      const car = await Car.create({
+        name,
+        category,
+        passengers,
+        transmission,
+        price,
+        brand,
+        estado,
+        image,
+      });
+      console.log("Imagen recibida:", req.file?.originalname);
+      res.status(201).json(car);
+    } catch (err) {
+      console.error(err);
+      res.status(400).json({ message: "Error al crear auto", error: err });
+    }
   }
-});
+);
 //------------------- Actualizar auto -------------------//
 router.put("/cars/:id", carValidation, async (req, res) => {
   try {

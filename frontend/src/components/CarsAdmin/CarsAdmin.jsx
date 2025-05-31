@@ -96,9 +96,9 @@ const CarsAdmin = () => {
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        console.error("Error al crear auto:", error);
-        alert(`Error: ${error.message || "No se pudo crear el auto"}`);
+        const text = await res.text();
+        console.error("Respuesta del servidor:", text);
+        alert("Error inesperado al crear el auto.");
         return;
       }
 

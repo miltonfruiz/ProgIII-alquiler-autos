@@ -21,6 +21,7 @@ const app = express();
 
 try {
   app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
@@ -32,7 +33,9 @@ try {
   app.use(reviewsRoutes);
   app.use(usersRoutes);
   app.use(adminRoutes);
-
+  app.use((req, res, next) => {
+    res.status(404).json({ message: "Ruta no encontrada" });
+  });
   await sequelize.sync();
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
