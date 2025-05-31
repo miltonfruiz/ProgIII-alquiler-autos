@@ -28,6 +28,7 @@ router.post("/cars", carValidation, async (req, res) => {
     const newCar = await Car.create(req.body);
     res.status(201).json(newCar);
   } catch (error) {
+    console.error("SequelizeValidationError:", error);
     res.status(400).json({ message: "Error al crear auto", error });
   }
 });

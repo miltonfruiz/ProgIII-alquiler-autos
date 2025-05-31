@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { AiFillEdit } from "react-icons/ai";
 import { IoSend, IoSettingsSharp } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
+import Select from "react-select";
 
 const CarsAdmin = () => {
   const [cars, setCars] = useState([]);
@@ -19,13 +20,47 @@ const CarsAdmin = () => {
     transmission: "",
     price: "",
     brand: "",
-    date: "",
-    tax: "",
-    paymentMethod: "",
-    billing: "",
-    total: "",
-    state: "Disponible",
+    estado: "Disponible",
   });
+  const categoryOptions = [
+    { value: "Económico", label: "Económico" },
+    { value: "Compacto", label: "Compacto" },
+    { value: "Estándar", label: "Estándar" },
+    { value: "Full-size", label: "Full-size" },
+    { value: "Premium", label: "Premium" },
+    { value: "SUV", label: "SUV" },
+    { value: "Pickup", label: "Pickup" },
+    { value: "Minivan", label: "Minivan" },
+    { value: "Deportivo", label: "Deportivo" },
+    { value: "Eléctrico", label: "Eléctrico" },
+  ];
+  const stateOptions = [
+    { value: "Disponible", label: "Disponible" },
+    { value: "No Disponible", label: "No Disponible" },
+  ];
+  const transmissionOptions = [
+    { value: "Manual", label: "Manual" },
+    { value: "Automática", label: "Automática" },
+  ];
+  const brandOptions = [
+    { value: "Kia", label: "Kia" },
+    { value: "Chevrolet", label: "Chevrolet" },
+    { value: "Nissan", label: "Nissan" },
+    { value: "Hyundai", label: "Hyundai" },
+    { value: "Toyota", label: "Toyota" },
+    { value: "Volskwagen", label: "Volskwagen" },
+    { value: "Honda", label: "Honda" },
+    { value: "Mazda", label: "Mazda" },
+    { value: "BMW", label: "BMW" },
+    { value: "Mercedes-Benz", label: "Mercedes-Benz" },
+    { value: "Ford", label: "Ford" },
+    { value: "Jeep", label: "Jeep" },
+    { value: "Chrysler", label: "Chrysler" },
+    { value: "Dodge", label: "Dodge" },
+    { value: "Audi", label: "Audi" },
+    { value: "Tesla", label: "Tesla" },
+    { value: "BYD", label: "BYD" },
+  ];
   useEffect(() => {
     fetch("http://localhost:3000/cars")
       .then((res) => res.json())
@@ -69,11 +104,6 @@ const CarsAdmin = () => {
         transmission: "",
         price: "",
         brand: "",
-        date: "",
-        tax: "",
-        paymentMethod: "",
-        billing: "",
-        total: "",
         state: "Disponible",
       });
     } catch (error) {
@@ -214,14 +244,37 @@ const CarsAdmin = () => {
                     }
                     required
                   />
-                  <input
-                    type="text"
+                  <Select
+                    className="select-options"
+                    options={categoryOptions}
                     placeholder="Categoría"
-                    value={newCar.category}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, category: e.target.value })
+                    onChange={(selectedOption) =>
+                      setNewCar({ ...newCar, category: selectedOption.value })
                     }
-                    required
+                    menuPosition="fixed"
+                    menuPortalTarget={document.body}
+                    styles={{
+                      control: (provided, state) => ({
+                        ...provided,
+                        borderRadius: "8px",
+                        outline: "none",
+                        borderColor: state.isFocused
+                          ? "#6366f1"
+                          : provided.borderColor,
+                        boxShadow: state.isFocused
+                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                          : "none",
+                        "&:hover": {
+                          borderColor: "#6366f1",
+                        },
+                      }),
+                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                      menu: (provided) => ({
+                        ...provided,
+                        overflowY: "auto",
+                        fontSize: "11px",
+                      }),
+                    }}
                   />
                   <input
                     type="number"
@@ -232,18 +285,41 @@ const CarsAdmin = () => {
                     }
                     required
                   />
-                  <select
-                    value={newCar.transmission}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, transmission: e.target.value })
+                  <Select
+                    className="select-options"
+                    options={transmissionOptions}
+                    placeholder="Transmisión"
+                    onChange={(selectedOption) =>
+                      setNewCar({
+                        ...newCar,
+                        transmission: selectedOption.value,
+                      })
                     }
-                  >
-                    <option value="" disabled>
-                      Transmisión
-                    </option>
-                    <option value="manual">Manual</option>
-                    <option value="automatica">Automatico</option>
-                  </select>
+                    menuPosition="fixed"
+                    menuPortalTarget={document.body}
+                    styles={{
+                      control: (provided, state) => ({
+                        ...provided,
+                        borderRadius: "8px",
+                        outline: "none",
+                        borderColor: state.isFocused
+                          ? "#6366f1"
+                          : provided.borderColor,
+                        boxShadow: state.isFocused
+                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                          : "none",
+                        "&:hover": {
+                          borderColor: "#6366f1",
+                        },
+                      }),
+                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                      menu: (provided) => ({
+                        ...provided,
+                        overflowY: "auto",
+                        fontSize: "11px",
+                      }),
+                    }}
+                  />
                   <input
                     type="number"
                     placeholder="Precio"
@@ -253,95 +329,83 @@ const CarsAdmin = () => {
                     }
                     required
                   />
-                  <input
-                    type="text"
+                  <Select
+                    className="select-options"
+                    options={brandOptions}
                     placeholder="Marca"
-                    value={newCar.brand}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, brand: e.target.value })
+                    onChange={(selectedOption) =>
+                      setNewCar({ ...newCar, brand: selectedOption.value })
                     }
-                    required
+                    menuPosition="fixed"
+                    menuPortalTarget={document.body}
+                    styles={{
+                      control: (provided, state) => ({
+                        ...provided,
+                        borderRadius: "8px",
+                        outline: "none",
+                        borderColor: state.isFocused
+                          ? "#6366f1"
+                          : provided.borderColor,
+                        boxShadow: state.isFocused
+                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                          : "none",
+                        "&:hover": {
+                          borderColor: "#6366f1",
+                        },
+                      }),
+                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                      menu: (provided) => ({
+                        ...provided,
+                        overflowY: "auto",
+                        fontSize: "11px",
+                      }),
+                    }}
                   />
-                  <input
-                    type="date"
-                    placeholder="Fecha"
-                    value={newCar.date}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, date: e.target.value })
+                  <Select
+                    className="select-options"
+                    options={stateOptions}
+                    placeholder="Estado"
+                    onChange={(selectedOption) =>
+                      setNewCar({ ...newCar, estado: selectedOption.value })
                     }
-                    required
+                    menuPosition="fixed"
+                    menuPortalTarget={document.body}
+                    styles={{
+                      control: (provided, state) => ({
+                        ...provided,
+                        borderRadius: "8px",
+                        outline: "none",
+                        borderColor: state.isFocused
+                          ? "#6366f1"
+                          : provided.borderColor,
+                        boxShadow: state.isFocused
+                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                          : "none",
+                        "&:hover": {
+                          borderColor: "#6366f1",
+                        },
+                      }),
+                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                      menu: (provided) => ({
+                        ...provided,
+                        overflowY: "auto",
+                        fontSize: "11px",
+                      }),
+                    }}
                   />
-                  <select
-                    value={newCar.tax}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, tax: e.target.value })
-                    }
-                  >
-                    <option value="" disabled>
-                      Impuesto
-                    </option>
-                    <option value="unica">Único</option>
-                    <option value="mensual">Mensual</option>
-                    <option value="anual">Anual</option>
-                  </select>
-                  <select
-                    value={newCar.paymentMethod}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, paymentMethod: e.target.value })
-                    }
-                  >
-                    <option value="" disabled>
-                      Método de Pago
-                    </option>
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="Transferencia">Transferencia</option>
-                    <option value="Tarjeta de crédito">
-                      Tarjeta de crédito
-                    </option>
-                  </select>
-                  <input
-                    type="number"
-                    placeholder="Facturación"
-                    value={newCar.billing}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, billing: e.target.value })
-                    }
-                    required
-                  />
-                  <select
-                    value={newCar.state}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, state: e.target.value })
-                    }
-                  >
-                    <option value="" disabled>
-                      Estado
-                    </option>
-                    <option value="disponible">Disponible</option>
-                    <option value="no disponible">No disponible</option>
-                  </select>
-                  <input
-                    type="number"
-                    placeholder="Total"
-                    value={newCar.total}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, total: e.target.value })
-                    }
-                    required
-                  />
+                  <div className="cars-container-button">
+                    <button className="create-button-cars" type="submit">
+                      <IoSend /> Crear
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowModal(false)}
+                      className="cancel-button-cars"
+                    >
+                      <MdCancel className="cancel-icon-cars" /> Cancelar
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="cars-container-button">
-                <button className="create-button-cars" type="submit">
-                  <IoSend /> Crear
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="cancel-button-cars"
-                >
-                  <MdCancel className="cancel-icon-cars" /> Cancelar
-                </button>
               </div>
             </form>
           </div>
