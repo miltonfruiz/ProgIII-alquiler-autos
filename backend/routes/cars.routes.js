@@ -25,6 +25,7 @@ router.get("/cars/:id", async (req, res) => {
 //------------------- Crear auto -------------------//
 router.post("/cars", carValidation, async (req, res) => {
   try {
+    console.log("Datos recibidos:", req.body); // <- Agregado
     const newCar = await Car.create(req.body);
     res.status(201).json(newCar);
   } catch (error) {
