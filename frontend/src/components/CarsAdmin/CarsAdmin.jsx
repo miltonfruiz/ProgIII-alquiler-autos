@@ -80,10 +80,19 @@ const CarsAdmin = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("name", newCar.name);
+      formData.append("category", newCar.category);
+      formData.append("image", newCar.image);
+      formData.append("passengers", newCar.passengers);
+      formData.append("transmission", newCar.transmission);
+      formData.append("price", newCar.price);
+      formData.append("brand", newCar.brand);
+      formData.append("estado", newCar.estado);
+
       const res = await fetch("http://localhost:3000/cars", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newCar),
+        body: formData,
       });
 
       if (!res.ok) {
@@ -104,7 +113,7 @@ const CarsAdmin = () => {
         transmission: "",
         price: "",
         brand: "",
-        state: "Disponible",
+        estado: "Disponible",
       });
     } catch (error) {
       console.error("Error al crear auto:", error);

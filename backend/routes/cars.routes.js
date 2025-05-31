@@ -1,8 +1,26 @@
 import { Router } from "express";
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import { Car } from "../src/models/Car.js";
 import { carValidation } from "../src/middlewares/carValidation.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const router = Router();
 
+//------------------- Configuración del almacenamiento -------------------//
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueName = Date.now() + "-" + file.originalname;
+    cb(null, uniqueName);
+  },
+});
+const upload = multer({ storage });
 //------------------- Obtener autos -------------------//
 router.get("/cars", async (req, res) => {
   try {
@@ -23,14 +41,28 @@ router.get("/cars/:id", async (req, res) => {
   }
 });
 //------------------- Crear auto -------------------//
-router.post("/cars", carValidation, async (req, res) => {
+router.post("/cars", upload.single("image"), async (req, res) => {
   try {
-    console.log("Datos recibidos:", req.body); // <- Agregado
-    const newCar = await Car.create(req.body);
-    res.status(201).json(newCar);
-  } catch (error) {
-    console.error("SequelizeValidationError:", error);
-    res.status(400).json({ message: "Error al crear auto", error });
+    const { name, category, passengers, transmission, price, brand, estado } =
+      req.body;
+
+    const image = req.file ? `/uploads/${req.file.filename}` : null;
+
+    const car = await Car.create({
+      name,
+      category,
+      passengers,
+      transmission,
+      price,
+      brand,
+      estado,
+      image,
+    });
+
+    res.status(201).json(car);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: "Error al crear auto", error: err });
   }
 });
 //------------------- Actualizar auto -------------------//
