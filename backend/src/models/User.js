@@ -53,6 +53,11 @@ export const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    rol: {
+      type: DataTypes.ENUM("administrador", "empleado", "usuario"),
+      allowNull: false,
+      defaultValue: "usuario",
+    },
   },
   {
     timestamps: false,

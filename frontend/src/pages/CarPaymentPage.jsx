@@ -1,35 +1,58 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import CarPayment from "../components/CarPayment/CarPayment";
 import CarPaymentValidation from "../components/CarPaymentValidation/CarPaymentValidation";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
+import { CiNoWaitingSign } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
 
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
-  const nombreRef = useRef(null);
-  const apellidoRef = useRef(null);
-  const numeroTelefonicoRef = useRef(null);
-  const dniRef = useRef(null);
 
-  function handlerSubmit(datosFacturacion) {
-    const errores = CarPaymentValidation({ datosFacturacion });
+  const useRefs = {
+    nombreRef: useRef(null),
+    apellidoRef: useRef(null),
+    numeroTelefonicoRef: useRef(null),
+    dniRef: useRef(null),
+    errorEleccionRef: useRef(null),
+    numeroTarjetaRef: useRef(null),
+    fechaTarjetaRef: useRef(null),
+    nombreTarjetaRef: useRef(null),
+    cvcRef: useRef(null),
+    comprobanteRef: useRef(null),
+  };
+
+  const arrayErrores = [
+    "nombre",
+    "apellido",
+    "numeroTelefonico",
+    "dni",
+    "errorEleccion",
+    "numeroTarjeta",
+    "fechaTarjeta",
+    "nombreTarjeta",
+    "cvc",
+    "comprobante",
+  ];
+
+  function handlerSubmit(datosFacturacion, datosPago, choicePayment) {
+    const errores = CarPaymentValidation({
+      datosFacturacion,
+      datosPago,
+      choicePayment,
+    });
 
     if (Object.keys(errores).length > 0) {
-      if (errores.nombre && nombreRef.current) {
-        nombreRef.current.focus();
-      }
-      if (errores.apellido && apellidoRef.current) {
-        apellidoRef.current.focus();
-      }
-      if (errores.numeroTelefonico && numeroTelefonicoRef.current) {
-        numeroTelefonicoRef.current.focus();
-      }
-      if (errores.dni && dniRef.current) {
-        dniRef.current.focus();
-      }
+      arrayErrores.forEach((error) => {
+        const keyRef = `${error}Ref`;
+        if (errores[error] && useRefs[keyRef].current) {
+          useRefs[keyRef].current.focus();
+        }
+      });
 
       setErrores(errores);
     } else {
+      toast.success("¡auto rentado!");
       setErrores({});
     }
   }
@@ -40,8 +63,11 @@ const CarPaymentPage = () => {
       <CarPayment
         onSubmit={handlerSubmit}
         errores={errores}
-        refs={{ nombreRef, apellidoRef, numeroTelefonicoRef, dniRef }}
+        refs={{
+          useRefs,
+        }}
       />
+      <ToastContainer position="top-right" autoClose={4000}></ToastContainer>
     </div>
   );
 };
