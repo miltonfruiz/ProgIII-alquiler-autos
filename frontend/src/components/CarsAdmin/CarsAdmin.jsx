@@ -8,6 +8,7 @@ import { IoSend, IoSettingsSharp } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
 import Select from "react-select";
 import CardAdminValidation from "../CarAdminValidation/CarAdminValidation";
+import { ToastContainer, toast } from "react-toastify";
 
 const CarsAdmin = () => {
   const [cars, setCars] = useState([]);
@@ -74,6 +75,7 @@ const CarsAdmin = () => {
       await fetch(`http://localhost:3000/cars/${id}`, {
         method: "DELETE",
       });
+      toast.success("Auto borrado correctamente!");
       setCars(cars.filter((car) => car.id !== id));
     } catch (error) {
       console.error("Error al eliminar auto:", error);
@@ -109,7 +111,7 @@ const CarsAdmin = () => {
         alert("Error inesperado al crear el auto.");
         return;
       }
-
+      toast.success("Auto creado correctamente!");
       const data = await res.json();
       setCars([...cars, data]);
       setShowModal(false);
@@ -503,6 +505,7 @@ const CarsAdmin = () => {
           </div>
         </div>
       )}
+      <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
 };

@@ -5,7 +5,7 @@ const CardAdminValidation = (car) => {
     errors.name = "* Debe ingresar nombre";
   }
   if (!car.category || car.category.trim() === "") {
-    errors.category = "* Debes seleccionar categoría.";
+    errors.category = "* Debes seleccionar categoría";
   }
   if (!car.image) {
     errors.image = "* Debe ingresar imagen";
@@ -14,16 +14,16 @@ const CardAdminValidation = (car) => {
     errors.passengers = "* Debe ingresar un número válido";
   }
   if (!car.transmission || car.transmission.trim() === "") {
-    errors.transmission = "* Debes seleccionar transmisión.";
+    errors.transmission = "* Debes seleccionar transmisión";
   }
   if (!car.price || isNaN(car.price) || Number(car.price) <= 0) {
     errors.price = "* Debe ingresar un número válido";
   }
   if (!car.brand || car.brand.trim() === "") {
-    errors.brand = "* Debes seleccionar marca.";
+    errors.brand = "* Debes seleccionar marca";
   }
   if (!car.estado || car.estado.trim() === "") {
-    errors.estado = "* Debes seleccionar estado.";
+    errors.estado = "* Debes seleccionar estado";
   }
   return errors;
 };
