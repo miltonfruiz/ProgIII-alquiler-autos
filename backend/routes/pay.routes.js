@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Pay } from "../src/models/Pay.js";
-import { payValidation } from "../src/middlewares";
+import { payValidation } from "../src/middlewares/payValidations.js";
 
 const router = Router();
 
@@ -83,3 +83,4 @@ router.get("/pays/user:userId", async (req, res) => {
 });
 
 // creo que irian esas dos rutas nomas. por ahora no se me ocurre otra
+export default router; 

@@ -1,4 +1,4 @@
-import { validateReservationDates } from "../helpers/validateDates";
+import { validateReservationDates } from "../helpers/validateDates.js";
 import { Reserva } from "../models/Reserva.js";
 import { Op } from "sequelize";
 export async function validateReservation(req, res, next) {

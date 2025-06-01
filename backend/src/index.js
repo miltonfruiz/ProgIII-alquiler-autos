@@ -9,6 +9,8 @@ import carsRoutes from "../routes/cars.routes.js";
 import reviewsRoutes from "../routes/review.routes.js";
 import usersRoutes from "../routes/users.routes.js";
 import adminRoutes from "../routes/admin.routes.js";
+import reservasRoutes from "../routes/reservas.routes.js";
+import payRoutes from "../routes/pay.routes.js";
 
 const app = express();
 
@@ -24,7 +26,11 @@ try {
   app.use(reviewsRoutes);
   app.use(usersRoutes);
   app.use(adminRoutes);
-
+  app.use(reservasRoutes);
+  app.use(payRoutes);
+  sequelize.sync({ force: true }).then(() => {
+  console.log("Todas las tablas fueron recreadas correctamente.");
+});
   await sequelize.sync();
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
