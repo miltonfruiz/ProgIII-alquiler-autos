@@ -199,7 +199,6 @@ const CarsAdmin = () => {
   };
   function convertToCSV(data) {
     if (!data || data.length === 0) return "";
-
     const headers = Object.keys(data[0]).join(",");
     const rows = data.map((row) =>
       Object.values(row)
@@ -210,14 +209,12 @@ const CarsAdmin = () => {
         )
         .join(",")
     );
-
     return [headers, ...rows].join("\n");
   }
   function downloadCSV(data, filename = "autos_backup.csv") {
     const csv = convertToCSV(data);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-
     const link = document.createElement("a");
     link.href = url;
     link.setAttribute("download", filename);
