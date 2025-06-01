@@ -71,16 +71,21 @@ router.post(
   }
 );
 //------------------- Actualizar auto -------------------//
-router.put("/cars/:id", carValidation, async (req, res) => {
-  try {
-    const car = await Car.findByPk(req.params.id);
-    if (!car) return res.status(404).json({ message: "Auto no encontrado" });
-    await car.update(req.body);
-    res.json(car);
-  } catch (error) {
-    res.status(400).json({ message: "Error al actualizar auto", error });
+router.put(
+  "/cars/:id",
+  upload.single("image"),
+  carValidation,
+  async (req, res) => {
+    try {
+      const car = await Car.findByPk(req.params.id);
+      if (!car) return res.status(404).json({ message: "Auto no encontrado" });
+      await car.update(req.body);
+      res.json(car);
+    } catch (error) {
+      res.status(400).json({ message: "Error al actualizar auto", error });
+    }
   }
-});
+);
 //------------------- Eliminar auto -------------------//
 router.delete("/cars/:id", async (req, res) => {
   try {

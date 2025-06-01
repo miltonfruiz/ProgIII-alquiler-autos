@@ -15,6 +15,8 @@ const CarsAdmin = () => {
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [editingCar, setEditingCar] = useState(null);
+
   const [newCar, setNewCar] = useState({
     name: "",
     category: "",
@@ -83,12 +85,9 @@ const CarsAdmin = () => {
   };
   const handleCreate = async (e) => {
     e.preventDefault();
-
     const errors = CardAdminValidation(newCar);
     setFormErrors(errors);
-
     if (Object.keys(errors).length > 0) return;
-
     try {
       const formData = new FormData();
       formData.append("name", newCar.name);
@@ -99,12 +98,10 @@ const CarsAdmin = () => {
       formData.append("price", newCar.price);
       formData.append("brand", newCar.brand);
       formData.append("estado", newCar.estado);
-
       const res = await fetch("http://localhost:3000/cars", {
         method: "POST",
         body: formData,
       });
-
       if (!res.ok) {
         const text = await res.text();
         console.error("Respuesta del servidor:", text);
@@ -139,6 +136,67 @@ const CarsAdmin = () => {
       [name]: value,
     }));
   };
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const errors = CardAdminValidation(newCar);
+    setFormErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+    try {
+      const formData = new FormData();
+      formData.append("name", newCar.name);
+      formData.append("category", newCar.category);
+      if (newCar.image) formData.append("image", newCar.image);
+      formData.append("passengers", newCar.passengers);
+      formData.append("transmission", newCar.transmission);
+      formData.append("price", newCar.price);
+      formData.append("brand", newCar.brand);
+      formData.append("estado", newCar.estado);
+      const res = await fetch(`http://localhost:3000/cars/${editingCar.id}`, {
+        method: "PUT",
+        body: formData,
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Respuesta del servidor:", text);
+        alert("Error al actualizar el auto.");
+        return;
+      }
+      toast.success("Auto editado correctamente!");
+      const updatedCar = await res.json();
+      setCars((prevCars) =>
+        prevCars.map((car) => (car.id === updatedCar.id ? updatedCar : car))
+      );
+      setShowModal(false);
+      setEditingCar(null);
+      setNewCar({
+        name: "",
+        category: "",
+        image: null,
+        passengers: "",
+        transmission: "",
+        price: "",
+        brand: "",
+        estado: "",
+      });
+    } catch (error) {
+      console.error("Error al actualizar auto:", error);
+    }
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setEditingCar(null);
+    setNewCar({
+      name: "",
+      category: "",
+      image: null,
+      passengers: "",
+      transmission: "",
+      price: "",
+      brand: "",
+      estado: "",
+    });
+    setFormErrors({});
+  };
 
   return (
     <div className="admin-cars-container">
@@ -166,7 +224,24 @@ const CarsAdmin = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <button className="create-button" onClick={() => setShowModal(true)}>
+          <button
+            className="create-button"
+            onClick={() => {
+              setEditingCar(null);
+              setNewCar({
+                name: "",
+                category: "",
+                image: null,
+                passengers: "",
+                transmission: "",
+                price: "",
+                brand: "",
+                estado: "",
+              });
+              setFormErrors({});
+              setShowModal(true);
+            }}
+          >
             <FaPlus /> Agregar Auto
           </button>
         </div>
@@ -199,11 +274,23 @@ const CarsAdmin = () => {
                       className="administration-button-edit"
                       onClick={(e) => {
                         e.stopPropagation();
-                        alert("Funcionalidad en desarrollo");
+                        setNewCar({
+                          name: car.name,
+                          category: car.category,
+                          image: null,
+                          passengers: car.passengers,
+                          transmission: car.transmission,
+                          price: car.price,
+                          brand: car.brand,
+                          estado: car.state,
+                        });
+                        setEditingCar(car);
+                        setShowModal(true);
                       }}
                     >
                       <FaEdit className="adm-icon-edit" /> Editar
                     </button>
+
                     <button
                       className="administration-button-delete"
                       onClick={(e) => {
@@ -224,9 +311,14 @@ const CarsAdmin = () => {
         <div className="modal-overlay-cars">
           <div className="modal-content-cars">
             <h2 className="create-text-cars">
-              <IoSettingsSharp className="create-icon-cars" /> Crear auto
+              <IoSettingsSharp className="create-icon-cars" />
+              {editingCar ? "Editar auto" : "Crear auto"}
             </h2>
-            <form onSubmit={handleCreate} className="car-form">
+
+            <form
+              onSubmit={editingCar ? handleUpdate : handleCreate}
+              className="car-form"
+            >
               <div className="image-inputs-container">
                 <div
                   className="cars-image-wrapper"
@@ -489,12 +581,12 @@ const CarsAdmin = () => {
                   </div>
                   <div className="cars-container-button">
                     <button className="create-button-cars" type="submit">
-                      <IoSend /> Crear
+                      <IoSend /> {editingCar ? "Editar" : "Crear"}
                     </button>
                     <button
                       className="cancel-button-cars"
                       type="button"
-                      onClick={() => setShowModal(false)}
+                      onClick={handleCloseModal}
                     >
                       <MdCancel className="cancel-icon-cars" /> Cancelar
                     </button>
