@@ -197,7 +197,34 @@ const CarsAdmin = () => {
     });
     setFormErrors({});
   };
+  function convertToCSV(data) {
+    if (!data || data.length === 0) return "";
 
+    const headers = Object.keys(data[0]).join(",");
+    const rows = data.map((row) =>
+      Object.values(row)
+        .map((value) =>
+          typeof value === "string"
+            ? `"${value.replace(/"/g, '""')}"`
+            : `"${value}"`
+        )
+        .join(",")
+    );
+
+    return [headers, ...rows].join("\n");
+  }
+  function downloadCSV(data, filename = "autos_backup.csv") {
+    const csv = convertToCSV(data);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
   return (
     <div className="admin-cars-container">
       <div className="admin-container-table">
@@ -207,13 +234,12 @@ const CarsAdmin = () => {
         <div className="admin-toolbar">
           <button
             className="backup-button"
-            onClick={(e) => {
-              e.stopPropagation();
-              alert("Funcionalidad en desarrollo");
-            }}
+            id="backup-button"
+            onClick={() => downloadCSV(cars)}
           >
-            <FaDownload /> Backup datos
+            <FaDownload /> Backup
           </button>
+
           <div className="search-container">
             <CiSearch className="search-icon-admin" />
             <input
@@ -242,7 +268,7 @@ const CarsAdmin = () => {
               setShowModal(true);
             }}
           >
-            <FaPlus /> Agregar Auto
+            <FaPlus /> Agregar
           </button>
         </div>
         <div className="table-container">
