@@ -241,8 +241,8 @@ td {
   overflow-y: auto;
 }
 .cars-image-wrapper {
-  width: 200px;
-  height: 200px;
+  width: 234px;
+  height: 234px;
   background-color: #f0f0f0;
   border: 2px dashed #ccc;
   display: flex;
@@ -366,6 +366,7 @@ td {
   border-radius: 8px;
 }
 .cars-placeholder-text {
+  margin-top: 50%;
   color: #777;
   font-size: 11px;
   text-align: center;
@@ -373,7 +374,8 @@ td {
 }
 .cars-container-button {
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 .image-inputs-container {
   display: flex;
@@ -386,4 +388,40 @@ td {
 }
 .send-icon {
   font-size: 15px;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  height: 53px;
+}
+.input-container-image {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+}
+.input-name {
+  width: 100%;
+}
+.error-admin-input {
+  height: 1rem;
+  color: red;
+  font-size: 11px;
+  margin-top: 0.1rem;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.error-admin-input.visible {
+  opacity: 1;
+}
+.error-admin-input-image {
+  height: 1rem;
+  color: red;
+  font-size: 11px;
+  margin-top: 4.1rem;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.error-admin-input-image.visible {
+  opacity: 1;
 }

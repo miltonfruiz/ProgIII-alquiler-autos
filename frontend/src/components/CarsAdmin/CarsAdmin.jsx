@@ -7,11 +7,13 @@ import { AiFillEdit } from "react-icons/ai";
 import { IoSend, IoSettingsSharp } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
 import Select from "react-select";
+import CardAdminValidation from "../CarAdminValidation/CarAdminValidation";
 
 const CarsAdmin = () => {
   const [cars, setCars] = useState([]);
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   const [newCar, setNewCar] = useState({
     name: "",
     category: "",
@@ -20,7 +22,7 @@ const CarsAdmin = () => {
     transmission: "",
     price: "",
     brand: "",
-    estado: "Disponible",
+    estado: "",
   });
   const categoryOptions = [
     { value: "Económico", label: "Económico" },
@@ -79,6 +81,12 @@ const CarsAdmin = () => {
   };
   const handleCreate = async (e) => {
     e.preventDefault();
+
+    const errors = CardAdminValidation(newCar);
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
+
     try {
       const formData = new FormData();
       formData.append("name", newCar.name);
@@ -119,10 +127,16 @@ const CarsAdmin = () => {
       console.error("Error al crear auto:", error);
     }
   };
-
   const filteredCars = cars.filter((car) =>
     car.name?.toLowerCase().includes(search.toLowerCase())
   );
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewCar((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <div className="admin-cars-container">
@@ -218,198 +232,267 @@ const CarsAdmin = () => {
                     document.getElementById("car-image-input").click()
                   }
                 >
-                  {newCar.image ? (
-                    <img
-                      src={URL.createObjectURL(newCar.image)}
-                      alt="Vista previa"
-                      className="cars-preview-image"
+                  <div className="input-container-image">
+                    {newCar.image ? (
+                      <img
+                        src={URL.createObjectURL(newCar.image)}
+                        alt="Vista previa"
+                        className="cars-preview-image"
+                      />
+                    ) : (
+                      <p className="cars-placeholder-text">
+                        Haz clic para subir una imagen
+                      </p>
+                    )}
+                    <AiFillEdit className="camera-icon" />
+                    <input
+                      id="car-image-input"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                          setNewCar({ ...newCar, image: file });
+                        }
+                      }}
+                      style={{ display: "none" }}
                     />
-                  ) : (
-                    <p className="cars-placeholder-text">
-                      Haz clic para subir una imagen
+                    <p
+                      className={`error-admin-input-image ${
+                        formErrors.image ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.image || ""}{" "}
                     </p>
-                  )}
-                  <AiFillEdit className="camera-icon" />
-                  <input
-                    id="car-image-input"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        setNewCar({ ...newCar, image: file });
-                      }
-                    }}
-                    style={{ display: "none" }}
-                  />
+                  </div>
                 </div>
                 <div className="cars-inputs">
-                  <input
-                    type="text"
-                    placeholder="Nombre"
-                    value={newCar.name}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, name: e.target.value })
-                    }
-                    required
-                  />
-                  <Select
-                    className="select-options"
-                    options={categoryOptions}
-                    placeholder="Categoría"
-                    onChange={(selectedOption) =>
-                      setNewCar({ ...newCar, category: selectedOption.value })
-                    }
-                    menuPosition="fixed"
-                    menuPortalTarget={document.body}
-                    styles={{
-                      control: (provided, state) => ({
-                        ...provided,
-                        borderRadius: "8px",
-                        outline: "none",
-                        borderColor: state.isFocused
-                          ? "#6366f1"
-                          : provided.borderColor,
-                        boxShadow: state.isFocused
-                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
-                          : "none",
-                        "&:hover": {
-                          borderColor: "#6366f1",
-                        },
-                      }),
-                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-                      menu: (provided) => ({
-                        ...provided,
-                        overflowY: "auto",
-                        fontSize: "11px",
-                      }),
-                    }}
-                  />
-                  <input
-                    type="number"
-                    placeholder="Pasajeros"
-                    value={newCar.passengers}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, passengers: e.target.value })
-                    }
-                    required
-                  />
-                  <Select
-                    className="select-options"
-                    options={transmissionOptions}
-                    placeholder="Transmisión"
-                    onChange={(selectedOption) =>
-                      setNewCar({
-                        ...newCar,
-                        transmission: selectedOption.value,
-                      })
-                    }
-                    menuPosition="fixed"
-                    menuPortalTarget={document.body}
-                    styles={{
-                      control: (provided, state) => ({
-                        ...provided,
-                        borderRadius: "8px",
-                        outline: "none",
-                        borderColor: state.isFocused
-                          ? "#6366f1"
-                          : provided.borderColor,
-                        boxShadow: state.isFocused
-                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
-                          : "none",
-                        "&:hover": {
-                          borderColor: "#6366f1",
-                        },
-                      }),
-                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-                      menu: (provided) => ({
-                        ...provided,
-                        overflowY: "auto",
-                        fontSize: "11px",
-                      }),
-                    }}
-                  />
-                  <input
-                    type="number"
-                    placeholder="Precio"
-                    value={newCar.price}
-                    onChange={(e) =>
-                      setNewCar({ ...newCar, price: e.target.value })
-                    }
-                    required
-                  />
-                  <Select
-                    className="select-options"
-                    options={brandOptions}
-                    placeholder="Marca"
-                    onChange={(selectedOption) =>
-                      setNewCar({ ...newCar, brand: selectedOption.value })
-                    }
-                    menuPosition="fixed"
-                    menuPortalTarget={document.body}
-                    styles={{
-                      control: (provided, state) => ({
-                        ...provided,
-                        borderRadius: "8px",
-                        outline: "none",
-                        borderColor: state.isFocused
-                          ? "#6366f1"
-                          : provided.borderColor,
-                        boxShadow: state.isFocused
-                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
-                          : "none",
-                        "&:hover": {
-                          borderColor: "#6366f1",
-                        },
-                      }),
-                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-                      menu: (provided) => ({
-                        ...provided,
-                        overflowY: "auto",
-                        fontSize: "11px",
-                      }),
-                    }}
-                  />
-                  <Select
-                    className="select-options"
-                    options={stateOptions}
-                    placeholder="Estado"
-                    onChange={(selectedOption) =>
-                      setNewCar({ ...newCar, estado: selectedOption.value })
-                    }
-                    menuPosition="fixed"
-                    menuPortalTarget={document.body}
-                    styles={{
-                      control: (provided, state) => ({
-                        ...provided,
-                        borderRadius: "8px",
-                        outline: "none",
-                        borderColor: state.isFocused
-                          ? "#6366f1"
-                          : provided.borderColor,
-                        boxShadow: state.isFocused
-                          ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
-                          : "none",
-                        "&:hover": {
-                          borderColor: "#6366f1",
-                        },
-                      }),
-                      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-                      menu: (provided) => ({
-                        ...provided,
-                        overflowY: "auto",
-                        fontSize: "11px",
-                      }),
-                    }}
-                  />
+                  <div className="input-container">
+                    <input
+                      className="input-name"
+                      type="text"
+                      name="name"
+                      placeholder="Nombre"
+                      value={newCar.name}
+                      onChange={handleChange}
+                    />
+                    <p
+                      className={`error-admin-input ${
+                        formErrors.name ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.name || ""}{" "}
+                    </p>
+                  </div>
+                  <div className="input-container">
+                    <Select
+                      className="select-options"
+                      options={categoryOptions}
+                      placeholder="Categoría"
+                      onChange={(selectedOption) =>
+                        setNewCar({ ...newCar, category: selectedOption.value })
+                      }
+                      menuPosition="fixed"
+                      menuPortalTarget={document.body}
+                      styles={{
+                        control: (provided, state) => ({
+                          ...provided,
+                          borderRadius: "8px",
+                          outline: "none",
+                          borderColor: state.isFocused
+                            ? "#6366f1"
+                            : provided.borderColor,
+                          boxShadow: state.isFocused
+                            ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                            : "none",
+                          "&:hover": {
+                            borderColor: "#6366f1",
+                          },
+                        }),
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                        menu: (provided) => ({
+                          ...provided,
+                          overflowY: "auto",
+                          fontSize: "11px",
+                        }),
+                      }}
+                    />
+                    <p
+                      className={`error-admin-input ${
+                        formErrors.category ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.category || ""}{" "}
+                    </p>
+                  </div>
+                  <div className="input-container">
+                    <input
+                      className="input-name"
+                      type="number"
+                      name="passengers"
+                      placeholder="Pasajeros"
+                      value={newCar.passengers}
+                      onChange={handleChange}
+                    />
+                    <p
+                      className={`error-admin-input ${
+                        formErrors.passengers ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.passengers || ""}{" "}
+                    </p>
+                  </div>
+                  <div className="input-container">
+                    <Select
+                      className="select-options"
+                      options={transmissionOptions}
+                      placeholder="Transmisión"
+                      onChange={(selectedOption) =>
+                        setNewCar({
+                          ...newCar,
+                          transmission: selectedOption.value,
+                        })
+                      }
+                      menuPosition="fixed"
+                      menuPortalTarget={document.body}
+                      styles={{
+                        control: (provided, state) => ({
+                          ...provided,
+                          borderRadius: "8px",
+                          outline: "none",
+                          borderColor: state.isFocused
+                            ? "#6366f1"
+                            : provided.borderColor,
+                          boxShadow: state.isFocused
+                            ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                            : "none",
+                          "&:hover": {
+                            borderColor: "#6366f1",
+                          },
+                        }),
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                        menu: (provided) => ({
+                          ...provided,
+                          overflowY: "auto",
+                          fontSize: "11px",
+                        }),
+                      }}
+                    />
+                    <p
+                      className={`error-admin-input ${
+                        formErrors.transmission ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.transmission || ""}{" "}
+                    </p>
+                  </div>
+                  <div className="input-container">
+                    <input
+                      className="input-name"
+                      type="number"
+                      name="price"
+                      placeholder="Precio"
+                      value={newCar.price}
+                      onChange={handleChange}
+                    />
+                    <p
+                      className={`error-admin-input ${
+                        formErrors.price ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.price || ""}{" "}
+                    </p>
+                  </div>
+                  <div className="input-container">
+                    <Select
+                      className="select-options"
+                      options={brandOptions}
+                      placeholder="Marca"
+                      onChange={(selectedOption) =>
+                        setNewCar({ ...newCar, brand: selectedOption.value })
+                      }
+                      menuPosition="fixed"
+                      menuPortalTarget={document.body}
+                      styles={{
+                        control: (provided, state) => ({
+                          ...provided,
+                          borderRadius: "8px",
+                          outline: "none",
+                          borderColor: state.isFocused
+                            ? "#6366f1"
+                            : provided.borderColor,
+                          boxShadow: state.isFocused
+                            ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                            : "none",
+                          "&:hover": {
+                            borderColor: "#6366f1",
+                          },
+                        }),
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                        menu: (provided) => ({
+                          ...provided,
+                          overflowY: "auto",
+                          fontSize: "11px",
+                        }),
+                      }}
+                    />
+                    <p
+                      className={`error-admin-input ${
+                        formErrors.brand ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.brand || ""}{" "}
+                    </p>
+                  </div>
+                  <div className="input-container">
+                    <Select
+                      className="select-options"
+                      options={stateOptions}
+                      placeholder="Estado"
+                      onChange={(selectedOption) =>
+                        setNewCar({ ...newCar, estado: selectedOption.value })
+                      }
+                      menuPosition="fixed"
+                      menuPortalTarget={document.body}
+                      styles={{
+                        control: (provided, state) => ({
+                          ...provided,
+                          borderRadius: "8px",
+                          outline: "none",
+                          borderColor: state.isFocused
+                            ? "#6366f1"
+                            : provided.borderColor,
+                          boxShadow: state.isFocused
+                            ? "0 0 0 2px rgba(99, 102, 241, 0.2)"
+                            : "none",
+                          "&:hover": {
+                            borderColor: "#6366f1",
+                          },
+                        }),
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                        menu: (provided) => ({
+                          ...provided,
+                          overflowY: "auto",
+                          fontSize: "11px",
+                        }),
+                      }}
+                    />
+                    <p
+                      className={`error-admin-input ${
+                        formErrors.estado ? "visible" : ""
+                      }`}
+                    >
+                      {formErrors.estado || ""}{" "}
+                    </p>
+                  </div>
                   <div className="cars-container-button">
                     <button className="create-button-cars" type="submit">
                       <IoSend /> Crear
                     </button>
                     <button
+                      className="cancel-button-cars"
                       type="button"
                       onClick={() => setShowModal(false)}
-                      className="cancel-button-cars"
                     >
                       <MdCancel className="cancel-icon-cars" /> Cancelar
                     </button>
