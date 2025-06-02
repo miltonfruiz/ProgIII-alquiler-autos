@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
 export const Reserva = sequelize.define(
-  "Reerva",
+  "Reserva",
   {
     id_reserva: {
       type: DataTypes.INTEGER,

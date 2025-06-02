@@ -12,7 +12,7 @@ export async function createReserva(req, res) {
     const diffTime = Math.abs(fin - inicio);
     const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    const nuevReserva = await Reserva.create({
+    const nuevaReserva = await Reserva.create({
       fecha_inicio,
       fecha_fin,
       estado_reserva: "pendiente",
