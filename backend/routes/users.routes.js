@@ -16,6 +16,7 @@ router.post("/users", userValidation, async (req, res) => {
       dni,
       nacimiento,
       licencia,
+      numeroTelefonico,
     } = req.body;
     const newUser = await User.create({
       nombre,
@@ -26,6 +27,7 @@ router.post("/users", userValidation, async (req, res) => {
       dni,
       nacimiento,
       licencia,
+      numeroTelefonico,
     });
     res.status(201).json(newUser);
   } catch (error) {
