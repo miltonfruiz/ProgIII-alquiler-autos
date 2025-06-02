@@ -70,9 +70,6 @@ body.dark .DatosFacturacion {
   padding-left: 1rem;
 }
 
-body.dark .inputDatos {
-}
-
 .error {
   height: 1rem;
   color: red;
@@ -140,6 +137,14 @@ body.dark .metodoPago {
   margin: 1rem;
   margin-left: 3em;
   cursor: pointer;
+  transition: ease all 0.3s;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+}
+
+.ingresoTarjeta:hover {
+  color: #ffffff;
+  background-color: #6366f1;
+  box-shadow: 3px 3px 6px 3px #9797975d;
 }
 
 .ingresoTarjetaClickeado {
@@ -150,13 +155,14 @@ body.dark .metodoPago {
   margin: 1rem;
   margin-left: 3em;
   cursor: pointer;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .ingresoTarjeta {
   background-color: #000000;
   outline: solid 1px #ffffff;
   box-shadow: 3px 3px 6px 3px #ffffff5d;
-  transition: all 0.3s;
+  transition: ease all 0.3s;
 }
 
 body.dark .ingresoTarjetaClickeado {
@@ -167,9 +173,9 @@ body.dark .ingresoTarjetaClickeado {
 
 body.dark .ingresoTarjeta:hover {
   color: #000000;
-  background-color: #fff;
-  outline: solid 1px #000000;
-  box-shadow: 3px 3px 6px 3px #69696988;
+  background-color: #91919177;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  outline: solid #ffffff 1px;
 }
 
 .seleccion {
@@ -232,6 +238,10 @@ body.dark .ingresoTarjeta:hover {
   flex-direction: column;
 }
 
+.cajaTransferenciaBancaria {
+  transition: all 0.2s;
+}
+
 .cajaTransferenciaBancaria,
 .cajaTransferenciaBancariaClickeado {
   width: 35rem;
@@ -243,6 +253,7 @@ body.dark .ingresoTarjeta:hover {
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .cajaTransferenciaBancaria {
@@ -266,11 +277,50 @@ body.dark .cajaTransferenciaBancariaClickeado {
   outline: solid 1px #ffffff;
 }
 
+.cajaTransferenciaBancaria:hover {
+  color: #ffffff;
+  background-color: #6366f1;
+  box-shadow: 3px 3px 6px 3px #9797975d;
+}
+
 body.dark .cajaTransferenciaBancaria:hover {
   color: #000000;
-  background-color: #fff;
-  outline: solid 1px #000000;
-  box-shadow: 3px 3px 6px 3px #69696988;
+  background-color: #91919177;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  outline: solid #ffffff 1px;
+}
+
+.botonArchivo {
+  height: 3.5rem;
+  width: 8rem;
+  border-radius: 0.55rem;
+  font-size: 0.75rem;
+  font-family: "poppins";
+  padding: 0.5rem;
+  background-color: #6366f1;
+  color: #ffffff;
+  transition: 0.3s;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+body.dark .botonArchivo {
+  background-color: #493569;
+  color: #000000;
+  transition: all 0.3s;
+}
+
+body.dark .botonArchivo:hover {
+  background-color: #7956b1;
+  color: #000000;
+  box-shadow: 3px 3px 6px 3px #6e6e6e5d;
+}
+
+.botonArchivo:hover {
+  background-color: #473fdb;
+  color: #ffffff;
+  box-shadow: 3px 3px 6px 3px #9797975d;
 }
 
 .containerPago {
@@ -361,7 +411,7 @@ body.dark .containerArrastre {
 
 .infoImportante {
   width: 45rem;
-  height: 35rem;
+  height: 35.5rem;
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;

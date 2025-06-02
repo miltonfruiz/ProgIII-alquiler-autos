@@ -35,11 +35,12 @@ const CarPaymentPage = () => {
     "comprobante",
   ];
 
-  function handlerSubmit(datosFacturacion, datosPago, choicePayment) {
+  function handlerSubmit(datosFacturacion, datosPago, choicePayment, checkbox) {
     const errores = CarPaymentValidation({
       datosFacturacion,
       datosPago,
       choicePayment,
+      checkbox,
     });
 
     if (Object.keys(errores).length > 0) {

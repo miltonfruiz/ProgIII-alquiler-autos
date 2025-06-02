@@ -2,6 +2,7 @@ export const CarPaymentValidation = ({
   datosFacturacion,
   datosPago,
   choicePayment,
+  checkbox,
 }) => {
   const errores = {};
 
@@ -30,34 +31,33 @@ export const CarPaymentValidation = ({
   }
 
   if (!choicePayment) {
-    errores.errorEleccion = "* elija un metodo de pago para poder pagar";
+    errores.errorEleccion = "* elija un metodo de pago para efectuar el pago";
   }
 
   if (choicePayment == "tarjeta") {
     if (!datosPago.numeroTarjeta?.trim()) {
-      errores.numeroTarjeta =
-        "* ingrese el numero de la tarjeta para efectuar el pago";
+      errores.numeroTarjeta = "* ingrese el numero de la tarjeta ";
     }
 
     if (!datosPago.fechaTarjeta?.trim()) {
-      errores.fechaTarjeta =
-        "* ingrese la fecha de expiracion de la tarjeta para efectuar el pago";
+      errores.fechaTarjeta = "* ingrese la fecha de expiracion de la ";
     }
 
     if (!datosPago.nombreTarjeta?.trim()) {
-      errores.nombreTarjeta =
-        "* ingrese el nombre del titular de la tarjeta para efectuar el pago";
+      errores.nombreTarjeta = "* ingrese el nombre del titular de la tarjeta ";
     }
 
     if (!datosPago.cvc?.trim()) {
-      errores.cvc =
-        "* ingrese el codigo de seguridad de la tarjeta para efectuar el pago";
+      errores.cvc = "* ingrese el codigo de seguridad de la tarjeta";
     }
   } else if (choicePayment == "transferencia") {
     if (!datosPago) {
-      errores.comprobante =
-        "* debe ingresar el comprobante de pago para poder efectuar el pago";
+      errores.comprobante = "* debe ingresar el comprobante de pago";
     }
+  }
+
+  if (!checkbox) {
+    errores.checkbox = "* debe aceptar los terminos y condiciones";
   }
 
   return errores;
