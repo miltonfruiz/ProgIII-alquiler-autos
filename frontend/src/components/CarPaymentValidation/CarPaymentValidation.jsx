@@ -6,7 +6,7 @@ export const CarPaymentValidation = ({
 }) => {
   const errores = {};
 
-  if (!datosFacturacion.name.trim()) {
+  if (!datosFacturacion.nombre.trim()) {
     errores.nombre = "* Debe ingresar nombre";
   } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.name)) {
     errores.nombre = "* Solo se permiten letras";
@@ -20,12 +20,6 @@ export const CarPaymentValidation = ({
 
   if (!datosFacturacion.numeroTelefonico?.trim()) {
     errores.numeroTelefonico = "* debe ingresar su numero telefonico";
-  } else if (
-    /!^(?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{2,3}\)?[-.\s]?)?\d{4,}[-.\s]?\d{4}$/.test(
-      datosFacturacion.numeroTelefonico
-    )
-  ) {
-    errores.numeroTelefonico = "* ingrese un numero valido";
   }
 
   if (!datosFacturacion.dni.trim()) {
