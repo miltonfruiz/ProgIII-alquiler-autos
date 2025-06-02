@@ -6,12 +6,16 @@ export const CarPaymentValidation = ({
 }) => {
   const errores = {};
 
-  if (!datosFacturacion.nombre?.trim()) {
-    errores.nombre = "* debe ingresar el nombre";
+  if (!datosFacturacion.name.trim()) {
+    errores.nombre = "* Debe ingresar nombre";
+  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.name)) {
+    errores.nombre = "* Solo se permiten letras";
   }
 
-  if (!datosFacturacion.apellido?.trim()) {
-    errores.apellido = "* debe ingresar el apellido";
+  if (!datosFacturacion.apellido.trim()) {
+    errores.apellido = "* Debe ingresar apellido";
+  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.apellido)) {
+    errores.apellido = "* Solo se permiten letras";
   }
 
   if (!datosFacturacion.numeroTelefonico?.trim()) {
@@ -24,10 +28,11 @@ export const CarPaymentValidation = ({
     errores.numeroTelefonico = "* ingrese un numero valido";
   }
 
-  if (!datosFacturacion.dni?.trim()) {
-    errores.dni = "* debe ingresar su dni";
-  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datosFacturacion.dni)) {
-    errores.dni = "* ingrese un dni valido";
+  if (!datosFacturacion.dni.trim()) {
+    errores.dni = "* Debe ingresar dni";
+  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datos.dni)) {
+    errores.dni =
+      "* el dni debe tener entre 6 y 8 caracteres y no puede tener letras ni espacios";
   }
 
   if (!choicePayment) {

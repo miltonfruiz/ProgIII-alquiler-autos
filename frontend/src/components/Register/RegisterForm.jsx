@@ -1,11 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { MdDriveFileRenameOutline } from "react-icons/md"; // nombre
-import { MdMail } from "react-icons/md"; // mail
-import { RiLockPasswordFill } from "react-icons/ri"; // contraseña
-import { IoCalendar } from "react-icons/io5"; // fecha nacimiento
-import { HiIdentification } from "react-icons/hi2"; // dni
-import { TbLicense } from "react-icons/tb"; // licencia
+import { dataForm } from "./dataRegister";
 import "./RegisterForm.css";
 
 const RegisterForm = ({ onSubmit, errores, refs }) => {
@@ -18,6 +13,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
     dni: "",
     nacimiento: "",
     licencia: "",
+    numeroTelefonico: "",
   });
 
   function handleChange(e) {
@@ -34,206 +30,27 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
       <form className="formRegister" action="" onSubmit={handleSubmit}>
         <h1 className="titleRegister">Registrarse</h1>
         <div className="gridRegister">
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <MdDriveFileRenameOutline id="icono"></MdDriveFileRenameOutline>
-                <label className="labelRegister">Nombre</label>
+          {dataForm.map((data, index) => {
+            return (
+              <div className="containerLabelInput" key={index}>
+                <div>
+                  <data.icono id="icono" />
+                  <label className="labelRegister">{data.label}</label>
+                </div>
+                <input
+                  className="inputRegister"
+                  placeholder={data.placeholder}
+                  name={data.name}
+                  type={data.type}
+                  onChange={handleChange}
+                  ref={refs.useRefs[`${data.name}Register`]}
+                />
+                {errores[data.name] && (
+                  <p className="error-message visible">{errores[data.name]}</p>
+                )}
               </div>
-              <input
-                className="inputRegister"
-                placeholder="Nombre"
-                name="name"
-                type="text"
-                onChange={handleChange}
-                ref={refs.useRefs.nameRegister}
-              />
-            </div>
-
-            {errores.name ? (
-              <p className={`error-message ${errores.name ? "visible" : ""}`}>
-                {errores.name}
-              </p>
-            ) : null}
-          </div>
-
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <MdDriveFileRenameOutline id="icono"></MdDriveFileRenameOutline>
-                <label className="labelRegister">Apellido</label>
-              </div>
-              <input
-                className="inputRegister"
-                placeholder="Apellido"
-                name="lastName"
-                type="text"
-                onChange={handleChange}
-                ref={refs.useRefs.lastNameRegister}
-              />
-            </div>
-
-            {errores.lastName ? (
-              <p
-                className={`error-message ${errores.lastName ? "visible" : ""}`}
-              >
-                {errores.lastName}
-              </p>
-            ) : null}
-          </div>
-
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <MdMail id="icono"></MdMail>
-                <label className="labelRegister">Correo elecrónico</label>
-              </div>
-              <input
-                className="inputRegister"
-                placeholder="Tunombre@gmail.com"
-                name="email"
-                type="email"
-                onChange={handleChange}
-                ref={refs.useRefs.emailRegister}
-              />
-            </div>
-
-            {errores.email ? (
-              <p className={`error-message ${errores.email ? "visible" : ""}`}>
-                {errores.email}
-              </p>
-            ) : null}
-          </div>
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <RiLockPasswordFill id="icono"></RiLockPasswordFill>
-                <label className="labelRegister">Contraseña</label>
-              </div>
-
-              <input
-                className="inputRegister"
-                placeholder="Contraseña"
-                name="password"
-                type="password"
-                onChange={handleChange}
-                ref={refs.useRefs.passwordRegister}
-              />
-            </div>
-
-            {errores.password ? (
-              <p
-                className={`error-message ${errores.password ? "visible" : ""}`}
-              >
-                {errores.password}
-              </p>
-            ) : null}
-          </div>
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <RiLockPasswordFill id="icono"></RiLockPasswordFill>
-                <label className="labelRegister">Repetir contraseña</label>
-              </div>
-
-              <input
-                className="inputRegister"
-                placeholder="Contraseña"
-                name="verifyPassword"
-                type="password"
-                onChange={handleChange}
-                ref={refs.useRefs.verifyPasswordRegister}
-              />
-            </div>
-
-            {errores.verifyPassword ? (
-              <p
-                className={`error-message ${
-                  errores.verifyPassword ? "visible" : ""
-                }`}
-              >
-                {errores.verifyPassword}
-              </p>
-            ) : null}
-          </div>
-
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <HiIdentification id="icono"></HiIdentification>
-                <label className="labelRegister">DNI</label>
-              </div>
-
-              <input
-                className="inputRegister"
-                placeholder="4600000"
-                name="dni"
-                type="text"
-                onChange={handleChange}
-                ref={refs.useRefs.dniRegister}
-              />
-            </div>
-
-            {errores.dni ? (
-              <p className={`error-message ${errores.dni ? "visible" : ""}`}>
-                {errores.dni}
-              </p>
-            ) : null}
-          </div>
-
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <IoCalendar id="icono"></IoCalendar>
-                <label className="labelRegister">Fecha de Nacimiento</label>
-              </div>
-
-              <input
-                className="inputRegister"
-                placeholder="DD / MM / AAAA"
-                name="nacimiento"
-                type="date"
-                onChange={handleChange}
-                ref={refs.useRefs.nacimientoRegister}
-              />
-            </div>
-
-            {errores.nacimiento ? (
-              <p
-                className={`error-message ${
-                  errores.nacimiento ? "visible" : ""
-                }`}
-              >
-                {errores.nacimiento}
-              </p>
-            ) : null}
-          </div>
-
-          <div>
-            <div className="containerLabelInput">
-              <div>
-                <TbLicense id="icono"></TbLicense>
-                <label className="labelRegister">N° De licencia</label>
-              </div>
-
-              <input
-                className="inputRegister"
-                placeholder="99999999"
-                name="licencia"
-                type="text"
-                onChange={handleChange}
-                ref={refs.useRefs.licenciaRegister}
-              />
-            </div>
-
-            {errores.licencia ? (
-              <p
-                className={`error-message ${errores.licencia ? "visible" : ""}`}
-              >
-                {errores.licencia}
-              </p>
-            ) : null}
-          </div>
+            );
+          })}
         </div>
         <div className="divButton">
           <button className="buttonRegister">Registrarse</button>
