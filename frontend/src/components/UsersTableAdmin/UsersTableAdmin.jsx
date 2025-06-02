@@ -1,44 +1,43 @@
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import "./CarsAdminTable.css";
+import "./UsersTableAdmin.css";
 
-const CarsAdminTable = ({ cars, onEdit, onDelete, search }) => {
+const UsersTableAdmin = ({ users, onEdit, onDelete, search }) => {
   return (
     <div className="table-container">
-      <table className="table-cars-admin">
+      <table className="table-users-admin">
         <thead className="admin-thead">
           <tr>
             <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Transmisión</th>
-            <th>Pasajeros</th>
-            <th>Marca</th>
-            <th>Estado</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>DNI</th>
+            <th>Nacimiento</th>
+            <th>Licencia</th>
+            <th>Rol</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {cars.length > 0 ? (
-            cars.map((car) => (
+          {users.length > 0 ? (
+            users.map((user) => (
               <tr
-                colSpan="8"
-                key={car.id}
+                key={user.id}
                 className={`administration-row ${search ? "fade-in" : ""}`}
               >
-                <td>{car.name}</td>
-                <td>{car.category}</td>
-                <td>${car.price}</td>
-                <td>{car.transmission}</td>
-                <td>{car.passengers}</td>
-                <td>{car.brand}</td>
-                <td>{car.state}</td>
+                <td>{user.nombre}</td>
+                <td>{user.apellido}</td>
+                <td>{user.correo}</td>
+                <td>{user.dni}</td>
+                <td>{user.nacimiento}</td>
+                <td>{user.licencia}</td>
+                <td>{user.rol}</td>
                 <td className="button-actions">
                   <button
                     className="administration-button-edit"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onEdit(car);
+                      onEdit(user);
                     }}
                   >
                     <FaEdit className="adm-icon-edit" /> Editar
@@ -47,7 +46,7 @@ const CarsAdminTable = ({ cars, onEdit, onDelete, search }) => {
                     className="administration-button-delete"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onDelete(car.id);
+                      onDelete(user);
                     }}
                   >
                     <RiDeleteBin6Line className="adm-icon-delete" /> Eliminar
@@ -56,9 +55,9 @@ const CarsAdminTable = ({ cars, onEdit, onDelete, search }) => {
               </tr>
             ))
           ) : (
-            <tr className="administration-row">
+            <tr>
               <td colSpan="8" className="no-results-text">
-                No se encontraron autos...
+                No se encontraron usuarios...
               </td>
             </tr>
           )}
@@ -67,5 +66,4 @@ const CarsAdminTable = ({ cars, onEdit, onDelete, search }) => {
     </div>
   );
 };
-
-export default CarsAdminTable;
+export default UsersTableAdmin;
