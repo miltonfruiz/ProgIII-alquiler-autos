@@ -32,7 +32,7 @@ const Register = ({ setRegisterIn }) => {
     "licencia",
   ];
 
-  const handleSubmit = (formRegister) => {
+  const handleSubmit = async (formRegister) => {
     const erroresRegister = RegisterValidation({ datos: formRegister });
 
     if (Object.keys(erroresRegister).length > 0) {
@@ -44,6 +44,21 @@ const Register = ({ setRegisterIn }) => {
       });
       setErrores(erroresRegister);
     } else {
+      fetch("http://localhost:3000/users", {
+        method: "POST",
+        body: JSON.stringify(formRegister),
+      })
+        .then((respuesta) => {
+          if (respuesta.ok) {
+            console.log("datos guardados");
+          } else {
+            console.log("error al enviar el formulario");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al enviar el formulario:", error);
+        });
+
       toast.success("¡Usuario registrado correctamente!");
       setErrores({});
       setRegisterIn(true);

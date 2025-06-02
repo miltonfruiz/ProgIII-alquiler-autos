@@ -9,8 +9,9 @@ import {
   objetosFormPersona,
   objetosFormTarjeta,
   objetosTarjetas,
+  objetosItems,
 } from "./ObjetosCarPayment.jsx";
-import InfoImportante from "./InfoImportante.jsx";
+
 import ResumenDeAlquiler from "./ResumenDeAlquiler.jsx";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
@@ -33,9 +34,13 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
 
+  const [stateTransition, setStateTransition] = useState("");
+  const [checkbox, setCheckBox] = useState(false);
+
   const [file, setFile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [choicePayment, setChoicePayment] = useState(false);
+  const [tipoTarjeta, setTipoTarjeta] = useState("");
   const inputRef = useRef(null);
 
   const eleccionTarjetaRef = useRef(null);
@@ -60,9 +65,15 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     e.preventDefault();
 
     if (choicePayment == "tarjeta" || !choicePayment) {
-      onSubmit(datosFacturacion, datosTarjeta, choicePayment);
+      onSubmit(
+        datosFacturacion,
+        datosTarjeta,
+        choicePayment,
+        checkbox,
+        tipoTarjeta
+      );
     } else if (choicePayment == "transferencia") {
-      onSubmit(datosFacturacion, file, choicePayment);
+      onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
   }
 
@@ -91,6 +102,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     if (e.target.value) {
       setSeleccionCbu(false);
       setSeleccionTarjeta(true);
+      setTimeout(() => {
+        setStateTransition("tarjeta");
+      }, 100);
+      setStateTransition("");
     }
   }
 
@@ -98,6 +113,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     if (e.target.value) {
       setSeleccionTarjeta(false);
       setSeleccionCbu(true);
+      setTimeout(() => {
+        setStateTransition("tranferencia");
+      }, 100);
+      setStateTransition("");
     }
   }
 
@@ -111,6 +130,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
         setImgTarjetas(tarjeta.value);
       }
     });
+    setTipoTarjeta(e.target.value);
   }
 
   function handlerClickTarjeta() {
@@ -122,6 +142,15 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     setChoicePayment(() => "transferencia");
     eleccionTransferRef.current.click();
   }
+
+  function handleTerminos(e) {
+    if (!checkbox) {
+      setCheckBox(true);
+    } else {
+      setCheckBox(false);
+    }
+  }
+
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
   return (
@@ -164,7 +193,12 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             <h2 className="tituloMetodo">Metodo de Pago</h2>
             <h3 className="subtituloMetodo">Elije tu metodo de pago</h3>
             <p className="paso2">Paso 2 de 3</p>
-            <div className="ingresoTarjeta" onClick={handlerClickTarjeta}>
+            <div
+              className={`ingresoTarjeta${
+                choicePayment == "tarjeta" ? "Clickeado" : ""
+              }`}
+              onClick={handlerClickTarjeta}
+            >
               <div className="seleccionTarjeta">
                 <input
                   type="radio"
@@ -180,7 +214,11 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </div>
 
               {seleccionTarjeta && (
-                <div>
+                <div
+                  className={`containerPago ${
+                    stateTransition ? "Visible" : ""
+                  }`}
+                >
                   <label htmlFor="seleccion" className="seleccion">
                     Seleccione una tarjeta
                   </label>
@@ -226,10 +264,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                               onChange={handlerDatosTarjeta}
                               ref={refs.useRefs[`${input.name}Ref`]}
                             />
+                            {errores[input.name] && (
+                              <p className="error">{errores[input.name]}</p>
+                            )}
                           </div>
-                          {errores[input.name] && (
-                            <p className="error">{errores[input.name]}</p>
-                          )}
                         </div>
                       );
                     })}
@@ -239,7 +277,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             </div>
 
             <div
-              className="cajaTransferenciaBancaria"
+              className={`cajaTransferenciaBancaria${
+                choicePayment == "transferencia" ? "Clickeado" : ""
+              }`}
               onClick={handlerClickTransferencia}
               tabIndex={-1}
               ref={refs.useRefs.errorEleccionRef}
@@ -263,7 +303,11 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </div>
 
               {seleccionCbu && (
-                <div className="conteinerTransferencia">
+                <div
+                  className={`conteinerTransferencia ${
+                    stateTransition ? "Visible" : ""
+                  }`}
+                >
                   <h3 className="tituloTransferencia">
                     Transfiera a esta cuenta
                   </h3>
@@ -301,7 +345,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                       style={{ display: "none" }}
                       ref={inputRef}
                     />
-                    <button className="" onClick={handleRefInput}>
+                    <button className="botonArchivo" onClick={handleRefInput}>
                       Seleccione un archivo
                     </button>
                   </div>
@@ -315,7 +359,36 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               <p className="error">{errores.errorEleccion}</p>
             )}
           </div>
-          <InfoImportante></InfoImportante>
+
+          <div className="infoImportante">
+            <h2 className="tituloInfo">Informacion Importante</h2>
+            <h3 className="subtituloInfo">
+              Lee atentamente esta informacion de utilidad
+            </h3>
+            <p className="paso3">Paso 3 de 3</p>
+            {objetosItems.map((items) => {
+              return (
+                <div className="cajaItems">
+                  <h2 className="tituloItems">{items.titulo}</h2>
+                  <ul>
+                    <li className="liItems">{items.primerItem}</li>
+                    <li className="liItems">{items.segundoItem}</li>
+                  </ul>
+                </div>
+              );
+            })}
+
+            <div className="cajaAceptoTerminos">
+              <input
+                type="checkbox"
+                className="aceptoTerminos"
+                onChange={handleTerminos}
+              />
+              <p className="textoAcepto">Acepto Terminos y condiciones</p>
+            </div>
+            {errores.checkbox && <p className="error">{errores.checkbox}</p>}
+          </div>
+
           <button type="button" className="botonRentar" onClick={handlerSubmit}>
             Rentar ahora
           </button>

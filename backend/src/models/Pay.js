@@ -24,7 +24,6 @@ export const Pay = sequelize.define("Pay", {
     },
   },
   reservationId: {
-    // creo que el id de la reserva no iria ya que la reserva se crea cuando se efectua el pago. en todo caso colocar los dias de reserva del auto aca
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
