@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import CardAdminValidation from "../CarAdminValidation/CarAdminValidation";
 import CarsAdminModal from "../CarAdminModal/CarAdminModal";
 import CarsAdminTable from "../CarsAdminTable/CarsAdminTable";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import {
   downloadCSV,
   categoryOptions,
@@ -30,6 +31,7 @@ const CarsAdmin = () => {
     brand: "",
     estado: "",
   });
+  const [carToDelete, setCarToDelete] = useState(null);
   useEffect(() => {
     fetch("http://localhost:3000/cars")
       .then((res) => res.json())
@@ -46,6 +48,15 @@ const CarsAdmin = () => {
     } catch (error) {
       console.error("Error al eliminar auto:", error);
     }
+  };
+  const confirmDelete = async () => {
+    if (carToDelete) {
+      await handleDelete(carToDelete.id);
+      setCarToDelete(null);
+    }
+  };
+  const cancelDelete = () => {
+    setCarToDelete(null);
   };
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -181,9 +192,16 @@ const CarsAdmin = () => {
             setEditingCar(car);
             setShowModal(true);
           }}
-          onDelete={handleDelete}
+          onDelete={(car) => setCarToDelete(car)}
         />
       </div>
+      {carToDelete && (
+        <ConfirmDeleteModal
+          carName={carToDelete.name}
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+        />
+      )}
       {showModal && (
         <CarsAdminModal
           newCar={newCar}

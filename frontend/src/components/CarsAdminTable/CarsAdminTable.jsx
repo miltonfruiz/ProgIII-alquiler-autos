@@ -41,7 +41,7 @@ const CarsAdminTable = ({ cars, onEdit, onDelete }) => {
                   className="administration-button-delete"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onDelete(car.id);
+                    onDelete(car);
                   }}
                 >
                   <RiDeleteBin6Line className="adm-icon-delete" /> Eliminar
