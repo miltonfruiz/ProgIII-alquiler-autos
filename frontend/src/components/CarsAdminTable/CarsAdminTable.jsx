@@ -1,7 +1,8 @@
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import "./CarsAdminTable.css";
 
-const CarsAdminTable = ({ cars, onEdit, onDelete }) => {
+const CarsAdminTable = ({ cars, onEdit, onDelete, search }) => {
   return (
     <div className="table-container">
       <table className="table-cars-admin">
@@ -18,37 +19,49 @@ const CarsAdminTable = ({ cars, onEdit, onDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {cars.map((car) => (
-            <tr key={car.id} className="administration-row">
-              <td>{car.name}</td>
-              <td>{car.category}</td>
-              <td>${car.price}</td>
-              <td>{car.transmission}</td>
-              <td>{car.passengers}</td>
-              <td>{car.brand}</td>
-              <td>{car.state}</td>
-              <td className="button-actions">
-                <button
-                  className="administration-button-edit"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit(car);
-                  }}
-                >
-                  <FaEdit className="adm-icon-edit" /> Editar
-                </button>
-                <button
-                  className="administration-button-delete"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete(car);
-                  }}
-                >
-                  <RiDeleteBin6Line className="adm-icon-delete" /> Eliminar
-                </button>
+          {cars.length > 0 ? (
+            cars.map((car) => (
+              <tr
+                colSpan="8"
+                key={car.id}
+                className={`administration-row ${search ? "fade-in" : ""}`}
+              >
+                <td>{car.name}</td>
+                <td>{car.category}</td>
+                <td>${car.price}</td>
+                <td>{car.transmission}</td>
+                <td>{car.passengers}</td>
+                <td>{car.brand}</td>
+                <td>{car.state}</td>
+                <td className="button-actions">
+                  <button
+                    className="administration-button-edit"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onEdit(car);
+                    }}
+                  >
+                    <FaEdit className="adm-icon-edit" /> Editar
+                  </button>
+                  <button
+                    className="administration-button-delete"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDelete(car.id);
+                    }}
+                  >
+                    <RiDeleteBin6Line className="adm-icon-delete" /> Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr className="administration-row">
+              <td colSpan="8" className="no-results-text">
+                No se encontraron autos...
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

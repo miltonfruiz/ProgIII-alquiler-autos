@@ -14,25 +14,30 @@
   margin-bottom: 15px;
 }
 .table-cars-admin {
+  width: 100%;
+  min-width: 110px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-collapse: collapse;
   border: 1px solid #d1d5db;
-  display: block;
-
-  overflow-x: auto;
-  max-height: 18.7rem;
-  overflow-y: auto;
 }
-
 .table-container {
+  width: 100%;
+  overflow-x: auto;
   padding: 22px auto;
   margin: 20px auto;
-  max-width: 1100px;
   display: flex;
   justify-content: center;
   gap: 0.5rem;
+
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.table-cars-admin th,
+.table-cars-admin td {
+  min-width: 100px;
 }
 .admin-container-table {
   background-color: #fff;
@@ -67,6 +72,7 @@ tbody td {
   border-collapse: collapse;
 }
 .administration-row {
+  width: 50%;
   text-align: center;
   background-color: #ffffff;
   border-radius: 8px;

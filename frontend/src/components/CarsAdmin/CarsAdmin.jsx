@@ -193,6 +193,7 @@ const CarsAdmin = () => {
             setShowModal(true);
           }}
           onDelete={(car) => setCarToDelete(car)}
+          search={search} // ✅ nuevo prop
         />
       </div>
       {carToDelete && (
