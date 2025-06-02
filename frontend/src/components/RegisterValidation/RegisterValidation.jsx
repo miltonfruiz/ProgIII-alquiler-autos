@@ -1,8 +1,6 @@
 const RegisterValidation = ({ datos }) => {
   const errores = {};
 
-  console.log(datos);
-
   if (!datos.name.trim()) {
     errores.name = "* Debe ingresar nombre";
   } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.name)) {

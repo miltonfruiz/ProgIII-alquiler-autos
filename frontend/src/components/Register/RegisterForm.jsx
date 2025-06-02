@@ -6,7 +6,6 @@ import { RiLockPasswordFill } from "react-icons/ri"; // contraseña
 import { IoCalendar } from "react-icons/io5"; // fecha nacimiento
 import { HiIdentification } from "react-icons/hi2"; // dni
 import { TbLicense } from "react-icons/tb"; // licencia
-import Header from "../Header/Header";
 import "./RegisterForm.css";
 
 const RegisterForm = ({ onSubmit, errores, refs }) => {
@@ -25,7 +24,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     onSubmit(formData);
   }
