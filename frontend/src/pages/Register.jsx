@@ -44,21 +44,22 @@ const Register = ({ setRegisterIn }) => {
       });
       setErrores(erroresRegister);
     } else {
-      try {
-        const respuesta = await fetch("http://localhost:3000/users", {
-          method: "POST",
-          body: JSON.stringify(formRegister),
+      fetch("http://localhost:3000/users", {
+        method: "POST",
+        body: JSON.stringify(formRegister),
+      })
+        .then((respuesta) => {
+          if (respuesta.ok) {
+            console.log("datos guardados");
+            setFormData("");
+          } else {
+            console.log("error al enviar el formulario");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al enviar el formulario:", error);
         });
 
-        if (respuesta.ok) {
-          console.log("datos guardados");
-          setFormData("");
-        } else {
-          console.log("error al enviar el formulario");
-        }
-      } catch (error) {
-        console.error("Error al enviar el formulario:", error);
-      }
       toast.success("¡Usuario registrado correctamente!");
       setErrores({});
       setRegisterIn(true);
