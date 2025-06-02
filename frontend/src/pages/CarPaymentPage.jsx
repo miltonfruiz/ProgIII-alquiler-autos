@@ -35,7 +35,13 @@ const CarPaymentPage = () => {
     "comprobante",
   ];
 
-  function handlerSubmit(datosFacturacion, datosPago, choicePayment, checkbox) {
+  function handlerSubmit(
+    datosFacturacion,
+    datosPago,
+    choicePayment,
+    checkbox,
+    tipoTarjeta
+  ) {
     const errores = CarPaymentValidation({
       datosFacturacion,
       datosPago,
@@ -53,6 +59,26 @@ const CarPaymentPage = () => {
 
       setErrores(errores);
     } else {
+      fetch("http://localhost:3000/pays", {
+        method: "POST",
+        body: JSON.stringify({
+          tipoTarjeta,
+          choicePayment,
+          ...datosPago,
+          checkbox,
+        }),
+      })
+        .then((respuesta) => {
+          if (respuesta.ok) {
+            console.log("Pago realizado correctamente");
+          } else {
+            console.log("Error al realizar el pago");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al enviar el formulario:", error);
+        });
+
       toast.success("¡auto rentado!");
       setErrores({});
     }

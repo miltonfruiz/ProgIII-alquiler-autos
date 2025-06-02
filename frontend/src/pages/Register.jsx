@@ -51,7 +51,6 @@ const Register = ({ setRegisterIn }) => {
         .then((respuesta) => {
           if (respuesta.ok) {
             console.log("datos guardados");
-            setFormData("");
           } else {
             console.log("error al enviar el formulario");
           }

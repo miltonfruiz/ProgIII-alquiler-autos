@@ -40,6 +40,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   const [file, setFile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [choicePayment, setChoicePayment] = useState(false);
+  const [tipoTarjeta, setTipoTarjeta] = useState("");
   const inputRef = useRef(null);
 
   const eleccionTarjetaRef = useRef(null);
@@ -64,9 +65,15 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     e.preventDefault();
 
     if (choicePayment == "tarjeta" || !choicePayment) {
-      onSubmit(datosFacturacion, datosTarjeta, choicePayment, checkbox);
+      onSubmit(
+        datosFacturacion,
+        datosTarjeta,
+        choicePayment,
+        checkbox,
+        tipoTarjeta
+      );
     } else if (choicePayment == "transferencia") {
-      onSubmit(datosFacturacion, file, choicePayment, checkbox);
+      onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
   }
 
@@ -123,6 +130,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
         setImgTarjetas(tarjeta.value);
       }
     });
+    setTipoTarjeta(e.target.value);
   }
 
   function handlerClickTarjeta() {

@@ -5,8 +5,8 @@
 }
 
 .container {
-  margin: 0; /* Elimina márgenes por defecto */
-  padding: 0; /* Elimina paddings por defecto */
+  margin: 0;
+  padding: 0;
   margin-top: 10rem;
   margin-bottom: 5rem;
 }
