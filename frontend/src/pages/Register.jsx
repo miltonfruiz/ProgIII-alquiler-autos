@@ -63,7 +63,7 @@ const Register = ({ setRegisterIn }) => {
       setErrores({});
       setRegisterIn(true);
       setTimeout(() => {
-        navigate("/testhome");
+        navigate("/home");
       }, 3000);
     }
   };
