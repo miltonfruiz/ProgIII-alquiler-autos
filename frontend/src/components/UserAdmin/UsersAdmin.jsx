@@ -85,7 +85,6 @@ const UsersAdmin = () => {
       console.error("Error al crear usuario:", error);
     }
   };
-
   const handleUpdate = async (e) => {
     e.preventDefault();
     const errors = UsersValidationAdmin(newUser);
@@ -133,6 +132,10 @@ const UsersAdmin = () => {
   const cancelDelete = () => {
     setUserToDelete(null);
   };
+  const handleClose = () => {
+    setShowModal(false);
+    resetForm();
+  };
   const resetForm = () => {
     setEditingUser(null);
     setFormErrors({});
@@ -170,7 +173,7 @@ const UsersAdmin = () => {
             <CiSearch className="search-icon-admin" />
             <input
               type="text"
-              placeholder="Buscar por nombre o apellido"
+              placeholder="Buscar..."
               className="search-input"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -215,7 +218,7 @@ const UsersAdmin = () => {
           formErrors={formErrors}
           handleChange={handleChange}
           handleSubmit={editingUser ? handleUpdate : handleCreate}
-          handleClose={resetForm}
+          handleClose={handleClose}
           setUser={setNewUser}
         />
       )}

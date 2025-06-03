@@ -182,9 +182,10 @@ const UsersModalAdmin = ({
                 {formErrors.rol || ""}
               </p>
             </div>
+            <div></div>
             <div className="cars-container-button">
               <button className="create-button-cars" type="submit">
-                <IoSend /> {editingUser ? "Guardar cambios" : "Crear"}
+                <IoSend /> {editingUser ? "Guardar" : "Crear"}
               </button>
               <button
                 className="cancel-button-cars"

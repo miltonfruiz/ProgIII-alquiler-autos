@@ -193,7 +193,7 @@ const CarsAdmin = () => {
             setShowModal(true);
           }}
           onDelete={(car) => setCarToDelete(car)}
-          search={search} // ✅ nuevo prop
+          search={search}
         />
       </div>
       {carToDelete && (
@@ -216,6 +216,7 @@ const CarsAdmin = () => {
           transmissionOptions={transmissionOptions}
           brandOptions={brandOptions}
           stateOptions={stateOptions}
+          //aca
         />
       )}
       <ToastContainer position="top-right" autoClose={4000} />
