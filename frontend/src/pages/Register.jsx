@@ -44,12 +44,17 @@ const Register = ({ setRegisterIn }) => {
       });
       setErrores(erroresRegister);
     } else {
+      console.log(formRegister);
       fetch("http://localhost:3000/users", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formRegister),
       })
-        .then((respuesta) => {
-          if (respuesta.ok) {
+        .then((res) => {
+          console.log(res);
+          if (res.ok) {
             console.log("datos guardados");
           } else {
             console.log("error al enviar el formulario");
@@ -57,6 +62,7 @@ const Register = ({ setRegisterIn }) => {
         })
         .catch((error) => {
           console.error("Error al enviar el formulario:", error);
+          console.log(res);
         });
 
       toast.success("¡Usuario registrado correctamente!");
