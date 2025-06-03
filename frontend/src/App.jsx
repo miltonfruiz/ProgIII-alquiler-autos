@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import TestHome from "./components/TestHome/TestHome";
-import PasswordRecover from "./pages/PasswordRecover";
+import { useState } from "react";
+import Login from "./pages/Log/Login/Login";
+import PasswordRecover from "./pages/Log/PasswordRecover/PasswordRecover";
 import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUser";
 import UserProfile from "./pages/UserProfile";
-import { useState } from "react";
 import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 import CarPaymentPage from "./pages/CarPaymentPage";
