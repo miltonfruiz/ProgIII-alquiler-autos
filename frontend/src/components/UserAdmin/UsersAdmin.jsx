@@ -26,6 +26,7 @@ const UsersAdmin = () => {
     dni: "",
     nacimiento: "",
     licencia: "",
+    numeroTelefonico: "",
     rol: "usuario",
   });
   useEffect(() => {
@@ -56,17 +57,25 @@ const UsersAdmin = () => {
     const errors = UsersValidationAdmin(newUser);
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
+
     try {
+      const { repetirContraseña, ...userToSend } = newUser;
+
       const res = await fetch("http://localhost:3000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
       });
+
       if (!res.ok) {
-        const { error } = await res.json();
-        toast.error(error || "Error al crear usuario");
+        const response = await res.json();
+        console.error("Respuesta del backend:", response);
+        toast.error(
+          response.error || response.errors || "Error al crear usuario"
+        );
         return;
       }
+
       const createdUser = await res.json();
       setUsers([...users, createdUser]);
       toast.success("Usuario creado correctamente");
@@ -76,6 +85,7 @@ const UsersAdmin = () => {
       console.error("Error al crear usuario:", error);
     }
   };
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     const errors = UsersValidationAdmin(newUser);
@@ -135,6 +145,7 @@ const UsersAdmin = () => {
       dni: "",
       nacimiento: "",
       licencia: "",
+      numeroTelefonico: "",
       rol: "usuario",
     });
   };
@@ -187,6 +198,7 @@ const UsersAdmin = () => {
               dni: user.dni,
               nacimiento: user.nacimiento,
               licencia: user.licencia,
+              numeroTelefonico: user.numeroTelefonico || "",
               rol: user.rol,
             });
             setEditingUser(user);
