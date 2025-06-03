@@ -3,6 +3,7 @@ import styles from "./Modal.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ModalValidation from "../ModalValidation/ModalValidation";
+import { crearReserva } from "../../api/reservas";
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
@@ -44,7 +45,7 @@ function Modal({ auto, onClose }) {
     setFormData(newData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const erroresModal = ModalValidation(formData); // Se pasan los datos que contiene el state formData a validacion
     console.log("Errores encontrados:", erroresModal);
@@ -53,22 +54,38 @@ function Modal({ auto, onClose }) {
       setErrores(erroresModal);
     }
 
-    //AQUI GUARDO LOS DATOS DEL AUTO PARA PASARLO AL CARPAYMENT
-    const datosAlquiler = {
-      auto: auto,
-      fecha_inicio: formData.fecha_inicio,
-      fecha_fin: formData.fecha_fin,
-      total: calcularTotal(),
-    };
+    try {
+      const { success } = await crearReserva({
+        fecha_inicio: formData.fecha_inicio,
+        fecha_fin: formData.fecha_fin,
+        carId: auto.id,
+        userId,
+      });
 
-    localStorage.setItem("datosAlquiler", JSON.stringify(datosAlquiler));
+      if (success) {
+        // Guardar datos en localStorage
+        const datosAlquiler = {
+          auto: auto,
+          fecha_inicio: formData.fecha_inicio,
+          fecha_fin: formData.fecha_fin,
+          total: calcularTotal(),
+        };
 
-    toast.success("¡Fechas seleccionadas correctamente!");
-    setErrores({});
-    // setRegisterIn(true);
-    setTimeout(() => {
-      navigate("/carPayment");
-    }, 3000);
+        localStorage.setItem("datosAlquiler", JSON.stringify(datosAlquiler));
+
+        toast.success("¡Fechas seleccionadas correctamente!");
+        setErrores({});
+
+        setTimeout(() => {
+          navigate("/carPayment");
+        }, 3000);
+      } else {
+        toast.error("No se pudo crear la reserva. Intenta nuevamente.");
+      }
+    } catch (error) {
+      console.error("Error al crear la reserva:", error);
+      toast.error("Error del servidor al crear la reserva.");
+    }
   };
 
   const calcularTotal = () => {
