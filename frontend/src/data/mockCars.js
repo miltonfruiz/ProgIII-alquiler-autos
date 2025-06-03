@@ -1,12 +1,12 @@
-import peugeot208 from "../assets/images/cars/peugeot208.png";
-import toyotaCorolla from "../assets/images/cars/toyotaCorolla.png";
-import peugeot408 from "../assets/images/cars/peugeot408.png";
-import volksGol from "../assets/images/cars/volkswagenGol.png";
-import chevroletPrisma from "../assets/images/cars/chevroletPrisma.png";
-import toyotaEtios from "../assets/images/cars/toyota_etios.png";
-import toyotaEtiosSedan from "../assets/images/cars/toyota_etios-sedan.png";
-import fiatCronos from "../assets/images/cars/fiat-cronos.png";
-import vwTcross from "../assets/images/cars/vw-t-cross.png";
+import peugeot208 from "../../public/images/cars/peugeot208.png";
+import toyotaCorolla from "../../public/images/cars/toyotaCorolla.png";
+import peugeot408 from "../../public/images/cars/peugeot408.png";
+import volksGol from "../../public/images/cars/volkswagenGol.png";
+import chevroletPrisma from "../../public/images/cars/chevroletPrisma.png";
+import toyotaEtios from "../../public/images/cars/toyota_etios.png";
+import toyotaEtiosSedan from "../../public/images/cars/toyota_etios-sedan.png";
+import fiatCronos from "../../public/images/cars/fiat-cronos.png";
+import vwTcross from "../../public/images/cars/vw-t-cross.png";
 
 const mockCars = [
   {

@@ -7,7 +7,7 @@
 
   background-color: rgba(0, 0, 0, 0.5); /* Oscurece el fondo */
 
-  z-index: 999;
+  z-index: 1001;
   display: flex;
   align-items: center;
   justify-content: center;
