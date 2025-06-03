@@ -149,6 +149,24 @@ const UsersModalAdmin = ({
               </p>
             </div>
             <div className="input-container">
+              <input
+                type="text"
+                id="numeroTelefonico"
+                name="numeroTelefonico"
+                value={user.numeroTelefonico}
+                placeholder="Número Telefónico"
+                onChange={handleChange}
+              />
+              <p
+                className={`error-admin-input ${
+                  formErrors.numeroTelefonico ? "visible" : ""
+                }`}
+              >
+                {formErrors.numeroTelefonico || ""}
+              </p>
+            </div>
+
+            <div className="input-container">
               <select name="rol" value={user.rol} onChange={handleChange}>
                 {rolOptions.map((rol) => (
                   <option key={rol} value={rol}>
@@ -164,9 +182,10 @@ const UsersModalAdmin = ({
                 {formErrors.rol || ""}
               </p>
             </div>
+            <div></div>
             <div className="cars-container-button">
               <button className="create-button-cars" type="submit">
-                <IoSend /> {editingUser ? "Guardar cambios" : "Crear"}
+                <IoSend /> {editingUser ? "Guardar" : "Crear"}
               </button>
               <button
                 className="cancel-button-cars"

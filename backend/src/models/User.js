@@ -31,7 +31,6 @@ export const User = sequelize.define(
     },
     repetirContraseña: {
       type: DataTypes.VIRTUAL,
-      allowNull: false,
       validate: {
         equalsPassword(value) {
           if (value !== this.contraseña) {

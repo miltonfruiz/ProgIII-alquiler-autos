@@ -37,6 +37,7 @@ try {
     res.status(404).json({ message: "Ruta no encontrada" });
   });
   await sequelize.sync();
+
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
   });
