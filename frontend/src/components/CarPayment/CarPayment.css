@@ -405,6 +405,16 @@ body.dark .containerArrastre {
   cursor: pointer;
   background-color: #ff0000;
   color: #ffffff;
+  transition: 0.2s;
+}
+
+body.dark .botonSacarArchivo {
+  border: #ffffff solid 1px;
+}
+
+.botonSacarArchivo:hover {
+  background-color: #ff0000d5;
+  color: #ffffff;
 }
 
 .comprobante {
