@@ -22,6 +22,7 @@ const UsersTableAdmin = ({ users, onEdit, onDelete, search }) => {
           {users.length > 0 ? (
             users.map((user) => (
               <tr
+                colSpan="8"
                 key={user.id}
                 className={`administration-row ${search ? "fade-in" : ""}`}
               >
@@ -66,4 +67,5 @@ const UsersTableAdmin = ({ users, onEdit, onDelete, search }) => {
     </div>
   );
 };
+
 export default UsersTableAdmin;

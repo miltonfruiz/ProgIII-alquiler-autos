@@ -8,6 +8,7 @@ export function userValidation(req, res, next) {
     dni,
     nacimiento,
     licencia,
+    numeroTelefonico,
   } = req.body;
   const errors = {};
   if (!nombre) errors.nombre = "El nombre es obligatorio.";
@@ -25,9 +26,7 @@ export function userValidation(req, res, next) {
   } else if (contraseña.length < 6) {
     errors.contraseña = "La contraseña debe tener al menos 6 caracteres.";
   }
-  if (!repetirContraseña) {
-    errors.repetirContraseña = "Debe repetir la contraseña.";
-  } else if (contraseña !== repetirContraseña) {
+  if (contraseña !== repetirContraseña) {
     errors.repetirContraseña = "Las contraseñas no coinciden.";
   }
   if (!dni) {
@@ -43,6 +42,12 @@ export function userValidation(req, res, next) {
   if (!licencia) {
     errors.licencia = "La licencia de conducir es obligatoria.";
   }
+  if (!numeroTelefonico) {
+    errors.numeroTelefonico = "El número telefónico es obligatorio.";
+  } else if (!/^\d{10}$/.test(numeroTelefonico)) {
+    errors.numeroTelefonico = "Debe tener 10 dígitos.";
+  }
+
   if (Object.keys(errors).length > 0) {
     return res.status(400).json({ errors });
   }

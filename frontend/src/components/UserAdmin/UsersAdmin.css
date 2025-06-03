@@ -1,0 +1,13 @@
+.table-users-admin {
+  width: 100%;
+  min-width: 110px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+}
+.table-users-admin th,
+.table-users-admin td {
+  min-width: 86px;
+}
