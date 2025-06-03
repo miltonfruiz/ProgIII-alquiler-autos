@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { Pay } from "../src/models/Pay.js";
-import { payValidation } from "../src/middlewares/payValidations.js";
+import { payValidation } from "../src/middlewares";
+import { Car } from "../src/models/Car.js";
+// importamos reservation cuando este disponible
+// import { Reservation } from "../src/models/Reservation.js";
 
 //Paso el reserva para poder hacer el update del estado, de pendiente -> confirmada
 import { Reserva } from "../src/models/Reserva.js";
@@ -10,13 +13,20 @@ const router = Router();
 
 router.post("/pays", payValidation, async (req, res) => {
   try {
+    const { userId } = req.params;
+    const { carId } = req.params;
+    const { reservationId } = req.params;
+
+    const { price } = await Car.findOne({ where: { id: carId } });
+    const { dias_totales } = await Reservation.findOne({
+      where: { id: reservationId },
+    });
+
+    if (!userId || !carId || !reservationId) {
+      return res.status(400).json({ error: "no se encontraron los id" });
+    }
+
     const {
-      userId,
-      carId,
-      reservationId,
-      price,
-      dias_totales,
-      tax,
       cardType,
       paymentMethod,
       cardNumber,
@@ -26,6 +36,8 @@ router.post("/pays", payValidation, async (req, res) => {
       voucher,
       acceptableTerms,
     } = req.body;
+
+    const tax = price * 0.21 * dias_totales;
 
     const subtotal = price * dias_totales;
 

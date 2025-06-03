@@ -31,7 +31,6 @@ export const User = sequelize.define(
     },
     repetirContraseña: {
       type: DataTypes.VIRTUAL,
-      allowNull: false,
       validate: {
         equalsPassword(value) {
           if (value !== this.contraseña) {
@@ -53,11 +52,20 @@ export const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    numeroTelefonico: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        is: /^[0-9]{10}$/, // Validación para un número telefónico de 10 dígitos
+      },
+    },
+    /*
     rol: {
       type: DataTypes.ENUM("administrador", "empleado", "usuario"),
       allowNull: false,
       defaultValue: "usuario",
     },
+     */
   },
   {
     timestamps: false,

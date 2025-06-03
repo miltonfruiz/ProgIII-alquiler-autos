@@ -137,12 +137,45 @@ body.dark .metodoPago {
   margin: 1rem;
   margin-left: 3em;
   cursor: pointer;
+  transition: ease all 0.3s;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+}
+
+.ingresoTarjeta:hover {
+  color: #ffffff;
+  background-color: #6366f1;
+  box-shadow: 3px 3px 6px 3px #9797975d;
+}
+
+.ingresoTarjetaClickeado {
+  width: 35rem;
+  min-height: 3rem;
+  background-color: #f0f0f0;
+  border-radius: 0.7rem;
+  margin: 1rem;
+  margin-left: 3em;
+  cursor: pointer;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .ingresoTarjeta {
   background-color: #000000;
   outline: solid 1px #ffffff;
   box-shadow: 3px 3px 6px 3px #ffffff5d;
+  transition: ease all 0.3s;
+}
+
+body.dark .ingresoTarjetaClickeado {
+  background-color: #000000;
+  outline: solid 1px #ffffff;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
+}
+
+body.dark .ingresoTarjeta:hover {
+  color: #000000;
+  background-color: #91919177;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  outline: solid #ffffff 1px;
 }
 
 .seleccion {
@@ -206,6 +239,11 @@ body.dark .ingresoTarjeta {
 }
 
 .cajaTransferenciaBancaria {
+  transition: all 0.2s;
+}
+
+.cajaTransferenciaBancaria,
+.cajaTransferenciaBancariaClickeado {
   width: 35rem;
   min-height: 3rem;
   background-color: #f0f0f0;
@@ -215,12 +253,83 @@ body.dark .ingresoTarjeta {
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .cajaTransferenciaBancaria {
   background-color: #000000;
   box-shadow: 3px 3px 6px 3px #ffffff5d;
   outline: solid 1px #ffffff;
+  transition: all 0.3s;
+}
+
+body.dark .cajaTransferenciaBancariaClickeado {
+  width: 35rem;
+  min-height: 3rem;
+  border-radius: 0.7rem;
+  margin: 1rem 1rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #000000;
+  box-shadow: 3px 3px 6px 3px #ffffff5d;
+  outline: solid 1px #ffffff;
+}
+
+.cajaTransferenciaBancaria:hover {
+  color: #ffffff;
+  background-color: #6366f1;
+  box-shadow: 3px 3px 6px 3px #9797975d;
+}
+
+body.dark .cajaTransferenciaBancaria:hover {
+  color: #000000;
+  background-color: #91919177;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  outline: solid #ffffff 1px;
+}
+
+.botonArchivo {
+  height: 3.5rem;
+  width: 8rem;
+  border-radius: 0.55rem;
+  font-size: 0.75rem;
+  font-family: "poppins";
+  padding: 0.5rem;
+  background-color: #6366f1;
+  color: #ffffff;
+  transition: 0.3s;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+body.dark .botonArchivo {
+  background-color: #493569;
+  color: #000000;
+  transition: all 0.3s;
+}
+
+body.dark .botonArchivo:hover {
+  background-color: #7956b1;
+  color: #000000;
+  box-shadow: 3px 3px 6px 3px #6e6e6e5d;
+}
+
+.botonArchivo:hover {
+  background-color: #473fdb;
+  color: #ffffff;
+  box-shadow: 3px 3px 6px 3px #9797975d;
+}
+
+.containerPago {
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.containerPago.Visible {
+  opacity: 1;
 }
 
 .labelTarjeta {
@@ -242,6 +351,13 @@ body.dark .cajaTransferenciaBancaria {
   align-items: center;
   flex-direction: column;
   margin-top: 0.5rem;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.conteinerTransferencia.Visible {
+  display: flex;
+  opacity: 1;
 }
 
 .conteinerTransfer {
@@ -295,7 +411,7 @@ body.dark .containerArrastre {
 
 .infoImportante {
   width: 45rem;
-  height: 35rem;
+  height: 35.5rem;
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
@@ -330,34 +446,19 @@ body.dark .infoImportante {
   color: #90a3bf;
 }
 
-.seguroDelAuto {
+.cajaItems {
   width: 60rem;
   border-radius: 0.7rem;
   margin: 2rem 0 0 1rem;
 }
 
-.tituloSeguro {
+.tituloItems {
   margin: 1rem;
   font-size: 1.25rem;
   font-weight: 500;
 }
 
-.liSeguroAuto {
-  margin-left: 2.7rem;
-  font-weight: 500;
-}
-
-.entregaYdevolucion {
-  margin: 2rem 0 0 1rem;
-}
-
-.tituloEntrega {
-  margin: 1rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-.liEntrega {
+.liItems {
   margin-left: 2.7rem;
   font-weight: 500;
 }
@@ -369,33 +470,11 @@ body.dark .infoImportante {
 }
 
 .aceptoTerminos {
-  width: 3rem;
-  height: 3rem;
-  margin-top: 0.2rem;
-}
-
-.requisitosAlRetirar {
-  width: 27rem;
-  height: 5rem;
-  margin: 2rem 0 0 1rem;
-}
-
-.TituloRequisitos {
-  margin: 1rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-.liRequisitos {
-  margin-left: 2.7rem;
-  font-weight: 500;
-}
-
-.aceptoTerminos {
   width: 1rem;
   height: 1rem;
   border-radius: 0.313;
   border: solid black 0.063;
+  margin-top: 0.2rem;
   margin-right: 0.5rem;
 }
 
@@ -548,6 +627,15 @@ body.dark .linea {
   margin: 1rem;
   color: #ffffff;
   transition: 0.3s;
+}
+
+body.dark .botonRentar {
+  background-color: #493569;
+  color: #000000;
+  transition: 0.3s;
+}
+body.dark .botonRentar:hover {
+  background-color: #7956b1;
 }
 
 .botonCancelar {
