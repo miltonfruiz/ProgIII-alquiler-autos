@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import TestHome from "./components/TestHome/TestHome";
-import PasswordRecover from "./pages/PasswordRecover";
+import { useState } from "react";
+import Login from "./pages/Log/Login/Login";
+import PasswordRecover from "./pages/Log/PasswordRecover/PasswordRecover";
 import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUser";
 import UserProfile from "./pages/UserProfile";
-import { useState } from "react";
 import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 import CarPaymentPage from "./pages/CarPaymentPage";
@@ -20,17 +19,27 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Landing from "./pages/Landing";
 import Administration from "./pages/Administration";
 import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRouteAdmin";
+import ResetPassword from "./pages/Log/PasswordReset/PasswordReset";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
   return (
     <BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        closeOnClick
+        pauseOnHover
+      />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/login" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/password-recover" element={<PasswordRecover />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+
         <Route
           path="/register"
           element={<Register setRegisterIn={setRegisterIn}></Register>}

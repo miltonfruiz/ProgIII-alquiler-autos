@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { User } from "../src/models/User.js";
 import { userValidation } from "../src/middlewares/userValidation.js";
+import nodemailer from "nodemailer";
 
 const router = Router();
 
@@ -131,4 +132,56 @@ router.delete("/users/:id", async (req, res) => {
     res.status(500).json({ error: "Error al eliminar el usuario" });
   }
 });
+//------------------- Recuperar Contraseña -------------------//
+router.post("/recover-password", async (req, res) => {
+  const { correo } = req.body;
+  if (!correo) return res.status(400).json({ error: "Email requerido" });
+  const user = await User.findOne({ where: { correo } });
+  if (!user) {
+    return res.status(404).json({ error: "Ese usuario no está registrado" });
+  }
+  const transporter = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "tu_usuario",
+      pass: "tu_password",
+    },
+  });
+  const mailOptions = {
+    from: '"RentCars Web" <no-reply@rentcars.com>',
+    to: correo,
+    subject: "Recuperación de contraseña",
+    html: `<p>Hola ${user.nombre},</p><p>Haz clic <a href="http://localhost:5173/reset-password">aquí</a> para restablecer tu contraseña.</p>`,
+  };
+  try {
+    await transporter.sendMail(mailOptions);
+    res.json({ message: "Instrucciones enviadas por correo" });
+  } catch (error) {
+    console.error("Error al enviar email:", error);
+    res.status(500).json({ error: "No se pudo enviar el correo" });
+  }
+});
+//------------------- Restablecer Contraseña -------------------//
+router.post("/reset-password", async (req, res) => {
+  const { correo, nuevaContraseña, repetirContraseña } = req.body;
+  if (!correo || !nuevaContraseña || !repetirContraseña) {
+    return res.status(400).json({ error: "Todos los campos son obligatorios" });
+  }
+  if (nuevaContraseña !== repetirContraseña) {
+    return res.status(400).json({ error: "Las contraseñas no coinciden" });
+  }
+  const user = await User.findOne({ where: { correo } });
+  if (!user) {
+    return res.status(404).json({ error: "Usuario no encontrado" });
+  }
+  try {
+    await user.update({ contraseña: nuevaContraseña });
+    res.status(200).json({ message: "Contraseña actualizada correctamente" });
+  } catch (error) {
+    console.error("Error al actualizar contraseña:", error);
+    res.status(500).json({ error: "Error al actualizar la contraseña" });
+  }
+});
+
 export default router;

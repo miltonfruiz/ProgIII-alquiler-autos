@@ -17,6 +17,8 @@ const marcas = [
 ];
 
 function Filtros({
+  categorias,
+  marcas,
   categoriasSeleccionadas,
   setCategoriasSeleccionadas,
   marcasSeleccionadas,
