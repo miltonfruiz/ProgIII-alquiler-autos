@@ -57,7 +57,7 @@ const Register = ({ setRegisterIn }) => {
           if (res.ok) {
             console.log("datos guardados");
           } else {
-            console.log("error al enviar el formulario");
+            console.error("Error:", res.statusText);
           }
         })
         .catch((error) => {

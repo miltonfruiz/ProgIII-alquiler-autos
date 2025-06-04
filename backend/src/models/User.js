@@ -45,7 +45,7 @@ export const User = sequelize.define(
       unique: true,
     },
     nacimiento: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     licencia: {
