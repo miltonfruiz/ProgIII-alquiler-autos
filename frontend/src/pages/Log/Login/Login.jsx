@@ -35,8 +35,13 @@ const Login = ({ setLogged }) => {
             setLogged(true);
             localStorage.setItem(
               "loggedUser",
-              JSON.stringify({ email: usuario.correo, id: usuario.id })
+              JSON.stringify({
+                email: usuario.correo,
+                password: usuario.contraseña,
+                id: usuario.id,
+              })
             );
+
             setTimeout(() => {
               if (
                 usuario.correo === "admin@test.com" &&

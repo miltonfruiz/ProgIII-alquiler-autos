@@ -1,21 +1,35 @@
 import { useState } from "react";
-import "./PasswordRecover.css";
 import { MdEmail } from "react-icons/md";
 import { IoIosSend } from "react-icons/io";
 import { TiArrowBack } from "react-icons/ti";
 import { ToastContainer, toast } from "react-toastify";
+import "./PasswordRecover.css";
 
 const PasswordRecover = () => {
   const [email, setEmail] = useState("");
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim()) {
       toast.error("Debes ingresar un email válido");
       return;
     }
-    toast.success("Se enviaron las instrucciones a tu correo");
-    setEmail("");
+    try {
+      const res = await fetch("http://localhost:3000/recover-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error || "Error al enviar el correo");
+        return;
+      }
+      toast.success(data.message || "Instrucciones enviadas");
+      setEmail("");
+    } catch (error) {
+      console.error("Error al enviar solicitud:", error);
+      toast.error("Error del servidor. Intenta más tarde.");
+    }
   };
   return (
     <div className="page-recovery">
@@ -27,9 +41,9 @@ const PasswordRecover = () => {
         </label>
         <input
           type="email"
-          id="email"
+          id="email-recovery"
           name="email"
-          placeholder="tunombre@gmail.com"
+          placeholder="recuperar@test.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

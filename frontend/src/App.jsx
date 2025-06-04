@@ -19,6 +19,7 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Landing from "./pages/Landing";
 import Administration from "./pages/Administration";
 import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRouteAdmin";
+import ResetPassword from "./pages/Log/PasswordReset/PasswordReset";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,6 +31,8 @@ function App() {
         <Route path="/" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/login" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/password-recover" element={<PasswordRecover />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+
         <Route
           path="/register"
           element={<Register setRegisterIn={setRegisterIn}></Register>}

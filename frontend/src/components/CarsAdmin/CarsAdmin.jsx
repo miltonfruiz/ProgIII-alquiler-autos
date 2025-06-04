@@ -38,20 +38,20 @@ const CarsAdmin = () => {
       .then((data) => setCars([...data]))
       .catch((err) => console.error("Error al traer autos:", err));
   }, []);
-  const handleDelete = async (id) => {
+  const handleDelete = async (car) => {
     try {
-      await fetch(`http://localhost:3000/cars/${id}`, {
+      await fetch(`http://localhost:3000/cars/${car.id}`, {
         method: "DELETE",
       });
       toast.success("Auto borrado correctamente!");
-      setCars(cars.filter((car) => car.id !== id));
+      setCars(cars.filter((c) => c.id !== car.id));
     } catch (error) {
       console.error("Error al eliminar auto:", error);
     }
   };
   const confirmDelete = async () => {
     if (carToDelete) {
-      await handleDelete(carToDelete.id);
+      await handleDelete(carToDelete);
       setCarToDelete(null);
     }
   };
@@ -198,7 +198,8 @@ const CarsAdmin = () => {
       </div>
       {carToDelete && (
         <ConfirmDeleteModal
-          carName={carToDelete.name}
+          itemName={carToDelete.name}
+          itemType="el auto"
           onConfirm={confirmDelete}
           onCancel={cancelDelete}
         />

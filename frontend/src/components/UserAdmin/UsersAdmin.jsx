@@ -224,7 +224,8 @@ const UsersAdmin = () => {
       )}
       {userToDelete && (
         <ConfirmDeleteModal
-          carName={`${userToDelete.nombre} ${userToDelete.apellido}`}
+          itemName={`${userToDelete.nombre} ${userToDelete.apellido}`}
+          itemType="el usuario"
           onConfirm={confirmDelete}
           onCancel={cancelDelete}
         />
