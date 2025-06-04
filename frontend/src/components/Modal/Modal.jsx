@@ -3,6 +3,7 @@ import styles from "./Modal.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ModalValidation from "../ModalValidation/ModalValidation";
+import { crearReserva } from "../../api/reservas";
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
@@ -44,7 +45,7 @@ function Modal({ auto, onClose }) {
     setFormData(newData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const erroresModal = ModalValidation(formData); // Se pasan los datos que contiene el state formData a validacion
     console.log("Errores encontrados:", erroresModal);
@@ -52,12 +53,39 @@ function Modal({ auto, onClose }) {
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
     }
-    toast.success("¡Fechas seleccionadas correctamente!");
-    setErrores({});
-    // setRegisterIn(true);
-    setTimeout(() => {
-      navigate("/carPayment");
-    }, 3000);
+
+    try {
+      const { success } = await crearReserva({
+        fecha_inicio: formData.fecha_inicio,
+        fecha_fin: formData.fecha_fin,
+        carId: auto.id,
+        userId,
+      });
+
+      if (success) {
+        // Guardar datos en localStorage
+        const datosAlquiler = {
+          auto: auto,
+          fecha_inicio: formData.fecha_inicio,
+          fecha_fin: formData.fecha_fin,
+          total: calcularTotal(),
+        };
+
+        localStorage.setItem("datosAlquiler", JSON.stringify(datosAlquiler));
+
+        toast.success("¡Fechas seleccionadas correctamente!");
+        setErrores({});
+
+        setTimeout(() => {
+          navigate("/carPayment");
+        }, 3000);
+      } else {
+        toast.error("No se pudo crear la reserva. Intenta nuevamente.");
+      }
+    } catch (error) {
+      console.error("Error al crear la reserva:", error);
+      toast.error("Error del servidor al crear la reserva.");
+    }
   };
 
   const calcularTotal = () => {
@@ -88,7 +116,13 @@ function Modal({ auto, onClose }) {
   console.log(errores);
 
   return (
-    <div className={styles.overlayBack} onClick={onClose}>
+    <div
+      className={styles.overlayBack}
+      onClick={() => {
+        localStorage.removeItem("datosAlquiler");
+        onClose();
+      }}
+    >
       <div
         className={styles.overlayConteiner}
         onClick={(e) => e.stopPropagation()}
@@ -161,7 +195,13 @@ function Modal({ auto, onClose }) {
             </div>
 
             <div className={styles.btnsConteiner}>
-              <button className={styles.btnCancelar} onClick={onClose}>
+              <button
+                className={styles.btnCancelar}
+                onClick={() => {
+                  localStorage.removeItem("datosAlquiler");
+                  onClose(); // cerrás el modal
+                }}
+              >
                 Cancelar
               </button>
               <button

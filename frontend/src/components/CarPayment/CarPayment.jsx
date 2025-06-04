@@ -153,6 +153,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
 
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
+  //LOS DATOS DEL ALQUILER VIENEN DEL MODAL
+  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
   return (
     <div className="contenedorGeneral">
       <div className="contenedor">

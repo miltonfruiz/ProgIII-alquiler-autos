@@ -12,10 +12,14 @@ import "./models/Car.js";
 import "./models/Review.js";
 import "./models/index.js";
 import "./models/User.js";
+import "./models/Reserva.js";
+import "./models/Pay.js";
 import carsRoutes from "../routes/cars.routes.js";
 import reviewsRoutes from "../routes/review.routes.js";
 import usersRoutes from "../routes/users.routes.js";
 import adminRoutes from "../routes/admin.routes.js";
+import reservasRoutes from "../routes/reservas.routes.js";
+import payRoutes from "../routes/pay.routes.js";
 
 const app = express();
 
@@ -33,6 +37,8 @@ try {
   app.use(reviewsRoutes);
   app.use(usersRoutes);
   app.use(adminRoutes);
+  app.use(reservasRoutes);
+  app.use(payRoutes);
   app.use((req, res, next) => {
     res.status(404).json({ message: "Ruta no encontrada" });
   });

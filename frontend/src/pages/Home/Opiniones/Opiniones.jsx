@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "./Opiniones.module.css";
 
-import profilePic from "../../../assets/images/reviews/user-profile.png";
-import profilePic2 from "../../../assets/images/reviews/user-profile2.png";
-import profilePic3 from "../../../assets/images/reviews/user-profile3.jpg";
-import profilePic4 from "../../../assets/images/reviews/user-profile4.png";
-import profilePic5 from "../../../assets/images/reviews/user-profile5.png";
-import profilePic6 from "../../../assets/images/reviews/user-profile6.png";
+import profilePic from "../../../../public/images/reviews/user-profile.png";
+import profilePic2 from "../../../../public/images/reviews/user-profile2.png";
+import profilePic3 from "../../../../public/images/reviews/user-profile3.jpg";
+import profilePic4 from "../../../../public/images/reviews/user-profile4.png";
+import profilePic5 from "../../../../public/images/reviews/user-profile5.png";
+import profilePic6 from "../../../../public/images/reviews/user-profile6.png";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCarRear,

@@ -1,5 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
+import { User } from "./User.js";
+import { Car } from "./Car.js";
+import { Reserva } from "./Reserva.js";
 
 export const Pay = sequelize.define("Pay", {
   id: {
@@ -11,7 +14,7 @@ export const Pay = sequelize.define("Pay", {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: "User",
+      model: User,
       key: "id",
     },
   },
@@ -19,7 +22,7 @@ export const Pay = sequelize.define("Pay", {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: "Car",
+      model: Car,
       key: "id",
     },
   },
@@ -27,7 +30,7 @@ export const Pay = sequelize.define("Pay", {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: "Reservation",
+      model: Reserva,
       key: "id",
     },
   },
@@ -74,7 +77,10 @@ export const Pay = sequelize.define("Pay", {
     type: DataTypes.STRING, // guardamos la ruta del archivo
     allowNull: true,
   },
-  acceptableTerms: DataTypes.BOOLEAN, // este es el checkbox de acepto terminos y condiciones
-  allowNull: false,
-  default: false,
+  //Arreglo terminos, estaba mal la sintaxis (juan)
+  acceptableTerms: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
 });
