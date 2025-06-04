@@ -2,10 +2,11 @@ import React from "react";
 import "./LandingPage.css";
 import { Link } from "react-router-dom";
 import { FaInstagram } from "react-icons/fa6";
-import { FaTwitter } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
+import { FaTwitter, FaFacebook, FaUserPlus, FaCarSide } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
+import { FiLogIn } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+
 const LandingPage = () => {
   const navigate = useNavigate();
 
@@ -22,23 +23,27 @@ const LandingPage = () => {
       <div className="containerLanding">
         <div className="containerHeader">
           <div className="containerH1">
-            <h1 className="titleLanding">Alquileres de autos</h1>
+            <h1 className="titleLanding">
+              <FaCarSide /> Bienvenidos RentCars!
+            </h1>
           </div>
+
           <p className="textWelcome">
-            ¡Bienvenidos a [Nombre de tu Empresa]– Tu Solución en Alquiler de
-            Autos! ¿Necesitas un auto confiable para tus viajes de negocios,
-            vacaciones o simplemente moverte con libertad? En [Nombre de tu
-            Empresa], te ofrecemos una flota moderna, precios competitivos y un
-            servicio personalizado para que tu experiencia de alquiler sea
-            rápida, fácil y sin complicaciones
+            Contamos con una flota moderna, precios accesibles y un servicio al
+            cliente personalizado que garantiza una experiencia de alquiler
+            rápida, segura y sin complicaciones. Reserva en línea en minutos y
+            comienza tu viaje con nosotros. Tu mejor opción en alquiler de autos
           </p>
           <div className="containerButton">
-            <button className="buttonRegisterLanding" onClick={handlerRegister}>
-              Registrarse
-            </button>
             <button className="buttonLogin" onClick={handlerLogin}>
-              Inicio Sección
+              <FiLogIn size={14} /> Iniciar Sesión
             </button>
+            <button className="buttonRegisterLanding" onClick={handlerRegister}>
+              <FaUserPlus size={14} /> Registrarse
+            </button>
+          </div>
+          <div className="container-project">
+            <p>Proyecto UTN 2025 - Grupo 6 :)</p>
           </div>
         </div>
         <div className="containerContenido">
