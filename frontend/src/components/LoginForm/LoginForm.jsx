@@ -32,12 +32,12 @@ const LoginForm = ({ onSubmit, errores, refs }) => {
           type="email"
           name="email"
           id="email"
-          placeholder="tunombre@gmail.com"
+          placeholder="correo@test.com"
           value={formData.email}
           onChange={handleChange}
           ref={refs.emailRef}
         />
-        <p className={`error-message ${errores.email ? "visible" : ""}`}>
+        <p className={`error-message-login ${errores.email ? "visible" : ""}`}>
           {errores.email || ""}
         </p>
       </div>
@@ -55,7 +55,9 @@ const LoginForm = ({ onSubmit, errores, refs }) => {
           onChange={handleChange}
           ref={refs.passwordRef}
         />
-        <p className={`error-message ${errores.password ? "visible" : ""}`}>
+        <p
+          className={`error-message-login ${errores.password ? "visible" : ""}`}
+        >
           {errores.password || ""}
         </p>
       </div>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import RegisterForm from "../components/Register/RegisterForm";
 import RegisterValidation from "../components/RegisterValidation/RegisterValidation";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
@@ -34,7 +34,6 @@ const Register = ({ setRegisterIn }) => {
 
   const handleSubmit = async (formRegister) => {
     const erroresRegister = RegisterValidation({ datos: formRegister });
-
     if (Object.keys(erroresRegister).length > 0) {
       arrayErrores.forEach((error) => {
         const keyRef = `${error}Register`;
@@ -44,33 +43,41 @@ const Register = ({ setRegisterIn }) => {
       });
       setErrores(erroresRegister);
     } else {
-      console.log(formRegister);
-      fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formRegister),
-      })
-        .then((res) => {
-          console.log(res);
-          if (res.ok) {
-            console.log("datos guardados");
-          } else {
-            console.error("Error:", res.statusText);
-          }
-        })
-        .catch((error) => {
-          console.error("Error al enviar el formulario:", error);
-          console.log(res);
+      const formBackend = {
+        nombre: formRegister.name,
+        apellido: formRegister.lastName,
+        correo: formRegister.email,
+        contraseña: formRegister.password,
+        repetirContraseña: formRegister.verifyPassword,
+        dni: formRegister.dni,
+        nacimiento: formRegister.nacimiento,
+        licencia: formRegister.licencia,
+        numeroTelefonico: formRegister.numeroTelefonico,
+      };
+      try {
+        const res = await fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formBackend),
         });
-
-      toast.success("¡Usuario registrado correctamente!");
-      setErrores({});
-      setRegisterIn(true);
-      setTimeout(() => {
-        navigate("/home");
-      }, 3000);
+        const data = await res.json();
+        if (!res.ok) {
+          console.log("Error del servidor:", data.error || data.errors);
+          toast.error(data.error || "Error al registrar el usuario.");
+          return;
+        }
+        toast.success("¡Usuario registrado correctamente!");
+        setErrores({});
+        setRegisterIn(true);
+        setTimeout(() => {
+          navigate("/home");
+        }, 3000);
+      } catch (error) {
+        console.error("Error al enviar el formulario:", error);
+        toast.error("Error del servidor.");
+      }
     }
   };
 
@@ -84,7 +91,6 @@ const Register = ({ setRegisterIn }) => {
           useRefs,
         }}
       />
-      <ToastContainer position="top-right" autoClose={4000}></ToastContainer>
       <Footer />
     </div>
   );
