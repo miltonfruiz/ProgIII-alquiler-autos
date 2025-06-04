@@ -2,21 +2,15 @@
   margin: 0;
   padding: 0;
   height: 1400px;
-}
-
-body.dark .contenedorGeneral {
-  background-color: rgb(37, 32, 32);
-}
-
-.contenedor {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 5rem;
   height: 100%;
+  margin-left: 40em;
 }
 
-body.dark .contenedor {
+body.dark .contenedorGeneral {
   background-color: rgb(37, 32, 32);
 }
 
@@ -27,11 +21,12 @@ body.dark .contenedor {
   background-color: #ffffff;
   margin: 1rem;
   padding: 1em;
-  box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .DatosFacturacion {
   background-color: black;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 .titleDatos {
@@ -100,11 +95,12 @@ body.dark .DatosFacturacion {
   margin: 1rem;
   margin-top: 2rem;
   padding: 1em;
-  box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .metodoPago {
   background-color: #000000;
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 .tituloMetodo {
@@ -173,7 +169,7 @@ body.dark .ingresoTarjetaClickeado {
 
 body.dark .ingresoTarjeta:hover {
   color: #000000;
-  background-color: #91919177;
+  background-color: #a201e2a4;
   box-shadow: 3px 3px 6px 3px #5e5e5e5d;
   outline: solid #ffffff 1px;
 }
@@ -285,7 +281,7 @@ body.dark .cajaTransferenciaBancariaClickeado {
 
 body.dark .cajaTransferenciaBancaria:hover {
   color: #000000;
-  background-color: #91919177;
+  background-color: #a201e2a4;
   box-shadow: 3px 3px 6px 3px #5e5e5e5d;
   outline: solid #ffffff 1px;
 }
@@ -400,6 +396,28 @@ body.dark .containerArrastre {
   box-shadow: 4px 4px 4px 4px rgba(0, 122, 31, 0.247);
 }
 
+.botonSacarArchivo {
+  border-radius: 3rem;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.5rem 0 0.2rem 0;
+  padding: 0.3rem;
+  border: #000000 solid 1px;
+  cursor: pointer;
+  background-color: #ff0000;
+  color: #ffffff;
+  transition: 0.2s;
+}
+
+body.dark .botonSacarArchivo {
+  border: #ffffff solid 1px;
+}
+
+.botonSacarArchivo:hover {
+  background-color: #ff0000d5;
+  color: #ffffff;
+}
+
 .comprobante {
   margin: 0.4rem 0 1rem 0;
 }
@@ -417,11 +435,12 @@ body.dark .containerArrastre {
   margin: 1rem;
   margin-top: 2rem;
   padding: 1rem;
-  box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .infoImportante {
   background-color: black;
+  box-shadow: 4px 4px 8px 3px #5e5e5e5d;
 }
 
 .tituloInfo {
@@ -485,11 +504,12 @@ body.dark .infoImportante {
   background-color: #ffffff;
   margin: 1rem;
   padding: 1rem;
-  box-shadow: 0 0 13px rgba(199, 199, 199, 0.1);
+  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
 }
 
 body.dark .resumenDeAlquiler {
   background-color: black;
+  box-shadow: 4px 4px 8px 3px #5e5e5e5d;
 }
 
 .tituloResumen {
