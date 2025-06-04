@@ -1,9 +1,6 @@
 import React from "react";
 import styles from "./Recomendados.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
-import { faRoad } from "@fortawesome/free-solid-svg-icons";
 
 function Recomendados({ autos }) {
   return (
