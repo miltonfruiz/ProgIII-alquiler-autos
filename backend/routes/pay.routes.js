@@ -32,6 +32,8 @@ router.post("/pays", async (req, res) => {
       acceptableTerms,
     } = req.body;
 
+    console.log();
+
     const tax = price * 0.21 * dias_totales;
 
     const subtotal = price * dias_totales;
