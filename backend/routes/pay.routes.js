@@ -5,6 +5,8 @@ import { Car } from "../src/models/Car.js";
 // importamos reservation cuando este disponible
 // import { Reservation } from "../src/models/Reservation.js";
 
+//Paso el reserva para poder hacer el update del estado, de pendiente -> confirmada
+import { Reserva } from "../src/models/Reserva.js";
 const router = Router();
 
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
@@ -40,6 +42,12 @@ router.post("/pays", payValidation, async (req, res) => {
     const subtotal = price * dias_totales;
 
     const total = tax + subtotal;
+
+    //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
+    await Reserva.update(
+      { estado_reserva: "confirmada" },
+      { where: { id_reserva: reservationId } }
+    );
 
     if (paymentMethod == "tarjeta") {
       const pay = await Pay.create({
@@ -90,3 +98,4 @@ router.get("/pays/user:userId", async (req, res) => {
 });
 
 // creo que irian esas dos rutas nomas. por ahora no se me ocurre otra
+export default router;

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./WhyUs.module.css";
-import imagenConcesionaria from "../../../assets/image-car.png";
+import imagenConcesionaria from "../../../../public/images/image-car.png";
 
 function WhyUs() {
   return (

@@ -62,3 +62,69 @@
   align-items: end;
   padding-right: 25px;
 }
+
+/* RESPONSIVE PARA LAPTOP */
+
+@media (max-width: 1440px) {
+  .heroSection {
+    width: 100%;
+    margin: 50px auto;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .textConteiner {
+    width: 100%;
+    padding: 0;
+    align-items: center;
+  }
+
+  .textConteiner h1 {
+    font-size: 28px;
+  }
+
+  .textConteiner p {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  .btnConteiner {
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .btnConteiner button {
+    padding: 20px 60px;
+    font-size: 16px;
+  }
+
+  .carImgConteiner {
+    padding-right: 0;
+    margin-top: 30px;
+    justify-content: center;
+  }
+
+  .carImagen {
+    width: 90%;
+    height: auto;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .textConteiner h1 {
+    font-size: 24px;
+  }
+
+  .btnConteiner button {
+    padding: 18px 50px;
+    font-size: 15px;
+  }
+
+  .carImagen {
+    max-width: 500px;
+  }
+}

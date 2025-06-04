@@ -14,8 +14,10 @@
 
 .categoriesConteiner {
   display: flex;
-  gap: 127px;
-  margin-left: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 120px;
+  margin-left: 0;
 }
 
 /* Card */
