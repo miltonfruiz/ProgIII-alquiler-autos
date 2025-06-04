@@ -20,12 +20,19 @@ import Landing from "./pages/Landing";
 import Administration from "./pages/Administration";
 import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRouteAdmin";
 import ResetPassword from "./pages/Log/PasswordReset/PasswordReset";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
   return (
     <BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        closeOnClick
+        pauseOnHover
+      />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Login setLogged={setLoggedIn} />} />
