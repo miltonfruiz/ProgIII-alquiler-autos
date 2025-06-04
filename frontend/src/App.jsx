@@ -35,7 +35,7 @@ function App() {
       />
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Login setLogged={setLoggedIn} />} />
+        <Route path="/" element={<Landing></Landing>} />
         <Route path="/login" element={<Login setLogged={setLoggedIn} />} />
         <Route path="/password-recover" element={<PasswordRecover />} />
         <Route path="/reset-password" element={<ResetPassword />} />
@@ -59,7 +59,6 @@ function App() {
           }
         />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/landing" element={<Landing></Landing>} />
         <Route
           path="/administration"
           element={

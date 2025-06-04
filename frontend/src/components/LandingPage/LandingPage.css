@@ -101,7 +101,6 @@
 }
 
 .containerContenido {
-  border: solid #3a2180c2 2px;
   background-image: url("src/assets/imagenFondoVioleta2.jpg");
 }
 
@@ -142,7 +141,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #474545;
+  background-color: #1c1c1c;
+  color: #fff;
+  font-size: 0.95rem;
 }
 
 .textDesign {
@@ -161,4 +162,132 @@
   text-align: center;
   font-size: 0.75rem;
   color: #777;
+}
+.section {
+  padding: 3rem 2rem;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.section p,
+.section li,
+.section ol {
+  font-size: 1.1rem;
+  color: white;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.statsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.statBox {
+  background-color: white;
+  padding: 2.5rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+}
+
+.statBox h3 {
+  font-size: 2rem;
+  color: #0077cc;
+}
+
+.statBox p {
+  font-size: 1rem;
+  color: #666;
+}
+.sectionDestaca {
+  padding: 2rem;
+  background-color: #f8f8f8;
+  border-top: 2px solid #ccc;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.ulDestaca {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.ulDestaca li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.bContenido {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.footerContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 5rem;
+}
+
+.footerSection {
+  flex: 1 1 250px;
+}
+.footerSection-social {
+  display: flex;
+  flex-direction: column;
+}
+.footerSection h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: #6366f1;
+}
+
+.footerSection p {
+  margin: 0.3rem 0;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.footer-a-icons {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.logo {
+  font-size: 1.5rem;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.logo:hover {
+  color: #ffdd57;
+}
+
+.footerBottom {
+  text-align: center;
+  margin-top: 4rem;
+  border-top: 1px solid #444;
+  padding-top: 1rem;
+  font-size: 0.85rem;
 }
