@@ -144,8 +144,8 @@ router.post("/password-recovery", async (req, res) => {
     host: "sandbox.smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: "tu_usuario",
-      pass: "tu_password",
+      user: "38e1e56732c573",
+      pass: "2efba2dceefe61",
     },
   });
   const mailOptions = {
