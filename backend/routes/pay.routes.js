@@ -7,33 +7,30 @@ const router = Router();
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
 router.post("/pays", async (req, res) => {
+  const { userId } = req.params;
+  const { carId } = req.params;
+  const { id_reserva } = req.params;
+
+  const { price } = await Car.findOne({ where: { id: carId } });
+
+  if (!price) {
+    console.log(res.status(404).json({ error: "precio no encontrado" }));
+  } else {
+    console.log("precio", price);
+  }
+
+  const { dias_totales } = await Reservation.findOne({
+    where: { id: id_reserva },
+  });
+
+  if (!dias_totales) {
+    console.log(res.status(404).json({ error: "dias totales no encontrados" }));
+  } else {
+    console.log("dias totales", dias_totales);
+  }
+
   try {
-    const { userId } = req.params;
-    const { carId } = req.params;
-    const { id_reserva } = req.params;
-
-    const { price } = await Car.findOne({ where: { id: carId } });
-
-    if (!price) {
-      return res.status(404).json({ error: "precio no encontrado" });
-    } else {
-      console.log("precio", price);
-    }
-
-    const { dias_totales } = await Reservation.findOne({
-      where: { id: id_reserva },
-    });
-
-    if (!dias_totales) {
-      return res.status(404).json({ error: "dias totales no encontrados" });
-    } else {
-      console.log("dias totales", dias_totales);
-    }
-
-    if (!userId || !carId || !id_reserva) {
-      return res.status(400).json({ error: "no se encontraron los id" });
-    }
-
+    console.log("req.body", req.body);
     try {
       const {
         cardType,
@@ -46,7 +43,7 @@ router.post("/pays", async (req, res) => {
         acceptableTerms,
       } = req.body;
     } catch (error) {
-      return res.status(400).json({ error: "Faltan datos de pago" });
+      console.log(res.status(400).json({ error: "Faltan datos de pago" }));
     }
 
     const tax = price * 0.21 * dias_totales;
@@ -83,7 +80,7 @@ router.post("/pays", async (req, res) => {
         cvc,
         acceptableTerms,
       });
-      res.status(201).json(pay);
+      console.log(res.status(201).json(pay));
     } else if (paymentMethod == "transferencia") {
       const pay = await Pay.create({
         userId,
@@ -99,7 +96,9 @@ router.post("/pays", async (req, res) => {
       res.status(201).json(pay);
     }
   } catch (error) {
-    res.status(500).json({ error: "Error al crear el comentario" });
+    console.log(
+      res.status(500).json({ error: "Error al crear el comentario" })
+    );
   }
 });
 

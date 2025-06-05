@@ -20,6 +20,10 @@ Reserva.belongsTo(Car, { foreignKey: "carId" });
 Reserva.hasOne(Pay, { foreignKey: "reservationId", onDelete: "CASCADE" });
 Pay.belongsTo(Reserva, { foreignKey: "reservationId" });
 
+// Un pago pertenece a un auto
+Car.hasOne(Pay, { foreignKey: "carId", onDelete: "CASCADE" });
+Pay.belongsTo(Car, { foreignKey: "carId" });
+
 User.hasMany(Review, { foreignKey: "userId", onDelete: "CASCADE" });
 Review.belongsTo(User, { foreignKey: "userId" });
 
