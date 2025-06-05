@@ -2,7 +2,7 @@ import LoginForm from "../../../components/LoginForm/LoginForm";
 import LoginValidation from "../../../components/LoginValidation/LoginValidation";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
@@ -79,7 +79,6 @@ const Login = ({ setLogged }) => {
         </div>
       </div>
       <p className="login-footer">© 2025 Todos los derechos reservados</p>
-      <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
 };
