@@ -2,10 +2,9 @@ import LoginForm from "../../../components/LoginForm/LoginForm";
 import LoginValidation from "../../../components/LoginValidation/LoginValidation";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
-import UserNavbar from "../../../components/UserNavbar/UserNavbar";
 
 const Login = ({ setLogged }) => {
   const emailRef = useRef(null);
@@ -67,7 +66,6 @@ const Login = ({ setLogged }) => {
   };
   return (
     <div className="login-page">
-      <UserNavbar />
       <div className="login-container">
         <div className="login-image-section">
           <img src="images/auto.png" alt="auto azul" className="login-image" />
@@ -81,7 +79,6 @@ const Login = ({ setLogged }) => {
         </div>
       </div>
       <p className="login-footer">© 2025 Todos los derechos reservados</p>
-      <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
 };
