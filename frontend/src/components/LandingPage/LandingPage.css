@@ -90,18 +90,43 @@
   color: black;
 }
 .buttonRegisterLanding:hover {
+  color: #4f46e5;
   transition: background-color 0.3s;
-  background-color: #4f46e5;
-  color: white;
+  filter: drop-shadow(0 0 0.35rem #4f46e5);
 }
 
 .buttonLogin:hover {
   transition: background-color 0.3s;
-  background-color: #4f46e5;
+  color: white;
+  border: 0px solid #4f46e5;
+  filter: drop-shadow(0 0 0.45rem white);
+  transition: background-color 0.3s;
 }
 
 .containerContenido {
+  position: relative;
   background-image: url("src/assets/imagenFondoVioleta2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.containerContenido::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.containerContenido > * {
+  position: relative;
+  z-index: 2;
 }
 
 .textContenido {
@@ -164,27 +189,31 @@
   color: #777;
 }
 .section {
-  padding: 3rem 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   text-align: center;
   border-radius: 12px;
 }
 
 .section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
   color: white;
 }
 
 .section p,
 .section li,
 .section ol {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: white;
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
   text-align: left;
 }
-
+#estadisticas {
+  padding-bottom: 7rem;
+}
 .statsContainer {
   display: flex;
   justify-content: center;
@@ -201,14 +230,17 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   min-width: 180px;
 }
-
+.width-cont {
+  min-width: 250px;
+}
 .statBox h3 {
   font-size: 2rem;
   color: #0077cc;
 }
 
 .statBox p {
-  font-size: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
   color: #666;
 }
 .sectionDestaca {
@@ -255,17 +287,23 @@
   flex-direction: column;
 }
 .footerSection h4 {
-  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
   margin-bottom: 0.75rem;
   color: #6366f1;
 }
 
 .footerSection p {
+  display: flex;
+  justify-content: center;
+  font-size: 0.8rem;
   margin: 0.3rem 0;
 }
 
 .socialIcons {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   margin-top: 0.5rem;
 }
@@ -281,7 +319,7 @@
 }
 
 .logo:hover {
-  color: #ffdd57;
+  color: #6366f1;
 }
 
 .footerBottom {
@@ -289,5 +327,15 @@
   margin-top: 4rem;
   border-top: 1px solid #444;
   padding-top: 1rem;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
+}
+.h2-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-title-landing {
+  margin-right: 10px;
+  color: #6366f1;
+  filter: drop-shadow(0 0 0.05rem white);
 }

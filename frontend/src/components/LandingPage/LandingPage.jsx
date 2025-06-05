@@ -7,9 +7,13 @@ import {
   FaFacebook,
   FaUserPlus,
   FaCarSide,
+  FaQuestionCircle,
+  FaStar,
+  FaChartLine,
 } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FiLogIn } from "react-icons/fi";
+import { FaGear } from "react-icons/fa6";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -33,6 +37,9 @@ const LandingPage = () => {
           </div>
           <p className="textWelcome">
             Contamos con una flota moderna, precios accesibles y un servicio al
+            cliente personalizado que garantiza una experiencia de alquiler
+            rápida, segura y sin complicaciones. Reserva en línea en minutos y
+            comienza tu viaje con nosotros. Tu mejor opción en alquiler de autos
             cliente personalizado. Reserva en línea en minutos y comenzá tu
             viaje.
           </p>
@@ -51,7 +58,9 @@ const LandingPage = () => {
       </section>
       <div className="containerContenido">
         <section className="section" id="rentcar">
-          <h2>¿Qué es RentCar?</h2>
+          <h2 className="h2-title">
+            <FaQuestionCircle className="icon-title-landing" /> ¿Qué es RentCar?
+          </h2>
           <p>
             RentCar es una plataforma innovadora de alquiler de vehículos
             pensada para facilitar la movilidad urbana y turística en todo el
@@ -59,7 +68,9 @@ const LandingPage = () => {
           </p>
         </section>
         <section className="section" id="funciona">
-          <h2>¿Cómo funciona?</h2>
+          <h2 className="h2-title">
+            <FaGear className="icon-title-landing" /> ¿Cómo funciona?
+          </h2>
           <ol>
             <li>📋 Registrate gratis y creá tu perfil.</li>
             <li>🚗 Elegí el auto que más te guste.</li>
@@ -68,7 +79,9 @@ const LandingPage = () => {
           </ol>
         </section>
         <section className="section" id="porque-elegirnos">
-          <h2>¿Por qué elegirnos?</h2>
+          <h2 className="h2-title">
+            <FaStar className="icon-title-landing" /> ¿Por qué elegirnos?
+          </h2>
           <ul className="ulPorqueElegirnos">
             <li>✅ Autos de última generación: económicos y premium.</li>
             <li>✅ Flexibilidad total: por horas, días o meses.</li>
@@ -85,9 +98,11 @@ const LandingPage = () => {
           </ul>
         </section>
         <section className="section" id="estadisticas">
-          <h2>Estadísticas</h2>
+          <h2 className="h2-title">
+            <FaChartLine className="icon-title-landing" /> Estadísticas
+          </h2>
           <div className="statsContainer">
-            <div className="statBox">
+            <div className="statBox width-cont">
               <h3>+1200</h3>
               <p>Clientes satisfechos</p>
             </div>
@@ -157,6 +172,7 @@ const LandingPage = () => {
                 <FaInstagram className="logo" />
               </Link>
               <Link
+                className="footer-a-icons"
                 to="https://x.com/explore"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -164,6 +180,7 @@ const LandingPage = () => {
                 <FaTwitter className="logo" />
               </Link>
               <Link
+                className="footer-a-icons"
                 to="https://www.facebook.com/?locale=es_ES"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -171,6 +188,7 @@ const LandingPage = () => {
                 <FaFacebook className="logo" />
               </Link>
               <Link
+                className="footer-a-icons"
                 to="https://web.whatsapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
