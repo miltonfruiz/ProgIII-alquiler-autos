@@ -1,21 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Filtros.module.css";
 
-const categorias = [
-  { nombre: "Económico", cantidad: 4 },
-  { nombre: "Estándar", cantidad: 1 },
-  { nombre: "SUV", cantidad: 1 },
-  { nombre: "Full Size", cantidad: 3 },
-];
-
-const marcas = [
-  { nombre: "Volkswagen", cantidad: 2 },
-  { nombre: "Fiat", cantidad: 1 },
-  { nombre: "Chevrolet", cantidad: 1 },
-  { nombre: "Toyota", cantidad: 3 },
-  { nombre: "Peugeot", cantidad: 2 },
-];
-
 function Filtros({
   categorias,
   marcas,

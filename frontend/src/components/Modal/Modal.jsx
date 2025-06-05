@@ -50,6 +50,9 @@ function Modal({ auto, onClose }) {
     const erroresModal = ModalValidation(formData); // Se pasan los datos que contiene el state formData a validacion
     console.log("Errores encontrados:", erroresModal);
 
+    const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
+    console.log("User ID desde localStorage:", userId);
+
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
     }
@@ -63,12 +66,17 @@ function Modal({ auto, onClose }) {
       });
 
       if (success) {
+        const total = calcularTotal();
+        const impuestos = calcularImpuestos(total);
+        const precioFinal = total + impuestos;
         // Guardar datos en localStorage
         const datosAlquiler = {
           auto: auto,
           fecha_inicio: formData.fecha_inicio,
           fecha_fin: formData.fecha_fin,
-          total: calcularTotal(),
+          total: total,
+          tax: impuestos,
+          totalFinal: precioFinal,
         };
 
         localStorage.setItem("datosAlquiler", JSON.stringify(datosAlquiler));
@@ -112,7 +120,9 @@ function Modal({ auto, onClose }) {
     // .ceil para redondear la cantidad de dias, el fin-inicio devuelve en MILISEG, (1000 * 60 * 60 * 24) identifica la cantidad de MILISEG en un dia
     return diffDias > 0 ? diffDias * auto.price : 0;
   };
-
+  const calcularImpuestos = (total) => {
+    return total * 0.21;
+  };
   console.log(errores);
 
   return (
