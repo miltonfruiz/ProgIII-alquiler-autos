@@ -141,11 +141,10 @@ router.post("/password-recovery", async (req, res) => {
     return res.status(404).json({ error: "Ese usuario no está registrado" });
   }
   const transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    service: "gmail",
     auth: {
-      user: "38e1e56732c573",
-      pass: "2efba2dceefe61",
+      user: "miltonfruizok@gmail.com",
+      pass: "ihbeffqueeqqtftp",
     },
   });
   const mailOptions = {
