@@ -133,7 +133,7 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 //------------------- Recuperar Contraseña -------------------//
-router.post("/recover-password", async (req, res) => {
+router.post("/password-recovery", async (req, res) => {
   const { correo } = req.body;
   if (!correo) return res.status(400).json({ error: "Email requerido" });
   const user = await User.findOne({ where: { correo } });

@@ -329,6 +329,11 @@
   padding-top: 1rem;
   font-size: 0.7rem;
 }
+.footerBottom h6 {
+  font-weight: 300;
+  font-size: 0.6rem;
+  margin-bottom: 1.5rem;
+}
 .h2-title {
   display: flex;
   justify-content: center;

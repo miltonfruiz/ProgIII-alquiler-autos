@@ -157,7 +157,7 @@ const LandingPage = () => {
             <h4>Contacto</h4>
             <p>📞 0800-123-456</p>
             <p>✉ contacto@rentcar.com</p>
-            <p>📍 Buenos Aires, Argentina</p>
+            <p>📍 Rosario, Santa Fe</p>
           </div>
 
           <div className="footerSection social">
@@ -201,7 +201,7 @@ const LandingPage = () => {
 
         <div className="footerBottom">
           <p>Diseñado por: Milton Ruiz, Juan Sosa, Branco Antuña</p>
-          <p>© 2025 RentCar. Todos los derechos reservados.</p>
+          <h6>© 2025 RentCar. Todos los derechos reservados.</h6>
         </div>
       </footer>
     </div>
