@@ -79,11 +79,6 @@
   display: flex;
   justify-content: center;
 }
-.label-with-icon {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-}
 .error-message {
   height: 1rem;
   color: red;

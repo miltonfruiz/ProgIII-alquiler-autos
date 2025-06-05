@@ -79,6 +79,11 @@ router.put(
     try {
       const car = await Car.findByPk(req.params.id);
       if (!car) return res.status(404).json({ message: "Auto no encontrado" });
+
+      if (req.file) {
+        req.body.image = `/uploads/${req.file.filename}`;
+      }
+
       await car.update(req.body);
       res.json(car);
     } catch (error) {
@@ -86,6 +91,7 @@ router.put(
     }
   }
 );
+
 //------------------- Eliminar auto -------------------//
 router.delete("/cars/:id", async (req, res) => {
   try {
