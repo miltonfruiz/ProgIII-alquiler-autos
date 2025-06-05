@@ -13,32 +13,53 @@ router.post("/pays", async (req, res) => {
     const { id_reserva } = req.params;
 
     const { price } = await Car.findOne({ where: { id: carId } });
+
+    if (!price) {
+      return res.status(404).json({ error: "precio no encontrado" });
+    } else {
+      console.log("precio", price);
+    }
+
     const { dias_totales } = await Reservation.findOne({
       where: { id: id_reserva },
     });
+
+    if (!dias_totales) {
+      return res.status(404).json({ error: "dias totales no encontrados" });
+    } else {
+      console.log("dias totales", dias_totales);
+    }
 
     if (!userId || !carId || !id_reserva) {
       return res.status(400).json({ error: "no se encontraron los id" });
     }
 
-    const {
-      cardType,
-      paymentMethod,
-      cardNumber,
-      expirationDate,
-      ownerName,
-      cvc,
-      voucher,
-      acceptableTerms,
-    } = req.body;
-
-    console.log();
+    try {
+      const {
+        cardType,
+        paymentMethod,
+        cardNumber,
+        expirationDate,
+        ownerName,
+        cvc,
+        voucher,
+        acceptableTerms,
+      } = req.body;
+    } catch (error) {
+      return res.status(400).json({ error: "Faltan datos de pago" });
+    }
 
     const tax = price * 0.21 * dias_totales;
 
+    console.log("tax", tax);
+
     const subtotal = price * dias_totales;
 
+    console.log("subtotal", subtotal);
+
     const total = tax + subtotal;
+
+    console.log("total", total);
 
     //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
     await Reserva.update(

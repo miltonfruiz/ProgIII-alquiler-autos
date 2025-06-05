@@ -35,6 +35,8 @@ const CarPaymentPage = () => {
     "comprobante",
   ];
 
+  let datosPagoCompleto = {};
+
   function handlerSubmit(
     datosFacturacion,
     datosPago,
@@ -59,16 +61,30 @@ const CarPaymentPage = () => {
 
       setErrores(errores);
     } else {
-      const datosPagoCompleto = {
-        cardType: tipoTarjeta,
-        paymentMethod: choicePayment,
-        cardNumber: datosPago.numeroTarjeta,
-        expirationDate: datosPago.fechaTarjeta,
-        ownerName: datosPago.nombreTarjeta,
-        cvc: datosPago.cvc,
-        voucher: datosPago.comprobante,
-        acceptableTerms: checkbox,
-      };
+      if (choicePayment == "tarjeta") {
+        datosPagoCompleto = {
+          cardType: tipoTarjeta,
+          paymentMethod: choicePayment,
+          cardNumber: datosPago.numeroTarjeta,
+          expirationDate: datosPago.fechaTarjeta,
+          ownerName: datosPago.nombreTarjeta,
+          cvc: datosPago.cvc,
+          voucher: null,
+          acceptableTerms: checkbox,
+        };
+      } else {
+        datosPagoCompleto = {
+          cardType: tipoTarjeta,
+          paymentMethod: choicePayment,
+          cardNumber: null,
+          expirationDate: null,
+          ownerName: null,
+          cvc: null,
+          voucher: datosPago,
+          acceptableTerms: checkbox,
+        };
+      }
+
       console.log(datosPagoCompleto);
 
       fetch("http://localhost:3000/pays", {
