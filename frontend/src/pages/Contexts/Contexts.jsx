@@ -3,9 +3,9 @@ import { createContext, useState, useContext } from "react";
 export const dataContext = createContext(); // esto crea el componente <dataContext>
 
 export function Contexts({ children }) {
-  const [estadoIds, setEstadoGlobal] = useState({});
+  const [estadoIds, setEstadoIds] = useState({});
 
-  const value = { estadoIds, setEstadoGlobal };
+  const value = { estadoIds, setEstadoIds };
 
   return <dataContext.Provider value={value}>{children}</dataContext.Provider>;
 }

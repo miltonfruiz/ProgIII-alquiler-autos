@@ -12,15 +12,17 @@ import Modal from "../../../components/Modal/Modal";
 function Catalogo({ autos, limpiarFiltros }) {
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
 
-  const { estadoIds, setEstadoGlobal } = useDataContext();
+  const { estadoIds, setEstadoIds } = useDataContext();
 
   const abrirOverlay = (auto) => {
     setAutoSeleccionado(auto);
 
-    setEstadoGlobal((prevState) => ({
+    setEstadoIds((prevState) => ({
       ...prevState,
       idAuto: auto.id,
     }));
+
+    console.log(estadoIds);
 
     // setEstadoGlobal({ ...estadoIds, idAuto: auto.id }); a esto lo comento porque no se si esta bien lo de arriba o esto
   };
