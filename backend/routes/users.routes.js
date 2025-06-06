@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { User } from "../src/models/User.js";
 import { userValidation } from "../src/middlewares/userValidation.js";
+import { userPartialValidation } from "../src/middlewares/userPartialValidation.js";
 import nodemailer from "nodemailer";
 
 const router = Router();
@@ -75,7 +76,7 @@ router.post("/users", userValidation, async (req, res) => {
   }
 });
 //------------------- Actualizar usuario -------------------//
-router.put("/users/:id", userValidation, async (req, res) => {
+router.put("/users/:id", userPartialValidation, async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -133,7 +134,7 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 //------------------- Recuperar Contraseña -------------------//
-router.post("/recover-password", async (req, res) => {
+router.post("/password-recovery", async (req, res) => {
   const { correo } = req.body;
   if (!correo) return res.status(400).json({ error: "Email requerido" });
   const user = await User.findOne({ where: { correo } });
@@ -141,11 +142,10 @@ router.post("/recover-password", async (req, res) => {
     return res.status(404).json({ error: "Ese usuario no está registrado" });
   }
   const transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    service: "gmail",
     auth: {
-      user: "tu_usuario",
-      pass: "tu_password",
+      user: "miltonfruizok@gmail.com",
+      pass: "ihbeffqueeqqtftp",
     },
   });
   const mailOptions = {

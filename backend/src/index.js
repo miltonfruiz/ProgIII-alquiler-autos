@@ -43,7 +43,7 @@ try {
     res.status(404).json({ message: "Ruta no encontrada" });
   });
   await sequelize.sync();
-
+  //await sequelize.sync({ force: true }); para borrar datos de la tabla
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
   });

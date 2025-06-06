@@ -10,30 +10,6 @@ export const Pay = sequelize.define("Pay", {
     primaryKey: true,
     autoIncrement: true,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: "id",
-    },
-  },
-  carId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Car,
-      key: "id",
-    },
-  },
-  reservationId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Reserva,
-      key: "id",
-    },
-  },
   subtotal: {
     // esto es el precio del auto por dia multiplicado a los dias que se alquila osea (price de Car) * (dias_totales de Reservas)
     type: DataTypes.FLOAT,

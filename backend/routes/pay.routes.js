@@ -2,27 +2,23 @@ import { Router } from "express";
 import { Pay } from "../src/models/Pay.js";
 import { payValidation } from "../src/middlewares/payValidations.js";
 import { Car } from "../src/models/Car.js";
-// importamos reservation cuando este disponible
-// import { Reservation } from "../src/models/Reservation.js";
-
-//Paso el reserva para poder hacer el update del estado, de pendiente -> confirmada
 import { Reserva } from "../src/models/Reserva.js";
 const router = Router();
 
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
-router.post("/pays", payValidation, async (req, res) => {
+router.post("/pays", async (req, res) => {
   try {
     const { userId } = req.params;
     const { carId } = req.params;
-    const { reservationId } = req.params;
+    const { id_reserva } = req.params;
 
     const { price } = await Car.findOne({ where: { id: carId } });
     const { dias_totales } = await Reservation.findOne({
-      where: { id: reservationId },
+      where: { id: id_reserva },
     });
 
-    if (!userId || !carId || !reservationId) {
+    if (!userId || !carId || !id_reserva) {
       return res.status(400).json({ error: "no se encontraron los id" });
     }
 
@@ -37,6 +33,8 @@ router.post("/pays", payValidation, async (req, res) => {
       acceptableTerms,
     } = req.body;
 
+    console.log();
+
     const tax = price * 0.21 * dias_totales;
 
     const subtotal = price * dias_totales;
@@ -46,14 +44,14 @@ router.post("/pays", payValidation, async (req, res) => {
     //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
     await Reserva.update(
       { estado_reserva: "confirmada" },
-      { where: { id_reserva: reservationId } }
+      { where: { id_reserva: id_reserva } }
     );
 
     if (paymentMethod == "tarjeta") {
       const pay = await Pay.create({
         userId,
         carId,
-        reservationId,
+        id_reserva,
         subtotal,
         total,
         tax,
@@ -70,7 +68,7 @@ router.post("/pays", payValidation, async (req, res) => {
       const pay = await Pay.create({
         userId,
         carId,
-        reservationId,
+        id_reserva,
         subtotal,
         total,
         tax,
@@ -97,5 +95,4 @@ router.get("/pays/user:userId", async (req, res) => {
   }
 });
 
-// creo que irian esas dos rutas nomas. por ahora no se me ocurre otra
 export default router;

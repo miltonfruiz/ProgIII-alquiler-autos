@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Login from "./pages/Log/Login/Login";
-import PasswordRecover from "./pages/Log/PasswordRecover/PasswordRecover";
+import PasswordRecovery from "./pages/Log/PasswordRecovery/PasswordRecovery";
 import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUser";
 import UserProfile from "./pages/UserProfile";
 import Register from "./pages/Register";
@@ -35,9 +35,9 @@ function App() {
       />
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Login setLogged={setLoggedIn} />} />
+        <Route path="/" element={<Landing></Landing>} />
         <Route path="/login" element={<Login setLogged={setLoggedIn} />} />
-        <Route path="/password-recover" element={<PasswordRecover />} />
+        <Route path="/password-recovery" element={<PasswordRecovery />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route
@@ -59,7 +59,6 @@ function App() {
           }
         />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/landing" element={<Landing></Landing>} />
         <Route
           path="/administration"
           element={

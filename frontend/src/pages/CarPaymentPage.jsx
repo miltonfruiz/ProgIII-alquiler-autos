@@ -59,24 +59,34 @@ const CarPaymentPage = () => {
 
       setErrores(errores);
     } else {
+      const datosPagoCompleto = {
+        cardType: tipoTarjeta,
+        paymentMethod: choicePayment,
+        cardNumber: datosPago.numeroTarjeta,
+        expirationDate: datosPago.fechaTarjeta,
+        ownerName: datosPago.nombreTarjeta,
+        cvc: datosPago.cvc,
+        voucher: datosPago.comprobante,
+        acceptableTerms: checkbox,
+      };
+      console.log(datosPagoCompleto);
+
       fetch("http://localhost:3000/pays", {
         method: "POST",
-        body: JSON.stringify({
-          tipoTarjeta,
-          choicePayment,
-          ...datosPago,
-          checkbox,
-        }),
+        body: JSON.stringify(datosPagoCompleto),
       })
         .then((respuesta) => {
+          console.log("Respuesta del servidor:", respuesta);
           if (respuesta.ok) {
             console.log("Pago realizado correctamente");
           } else {
             console.log("Error al realizar el pago");
+            toast.error("Error al realizar el pago");
           }
         })
         .catch((error) => {
           console.error("Error al enviar el formulario:", error);
+          toast.error("Error al enviar el formulario");
         });
 
       toast.success("¡auto rentado!");

@@ -8,13 +8,13 @@ export const CarPaymentValidation = ({
 
   if (!datosFacturacion.nombre.trim()) {
     errores.nombre = "* Debe ingresar nombre";
-  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.name)) {
+  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datosFacturacion.nombre)) {
     errores.nombre = "* Solo se permiten letras";
   }
 
   if (!datosFacturacion.apellido.trim()) {
     errores.apellido = "* Debe ingresar apellido";
-  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datos.apellido)) {
+  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datosFacturacion.apellido)) {
     errores.apellido = "* Solo se permiten letras";
   }
 
@@ -24,7 +24,7 @@ export const CarPaymentValidation = ({
 
   if (!datosFacturacion.dni.trim()) {
     errores.dni = "* Debe ingresar dni";
-  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datos.dni)) {
+  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datosFacturacion.dni)) {
     errores.dni =
       "* el dni debe tener entre 6 y 8 caracteres y no puede tener letras ni espacios";
   }
@@ -39,7 +39,7 @@ export const CarPaymentValidation = ({
     }
 
     if (!datosPago.fechaTarjeta?.trim()) {
-      errores.fechaTarjeta = "* ingrese la fecha de expiracion de la ";
+      errores.fechaTarjeta = "* ingrese la fecha de expiracion";
     }
 
     if (!datosPago.nombreTarjeta?.trim()) {

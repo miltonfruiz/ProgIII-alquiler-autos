@@ -29,18 +29,22 @@ export const objetosFormPersona = [
 export const objetosFormTarjeta = [
   {
     label: "Numero de Tarjeta",
+    type: "text",
     name: "numeroTarjeta",
   },
   {
     label: "Fecha de expiracion",
+    type: "date",
     name: "fechaTarjeta",
   },
   {
     label: "Nombre del titular",
+    type: "text",
     name: "nombreTarjeta",
   },
   {
     label: "CVC",
+    type: "text",
     name: "cvc",
   },
 ];
