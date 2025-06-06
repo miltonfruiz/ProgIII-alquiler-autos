@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./MyReservations.css";
 import { FaCarSide, FaHandHoldingUsd } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
@@ -10,7 +10,8 @@ import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
 
 export default function MyReservations() {
-  const [reservations, setReservations] = useState([
+  const [reservations, setReservations] = useState([]);
+  /*const [reservations, setReservations] = useState([
     {
       id: 1,
       auto: "Toyota Corolla",
@@ -77,7 +78,7 @@ export default function MyReservations() {
       facturacion: "Factura B",
       total: 36300,
     },
-  ]);
+  ]);*/
   const [expandedIds, setExpandedIds] = useState([]);
   const handleDelete = (id) => {
     const nuevasReservas = reservations.filter((res) => res.id !== id);
@@ -88,6 +89,25 @@ export default function MyReservations() {
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
+  useEffect(() => {
+    const fetchReservations = async () => {
+      try {
+        const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+        if (!loggedUser?.id) return;
+
+        const res = await fetch(
+          `http://localhost:3000/reservas/user/${loggedUser.id}`
+        );
+        const data = await res.json();
+        setReservations(data);
+      } catch (error) {
+        console.error("Error al obtener reservas:", error);
+      }
+    };
+
+    fetchReservations();
+  }, []);
+
   return (
     <div className="reservation-container">
       <h1 className="reservation-title">
@@ -108,9 +128,13 @@ export default function MyReservations() {
                   expandedIds.includes(res.id) ? "expanded" : ""
                 }`}
               >
-                <img src={res.imagen} alt={res.auto} className="car-image" />
+                <img
+                  src={res.Car.image || "/images/default.png"}
+                  alt={res.Car.name}
+                  className="car-image"
+                />
                 <div className="reservation-info">
-                  <h2>{res.auto}</h2>
+                  <h2>{res.Car?.name || "Auto"}</h2>
                   <p>
                     <MdDateRange className="data-myreservations" />
                     Fecha: {new Date(res.fecha).toLocaleDateString("es-AR")}
