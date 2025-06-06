@@ -5,10 +5,11 @@ import mockCars from "../../../data/mockCars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faRoad } from "@fortawesome/free-solid-svg-icons";
+
 import Modal from "../../../components/Modal/Modal";
 
 function Catalogo({ autos, limpiarFiltros }) {
-  const [autoSeleccionado, setAutoSeleccionado] = useState(null);
+  const [autoSeleccionado, setAutoSeleccionado] = useState(null); // tengo que hacer un contexto para pasar esto a carPaymentPage y tomar el id y pasarlo por el body al backend
 
   const abrirOverlay = (auto) => {
     setAutoSeleccionado(auto);
