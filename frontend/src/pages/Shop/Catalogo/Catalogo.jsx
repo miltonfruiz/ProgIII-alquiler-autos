@@ -5,14 +5,24 @@ import mockCars from "../../../data/mockCars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faRoad } from "@fortawesome/free-solid-svg-icons";
+import { useDataContext } from "../../../pages/Contexts/Contexts";
 
 import Modal from "../../../components/Modal/Modal";
 
 function Catalogo({ autos, limpiarFiltros }) {
-  const [autoSeleccionado, setAutoSeleccionado] = useState(null); // tengo que hacer un contexto para pasar esto a carPaymentPage y tomar el id y pasarlo por el body al backend
+  const [autoSeleccionado, setAutoSeleccionado] = useState(null);
+
+  const { estadoIds, setEstadoGlobal } = useDataContext();
 
   const abrirOverlay = (auto) => {
     setAutoSeleccionado(auto);
+
+    setEstadoGlobal((prevState) => ({
+      ...prevState,
+      idAuto: auto.id,
+    }));
+
+    // setEstadoGlobal({ ...estadoIds, idAuto: auto.id }); a esto lo comento porque no se si esta bien lo de arriba o esto
   };
 
   const cerrarOverlay = () => {
