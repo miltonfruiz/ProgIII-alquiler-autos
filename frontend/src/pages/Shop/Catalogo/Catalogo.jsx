@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useDataContext } from "../../../pages/contexts/Contexts";
 import styles from "./Catalogo.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
 import mockCars from "../../../data/mockCars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faRoad } from "@fortawesome/free-solid-svg-icons";
-
 import Modal from "../../../components/Modal/Modal";
 
 function Catalogo({ autos, limpiarFiltros }) {
-  const [autoSeleccionado, setAutoSeleccionado] = useState(null); // tengo que hacer un contexto para pasar esto a carPaymentPage y tomar el id y pasarlo por el body al backend
-<<<<<<< HEAD
+  const [autoSeleccionado, setAutoSeleccionado] = useState(null);
 
   const { estadoIds, setEstadoGlobal } = useDataContext();
-=======
->>>>>>> parent of 6f71b20 (Branco 6-6: creado del contexto y pasado del id del auto (falta los del usuario y la reserva))
 
   const abrirOverlay = (auto) => {
     setAutoSeleccionado(auto);
