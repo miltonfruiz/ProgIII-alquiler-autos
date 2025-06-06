@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./CarsAdmin.css";
 import { FaClipboardList, FaPlus, FaDownload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import CardAdminValidation from "../CarAdminValidation/CarAdminValidation";
 import CarsAdminModal from "../CarAdminModal/CarAdminModal";
 import CarsAdminTable from "../CarsAdminTable/CarsAdminTable";

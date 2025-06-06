@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { User } from "../src/models/User.js";
 import { userValidation } from "../src/middlewares/userValidation.js";
+import { userPartialValidation } from "../src/middlewares/userPartialValidation.js";
 import nodemailer from "nodemailer";
 
 const router = Router();
@@ -75,7 +76,7 @@ router.post("/users", userValidation, async (req, res) => {
   }
 });
 //------------------- Actualizar usuario -------------------//
-router.put("/users/:id", userValidation, async (req, res) => {
+router.put("/users/:id", userPartialValidation, async (req, res) => {
   try {
     const { id } = req.params;
     const {
