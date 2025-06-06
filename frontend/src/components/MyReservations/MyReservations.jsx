@@ -129,20 +129,22 @@ export default function MyReservations() {
                 }`}
               >
                 <img
-                  src={res.Car.image || "/images/default.png"}
-                  alt={res.Car.name}
+                  src={res.Car?.image || "/images/default.png"}
+                  alt={res.Car?.name}
                   className="car-image"
                 />
                 <div className="reservation-info">
-                  <h2>{res.Car?.name || "Auto"}</h2>
+                  <h2>{res.Car?.name}</h2>
                   <p>
                     <MdDateRange className="data-myreservations" />
-                    Fecha: {new Date(res.fecha).toLocaleDateString("es-AR")}
+                    Desde:{" "}
+                    {new Date(res.fecha_inicio).toLocaleDateString("es-AR")} -
+                    Hasta: {new Date(res.fecha_fin).toLocaleDateString("es-AR")}
                   </p>
+
                   <div className="extra-details">
                     <p>
-                      <IoPricetagSharp />
-                      Precio base: ${res.precio.toLocaleString()}
+                      <IoPricetagSharp /> Días: {res.cant_dias}
                     </p>
                     <p>
                       <TbTax /> Impuestos: ${res.impuestos.toLocaleString()}
