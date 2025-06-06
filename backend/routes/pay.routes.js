@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Pay } from "../src/models/Pay.js";
+import { payValidation } from "../src/middlewares/payValidations.js";
 import { Car } from "../src/models/Car.js";
 import { Reserva } from "../src/models/Reserva.js";
 const router = Router();

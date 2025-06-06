@@ -27,6 +27,7 @@ router.get("/cars", async (req, res) => {
     const cars = await Car.findAll();
     res.json(cars);
   } catch (error) {
+    console.error("Error al hacer Car.findAll():", error.message);
     res.status(500).json({ message: "Error al obtener autos", error });
   }
 });

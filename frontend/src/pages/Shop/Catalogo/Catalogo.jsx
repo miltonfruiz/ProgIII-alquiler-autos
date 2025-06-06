@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import styles from "./Catalogo.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
 import mockCars from "../../../data/mockCars";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
-import { faRoad } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 import Modal from "../../../components/Modal/Modal";
 
-function Catalogo({ autos, limpiarFiltros }) {
+function Catalogo({ autos, limpiarFiltros, loggedIn }) {
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
+  const navigate = useNavigate();
 
   const abrirOverlay = (auto) => {
-    setAutoSeleccionado(auto);
+    if (loggedIn) {
+      setAutoSeleccionado(auto);
+    } else {
+      navigate("/login");
+    }
   };
 
   const cerrarOverlay = () => {
