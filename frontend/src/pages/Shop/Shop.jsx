@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import { obtenerAutos } from "../../api/autos";
 
-function Shop() {
+function Shop({ loggedIn }) {
   const [autosDB, setAutosDB] = useState([]);
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
@@ -81,7 +81,11 @@ function Shop() {
           marcasSeleccionadas={marcasSeleccionadas}
           setMarcasSeleccionadas={setMarcasSeleccionadas}
         />
-        <Catalogo autos={autosFiltrados} limpiarFiltros={limpiarFiltros} />
+        <Catalogo
+          autos={autosFiltrados}
+          limpiarFiltros={limpiarFiltros}
+          loggedIn={loggedIn}
+        />
       </main>
       <Footer />
     </>

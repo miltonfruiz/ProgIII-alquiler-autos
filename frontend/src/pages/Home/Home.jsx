@@ -15,7 +15,7 @@ function Home({ loggedIn }) {
       <UserNavbar />
       <Hero loggedIn={loggedIn} />
       <Categorias loggedIn={loggedIn} />
-      <Recomendados autos={mockRecomendados} />
+      <Recomendados autos={mockRecomendados} loggedIn={loggedIn} />
       <WhyUs />
       <Opiniones />
       <RentNow loggedIn={loggedIn} />
