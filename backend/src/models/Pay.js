@@ -6,9 +6,9 @@ import { Reserva } from "./Reserva.js";
 
 export const Pay = sequelize.define("Pay", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
   userId: {
     type: DataTypes.INTEGER,

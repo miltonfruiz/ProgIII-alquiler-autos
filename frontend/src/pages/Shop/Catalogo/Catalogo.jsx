@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useDataContext } from "../../../pages/contexts/Contexts";
 import styles from "./Catalogo.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
 import mockCars from "../../../data/mockCars";
@@ -11,17 +10,8 @@ import Modal from "../../../components/Modal/Modal";
 function Catalogo({ autos, limpiarFiltros }) {
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
 
-  const { estadoIds, setEstadoGlobal } = useDataContext();
-
   const abrirOverlay = (auto) => {
     setAutoSeleccionado(auto);
-
-    setEstadoGlobal((prevState) => ({
-      ...prevState,
-      idAuto: auto.id,
-    }));
-
-    // setEstadoGlobal({ ...estadoIds, idAuto: auto.id }); a esto lo comento porque no se si esta bien lo de arriba o esto
   };
 
   const cerrarOverlay = () => {

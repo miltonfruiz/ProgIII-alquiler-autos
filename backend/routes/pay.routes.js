@@ -2,49 +2,47 @@ import { Router } from "express";
 import { Pay } from "../src/models/Pay.js";
 import { Car } from "../src/models/Car.js";
 import { Reserva } from "../src/models/Reserva.js";
+import { User } from "../src/models/User.js";
 const router = Router();
 
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
 router.post("/pays", async (req, res) => {
-  const { userId } = req.params;
-  const { carId } = req.params;
-  const { id_reserva } = req.params;
-
-  const { price } = await Car.findOne({ where: { id: carId } });
-
-  if (!price) {
-    console.log(res.status(404).json({ error: "precio no encontrado" }));
-  } else {
-    console.log("precio", price);
-  }
-
-  const { dias_totales } = await Reservation.findOne({
-    where: { id: id_reserva },
-  });
-
-  if (!dias_totales) {
-    console.log(res.status(404).json({ error: "dias totales no encontrados" }));
-  } else {
-    console.log("dias totales", dias_totales);
-  }
-
   try {
     console.log("req.body", req.body);
-    try {
-      const {
-        cardType,
-        paymentMethod,
-        cardNumber,
-        expirationDate,
-        ownerName,
-        cvc,
-        voucher,
-        acceptableTerms,
-      } = req.body;
-    } catch (error) {
-      console.log(res.status(400).json({ error: "Faltan datos de pago" }));
-    }
+
+    const {
+      payId,
+      cardType,
+      paymentMethod,
+      cardNumber,
+      expirationDate,
+      ownerName,
+      cvc,
+      voucher,
+      acceptableTerms,
+    } = req.body;
+
+    const pago = await Pay.findOne({
+      where: { id: payId },
+      include: [
+        { model: Car, attributes: ["id", "price"] },
+        { model: Reserva, attributes: ["id_reserva", "dias_totales"] },
+        { model: User, attributes: ["id"] },
+      ],
+    }); // buscamos el pago por su id incluidos otros datos de la reserva, auto y usuario
+
+    console.log("pago", pago);
+
+    const id_reserva = pago.Reserva.id_reserva; // para que al crear el pago, se guarde el id de la reserva
+
+    const carId = pago.Car.id; // para que al crear el pago, se guarde el id del auto
+
+    const userId = pago.User.id; // para que al crear el pago, se guarde el id del usuario
+
+    const price = pago.Car.price;
+
+    const dias_totales = pago.Reserva.dias_totales;
 
     const tax = price * 0.21 * dias_totales;
 
@@ -66,6 +64,7 @@ router.post("/pays", async (req, res) => {
 
     if (paymentMethod == "tarjeta") {
       const pay = await Pay.create({
+        payId,
         userId,
         carId,
         id_reserva,

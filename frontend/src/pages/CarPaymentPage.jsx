@@ -5,6 +5,7 @@ import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
@@ -61,8 +62,10 @@ const CarPaymentPage = () => {
 
       setErrores(errores);
     } else {
+      const idGenerado = uuidv4();
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
+          payId: idGenerado,
           cardType: tipoTarjeta,
           paymentMethod: choicePayment,
           cardNumber: datosPago.numeroTarjeta,
@@ -74,13 +77,14 @@ const CarPaymentPage = () => {
         };
       } else {
         datosPagoCompleto = {
+          payId: idGenerado,
           cardType: tipoTarjeta,
           paymentMethod: choicePayment,
           cardNumber: null,
           expirationDate: null,
           ownerName: null,
           cvc: null,
-          voucher: datosPago,
+          voucher: datosPago.name,
           acceptableTerms: checkbox,
         };
       }

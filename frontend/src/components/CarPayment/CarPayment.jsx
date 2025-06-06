@@ -288,7 +288,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                   onDrop={(e) => {
                     e.preventDefault();
                     const file = e.dataTransfer.files[0];
-                    setFile((prevFile) => file);
+                    setFile(file);
                   }}
                 >
                   {file ? (
@@ -303,7 +303,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                     className="comprobante"
                     onChange={(e) => {
                       if (e.target.files[0]) {
-                        setFile((prevFile) => e.target.files[0]);
+                        setFile(e.target.files[0]);
                       }
                     }}
                     style={{ display: "none" }}
