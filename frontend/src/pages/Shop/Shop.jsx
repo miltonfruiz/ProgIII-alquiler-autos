@@ -15,7 +15,6 @@ function Shop({ loggedIn }) {
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
 
   const location = useLocation(); // Esto sirve para recibir el state que esta en CATEGORIAS.JSX
-
   useEffect(() => {
     const fetchAutos = async () => {
       try {
