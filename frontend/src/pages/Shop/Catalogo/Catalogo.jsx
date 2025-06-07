@@ -17,17 +17,14 @@ function Catalogo({ autos, limpiarFiltros, loggedIn }) {
   const { estadoIds, setEstadoIds } = useDataContext();
 
   const abrirOverlay = (auto) => {
+    setAutoSeleccionado(auto);
     setEstadoIds((prevState) => ({
       ...prevState,
       carId: auto.id,
     }));
-
-    if (loggedIn) {
-      setAutoSeleccionado(auto);
-    } else {
-      navigate("/login");
-    }
   };
+
+  console.log(estadoIds);
 
   const cerrarOverlay = () => {
     setAutoSeleccionado(null); // Se utiliza null, ya que en el componente "overlay" se verifica con un IF si es NULL no se muestra.
