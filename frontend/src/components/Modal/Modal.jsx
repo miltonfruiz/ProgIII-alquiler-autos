@@ -69,8 +69,7 @@ function Modal({ auto, onClose }) {
       });
 
       if (success) {
-        /*
-        let contador = localStorage.getItem("contadorReservas");
+        let contador = localStorage.getItem("contadorReservas"); // creo un contador para simular el id de reservas
 
         contador = contador ? parseInt(contador) : 0;
 
@@ -79,10 +78,12 @@ function Modal({ auto, onClose }) {
         localStorage.setItem("contadorReservas", contador);
 
         setEstadoIds((prevState) => ({
+          // actualizo el estado global con el valor de reserva
           ...prevState,
           id_reserva: contador,
         }));
-         */
+
+        console.log(estadoIds);
 
         const total = calcularTotal();
         const impuestos = calcularImpuestos(total);
@@ -138,7 +139,9 @@ function Modal({ auto, onClose }) {
     // .ceil para redondear la cantidad de dias, el fin-inicio devuelve en MILISEG, (1000 * 60 * 60 * 24) identifica la cantidad de MILISEG en un dia
     return diffDias > 0 ? diffDias * auto.price : 0;
   };
-
+  const calcularImpuestos = (total) => {
+    return total * 0.21;
+  };
   console.log(errores);
 
   return (

@@ -10,7 +10,6 @@ export const Pay = sequelize.define("Pay", {
     primaryKey: true,
     autoIncrement: true,
   },
-
   carId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -19,7 +18,7 @@ export const Pay = sequelize.define("Pay", {
       key: "id",
     },
   },
-  reservationId: {
+  id_reserva: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {

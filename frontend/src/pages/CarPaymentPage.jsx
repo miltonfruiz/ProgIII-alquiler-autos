@@ -75,15 +75,16 @@ const CarPaymentPage = () => {
           voucher: null,
           acceptableTerms: checkbox,
         };
-      } else {
+      } else if (choicePayment == "transferencia") {
+        const file = String(datosPago.name);
         datosPagoCompleto = {
-          cardType: tipoTarjeta,
+          cardType: null,
           paymentMethod: choicePayment,
           cardNumber: null,
           expirationDate: null,
           ownerName: null,
           cvc: null,
-          voucher: datosPago,
+          voucher: file,
           acceptableTerms: checkbox,
         };
       }
@@ -92,16 +93,15 @@ const CarPaymentPage = () => {
       // probamos pasarlo por params si no lo pasamos por el body
       console.log(estadoIds);
       if (estadoIds.carId && estadoIds.id_reserva) {
-        fetch(
-          `http://localhost:3000/pays/${estadoIds.carId}/${estadoIds.id_reserva}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(datosPagoCompleto),
-          }
-        )
+        const carId = estadoIds.carId;
+        const id_reserva = estadoIds.id_reserva;
+        fetch(`http://localhost:3000/pays/${carId}/${id_reserva}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datosPagoCompleto),
+        })
           .then((respuesta) => {
             console.log("Respuesta del servidor:", respuesta);
             if (respuesta.ok) {
