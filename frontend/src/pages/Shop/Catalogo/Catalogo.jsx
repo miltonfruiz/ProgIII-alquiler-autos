@@ -19,10 +19,8 @@ function Catalogo({ autos, limpiarFiltros }) {
 
     setEstadoIds((prevState) => ({
       ...prevState,
-      idAuto: auto.id,
+      carId: auto.id,
     }));
-
-    console.log(estadoIds);
 
     // setEstadoGlobal({ ...estadoIds, idAuto: auto.id }); a esto lo comento porque no se si esta bien lo de arriba o esto
   };

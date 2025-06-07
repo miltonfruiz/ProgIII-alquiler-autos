@@ -10,14 +10,7 @@ export const Pay = sequelize.define("Pay", {
     primaryKey: true,
     autoIncrement: true,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: "User",
-      key: "id",
-    },
-  },
+
   carId: {
     type: DataTypes.INTEGER,
     allowNull: false,

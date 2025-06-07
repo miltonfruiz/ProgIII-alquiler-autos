@@ -4,9 +4,12 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ModalValidation from "../ModalValidation/ModalValidation";
 import { crearReserva } from "../../api/reservas";
+import { useDataContext } from "../../pages/Contexts/Contexts";
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
+
+  const { estadoIds, setEstadoIds } = useDataContext();
 
   const navigate = useNavigate();
 
@@ -63,6 +66,21 @@ function Modal({ auto, onClose }) {
       });
 
       if (success) {
+        /*
+        let contador = localStorage.getItem("contadorReservas");
+
+        contador = contador ? parseInt(contador) : 0;
+
+        contador++;
+
+        localStorage.setItem("contadorReservas", contador);
+
+        setEstadoIds((prevState) => ({
+          ...prevState,
+          id_reserva: contador,
+        }));
+         */
+
         // Guardar datos en localStorage
         const datosAlquiler = {
           auto: auto,
@@ -112,8 +130,6 @@ function Modal({ auto, onClose }) {
     // .ceil para redondear la cantidad de dias, el fin-inicio devuelve en MILISEG, (1000 * 60 * 60 * 24) identifica la cantidad de MILISEG en un dia
     return diffDias > 0 ? diffDias * auto.price : 0;
   };
-
-  console.log(errores);
 
   return (
     <div

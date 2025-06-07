@@ -7,7 +7,7 @@ const router = Router();
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
 router.post("/pays", async (req, res) => {
-  const { userId } = req.params;
+  //borro el userId para probar que ande el estado global correctamente
   const { carId } = req.params;
   const { id_reserva } = req.params;
 
@@ -19,14 +19,14 @@ router.post("/pays", async (req, res) => {
     console.log("precio", price);
   }
 
-  const { dias_totales } = await Reservation.findOne({
+  const { cant_dias } = await Reservation.findOne({
     where: { id: id_reserva },
   });
 
-  if (!dias_totales) {
+  if (!cant_dias) {
     console.log(res.status(404).json({ error: "dias totales no encontrados" }));
   } else {
-    console.log("dias totales", dias_totales);
+    console.log("dias totales", cant_dias);
   }
 
   try {
@@ -46,11 +46,11 @@ router.post("/pays", async (req, res) => {
       console.log(res.status(400).json({ error: "Faltan datos de pago" }));
     }
 
-    const tax = price * 0.21 * dias_totales;
+    const tax = price * 0.21 * cant_dias;
 
     console.log("tax", tax);
 
-    const subtotal = price * dias_totales;
+    const subtotal = price * cant_dias;
 
     console.log("subtotal", subtotal);
 
@@ -66,7 +66,6 @@ router.post("/pays", async (req, res) => {
 
     if (paymentMethod == "tarjeta") {
       const pay = await Pay.create({
-        userId,
         carId,
         id_reserva,
         subtotal,
@@ -83,7 +82,6 @@ router.post("/pays", async (req, res) => {
       console.log(res.status(201).json(pay));
     } else if (paymentMethod == "transferencia") {
       const pay = await Pay.create({
-        userId,
         carId,
         id_reserva,
         subtotal,
@@ -104,7 +102,7 @@ router.post("/pays", async (req, res) => {
 
 //-------------------------- obtener pagos de una persona------------------
 
-router.get("/pays/user:userId", async (req, res) => {
+/* router.get("/pays/user:userId", async (req, res) => {
   try {
     const { userId } = req.params;
     const pays = await Pay.findById(userId);
@@ -112,6 +110,6 @@ router.get("/pays/user:userId", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los pagos de la persona" });
   }
-});
+});*/
 
 export default router;
