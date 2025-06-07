@@ -83,7 +83,6 @@ const Register = ({ setRegisterIn }) => {
 
   return (
     <div>
-      <UserNavbar />
       <RegisterForm
         onSubmit={handleSubmit}
         errores={errores}
@@ -91,7 +90,6 @@ const Register = ({ setRegisterIn }) => {
           useRefs,
         }}
       />
-      <Footer />
     </div>
   );
 };
