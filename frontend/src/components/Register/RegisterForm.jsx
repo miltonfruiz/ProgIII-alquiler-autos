@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { dataForm } from "./dataRegister";
 import "./RegisterForm.css";
+import { FiLogIn } from "react-icons/fi";
 
 const RegisterForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
@@ -33,10 +34,9 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
           {dataForm.map((data, index) => {
             return (
               <div className="containerLabelInput" key={index}>
-                <div>
-                  <data.icono id="icono" />
-                  <label className="labelRegister">{data.label}</label>
-                </div>
+                <label className="labelRegister">
+                  <data.icono id="icono" size={13} /> {data.label}
+                </label>
                 <input
                   className="inputRegister"
                   placeholder={data.placeholder}
@@ -53,11 +53,13 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
           })}
         </div>
         <div className="divButton">
-          <button className="buttonRegister">Registrarse</button>
-          <p className="tienesCuenta">
-            ¿Ya tienes una cuenta? <a href="/">Iniciar seccion</a>
-          </p>
+          <button className="buttonRegister">
+            <FiLogIn size={14} /> Registrarse
+          </button>
         </div>
+        <p className="tienesCuenta">
+          ¿Ya tienes una cuenta? <a href="/">Iniciar sesión</a>
+        </p>
       </form>
     </div>
   );
