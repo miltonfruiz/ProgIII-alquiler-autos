@@ -1,6 +1,8 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 const ResumenDeAlquiler = () => {
+  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
+
   return (
     <div>
       <aside>
@@ -13,11 +15,11 @@ const ResumenDeAlquiler = () => {
           <div className="cajaValoracionAuto">
             <img
               className="imagenResumen"
-              src="public\images\camionetaCarPayment.png"
+              src={datosAlquiler.auto.image}
               alt=""
             />
             <div className="cajaExtrellasNombre">
-              <p className="nombreAutos">Volkswagen T-Cross</p>
+              <p className="nombreAutos">{datosAlquiler.auto.name}</p>
               <div className="valoracionResumen">
                 {[0, 1, 2, 3, 4].map((estrella) => {
                   return <FaStar className="estrella" />;
@@ -31,11 +33,11 @@ const ResumenDeAlquiler = () => {
           <div className="linea"></div>
           <div className="cajaSubtotal">
             <p className="tituloSubtotal">Subtotal</p>
-            <p className="subtotal">$290.000</p>
+            <p className="subtotal">${datosAlquiler.total}</p>
           </div>
           <div className="cajaImpuestos">
             <p className="tituloImpuestos">Impuestos</p>
-            <p className="impuestos">$34.000</p>
+            <p className="impuestos">${datosAlquiler.tax}</p>
           </div>
           <div className="cajaPrecioFinal">
             <div>
@@ -45,7 +47,7 @@ const ResumenDeAlquiler = () => {
               </h3>
             </div>
 
-            <p className="precioFinal">$324.000</p>
+            <p className="precioFinal">${datosAlquiler.totalFinal}</p>
           </div>
         </div>
       </aside>

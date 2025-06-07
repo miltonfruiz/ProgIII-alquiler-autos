@@ -1,20 +1,33 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./MyProfile.css";
 import { ImProfile } from "react-icons/im";
-import { FaSignature } from "react-icons/fa6";
 import { MdDateRange, MdCancel } from "react-icons/md";
-import { FaRegAddressCard, FaCarSide, FaSave, FaEdit } from "react-icons/fa";
+import {
+  FaRegAddressCard,
+  FaCarSide,
+  FaSave,
+  FaEdit,
+  FaUser,
+  FaMobileAlt,
+} from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
+import { IoIosMail } from "react-icons/io";
+import { toast } from "react-toastify";
 
 export default function MyProfile() {
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
   const [editMode, setEditMode] = useState(false);
   const [animateOut, setAnimateOut] = useState(false);
   const [profileData, setProfileData] = useState({
-    nombre: "Maria San Juan",
-    nacimiento: "1992-03-20",
-    dni: "39484200",
-    licencia: "39489200",
+    nombre: "",
+    apellido: "",
+    correo: "",
+    nacimiento: "",
+    dni: "",
+    licencia: "",
+    numeroTelefonico: "",
   });
+
   const [profileImage, setProfileImage] = useState("/images/profile.png");
   const [originalProfileData, setOriginalProfileData] = useState({});
   const [originalProfileImage, setOriginalProfileImage] =
@@ -37,13 +50,34 @@ export default function MyProfile() {
     setOriginalProfileImage(profileImage);
     setEditMode(true);
   };
-  const handleSave = () => {
+  const handleSave = async () => {
     setAnimateOut(true);
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+    try {
+      const res = await fetch(`http://localhost:3000/users/${loggedUser.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profileData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.error("Error al actualizar:", data.error);
+      } else {
+        toast.success("Perfil actualizado");
+      }
+    } catch (error) {
+      console.error("Error al guardar cambios:", error);
+    }
+
     setTimeout(() => {
       setAnimateOut(false);
       setEditMode(false);
     }, 100);
   };
+
   const handleCancel = () => {
     setAnimateOut(true);
     setTimeout(() => {
@@ -53,6 +87,44 @@ export default function MyProfile() {
       setEditMode(false);
     }, 100);
   };
+  useEffect(() => {
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    if (!loggedUser?.id) return;
+
+    const fetchUserData = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/users/${loggedUser.id}`);
+        const data = await res.json();
+        if (res.ok) {
+          setProfileData({
+            nombre: data.nombre,
+            apellido: data.apellido,
+            correo: data.correo,
+            nacimiento: data.nacimiento,
+            dni: data.dni,
+            licencia: data.licencia,
+            numeroTelefonico: data.numeroTelefonico,
+          });
+          setOriginalProfileData({
+            nombre: data.nombre,
+            apellido: data.apellido,
+            correo: data.correo,
+            nacimiento: data.nacimiento,
+            dni: data.dni,
+            licencia: data.licencia,
+            numeroTelefonico: data.numeroTelefonico,
+          });
+        } else {
+          console.error("Error al obtener datos del usuario:", data.error);
+        }
+      } catch (err) {
+        console.error("Error de conexión:", err);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <div className="profile-header">
       <h1 className="profile-title">
@@ -82,20 +154,29 @@ export default function MyProfile() {
           />
         </div>
         <div className="profile-details">
-          <h2>
-            <FaSignature className="icon-date" />
+          <p>
+            <FaUser className="icon-date" /> Nombre:{" "}
             {editMode ? (
-              <input
-                type="text"
-                name="nombre"
-                value={profileData.nombre}
-                onChange={handleChange}
-                className={animateOut ? "fade-out" : "fade-in"}
-              />
+              <>
+                <input
+                  type="text"
+                  name="nombre"
+                  value={profileData.nombre}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  name="apellido"
+                  value={profileData.apellido}
+                  onChange={handleChange}
+                  style={{ marginLeft: "8px" }}
+                />
+              </>
             ) : (
-              profileData.nombre
+              `${profileData.nombre} ${profileData.apellido}`
             )}
-          </h2>
+          </p>
+
           <p>
             <MdDateRange className="icon-date" />
             Fecha de Nacimiento:{" "}
@@ -141,7 +222,22 @@ export default function MyProfile() {
               profileData.licencia
             )}
           </p>
-
+          <p>
+            <FaMobileAlt className="icon-date" /> Teléfono:{" "}
+            {editMode ? (
+              <input
+                type="text"
+                name="numeroTelefonico"
+                value={profileData.numeroTelefonico}
+                onChange={handleChange}
+              />
+            ) : (
+              profileData.numeroTelefonico
+            )}
+          </p>
+          <p>
+            <IoIosMail className="icon-date" /> Correo: {profileData.correo}
+          </p>
           {editMode ? (
             <div
               className={`edit-actions ${animateOut ? "fade-out" : "fade-in"}`}

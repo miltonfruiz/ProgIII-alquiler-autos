@@ -1,4 +1,5 @@
 import { Reserva } from "../models/Reserva.js";
+import { Car } from "../models/Car.js";
 
 export async function createReserva(req, res) {
   try {
@@ -29,5 +30,24 @@ export async function createReserva(req, res) {
   } catch (error) {
     console.error("Error al crear la reserva:", error);
     res.status(500).json({ mensaje: "Error al crear la reserva" });
+  }
+}
+export async function getReservasPorUsuario(req, res) {
+  const { id } = req.params;
+  try {
+    const reservas = await Reserva.findAll({
+      where: { userId: id },
+      include: [
+        {
+          model: Car,
+          attributes: ["name", "image", "brand", "price"],
+        },
+      ],
+    });
+
+    res.status(200).json(reservas);
+  } catch (error) {
+    console.error("Error al obtener reservas del usuario:", error);
+    res.status(500).json({ error: "Error al obtener reservas del usuario" });
   }
 }

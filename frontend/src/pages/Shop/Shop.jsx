@@ -7,12 +7,27 @@ import Filtros from "../Shop/Filtros/Filtros";
 import styles from "./Shop.module.css";
 import { useLocation } from "react-router-dom";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
+import { obtenerAutos } from "../../api/autos";
 
-function Shop() {
+function Shop({ loggedIn }) {
+  const [autosDB, setAutosDB] = useState([]);
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
 
   const location = useLocation(); // Esto sirve para recibir el state que esta en CATEGORIAS.JSX
+
+  useEffect(() => {
+    const fetchAutos = async () => {
+      try {
+        const data = await obtenerAutos();
+        setAutosDB(data);
+      } catch (error) {
+        console.error("Error al cargar autos desde el backend", error);
+      }
+    };
+
+    fetchAutos();
+  }, []);
 
   useEffect(() => {
     if (location.state?.categoriaSeleccionada) {
@@ -21,7 +36,23 @@ function Shop() {
     }
   }, [location.state]);
 
-  const autosFiltrados = mockCars.filter((auto) => {
+  const contarPorCampo = (autos, campo) => {
+    return autos.reduce((acc, auto) => {
+      const key = auto[campo];
+      acc[key] = acc[key] ? acc[key] + 1 : 1;
+      return acc;
+    }, {});
+  };
+
+  const categoriasConCantidad = Object.entries(
+    contarPorCampo(autosDB, "category")
+  ).map(([nombre, cantidad]) => ({ nombre, cantidad }));
+
+  const marcasConCantidad = Object.entries(
+    contarPorCampo(autosDB, "brand")
+  ).map(([nombre, cantidad]) => ({ nombre, cantidad }));
+
+  const autosFiltrados = autosDB.filter((auto) => {
     const categoriaFiltro =
       categoriasSeleccionadas.length === 0 ||
       categoriasSeleccionadas.includes(auto.category);
@@ -43,12 +74,18 @@ function Shop() {
       <UserNavbar />
       <main className={styles.mainContainer}>
         <Filtros
+          categorias={categoriasConCantidad} //LE PASO AL FILTROS.JSX LAS CANT. DE CATEGORIAS
+          marcas={marcasConCantidad} //LE PASO AL FILTROS.JSX LAS CANT. DE MARCAS
           categoriasSeleccionadas={categoriasSeleccionadas}
           setCategoriasSeleccionadas={setCategoriasSeleccionadas}
           marcasSeleccionadas={marcasSeleccionadas}
           setMarcasSeleccionadas={setMarcasSeleccionadas}
         />
-        <Catalogo autos={autosFiltrados} limpiarFiltros={limpiarFiltros} />
+        <Catalogo
+          autos={autosFiltrados}
+          limpiarFiltros={limpiarFiltros}
+          loggedIn={loggedIn}
+        />
       </main>
       <Footer />
     </>

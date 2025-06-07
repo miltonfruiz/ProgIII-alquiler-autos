@@ -6,23 +6,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faRoad } from "@fortawesome/free-solid-svg-icons";
 import { useDataContext } from "../../../pages/Contexts/Contexts";
+import { useNavigate } from "react-router-dom";
 
 import Modal from "../../../components/Modal/Modal";
 
-function Catalogo({ autos, limpiarFiltros }) {
+function Catalogo({ autos, limpiarFiltros, loggedIn }) {
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
+  const navigate = useNavigate();
 
   const { estadoIds, setEstadoIds } = useDataContext();
 
   const abrirOverlay = (auto) => {
-    setAutoSeleccionado(auto);
-
-    setEstadoIds((prevState) => ({
-      ...prevState,
-      carId: auto.id,
-    }));
-
     // setEstadoGlobal({ ...estadoIds, idAuto: auto.id }); a esto lo comento porque no se si esta bien lo de arriba o esto
+    if (loggedIn) {
+      setEstadoIds((prevState) => ({
+        ...prevState,
+        carId: auto.id,
+      }));
+      setAutoSeleccionado(auto);
+    } else {
+      navigate("/login");
+    }
   };
 
   const cerrarOverlay = () => {
