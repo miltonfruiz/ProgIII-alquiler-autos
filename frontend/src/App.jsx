@@ -58,7 +58,7 @@ function App() {
             // </ProtectedRouteUser>
           }
         />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Shop loggedIn={loggedIn} />} />
         <Route
           path="/administration"
           element={
