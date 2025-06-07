@@ -374,7 +374,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
           Cancelar
         </button>
       </div>
-      <ResumenDeAlquiler></ResumenDeAlquiler>
+      {/*
+        <ResumenDeAlquiler></ResumenDeAlquiler>
+        */}
     </div>
   );
 };
