@@ -17,12 +17,12 @@ function Catalogo({ autos, limpiarFiltros, loggedIn }) {
   const { estadoIds, setEstadoIds } = useDataContext();
 
   const abrirOverlay = (auto) => {
-    // setEstadoGlobal({ ...estadoIds, idAuto: auto.id }); a esto lo comento porque no se si esta bien lo de arriba o esto
+    setEstadoIds((prevState) => ({
+      ...prevState,
+      carId: auto.id,
+    }));
+
     if (loggedIn) {
-      setEstadoIds((prevState) => ({
-        ...prevState,
-        carId: auto.id,
-      }));
       setAutoSeleccionado(auto);
     } else {
       navigate("/login");
