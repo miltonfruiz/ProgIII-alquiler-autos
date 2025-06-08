@@ -5,7 +5,7 @@ import mockCars from "../../../data/mockCars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faRoad } from "@fortawesome/free-solid-svg-icons";
-import { useDataContext } from "../../../pages/Contexts/Contexts";
+// import { useDataContext } from "../../../pages/Contexts/Contexts";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "../../../components/Modal/Modal";
@@ -14,17 +14,21 @@ function Catalogo({ autos, limpiarFiltros, loggedIn }) {
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
   const navigate = useNavigate();
 
+  /*
   const { estadoIds, setEstadoIds } = useDataContext();
+  */
 
   const abrirOverlay = (auto) => {
     setAutoSeleccionado(auto);
-    setEstadoIds((prevState) => ({
+    /*
+     setEstadoIds((prevState) => ({
       ...prevState,
       carId: auto.id,
     }));
+    */
   };
 
-  console.log(estadoIds);
+  // console.log(estadoIds);
 
   const cerrarOverlay = () => {
     setAutoSeleccionado(null); // Se utiliza null, ya que en el componente "overlay" se verifica con un IF si es NULL no se muestra.

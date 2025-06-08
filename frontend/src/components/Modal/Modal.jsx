@@ -4,12 +4,12 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ModalValidation from "../ModalValidation/ModalValidation";
 import { crearReserva } from "../../api/reservas";
-import { useDataContext } from "../../pages/Contexts/Contexts";
+// import { useDataContext } from "../../pages/Contexts/Contexts";
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
 
-  const { estadoIds, setEstadoIds } = useDataContext();
+  // const { estadoIds, setEstadoIds } = useDataContext();
 
   const navigate = useNavigate();
 
@@ -69,6 +69,7 @@ function Modal({ auto, onClose }) {
       });
 
       if (success) {
+        /*
         let contador = localStorage.getItem("contadorReservas"); // creo un contador para simular el id de reservas
 
         contador = contador ? parseInt(contador) : 0;
@@ -84,6 +85,7 @@ function Modal({ auto, onClose }) {
         }));
 
         console.log(estadoIds);
+        */
 
         const total = calcularTotal();
         const impuestos = calcularImpuestos(total);

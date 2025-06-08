@@ -5,12 +5,12 @@ import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
-import { useDataContext } from "./Contexts/Contexts";
+// import { useDataContext } from "./Contexts/Contexts";
 
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
 
-  const { estadoIds, setEstadoIds } = useDataContext();
+  // const { estadoIds, setEstadoIds } = useDataContext();
 
   const useRefs = {
     nombreRef: useRef(null),

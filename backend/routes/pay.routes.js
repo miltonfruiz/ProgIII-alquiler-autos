@@ -32,9 +32,13 @@ router.post("/pays/:carId/:id_reserva", async (req, res) => {
     console.log("precio", price);
   }
 
-  const { cant_dias } = await Reserva.findOne({
+  const reserva = await Reserva.findOne({
     where: { id_reserva: id_reserva },
   });
+
+  const cant_dias = reserva.cant_dias;
+
+  console.log(cant_dias);
 
   if (!cant_dias) {
     return res.status(404).json({ error: "dias totales no encontrados" });
