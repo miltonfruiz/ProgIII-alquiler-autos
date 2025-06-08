@@ -11,6 +11,8 @@ import Flag from "react-world-flags";
 import { IoMdCheckmark } from "react-icons/io";
 import { BsCalendarDateFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
+import { MdDashboardCustomize } from "react-icons/md";
+
 import "react-toastify/dist/ReactToastify.css";
 
 export default function UserNavbar() {
@@ -23,6 +25,8 @@ export default function UserNavbar() {
   const [fade, setFade] = useState(false);
   const location = useLocation();
   const isOnEditProfile = location.pathname === "/user-profile";
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  const userEmail = loggedUser?.email;
 
   const languages = [
     { code: "es", name: "Español", flag: "AR" },
@@ -40,7 +44,7 @@ export default function UserNavbar() {
     });
 
     setTimeout(() => {
-      navigate("/presentation");
+      navigate("/");
     }, 4000);
   };
   useEffect(() => {
@@ -92,14 +96,24 @@ export default function UserNavbar() {
       </div>
       <div className="navbar-right">
         <div className="icon-wrapper">
+          {userEmail === "admin@test.com" && (
+            <div className="nav-item">
+              <Link to="/administration" className="nav-link">
+                <MdDashboardCustomize className="faAdmin-icon nav-icon" />
+                <span className="nav-title">Panel</span>
+              </Link>
+            </div>
+          )}
           <div className="nav-item">
-            <Link to="/home">
-              <FaHome title="Inicio" className="faHome-icon" /> Inicio
+            <Link to="/home" className="nav-link">
+              <FaHome title="Inicio" className="faHome-icon nav-icon" />
+              <span className="nav-title">Inicio</span>
             </Link>
           </div>
           <div className="nav-item">
             <Link
               to="/user-profile"
+              className="nav-link"
               onClick={() => {
                 setTimeout(() => {
                   const target = document.getElementById(
@@ -109,24 +123,26 @@ export default function UserNavbar() {
                 }, 500);
               }}
             >
-              <BsCalendarDateFill className="BsCalendarDateFill-icon" />
-              Reservas
+              <BsCalendarDateFill className="BsCalendarDateFill-icon nav-icon" />
+              <span className="nav-title">Reservas</span>
             </Link>
           </div>
-
           <div className="nav-item">
-            <Link to="/shop">
+            <Link to="/shop" className="nav-link">
               {" "}
-              <FaCar title="Tienda de Autos" className="faCar-icon" /> Tienda
+              <FaCar
+                title="Tienda de Autos"
+                className="faCar-icon nav-icon"
+              />{" "}
+              <span className="nav-title">Tienda</span>
             </Link>
           </div>
-
-          <div className="user-dropdown nav-item" ref={dropdownRef}>
+          <div className="user-dropdown nav-item nav-link" ref={dropdownRef}>
             <FaUserEdit
-              className="faUserEdit-icon"
+              className="faUserEdit-icon nav-icon"
               onClick={() => setShowDropdown((prev) => !prev)}
             />{" "}
-            Perfil
+            <span className="nav-title">Perfil</span>
             {showDropdown && (
               <div
                 className="dropdown-menu"

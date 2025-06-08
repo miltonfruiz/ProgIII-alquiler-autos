@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #5e49d8;
+  background-color: #6366f1;
   padding: 10px 24px;
   color: white;
 
@@ -72,6 +72,7 @@
   display: flex;
   gap: 20px;
 }
+.faAdmin-icon,
 .BsCalendarDateFill-icon,
 .faHome-icon,
 .faUserEdit-icon,
@@ -82,6 +83,9 @@
   color: white;
   font-size: 22px;
   margin-bottom: 3px;
+}
+.faAdmin-icon {
+  color: rgba(255, 0, 0, 0.692);
 }
 .user-dropdown {
   font-size: 12px;
@@ -195,6 +199,19 @@
   font-size: 12px;
   font-weight: 300;
 }
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.nav-link:hover .nav-icon,
+.nav-link:hover .nav-title {
+  transition: color 0.3s ease;
+  color: rgba(0, 0, 0, 0.76);
+}
 /*--------------------------------*/
 body.dark .navbar {
   background-color: black;
@@ -220,4 +237,10 @@ body.dark .submenu button {
 body.dark .submenu button:hover {
   background-color: white;
   color: black;
+}
+body.dark .nav-link:hover .nav-icon,
+body.dark .nav-link:hover .nav-title {
+  transition: color 0.3s ease;
+  color: #6366f1;
+  filter: drop-shadow(0 0 0rem white);
 }
