@@ -28,7 +28,7 @@ export default function MyProfile() {
     numeroTelefonico: "",
   });
 
-  const [profileImage, setProfileImage] = useState("/images/profile.png");
+  const [profileImage, setProfileImage] = useState("/images/test.jpg");
   const [originalProfileData, setOriginalProfileData] = useState({});
   const [originalProfileImage, setOriginalProfileImage] =
     useState(profileImage);
