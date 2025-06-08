@@ -17,13 +17,14 @@ Car.hasMany(Reserva, { foreignKey: "carId", onDelete: "CASCADE" });
 Reserva.belongsTo(Car, { foreignKey: "carId" });
 
 // Un pago pertenece a una reserva
-Reserva.hasOne(Pay, { foreignKey: "reservationId", onDelete: "CASCADE" });
-Pay.belongsTo(Reserva, { foreignKey: "reservationId" });
+Reserva.hasOne(Pay, { foreignKey: "id_reserva", onDelete: "CASCADE" });
+Pay.belongsTo(Reserva, { foreignKey: "id_reserva" });
+
+// Un pago pertenece a un auto
+Car.hasOne(Pay, { foreignKey: "carId", onDelete: "CASCADE" });
+Pay.belongsTo(Car, { foreignKey: "carId" });
 
 User.hasMany(Review, { foreignKey: "userId", onDelete: "CASCADE" });
 Review.belongsTo(User, { foreignKey: "userId" });
-
-User.hasMany(Pay, { foreignKey: "userId", onDelete: "CASCADE" });
-Pay.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" });
 
 export { Car, Review, User, Reserva, Pay };
