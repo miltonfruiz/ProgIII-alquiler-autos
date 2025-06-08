@@ -12,8 +12,9 @@
 }
 
 .carImagen {
-  width: 680px;
-  height: 216px;
+  width: 100%;
+  height: auto;
+  max-width: 680px;
 }
 
 .textConteiner {
@@ -40,9 +41,6 @@
 
 .btnConteiner {
   margin-top: 40px; /* o el valor que se vea bien */
-  display: flex;
-  align-items: end;
-  text-decoration: none;
 }
 
 .btnConteiner button:hover {
@@ -52,15 +50,18 @@
 .btnConteiner button {
   color: #fff;
   background-color: #b2b2ff;
-  padding: 30px 85px;
   border-radius: 15px;
   transition: all 0.4s ease;
+  padding: 20px 60px;
+  font-size: 16px;
 }
 
 .carImgConteiner {
   display: flex;
-  align-items: end;
-  padding-right: 25px;
+  align-items: flex-end;
+  justify-content: end;
+  padding-right: 0;
+  width: 100%;
 }
 
 /* RESPONSIVE PARA LAPTOP */
