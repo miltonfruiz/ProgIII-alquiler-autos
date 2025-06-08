@@ -37,6 +37,8 @@ router.post("/pays", payValidation, async (req, res) => {
 
   const pago = await Pay.findOne({ where: { id: pay.id } });
 
+  console.log("PAGO", pago);
+
   const id_reserva = pago.id_reserva;
 
   console.log("ID DE RESERVA", id_reserva);
