@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CarsAdmin.css";
-import { FaClipboardList, FaPlus, FaDownload } from "react-icons/fa";
+import { FaPlus, FaDownload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { toast } from "react-toastify";
 import CardAdminValidation from "../CarAdminValidation/CarAdminValidation";
@@ -146,14 +146,33 @@ const CarsAdmin = () => {
   const filteredCars = cars.filter((car) =>
     car.name?.toLowerCase().includes(search.toLowerCase())
   );
+  const handleDownloadCars = () => {
+    const options = {
+      excludeFields: ["createdAt", "updatedAt", "image"],
+      fieldFormatters: {
+        price: (value) => `$${value.toLocaleString()}`,
+        estado: (value) =>
+          value === "available" ? "Disponible" : "No disponible",
+      },
+      headerNames: {
+        name: "Modelo",
+        category: "Categoría",
+        passengers: "Pasajeros",
+        transmission: "Transmisión",
+        price: "Precio",
+        brand: "Marca",
+        estado: "Estado",
+      },
+    };
+
+    downloadCSV(cars, "autos_backup.csv", options);
+  };
   return (
     <div className="admin-cars-container">
       <div className="admin-container-table">
-        <h2 className="admin-h2-text">
-          <FaClipboardList /> Lista de Autos
-        </h2>
+        <h2 className="admin-h2-text">Lista de Autos</h2>
         <div className="admin-toolbar">
-          <button className="backup-button" onClick={() => downloadCSV(cars)}>
+          <button className="backup-button" onClick={handleDownloadCars}>
             <FaDownload /> Backup
           </button>
           <div className="search-container">
