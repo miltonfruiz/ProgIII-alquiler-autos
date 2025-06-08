@@ -7,10 +7,7 @@ const router = Router();
 
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
-router.post("/pays/:carId/:id_reserva", async (req, res) => {
-  const { carId } = req.params;
-  const { id_reserva } = req.params;
-
+router.post("/pays", async (req, res) => {
   const {
     cardType,
     paymentMethod,
@@ -24,55 +21,7 @@ router.post("/pays/:carId/:id_reserva", async (req, res) => {
 
   console.log(req.body);
 
-  const { price } = await Car.findOne({ where: { id: carId } });
-
-  if (!price) {
-    return res.status(404).json({ error: "precio no encontrado" });
-  } else {
-    console.log("precio", price);
-  }
-
-  const reserva = await Reserva.findOne({
-    where: { id_reserva: id_reserva },
-  });
-
-  const cant_dias = reserva.cant_dias;
-
-  console.log(cant_dias);
-
-  if (!cant_dias) {
-    return res.status(404).json({ error: "dias totales no encontrados" });
-  } else {
-    console.log("dias totales", cant_dias);
-  }
-
-  console.log(cardType);
-
-  const tax = price * 0.21 * cant_dias;
-
-  console.log("tax", tax);
-
-  const subtotal = price * cant_dias;
-
-  console.log("subtotal", subtotal);
-
-  const total = tax + subtotal;
-
-  console.log("total", total);
-
-  //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
-
-  await Reserva.update(
-    { estado_reserva: "confirmada" },
-    { where: { id_reserva: id_reserva } }
-  );
-
   const pay = await Pay.create({
-    carId,
-    id_reserva,
-    subtotal,
-    tax,
-    total,
     cardType,
     paymentMethod,
     cardNumber,
@@ -83,6 +32,17 @@ router.post("/pays/:carId/:id_reserva", async (req, res) => {
     acceptableTerms,
   });
   res.status(201).json(pay);
+
+  const { id_reserva } = await Pay.findOne({ where: { id: pay.id } });
+
+  console.log(id_reserva);
+
+  //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
+
+  await Reserva.update(
+    { estado_reserva: "confirmada" },
+    { where: { id_reserva: id_reserva } }
+  );
 });
 
 //-------------------------- obtener pagos de una persona------------------

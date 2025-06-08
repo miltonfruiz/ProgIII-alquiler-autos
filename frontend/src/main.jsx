@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App.jsx";
 import { Mode } from "./components/Mode/Mode.jsx";
 import "./components/Languages/Languages.jsx";
-import { Contexts } from "./pages/Contexts/Contexts.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -13,9 +12,7 @@ createRoot(document.getElementById("root")).render(
       // se utiliza para detectar errores en la aplicacion
     }
     <Mode>
-      <Contexts>
-        <App />
-      </Contexts>
+      <App />
     </Mode>
   </StrictMode>
 );

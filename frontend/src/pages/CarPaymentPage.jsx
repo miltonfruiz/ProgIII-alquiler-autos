@@ -90,32 +90,27 @@ const CarPaymentPage = () => {
       }
 
       console.log(datosPagoCompleto);
-      // probamos pasarlo por params si no lo pasamos por el body
-      console.log(estadoIds);
-      if (estadoIds.carId && estadoIds.id_reserva) {
-        const carId = estadoIds.carId;
-        const id_reserva = estadoIds.id_reserva;
-        fetch(`http://localhost:3000/pays/${carId}/${id_reserva}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(datosPagoCompleto),
+
+      fetch(`http://localhost:3000/pays`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datosPagoCompleto),
+      })
+        .then((respuesta) => {
+          console.log("Respuesta del servidor:", respuesta);
+          if (respuesta.ok) {
+            console.log("Pago realizado correctamente");
+          } else {
+            console.log("Error al realizar el pago");
+            toast.error("Error al realizar el pago");
+          }
         })
-          .then((respuesta) => {
-            console.log("Respuesta del servidor:", respuesta);
-            if (respuesta.ok) {
-              console.log("Pago realizado correctamente");
-            } else {
-              console.log("Error al realizar el pago");
-              toast.error("Error al realizar el pago");
-            }
-          })
-          .catch((error) => {
-            console.error("Error al enviar el formulario:", error);
-            toast.error("Error al enviar el formulario");
-          });
-      }
+        .catch((error) => {
+          console.error("Error al enviar el formulario:", error);
+          toast.error("Error al enviar el formulario");
+        });
 
       toast.success("¡auto rentado!");
       setErrores({});
