@@ -58,7 +58,7 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
           </button>
         </div>
         <p className="tienesCuenta">
-          ¿Ya tienes una cuenta? <a href="/">Iniciar sesión</a>
+          ¿Ya tienes una cuenta? <a href="/login">Iniciar sesión</a>
         </p>
       </form>
     </div>

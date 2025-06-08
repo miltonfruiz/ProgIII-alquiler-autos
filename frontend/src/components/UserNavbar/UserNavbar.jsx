@@ -92,25 +92,41 @@ export default function UserNavbar() {
       </div>
       <div className="navbar-right">
         <div className="icon-wrapper">
-          <Link to="/home">
-            <FaHome title="Inicio" className="faHome-icon" />
-          </Link>
-          <Link to="/reservations">
-            <BsCalendarDateFill
-              title="Mis Reservas"
-              className="BsCalendarDateFill-icon"
-            />
-          </Link>
-          <Link to="/shop">
-            {" "}
-            {/* cambio link al correcto */}
-            <FaCar title="Tienda de Autos" className="faCar-icon" />
-          </Link>
-          <div className="user-dropdown" ref={dropdownRef}>
+          <div className="nav-item">
+            <Link to="/home">
+              <FaHome title="Inicio" className="faHome-icon" /> Inicio
+            </Link>
+          </div>
+          <div className="nav-item">
+            <Link
+              to="/user-profile"
+              onClick={() => {
+                setTimeout(() => {
+                  const target = document.getElementById(
+                    "my-reservations-link"
+                  );
+                  if (target) target.scrollIntoView({ behavior: "smooth" });
+                }, 500);
+              }}
+            >
+              <BsCalendarDateFill className="BsCalendarDateFill-icon" />
+              Reservas
+            </Link>
+          </div>
+
+          <div className="nav-item">
+            <Link to="/shop">
+              {" "}
+              <FaCar title="Tienda de Autos" className="faCar-icon" /> Tienda
+            </Link>
+          </div>
+
+          <div className="user-dropdown nav-item" ref={dropdownRef}>
             <FaUserEdit
               className="faUserEdit-icon"
               onClick={() => setShowDropdown((prev) => !prev)}
-            />
+            />{" "}
+            Perfil
             {showDropdown && (
               <div
                 className="dropdown-menu"

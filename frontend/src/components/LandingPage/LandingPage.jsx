@@ -1,31 +1,25 @@
 import React from "react";
 import "./LandingPage.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  FaInstagram,
-  FaTwitter,
-  FaFacebook,
   FaUserPlus,
   FaCarSide,
   FaQuestionCircle,
   FaStar,
   FaChartLine,
 } from "react-icons/fa";
-import { IoLogoWhatsapp } from "react-icons/io";
 import { FiLogIn } from "react-icons/fi";
 import { FaGear } from "react-icons/fa6";
+import LandingFooter from "../LandingFooter/LandingFooter";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-
   function handlerRegister() {
     navigate("/register");
   }
-
   function handlerLogin() {
     navigate("/login");
   }
-
   return (
     <div>
       <section className="containerLanding">
@@ -117,93 +111,7 @@ const LandingPage = () => {
           </div>
         </section>
       </div>
-      {/*
-      <section className="section">
-        <h2>Destaca con nosotros</h2>
-        <ul className="ulDestaca">
-          <li>
-            📍 Retiro y entrega sin demoras en aeropuertos y sucursales
-            estratégicas.
-          </li>
-          <li>🚗 Kilometraje ilimitado en la mayoría de nuestros vehículos.</li>
-          <li>💳 Múltiples métodos de pago y opciones de garantía.</li>
-        </ul>
-        <b className="bContenido">
-          ¡Tu viaje comienza aquí! Explora nuestras promociones, compara modelos
-          y reserva hoy mismo.
-        </b>
-        <p>
-          Con RentCar, la libertad de moverte está a solo un clic de distancia.
-        </p>
-        <p>📞 Contáctanos: 0800-123-456 | ✉ Email: contacto@rentcar.com</p>
-        <p>🌐 Visítanos: www.rentcar.com | Redes: @rentcar.ok</p>
-        <p>
-          <strong>RentCar</strong> – Más que un alquiler, una experiencia sin
-          límites.
-        </p>
-      </section>
-      */}
-      <footer className="footer">
-        <div className="footerContent">
-          <div className="footerSection about">
-            <h4>RentCar</h4>
-            <p>
-              Tu viaje comienza con nosotros. Alquiler rápido, seguro y
-              accesible.
-            </p>
-          </div>
-
-          <div className="footerSection contact">
-            <h4>Contacto</h4>
-            <p>📞 0800-123-456</p>
-            <p>✉ contacto@rentcar.com</p>
-            <p>📍 Rosario, Santa Fe</p>
-          </div>
-
-          <div className="footerSection social">
-            <h4>Redes Sociales</h4>
-            <div className="socialIcons">
-              <Link
-                className="footer-a-icons"
-                to="https://www.instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram className="logo" />
-              </Link>
-              <Link
-                className="footer-a-icons"
-                to="https://x.com/explore"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter className="logo" />
-              </Link>
-              <Link
-                className="footer-a-icons"
-                to="https://www.facebook.com/?locale=es_ES"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebook className="logo" />
-              </Link>
-              <Link
-                className="footer-a-icons"
-                to="https://web.whatsapp.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IoLogoWhatsapp className="logo" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="footerBottom">
-          <p>Diseñado por: Milton Ruiz, Juan Sosa, Branco Antuña</p>
-          <h6>© 2025 RentCar. Todos los derechos reservados.</h6>
-        </div>
-      </footer>
+      <LandingFooter />
     </div>
   );
 };
