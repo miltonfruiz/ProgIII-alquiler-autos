@@ -11,3 +11,6 @@
 .table-users-admin td {
   min-width: 86px;
 }
+.admin-users-container {
+  margin-bottom: 6rem;
+}

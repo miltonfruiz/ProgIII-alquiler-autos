@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./UsersAdmin.css";
-import { FaClipboardList, FaPlus, FaEdit, FaDownload } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaPlus, FaDownload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { toast, ToastContainer } from "react-toastify";
 import UsersTableAdmin from "../UsersTableAdmin/UsersTableAdmin";
 import UsersModalAdmin from "../UsersModalAdmin/UsersModalAdmin";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import { UsersValidationAdmin } from "../UsersValidationAdmin/UsersValidationAdmin";
+import { downloadCSV } from "../CarsAdminUtils/CarsAdminUtils";
 
 const UsersAdmin = () => {
   const [users, setUsers] = useState([]);
@@ -16,7 +16,6 @@ const UsersAdmin = () => {
   const [editingUser, setEditingUser] = useState(null);
   const [userToDelete, setUserToDelete] = useState(null);
   const [formErrors, setFormErrors] = useState({});
-
   const [newUser, setNewUser] = useState({
     nombre: "",
     apellido: "",
@@ -159,14 +158,38 @@ const UsersAdmin = () => {
           .includes(search.toLowerCase())
       )
     : [];
+  const handleDownloadUsers = () => {
+    const options = {
+      excludeFields: [
+        "createdAt",
+        "updatedAt",
+        "contraseña",
+        "repetirContraseña",
+      ],
+      fieldFormatters: {
+        nacimiento: (value) =>
+          value ? new Date(value).toLocaleDateString("es-ES") : "",
+        rol: (value) => (value === "admin" ? "Administrador" : "Usuario"),
+      },
+      headerNames: {
+        nombre: "Nombre",
+        apellido: "Apellido",
+        correo: "Email",
+        dni: "DNI",
+        nacimiento: "Fecha Nacimiento",
+        licencia: "Licencia",
+        numeroTelefonico: "Teléfono",
+        rol: "Rol",
+      },
+    };
+    downloadCSV(users, "usuarios_backup.csv", options);
+  };
   return (
     <div className="admin-users-container">
       <div className="admin-container-table">
-        <h2 className="admin-h2-text">
-          <FaClipboardList /> Lista de Usuarios
-        </h2>
+        <h2 className="admin-h2-text">Lista de Usuarios</h2>
         <div className="admin-toolbar">
-          <button className="backup-button">
+          <button className="backup-button" onClick={handleDownloadUsers}>
             <FaDownload /> Backup
           </button>
           <div className="search-container">

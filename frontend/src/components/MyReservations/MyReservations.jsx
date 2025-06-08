@@ -8,77 +8,10 @@ import { IoPricetagSharp } from "react-icons/io5";
 import { TbTax } from "react-icons/tb";
 import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 export default function MyReservations() {
   const [reservations, setReservations] = useState([]);
-  /*const [reservations, setReservations] = useState([
-    {
-      id: 1,
-      auto: "Toyota Corolla",
-      fecha: "2025-06-12",
-      imagen: "/images/volkswagen.png",
-      precio: 35000,
-      impuestos: 7350,
-      metodoPago: "Tarjeta de crédito",
-      facturacion: "Factura A",
-      total: 42350,
-    },
-    {
-      id: 2,
-      auto: "Peugeot 208",
-      fecha: "2025-07-01",
-      imagen: "/images/volkswagen.png",
-      precio: 30000,
-      impuestos: 6300,
-      metodoPago: "Mercado Pago",
-      facturacion: "Factura B",
-      total: 36300,
-    },
-    {
-      id: 3,
-      auto: "Volkswagen Gol",
-      fecha: "2025-07-15",
-      imagen: "/images/volkswagen.png",
-      precio: 20000,
-      impuestos: 5300,
-      metodoPago: "Tarjeta de crédito",
-      facturacion: "Factura B",
-      total: 36300,
-    },
-    {
-      id: 4,
-      auto: "Toyota Corolla",
-      fecha: "2025-06-12",
-      imagen: "/images/volkswagen.png",
-      precio: 25000,
-      impuestos: 5000,
-      metodoPago: "Mercado Pago",
-      facturacion: "Factura B",
-      total: 36300,
-    },
-    {
-      id: 5,
-      auto: "Peugeot 208",
-      fecha: "2025-07-01",
-      imagen: "/images/volkswagen.png",
-      precio: 35000,
-      impuestos: 7300,
-      metodoPago: "Tarjeta de crédito",
-      facturacion: "Factura B",
-      total: 36300,
-    },
-    {
-      id: 6,
-      auto: "Volkswagen Gol",
-      fecha: "2025-07-15",
-      imagen: "/images/volkswagen.png",
-      precio: 27000,
-      impuestos: 2800,
-      metodoPago: "Mercado Pago",
-      facturacion: "Factura B",
-      total: 36300,
-    },
-  ]);*/
   const [expandedIds, setExpandedIds] = useState([]);
   const handleDelete = (id) => {
     const nuevasReservas = reservations.filter((res) => res.id !== id);
@@ -108,8 +41,32 @@ export default function MyReservations() {
     fetchReservations();
   }, []);
   const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#my-reservations-link") {
+      setTimeout(() => {
+        const element = document.getElementById("my-reservations-link");
+        if (element) {
+          const navbarHeight = 90;
+          const elementRect = element.getBoundingClientRect();
+          const elementTop = elementRect.top + window.scrollY;
+          const elementHeight = elementRect.height;
+          const viewportHeight = window.innerHeight;
+          const offset =
+            elementTop -
+            (viewportHeight - elementHeight) / 2 +
+            navbarHeight / 2;
+          window.scrollTo({
+            top: offset,
+            behavior: "smooth",
+          });
+        }
+      }, 300);
+    }
+  }, [location]);
   return (
-    <div className="reservation-container">
+    <div id="my-reservations-link" className="reservation-container">
       <h1 className="reservation-title">
         <FaCarSide className="car-myreservations" />
         Mis Reservas

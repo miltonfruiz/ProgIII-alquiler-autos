@@ -8,18 +8,16 @@ export const CarPaymentValidation = ({
 
   if (!datosFacturacion.nombre.trim()) {
     errores.nombre = "* Debe ingresar nombre";
-  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datosFacturacion.nombre)) {
-    errores.nombre = "* Solo se permiten letras";
   }
 
   if (!datosFacturacion.apellido.trim()) {
     errores.apellido = "* Debe ingresar apellido";
-  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(datosFacturacion.apellido)) {
-    errores.apellido = "* Solo se permiten letras";
   }
 
   if (!datosFacturacion.numeroTelefonico?.trim()) {
     errores.numeroTelefonico = "* debe ingresar su numero telefonico";
+  } else if (datosFacturacion.numeroTelefonico.length != 10) {
+    errores.numeroTelefonico = "* el numero de telefono debe tener 10 digitos";
   }
 
   if (!datosFacturacion.dni.trim()) {
@@ -36,10 +34,23 @@ export const CarPaymentValidation = ({
   if (choicePayment == "tarjeta") {
     if (!datosPago.numeroTarjeta?.trim()) {
       errores.numeroTarjeta = "* ingrese el numero de la tarjeta ";
+    } else if (
+      datosPago.numeroTarjeta.length < 14 ||
+      datosPago.numeroTarjeta.length > 16
+    ) {
+      errores.numeroTarjeta =
+        "* el número de la tarjeta debe tener entre 14 y 16 dígitos";
     }
 
     if (!datosPago.fechaTarjeta?.trim()) {
       errores.fechaTarjeta = "* ingrese la fecha de expiracion";
+    } else {
+      const hoy = new Date();
+      const fechaExp = new Date(datosPago.fechaTarjeta);
+      if (fechaExp < hoy) {
+        errores.fechaTarjeta =
+          "* la fecha de expiración no puede ser anterior al día de hoy";
+      }
     }
 
     if (!datosPago.nombreTarjeta?.trim()) {
@@ -48,6 +59,8 @@ export const CarPaymentValidation = ({
 
     if (!datosPago.cvc?.trim()) {
       errores.cvc = "* ingrese el codigo de seguridad de la tarjeta";
+    } else if (datosPago.cvc.length < 3 || datosPago.cvc.length > 4) {
+      errores.cvc = "* el cvc de la tarjeta debe tener 3 o 4 dígitos";
     }
   } else if (choicePayment == "transferencia") {
     if (!datosPago) {
