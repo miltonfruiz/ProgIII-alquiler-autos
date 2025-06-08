@@ -5,9 +5,12 @@ import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
+// import { useDataContext } from "./Contexts/Contexts";
 
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
+
+  // const { estadoIds, setEstadoIds } = useDataContext();
 
   const useRefs = {
     nombreRef: useRef(null),
@@ -35,6 +38,8 @@ const CarPaymentPage = () => {
     "comprobante",
   ];
 
+  let datosPagoCompleto = {};
+
   function handlerSubmit(
     datosFacturacion,
     datosPago,
@@ -59,20 +64,38 @@ const CarPaymentPage = () => {
 
       setErrores(errores);
     } else {
-      const datosPagoCompleto = {
-        cardType: tipoTarjeta,
-        paymentMethod: choicePayment,
-        cardNumber: datosPago.numeroTarjeta,
-        expirationDate: datosPago.fechaTarjeta,
-        ownerName: datosPago.nombreTarjeta,
-        cvc: datosPago.cvc,
-        voucher: datosPago.comprobante,
-        acceptableTerms: checkbox,
-      };
+      if (choicePayment == "tarjeta") {
+        datosPagoCompleto = {
+          cardType: tipoTarjeta,
+          paymentMethod: choicePayment,
+          cardNumber: datosPago.numeroTarjeta,
+          expirationDate: datosPago.fechaTarjeta,
+          ownerName: datosPago.nombreTarjeta,
+          cvc: datosPago.cvc,
+          voucher: null,
+          acceptableTerms: checkbox,
+        };
+      } else if (choicePayment == "transferencia") {
+        const file = String(datosPago.name);
+        datosPagoCompleto = {
+          cardType: null,
+          paymentMethod: choicePayment,
+          cardNumber: null,
+          expirationDate: null,
+          ownerName: null,
+          cvc: null,
+          voucher: file,
+          acceptableTerms: checkbox,
+        };
+      }
+
       console.log(datosPagoCompleto);
 
-      fetch("http://localhost:3000/pays", {
+      fetch(`http://localhost:3000/pays`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(datosPagoCompleto),
       })
         .then((respuesta) => {

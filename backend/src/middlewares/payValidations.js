@@ -27,11 +27,21 @@ export function payValidation(req, res, next) {
     if (!cardNumber) {
       errores.cardNumber =
         "* ingrese el numero de la tarjeta para efectuar el pago";
+    } else if (cardNumber.length < 14 || cardNumber.length > 16) {
+      errores.cardNumber =
+        "* el número de la tarjeta debe tener entre 14 y 16 dígitos";
     }
 
     if (!expirationDate) {
       errores.expirationDate =
         "* ingrese la fecha de expiracion de la tarjeta para efectuar el pago";
+    } else {
+      const hoy = new Date();
+      const fechaExp = new Date(expirationDate);
+      if (fechaExp < hoy) {
+        errores.expirationDate =
+          "* la fecha de expiración no puede ser anterior al día de hoy";
+      }
     }
 
     if (!ownerName) {
@@ -42,6 +52,8 @@ export function payValidation(req, res, next) {
     if (!cvc) {
       errores.cvc =
         "* ingrese el codigo de seguridad de la tarjeta para efectuar el pago";
+    } else if (cvc.length < 3 || cvc.length > 4) {
+      errores.cvc = "* el cvc de la tarjeta debe tener 3 o 4 dígitos";
     }
   } else if (paymentMethod == "transferencia") {
     if (!voucher) {

@@ -34,7 +34,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   const [seleccionCbu, setSeleccionCbu] = useState(false);
   const [stateTransition, setStateTransition] = useState("");
   const [checkbox, setCheckBox] = useState(false);
-  const [file, setFile] = useState(false);
+  const [file, setFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [choicePayment, setChoicePayment] = useState(false);
   const [tipoTarjeta, setTipoTarjeta] = useState("Visa");
