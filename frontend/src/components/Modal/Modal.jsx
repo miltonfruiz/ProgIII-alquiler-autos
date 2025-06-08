@@ -66,6 +66,18 @@ function Modal({ auto, onClose }) {
       });
 
       if (success) {
+        // Branco: agrego esto para crear un id de reserva porque en el front no lo encontre en ningun lado
+        // ---------------------------------------------------------
+
+        let contador = localStorage.getItem("contadorReservas");
+
+        contador = contador ? parseInt(contador) : 0;
+
+        contador++;
+
+        localStorage.setItem("contadorReservas", contador);
+        // --------------------------------------------------------
+
         const total = calcularTotal();
         const impuestos = calcularImpuestos(total);
         const precioFinal = total + impuestos;
