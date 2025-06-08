@@ -66,7 +66,11 @@ const CarPaymentPage = () => {
     } else {
       const carId = JSON.parse(localStorage.getItem("datosAlquiler"))?.auto.id;
       const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
-      const id_reserva = localStorage.getItem("contadorReservas");
+      const id_reserva = parseInt(localStorage.getItem("contadorReservas"));
+
+      console.log(typeof carId);
+      console.log(typeof userId);
+      console.log(typeof id_reserva);
 
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
