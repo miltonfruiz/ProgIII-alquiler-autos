@@ -93,13 +93,15 @@ export default function UserNavbar() {
       <div className="navbar-right">
         <div className="icon-wrapper">
           <div className="nav-item">
-            <Link to="/home">
-              <FaHome title="Inicio" className="faHome-icon" /> Inicio
+            <Link to="/home" className="nav-link">
+              <FaHome title="Inicio" className="faHome-icon nav-icon" />
+              <span className="nav-title">Inicio</span>
             </Link>
           </div>
           <div className="nav-item">
             <Link
               to="/user-profile"
+              className="nav-link"
               onClick={() => {
                 setTimeout(() => {
                   const target = document.getElementById(
@@ -109,24 +111,26 @@ export default function UserNavbar() {
                 }, 500);
               }}
             >
-              <BsCalendarDateFill className="BsCalendarDateFill-icon" />
-              Reservas
+              <BsCalendarDateFill className="BsCalendarDateFill-icon nav-icon" />
+              <span className="nav-title">Reservas</span>
             </Link>
           </div>
-
           <div className="nav-item">
-            <Link to="/shop">
+            <Link to="/shop" className="nav-link">
               {" "}
-              <FaCar title="Tienda de Autos" className="faCar-icon" /> Tienda
+              <FaCar
+                title="Tienda de Autos"
+                className="faCar-icon nav-icon"
+              />{" "}
+              <span className="nav-title">Tienda</span>
             </Link>
           </div>
-
-          <div className="user-dropdown nav-item" ref={dropdownRef}>
+          <div className="user-dropdown nav-item nav-link" ref={dropdownRef}>
             <FaUserEdit
-              className="faUserEdit-icon"
+              className="faUserEdit-icon nav-icon"
               onClick={() => setShowDropdown((prev) => !prev)}
             />{" "}
-            Perfil
+            <span className="nav-title">Perfil</span>
             {showDropdown && (
               <div
                 className="dropdown-menu"
