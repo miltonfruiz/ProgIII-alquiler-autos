@@ -72,6 +72,7 @@
   display: flex;
   gap: 20px;
 }
+.faAdmin-icon,
 .BsCalendarDateFill-icon,
 .faHome-icon,
 .faUserEdit-icon,
@@ -82,6 +83,9 @@
   color: white;
   font-size: 22px;
   margin-bottom: 3px;
+}
+.faAdmin-icon {
+  color: rgba(255, 0, 0, 0.692);
 }
 .user-dropdown {
   font-size: 12px;
