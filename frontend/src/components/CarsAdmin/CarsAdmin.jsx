@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import "./CarsAdmin.css";
 import { FaPlus, FaDownload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { toast } from "react-toastify";
 import CardAdminValidation from "../CarAdminValidation/CarAdminValidation";
 import CarsAdminModal from "../CarAdminModal/CarAdminModal";
-import CarsAdminTable from "../CarsAdminTable/CarsAdminTable";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import AdminTable from "../AdminTable/AdminTable";
+import "../AdminTable/AdminTable.css";
+
 import {
   downloadCSV,
   categoryOptions,
@@ -195,8 +196,26 @@ const CarsAdmin = () => {
             <FaPlus /> Agregar
           </button>
         </div>
-        <CarsAdminTable
-          cars={filteredCars}
+        <AdminTable
+          data={filteredCars}
+          columns={[
+            "Nombre",
+            "Categoría",
+            "Precio",
+            "Transmisión",
+            "Pasajeros",
+            "Marca",
+            "Estado",
+          ]}
+          fields={[
+            "name",
+            "category",
+            "price",
+            "transmission",
+            "passengers",
+            "brand",
+            "state",
+          ]}
           onEdit={(car) => {
             setNewCar({
               name: car.name,

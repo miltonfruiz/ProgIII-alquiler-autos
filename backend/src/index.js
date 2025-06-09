@@ -8,9 +8,9 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+import "./models/index.js";
 import "./models/Car.js";
 import "./models/Review.js";
-import "./models/index.js";
 import "./models/User.js";
 import "./models/Reserva.js";
 import "./models/Pay.js";
