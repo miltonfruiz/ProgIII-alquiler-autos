@@ -1,8 +1,8 @@
 export function payValidation(req, res, next) {
   const {
-    userId,
     carId,
-    reservationId,
+    userId,
+    id_reserva,
     cardType,
     paymentMethod,
     cardNumber,
