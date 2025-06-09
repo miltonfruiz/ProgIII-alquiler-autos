@@ -59,20 +59,23 @@ const ReservationsAdmin = () => {
         return fullName.includes(search.toLowerCase());
       })
     : [];
-  const handleDelete = async (reserva) => {
+  const handleDelete = async (id_reserva) => {
     try {
-      await fetch(`http://localhost:3000/reservas/${reserva.id_reserva}`, {
+      const res = await fetch(`http://localhost:3000/reservas/${id_reserva}`, {
         method: "DELETE",
       });
+
+      if (!res.ok) throw new Error("Error al eliminar");
+
       setReservations((prev) =>
-        prev.filter((r) => r.id_reserva !== reserva.id_reserva)
+        prev.filter((r) => r.id_reserva !== id_reserva)
       );
-      toast.success("Reserva eliminada correctamente");
+      setShowConfirmModal(false);
     } catch (error) {
-      console.error("Error al eliminar reserva:", error);
-      toast.error("Error al eliminar la reserva");
+      console.error("Error al cancelar reserva:", error);
     }
   };
+
   const confirmDelete = () => {
     if (reservationToDelete) {
       handleDelete(reservationToDelete);

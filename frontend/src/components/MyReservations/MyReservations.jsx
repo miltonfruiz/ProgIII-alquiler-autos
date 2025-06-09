@@ -9,14 +9,36 @@ import { TbTax } from "react-icons/tb";
 import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import { toast } from "react-toastify";
 
 export default function MyReservations() {
   const [reservations, setReservations] = useState([]);
   const [expandedIds, setExpandedIds] = useState([]);
-  const handleDelete = (id) => {
-    const nuevasReservas = reservations.filter((res) => res.id !== id);
-    setReservations(nuevasReservas);
+  const [reservationToDelete, setReservationToDelete] = useState(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { t } = useTranslation();
+  const handleDelete = async (id_reserva) => {
+    try {
+      const res = await fetch(`http://localhost:3000/reservas/${id_reserva}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Error al cancelar la reserva");
+      }
+
+      setReservations((prev) =>
+        prev.filter((res) => res.id_reserva !== id_reserva)
+      );
+      toast.success("Reserva eliminada!");
+    } catch (error) {
+      console.error("Error al cancelar reserva:", error);
+      alert("No se pudo cancelar la reserva.");
+    }
   };
+
   const toggleExpand = (id) => {
     setExpandedIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -69,24 +91,23 @@ export default function MyReservations() {
     <div id="my-reservations-link" className="reservation-container">
       <h1 className="reservation-title">
         <FaCarSide className="car-myreservations" />
-        Mis Reservas
+        {t("navbar.myReservations")}
       </h1>
-      <h6 className="reservation-subtitle">
-        Mantente al tanto de tus reservas
-      </h6>
+      <h6 className="reservation-subtitle">{t("navbar.stay")}</h6>
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
           {reservations.length === 0 ? (
-            <p className="no-reservations">No hay reservas activas.</p>
+            <p className="no-reservations">{t("navbar.noActive")}.</p>
           ) : (
             reservations.map((res) => (
               <div
+                key={res.id_reserva}
                 className={`reservation-card myreservations-fade-in ${
                   expandedIds.includes(res.id) ? "expanded" : ""
                 }`}
               >
                 <img
-                  src={res.Car?.image || "/images/default.png"}
+                  src={res.Car?.image || "/images/volkswagen.png"}
                   alt={res.Car?.name}
                   className="car-image"
                 />
@@ -131,17 +152,20 @@ export default function MyReservations() {
                     >
                       {expandedIds.includes(res.id) ? (
                         <>
-                          <IoIosArrowUp /> Ocultar info
+                          <IoIosArrowUp /> {t("navbar.buttonHide")}
                         </>
                       ) : (
                         <>
-                          <IoIosArrowDown /> Ver detalles
+                          <IoIosArrowDown /> {t("navbar.buttonSeeDetails")}
                         </>
                       )}
                     </button>
                     <button
                       className="delete-myreservations"
-                      onClick={() => handleDelete(res.id)}
+                      onClick={() => {
+                        setReservationToDelete(res);
+                        setShowConfirmModal(true);
+                      }}
                     >
                       <RiDeleteBin6Line /> Cancelar
                     </button>
@@ -149,6 +173,21 @@ export default function MyReservations() {
                 </div>
               </div>
             ))
+          )}
+          {showConfirmModal && reservationToDelete && (
+            <ConfirmDeleteModal
+              itemName={reservationToDelete.Car?.name || "la reserva"}
+              itemType="la reserva"
+              onConfirm={() => {
+                handleDelete(reservationToDelete.id_reserva);
+                setReservationToDelete(null);
+                setShowConfirmModal(false);
+              }}
+              onCancel={() => {
+                setReservationToDelete(null);
+                setShowConfirmModal(false);
+              }}
+            />
           )}
         </div>
       </div>

@@ -13,6 +13,7 @@ import {
 import { AiFillEdit } from "react-icons/ai";
 import { IoIosMail } from "react-icons/io";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export default function MyProfile() {
   const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
@@ -27,7 +28,7 @@ export default function MyProfile() {
     licencia: "",
     numeroTelefonico: "",
   });
-
+  const { t } = useTranslation();
   const [profileImage, setProfileImage] = useState("/images/test.jpg");
   const [originalProfileData, setOriginalProfileData] = useState({});
   const [originalProfileImage, setOriginalProfileImage] =
@@ -129,7 +130,7 @@ export default function MyProfile() {
     <div className="profile-header">
       <h1 className="profile-title">
         <ImProfile className="imProfile-icon" />
-        Mis Datos
+        {t("navbar.myDates")}
       </h1>
       <div className="profile-content">
         <div className="profile-image-wrapper">
@@ -155,7 +156,7 @@ export default function MyProfile() {
         </div>
         <div className="profile-details">
           <p>
-            <FaUser className="icon-date" /> Nombre:{" "}
+            <FaUser className="icon-date" /> {t("navbar.name")}:{" "}
             {editMode ? (
               <>
                 <input
@@ -179,7 +180,7 @@ export default function MyProfile() {
 
           <p>
             <MdDateRange className="icon-date" />
-            Fecha de Nacimiento:{" "}
+            {t("navbar.date")}:{" "}
             {editMode ? (
               <input
                 type="date"
@@ -209,7 +210,7 @@ export default function MyProfile() {
           </p>
           <p>
             <FaCarSide className="icon-date" />
-            Nº Licencia:{" "}
+            {t("navbar.numberLicense")}:{" "}
             {editMode ? (
               <input
                 type="text"
@@ -223,7 +224,7 @@ export default function MyProfile() {
             )}
           </p>
           <p>
-            <FaMobileAlt className="icon-date" /> Teléfono:{" "}
+            <FaMobileAlt className="icon-date" /> {t("navbar.phone")}:{" "}
             {editMode ? (
               <input
                 type="text"
@@ -236,23 +237,24 @@ export default function MyProfile() {
             )}
           </p>
           <p>
-            <IoIosMail className="icon-date" /> Correo: {profileData.correo}
+            <IoIosMail className="icon-date" /> {t("navbar.email")}:{" "}
+            {profileData.correo}
           </p>
           {editMode ? (
             <div
               className={`edit-actions ${animateOut ? "fade-out" : "fade-in"}`}
             >
               <button className="save-button" onClick={handleSave}>
-                <FaSave className="icon-edits" /> Guardar
+                <FaSave className="icon-edits" /> {t("navbar.buttonSave")}
               </button>
               <button className="cancel-button" onClick={handleCancel}>
-                <MdCancel className="icon-edits" /> Cancelar
+                <MdCancel className="icon-edits" /> {t("navbar.buttonCancel")}
               </button>
             </div>
           ) : (
             <button className="edit-button fade-in" onClick={handleEditToggle}>
               <FaEdit className="FaEdit-icon" />
-              Editar Perfil
+              {t("navbar.buttonEdit")}
             </button>
           )}
         </div>

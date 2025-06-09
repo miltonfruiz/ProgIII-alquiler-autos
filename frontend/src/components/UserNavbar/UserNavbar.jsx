@@ -100,14 +100,14 @@ export default function UserNavbar() {
             <div className="nav-item">
               <Link to="/administration" className="nav-link">
                 <MdDashboardCustomize className="faAdmin-icon nav-icon" />
-                <span className="nav-title">Panel</span>
+                <span className="nav-title">{t("navbar.dashboard")}</span>
               </Link>
             </div>
           )}
           <div className="nav-item">
             <Link to="/home" className="nav-link">
               <FaHome title="Inicio" className="faHome-icon nav-icon" />
-              <span className="nav-title">Inicio</span>
+              <span className="nav-title">{t("navbar.home")}</span>
             </Link>
           </div>
           <div className="nav-item">
@@ -124,7 +124,7 @@ export default function UserNavbar() {
               }}
             >
               <BsCalendarDateFill className="BsCalendarDateFill-icon nav-icon" />
-              <span className="nav-title">Reservas</span>
+              <span className="nav-title">{t("navbar.reservations")}</span>
             </Link>
           </div>
           <div className="nav-item">
@@ -134,7 +134,7 @@ export default function UserNavbar() {
                 title="Tienda de Autos"
                 className="faCar-icon nav-icon"
               />{" "}
-              <span className="nav-title">Tienda</span>
+              <span className="nav-title">{t("navbar.shop")}</span>
             </Link>
           </div>
           <div className="user-dropdown nav-item nav-link" ref={dropdownRef}>
@@ -142,7 +142,7 @@ export default function UserNavbar() {
               className="faUserEdit-icon nav-icon"
               onClick={() => setShowDropdown((prev) => !prev)}
             />{" "}
-            <span className="nav-title">Perfil</span>
+            <span className="nav-title">{t("navbar.profile")}</span>
             {showDropdown && (
               <div
                 className="dropdown-menu"

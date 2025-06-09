@@ -2,6 +2,7 @@ import UserNavbar from "../components/UserNavbar/UserNavbar";
 import MyProfile from "../components/MyProfile/MyProfile";
 import MyReservations from "../components/MyReservations/MyReservations";
 import MyPastReservations from "../components/MyPastReservations/MyPastReservations";
+import LandingFooter from "../components/LandingFooter/LandingFooter";
 
 const UserProfile = () => {
   return (
@@ -10,6 +11,7 @@ const UserProfile = () => {
       <MyProfile />
       <MyReservations />
       <MyPastReservations />
+      <LandingFooter />
     </div>
   );
 };

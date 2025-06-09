@@ -1,6 +1,11 @@
 {
   "navbar": {
     "searchPlaceholder": "Ingrese nombre o modelo de auto...",
+    "dashboard": "Panel",
+    "home": "Inicio",
+    "reservations": "Reservas",
+    "shop": "Tienda",
+    "profile": "Perfil",
     "language": "Idioma",
     "language_es": "Español",
     "language_en": "Inglés",
@@ -8,6 +13,25 @@
     "themeLight": "Modo claro",
     "themeDark": "Modo oscuro",
     "editProfile": "Editar perfil",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "myDates": "Mis Datos",
+    "name": "Nombre",
+    "date": "Fecha de Nacimiento",
+    "numberLicense": "N° de Licencia",
+    "phone": "Teléfono",
+    "email": "Correo",
+    "buttonEdit": "Editar Perfil",
+    "buttonCancel": "Cancelar",
+    "buttonSave": "Guardar",
+
+    "buttonHide": "Ocultar info",
+    "buttonSeeDetails": "Ver Detalles",
+    "buttonRating": "Calificar",
+
+    "myReservations": "Mis Reservas",
+    "stay": "Mantente al tanto de tus reservas",
+    "noActive": "No hay reservas activas",
+    "myPastReservations": "Mis Reservas Pasadas",
+    "check": "Consulta y califica tus reservas anteriores"
   }
 }
