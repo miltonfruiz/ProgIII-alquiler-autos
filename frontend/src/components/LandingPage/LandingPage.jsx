@@ -53,10 +53,11 @@ const LandingPage = () => {
       <div className="containerContenido">
         <section className="section" id="rentcar">
           <h2 className="h2-title">
-            <FaQuestionCircle className="icon-title-landing" /> ¿Qué es RentCar?
+            <FaQuestionCircle className="icon-title-landing" /> ¿Qué es
+            RentCars?
           </h2>
           <p>
-            RentCar es una plataforma innovadora de alquiler de vehículos
+            RentCars es una plataforma innovadora de alquiler de vehículos
             pensada para facilitar la movilidad urbana y turística en todo el
             país. Ofrecemos una experiencia digital simple, rápida y segura.
           </p>

@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className={styles.siteFooter}>
       <div className={styles.companyName}>
-        <p className={styles.companyTitle}>(NOM DE LA MARCA)</p>
+        <p className={styles.companyTitle}>RENTCARS</p>
         <p className={styles.companyAbout}>
           Somos un equipo joven apasionado por la tecnología y los viajes.
           Creamos esta plataforma para hacer del alquiler de autos algo fácil,
@@ -74,7 +74,7 @@ function Footer() {
       </section>
       <div className={styles.bottomSection}>
         <p className={styles.copyright}>
-          ©2025 (nom marca) Todos los derechos registrados
+          ©2025 RentCars Todos los derechos registrados
         </p>
         <div className={styles.legalLinks}>
           <a href="#" className={styles.link}>
