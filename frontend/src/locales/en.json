@@ -1,6 +1,11 @@
 {
   "navbar": {
     "searchPlaceholder": "Enter car name or model...",
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "reservations": "Reservations",
+    "shop": "Shop",
+    "profile": "Profile",
     "language": "Language",
     "language_es": "Spanish",
     "language_en": "English",
@@ -8,6 +13,25 @@
     "themeLight": "Light Mode",
     "themeDark": "Dark Mode",
     "editProfile": "Edit Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "myDates": "My Data",
+    "name": "Name",
+    "date": "Birthdate",
+    "numberLicense": "License Number",
+    "phone": "Phone",
+    "email": "Mail",
+    "buttonEdit": "Edit Profile",
+    "buttonCancel": "Cancel",
+    "buttonSave": "Save",
+
+    "buttonHide": "Hide info",
+    "buttonSeeDetails": "See Details",
+    "buttonRating": "Qualify",
+
+    "myReservations": "My Reservations",
+    "stay": "Stay on top of your reservations",
+    "noActive": "There are no active reservations",
+    "myPastReservations": "My Past Reservations",
+    "check": "Check and rate your previous reservations"
   }
 }

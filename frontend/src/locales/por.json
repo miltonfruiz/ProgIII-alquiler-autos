@@ -1,6 +1,11 @@
 {
   "navbar": {
     "searchPlaceholder": "Digite o nome ou modelo do carro...",
+    "dashboard": "Painel",
+    "home": "Começar",
+    "reservations": "Reservas",
+    "shop": "Loja",
+    "profile": "Perfil",
     "language": "Idioma",
     "language_es": "Espanhol",
     "language_en": "Inglês",
@@ -8,6 +13,25 @@
     "themeLight": "Modo claro",
     "themeDark": "Modo escuro",
     "editProfile": "Editar perfil",
-    "logout": "Sair"
+    "logout": "Sair",
+    "myDates": "Meus dados",
+    "name": "Nome",
+    "date": "Data de nascimento",
+    "numberLicense": "Número de licença",
+    "phone": "Telefone",
+    "email": "Correspondência",
+    "buttonEdit": "Editar Perfil",
+    "buttonCancel": "Cancelar",
+    "buttonSave": "Manter",
+
+    "buttonHide": "Ocultar informações",
+    "buttonSeeDetails": "Ver detalhes",
+    "buttonRating": "Qualificar",
+
+    "myReservations": "As Minhas Reservas",
+    "stay": "Fique por dentro das suas reservas",
+    "noActive": "Não há reservas ativas",
+    "myPastReservations": "As minhas reservas anteriores",
+    "check": "Verifique e avalie as suas reservas anteriores"
   }
 }

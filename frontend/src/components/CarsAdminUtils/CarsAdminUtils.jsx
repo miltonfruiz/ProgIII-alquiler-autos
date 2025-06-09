@@ -91,3 +91,10 @@ export const brandOptions = [
   { value: "Tesla", label: "Tesla" },
   { value: "BYD", label: "BYD" },
 ];
+export const reservationState = [
+  { value: "Pendiente", label: "Pendiente" },
+  { value: "Confirmada", label: "Confirmada" },
+  { value: "En Curso", label: "En Curso" },
+  { value: "Completada", label: "Completada" },
+  { value: "Cancelada", label: "Cancelada" },
+];

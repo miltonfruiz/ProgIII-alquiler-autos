@@ -14,7 +14,7 @@ export function validateReservationDates(startDate, endDate) {
   if (isValidDate(startDate) && isValidDate(endDate)) {
     const hoy = new Date();
     const inicio = new Date(startDate);
-    const fin = new Date(startDate);
+    const fin = new Date(endDate);
 
     // Ignorar la hora
     hoy.setHours(0, 0, 0, 0);

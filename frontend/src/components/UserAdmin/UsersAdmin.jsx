@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import "./UsersAdmin.css";
 import { FaPlus, FaDownload } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { toast, ToastContainer } from "react-toastify";
-import UsersTableAdmin from "../UsersTableAdmin/UsersTableAdmin";
 import UsersModalAdmin from "../UsersModalAdmin/UsersModalAdmin";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import { UsersValidationAdmin } from "../UsersValidationAdmin/UsersValidationAdmin";
 import { downloadCSV } from "../CarsAdminUtils/CarsAdminUtils";
+import AdminTable from "../AdminTable/AdminTable";
+import "../AdminTable/AdminTable.css";
 
 const UsersAdmin = () => {
   const [users, setUsers] = useState([]);
@@ -56,16 +56,13 @@ const UsersAdmin = () => {
     const errors = UsersValidationAdmin(newUser);
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
-
     try {
       const { repetirContraseña, ...userToSend } = newUser;
-
       const res = await fetch("http://localhost:3000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
       });
-
       if (!res.ok) {
         const response = await res.json();
         console.error("Respuesta del backend:", response);
@@ -74,7 +71,6 @@ const UsersAdmin = () => {
         );
         return;
       }
-
       const createdUser = await res.json();
       setUsers([...users, createdUser]);
       toast.success("Usuario creado correctamente");
@@ -212,8 +208,26 @@ const UsersAdmin = () => {
             <FaPlus /> Agregar
           </button>
         </div>
-        <UsersTableAdmin
-          users={filteredUsers}
+        <AdminTable
+          data={filteredUsers}
+          columns={[
+            "Nombre",
+            "Apellido",
+            "Correo",
+            "DNI",
+            "Nacimiento",
+            "Licencia",
+            "Rol",
+          ]}
+          fields={[
+            "nombre",
+            "apellido",
+            "correo",
+            "dni",
+            "nacimiento",
+            "licencia",
+            "rol",
+          ]}
           onEdit={(user) => {
             setNewUser({
               nombre: user.nombre,

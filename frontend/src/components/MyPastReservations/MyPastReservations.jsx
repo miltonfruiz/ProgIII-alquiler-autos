@@ -10,14 +10,15 @@ import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import ModalValidation from "../ModalValidation/ModalValidation";
+import { useTranslation } from "react-i18next";
 
 export default function MyPastReservations() {
   const [pastReservations] = useState([
     {
       id: 1,
-      auto: "Renault Logan",
+      auto: "Chevrolet Prisma",
       fecha: "2024-12-01",
-      imagen: "/images/volkswagen.png",
+      imagen: "/images/cars/chevroletPrisma.png",
       precio: 28000,
       impuestos: 5900,
       metodoPago: "Tarjeta de débito",
@@ -26,9 +27,9 @@ export default function MyPastReservations() {
     },
     {
       id: 2,
-      auto: "Ford Fiesta",
+      auto: "Fiat Cronos",
       fecha: "2024-11-15",
-      imagen: "/images/volkswagen.png",
+      imagen: "/images/cars/fiat-cronos.png",
       precio: 22000,
       impuestos: 4600,
       metodoPago: "Transferencia",
@@ -37,9 +38,9 @@ export default function MyPastReservations() {
     },
     {
       id: 3,
-      auto: "Chevrolet Onix",
+      auto: "Peugeot 208",
       fecha: "2024-10-10",
-      imagen: "/images/volkswagen.png",
+      imagen: "/images/cars/peugeot208.png",
       precio: 24000,
       impuestos: 5100,
       metodoPago: "Mercado Pago",
@@ -48,9 +49,9 @@ export default function MyPastReservations() {
     },
     {
       id: 4,
-      auto: "Volkswagen Gol",
+      auto: "Toyota Etios",
       fecha: "2024-09-05",
-      imagen: "/images/volkswagen.png",
+      imagen: "/images/cars/toyota_etios-sedan.png",
       precio: 21000,
       impuestos: 4300,
       metodoPago: "Efectivo",
@@ -59,9 +60,9 @@ export default function MyPastReservations() {
     },
     {
       id: 5,
-      auto: "Toyota Etios",
+      auto: "Toyota Corolla",
       fecha: "2024-08-25",
-      imagen: "/images/volkswagen.png",
+      imagen: "/images/cars/toyotaCorolla.png",
       precio: 26000,
       impuestos: 5500,
       metodoPago: "Tarjeta de crédito",
@@ -70,9 +71,9 @@ export default function MyPastReservations() {
     },
     {
       id: 6,
-      auto: "Fiat Cronos",
+      auto: "Volkswagen Gol",
       fecha: "2024-07-15",
-      imagen: "/images/volkswagen.png",
+      imagen: "/images/cars/volkswagenGol.png",
       precio: 23000,
       impuestos: 4800,
       metodoPago: "Transferencia",
@@ -86,6 +87,8 @@ export default function MyPastReservations() {
   const commentRef = useRef(null);
   const starsRef = useRef(null);
   const [modalErrores, setModalErrores] = useState({});
+  const { t } = useTranslation();
+
   const isRated = (id) => {
     return ratings[id]?.stars > 0 && ratings[id]?.comment?.trim().length > 0;
   };
@@ -146,11 +149,9 @@ export default function MyPastReservations() {
     <div className="reservation-container">
       <h1 className="reservation-title">
         <FaHistory className="history-mypastreservations" />
-        Reservas Finalizadas
+        {t("navbar.myPastReservations")}
       </h1>
-      <h6 className="reservation-subtitle">
-        Consulta y califica tus reservas anteriores
-      </h6>
+      <h6 className="reservation-subtitle">{t("navbar.check")}</h6>
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
           {pastReservations.length === 0 ? (
@@ -197,11 +198,11 @@ export default function MyPastReservations() {
                     >
                       {expandedIds.includes(res.id) ? (
                         <>
-                          <IoIosArrowUp /> Ocultar info
+                          <IoIosArrowUp /> {t("navbar.buttonHide")}
                         </>
                       ) : (
                         <>
-                          <IoIosArrowDown /> Ver detalles
+                          <IoIosArrowDown /> {t("navbar.buttonSeeDetails")}
                         </>
                       )}
                     </button>
@@ -215,7 +216,7 @@ export default function MyPastReservations() {
                         className="toggle-rate-button"
                         onClick={() => setModalReservaId(res.id)}
                       >
-                        <FaStar /> Calificar
+                        <FaStar /> {t("navbar.buttonRating")}
                       </button>
                     )}
                   </div>
