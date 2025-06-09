@@ -36,7 +36,7 @@ function Opiniones() {
   return (
     <section className={styles.opinionesSection}>
       <div className={styles.opinionesTitle}>
-        <p>Opiniones de clientes de (nom de la marca)</p>
+        <p>Opiniones de clientes de RentCars</p>
       </div>
       <div className={styles.opinionesConteiner}>
         <div className={styles.opinionesCard}>

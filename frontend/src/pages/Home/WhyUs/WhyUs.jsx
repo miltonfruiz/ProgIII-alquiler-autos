@@ -6,15 +6,10 @@ function WhyUs() {
   return (
     <section className={styles.whyUsSection}>
       <div className={styles.whyUsConteiner}>
-        <img
-          className={styles.imagenConsensionaria}
-          src={imagenConcesionaria}
-          alt="Concesionaria"
-        />
         <div className={styles.whyUsText}>
-          <span className={styles.trustText}>¿Porque confiar en RentCar?</span>
+          <span className={styles.trustText}>¿Porque confiar en RentCars?</span>
           <span className={styles.whyUs}>
-            En RentCar nos comprometemos a ofrecerte vehículos en excelente
+            En RentCars nos comprometemos a ofrecerte vehículos en excelente
             estado, con mantenimiento constante y garantía de calidad. Nuestro
             equipo te brinda una atención personalizada desde el primer
             contacto, ayudándote a encontrar el auto ideal para cada ocasión.

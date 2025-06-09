@@ -8,7 +8,7 @@ const LandingFooter = () => {
     <footer className="footer">
       <div className="footerContent">
         <div className="footerSection about">
-          <h4>RentCar</h4>
+          <h4>RentCars</h4>
           <p>
             Tu viaje comienza con nosotros. Alquiler rápido, seguro y accesible.
           </p>
@@ -16,7 +16,7 @@ const LandingFooter = () => {
         <div className="footerSection contact">
           <h4>Contacto</h4>
           <p>📞 0800-123-456</p>
-          <p>✉ contacto@rentcar.com</p>
+          <p>✉ contacto@rentcars.com</p>
           <p>📍 Rosario, Santa Fe</p>
         </div>
         <div className="footerSection social">

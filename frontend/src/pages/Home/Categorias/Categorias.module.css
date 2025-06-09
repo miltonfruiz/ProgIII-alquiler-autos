@@ -1,5 +1,6 @@
 .categoriesSection {
-  margin: 50px 150px 0 150px;
+  margin: 2rem;
+  width: 90%;
 }
 
 .titleConteiner {
@@ -14,10 +15,9 @@
 
 .categoriesConteiner {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 120px;
-  margin-left: 0;
+  gap: 50px;
+  height: 480px;
 }
 
 /* Card */
@@ -32,6 +32,10 @@
   background-color: #fff;
   border-radius: 10px;
   min-width: 250px;
+}
+
+.cardConteiner:nth-child(1) {
+  margin-left: 7rem;
 }
 
 .cardTitle {
@@ -76,7 +80,10 @@
 
 .cardButton button {
   margin-top: 0.3rem;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
   color: #fff;
   padding: 20px 100px;
   border-radius: 5px;

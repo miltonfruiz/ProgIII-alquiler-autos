@@ -31,13 +31,12 @@
 } */
 
 .rentNowSection {
-  margin: 50px 0 120px 150px;
+  margin: 50px;
   position: relative;
 }
 
 .rentNowImage {
   width: 100%;
-  max-width: 1620px;
   display: block;
 }
 
