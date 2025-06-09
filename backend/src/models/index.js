@@ -27,4 +27,8 @@ Pay.belongsTo(Car, { foreignKey: "carId" });
 User.hasMany(Review, { foreignKey: "userId", onDelete: "CASCADE" });
 Review.belongsTo(User, { foreignKey: "userId" });
 
+// Cada reserva pertenece a un usuario y a un auto
+Reserva.belongsTo(User, { foreignKey: "userId" });
+Reserva.belongsTo(Car, { foreignKey: "carId" });
+
 export { Car, Review, User, Reserva, Pay };

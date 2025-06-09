@@ -7,6 +7,8 @@ export async function validateReservation(req, res, next) {
 
   //Esto se encuentra en el return del validateDates en helpers
   if (!valid) {
+    console.log("Errores de validación de fechas:", errores);
+
     return res.status(400).json({ errores });
   }
 
@@ -21,6 +23,7 @@ export async function validateReservation(req, res, next) {
     });
 
     if (reservasExistentes.length > 0) {
+      console.log("Reserva superpuesta encontrada:", reservasExistentes);
       return res.status(400).json({
         errores: {
           disponibilidad: "El auto ya está reservado en esas fechas",
