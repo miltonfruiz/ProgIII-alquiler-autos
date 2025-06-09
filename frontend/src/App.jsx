@@ -62,10 +62,11 @@ function App() {
         <Route
           path="/administration"
           element={
-            <ProtectedRouteAdmin>
-              {" "}
-              <Administration />{" "}
-            </ProtectedRouteAdmin>
+            // <ProtectedRouteAdmin>
+            // {" "}
+            <Administration />
+            // {" "}
+            // </ProtectedRouteAdmin>
           }
         />
       </Routes>

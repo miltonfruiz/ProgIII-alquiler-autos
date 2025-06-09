@@ -34,6 +34,7 @@ export async function createReserva(req, res) {
 }
 export async function getReservasPorUsuario(req, res) {
   const { id } = req.params;
+  const hoy = new Date().toISOString().split("T")[0];
   try {
     const reservas = await Reserva.findAll({
       where: { userId: id },
