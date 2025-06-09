@@ -10,6 +10,7 @@ import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import ModalValidation from "../ModalValidation/ModalValidation";
+import { useTranslation } from "react-i18next";
 
 export default function MyPastReservations() {
   const [pastReservations] = useState([
@@ -86,6 +87,8 @@ export default function MyPastReservations() {
   const commentRef = useRef(null);
   const starsRef = useRef(null);
   const [modalErrores, setModalErrores] = useState({});
+  const { t } = useTranslation();
+
   const isRated = (id) => {
     return ratings[id]?.stars > 0 && ratings[id]?.comment?.trim().length > 0;
   };
@@ -146,11 +149,9 @@ export default function MyPastReservations() {
     <div className="reservation-container">
       <h1 className="reservation-title">
         <FaHistory className="history-mypastreservations" />
-        Reservas Finalizadas
+        {t("navbar.myPastReservations")}
       </h1>
-      <h6 className="reservation-subtitle">
-        Consulta y califica tus reservas anteriores
-      </h6>
+      <h6 className="reservation-subtitle">{t("navbar.check")}</h6>
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
           {pastReservations.length === 0 ? (
@@ -197,11 +198,11 @@ export default function MyPastReservations() {
                     >
                       {expandedIds.includes(res.id) ? (
                         <>
-                          <IoIosArrowUp /> Ocultar info
+                          <IoIosArrowUp /> {t("navbar.buttonHide")}
                         </>
                       ) : (
                         <>
-                          <IoIosArrowDown /> Ver detalles
+                          <IoIosArrowDown /> {t("navbar.buttonSeeDetails")}
                         </>
                       )}
                     </button>
@@ -215,7 +216,7 @@ export default function MyPastReservations() {
                         className="toggle-rate-button"
                         onClick={() => setModalReservaId(res.id)}
                       >
-                        <FaStar /> Calificar
+                        <FaStar /> {t("navbar.buttonRating")}
                       </button>
                     )}
                   </div>

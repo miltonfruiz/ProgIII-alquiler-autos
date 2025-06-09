@@ -9,6 +9,7 @@ import { TbTax } from "react-icons/tb";
 import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import { toast } from "react-toastify";
 
@@ -17,6 +18,7 @@ export default function MyReservations() {
   const [expandedIds, setExpandedIds] = useState([]);
   const [reservationToDelete, setReservationToDelete] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { t } = useTranslation();
   const handleDelete = async (id_reserva) => {
     try {
       const res = await fetch(`http://localhost:3000/reservas/${id_reserva}`, {
@@ -89,15 +91,13 @@ export default function MyReservations() {
     <div id="my-reservations-link" className="reservation-container">
       <h1 className="reservation-title">
         <FaCarSide className="car-myreservations" />
-        Mis Reservas
+        {t("navbar.myReservations")}
       </h1>
-      <h6 className="reservation-subtitle">
-        Mantente al tanto de tus reservas
-      </h6>
+      <h6 className="reservation-subtitle">{t("navbar.stay")}</h6>
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
           {reservations.length === 0 ? (
-            <p className="no-reservations">No hay reservas activas.</p>
+            <p className="no-reservations">{t("navbar.noActive")}.</p>
           ) : (
             reservations.map((res) => (
               <div
@@ -152,11 +152,11 @@ export default function MyReservations() {
                     >
                       {expandedIds.includes(res.id) ? (
                         <>
-                          <IoIosArrowUp /> Ocultar info
+                          <IoIosArrowUp /> {t("navbar.buttonHide")}
                         </>
                       ) : (
                         <>
-                          <IoIosArrowDown /> Ver detalles
+                          <IoIosArrowDown /> {t("navbar.buttonSeeDetails")}
                         </>
                       )}
                     </button>
