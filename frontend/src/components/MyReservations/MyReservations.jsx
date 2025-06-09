@@ -40,6 +40,7 @@ export default function MyReservations() {
 
     fetchReservations();
   }, []);
+  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
   const location = useLocation();
 
   useEffect(() => {
@@ -103,7 +104,10 @@ export default function MyReservations() {
                       <IoPricetagSharp /> Días: {res.cant_dias}
                     </p>
                     <p>
-                      <TbTax /> Impuestos: ${res.impuestos.toLocaleString()}
+                      <TbTax /> Impuestos: $
+                      {typeof datosAlquiler.tax === "number"
+                        ? datosAlquiler.tax.toLocaleString()
+                        : "N/A"}
                     </p>
                     <p>
                       <FaHandHoldingUsd />
@@ -114,7 +118,10 @@ export default function MyReservations() {
                       Tipo de facturación: {res.facturacion}
                     </p>
                     <p>
-                      <BsCashCoin /> Total: ${res.total.toLocaleString()}
+                      <BsCashCoin /> Total: $
+                      {typeof datosAlquiler.total === "number"
+                        ? datosAlquiler.total.toLocaleString()
+                        : "N/A"}
                     </p>
                   </div>
                   <div className="reservation-actions">
