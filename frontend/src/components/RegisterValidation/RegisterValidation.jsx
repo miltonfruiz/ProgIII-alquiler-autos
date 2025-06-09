@@ -40,9 +40,10 @@ const RegisterValidation = ({ datos }) => {
 
   if (!datos.dni.trim()) {
     errores.dni = "* Debe ingresar dni";
-  } else if (!/^(?![0]+$)[0-9]{6,8}$/.test(datos.dni)) {
-    errores.dni =
-      "* el dni debe tener entre 6 y 8 caracteres y no puede tener letras ni espacios";
+  } else if (datos.dni.length > 10 || datos.dni.length < 7) {
+    errores.dni = "* el dni debe tener entre 7 y 10 caracteres";
+  } else if (/[^0-9]/.test(datos.dni)) {
+    errores.dni = "* el dni no puede poseer ni letras ni caracteres especiales";
   }
 
   if (!datos.nacimiento.trim()) {
@@ -71,6 +72,9 @@ const RegisterValidation = ({ datos }) => {
     )
   ) {
     errores.numeroTelefonico = "* ingrese un numero valido";
+  } else if (/[^0-9]/.test(datos.numeroTelefonico)) {
+    errores.numeroTelefonico =
+      "* No puede poseer ni letras ni caracteres especiales";
   }
   return errores;
 };

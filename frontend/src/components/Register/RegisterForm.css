@@ -105,6 +105,7 @@ img {
   background-color: white;
   max-height: 470px;
   position: relative;
+  padding: 2rem;
 }
 
 body.dark .formRegister {
