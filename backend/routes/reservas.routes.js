@@ -4,6 +4,7 @@ import {
   createReserva,
   getTodasLasReservas,
   updateReserva,
+  deleteReserva,
 } from "../src/controller/reservas.controller.js";
 import { validateReservation } from "../src/middlewares/reservaValidation.js";
 
@@ -17,4 +18,7 @@ router.post("/reservas", validateReservation, createReserva);
 router.get("/reservas", getTodasLasReservas);
 //------------------- Actualizar reservas -------------------//
 router.put("/reservas/:id", updateReserva);
+//------------------- Eliminar reserva -------------------//
+router.delete("/reservas/:id", deleteReserva);
+
 export default router;

@@ -241,14 +241,14 @@ const ReservationsAdmin = () => {
             <CiSearch className="search-icon-admin" />
             <input
               type="text"
-              placeholder="Buscar por cliente"
+              placeholder="Buscar..."
               className="search-input"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <button className="create-button" onClick={handleCreate}>
-            <FaPlus /> Crear Reserva
+            <FaPlus /> Agregar
           </button>
         </div>
         <AdminTable

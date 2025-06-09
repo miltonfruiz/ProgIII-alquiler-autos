@@ -109,3 +109,18 @@ export async function updateReserva(req, res) {
     res.status(500).json({ mensaje: "Error al actualizar reserva" });
   }
 }
+export async function deleteReserva(req, res) {
+  try {
+    const { id } = req.params;
+    const deleted = await Reserva.destroy({ where: { id_reserva: id } });
+
+    if (deleted === 0) {
+      return res.status(404).json({ mensaje: "Reserva no encontrada" });
+    }
+
+    res.status(200).json({ mensaje: "Reserva eliminada correctamente" });
+  } catch (error) {
+    console.error("Error al eliminar reserva:", error);
+    res.status(500).json({ mensaje: "Error al eliminar reserva" });
+  }
+}
