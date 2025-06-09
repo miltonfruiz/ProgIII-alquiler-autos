@@ -1,45 +1,29 @@
 .whyUsSection {
-  margin-left: 50px;
-  margin-right: 50px;
-  padding: 60px 5vw 0 5vw; /* más flexible que margin fijo */
-}
-
-.imagenConsensionaria {
-  width: 100%;
-  height: auto;
+  margin: 2rem 50px;
+  padding: 60px 5vw 0 5vw;
+  background-image: url("C:/Users/diego/OneDrive/Documentos/GitHub/ProgIII-alquiler-autos/frontend/public/images/image-car.png");
   object-fit: cover;
-  max-height: 550px;
-  display: block;
-}
-
-.whyUsConteiner {
   position: relative;
-  height: 100%; /* importante para que los hijos absolutos se limiten */
-  overflow: hidden; /* oculta contenido que se desborda */
+  border-radius: 1rem;
 }
 
 .whyUsText {
+  display: flex;
+  flex-direction: row;
   color: white;
+  width: 100%;
 }
 
 .trustText {
   font-weight: 500;
-  max-width: 45%;
-  font-size: clamp(1rem, 3.5vw, 4rem); /* antes era hasta 6rem */
-  position: absolute;
-  top: 8%;
-  left: 5%;
   color: #edefff;
+  margin: 1rem 2rem auto 0;
 }
 
 .whyUs {
-  position: absolute;
-  top: 13%;
-  right: 5%;
-  max-width: 33%;
-  font-size: clamp(0.9rem, 1.4vw, 1.2rem); /* más contenido entra */
-  line-height: 1.5;
   color: #ffffff;
+  width: 100%;
+  padding: 1rem 0 1em 0;
 }
 
 /* 📱 Responsive ajustes para móviles */

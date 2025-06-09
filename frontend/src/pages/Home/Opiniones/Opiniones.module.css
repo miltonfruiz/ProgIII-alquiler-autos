@@ -1,6 +1,5 @@
 .opinionesSection {
-  width: 1550px;
-  margin: 50px 150px 0 150px;
+  margin: 1rem 4rem;
 }
 
 .filledStar {
@@ -28,18 +27,14 @@
 
 .opinionesConteiner {
   display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 0.5fr);
   gap: 1.5rem;
-  row-gap: 6.25rem;
-  column-gap: 4.688rem;
   margin-bottom: 5.5rem;
 }
 
 .opinionesCard {
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
+  padding: 0.8rem;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background: #fff;

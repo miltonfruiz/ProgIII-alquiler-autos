@@ -11,6 +11,10 @@
   padding: 40px;
 }
 
+.textContent {
+  padding: 4rem;
+}
+
 .carImagen {
   width: 680px;
   height: 216px;
