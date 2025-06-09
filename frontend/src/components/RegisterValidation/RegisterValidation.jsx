@@ -47,6 +47,13 @@ const RegisterValidation = ({ datos }) => {
 
   if (!datos.nacimiento.trim()) {
     errores.nacimiento = "* Debe ingresar fecha de nacimiento";
+  } else {
+    const hoy = new Date();
+    const fechaNacimiento = new Date(datos.nacimiento);
+    const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    if (edad < 18) {
+      errores.nacimiento = "Para registrarse debe ser mayor de 18 años";
+    }
   }
 
   if (!datos.licencia.trim()) {
