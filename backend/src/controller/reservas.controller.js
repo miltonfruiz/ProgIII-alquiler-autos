@@ -12,7 +12,7 @@ export async function createReserva(req, res) {
     const fin = new Date(fecha_fin);
 
     const diffTime = Math.abs(fin - inicio);
-    const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
     const nuevaReserva = await Reserva.create({
       fecha_inicio,
@@ -47,6 +47,7 @@ export async function createReserva(req, res) {
 }
 export async function getReservasPorUsuario(req, res) {
   const { id } = req.params;
+  const hoy = new Date().toISOString().split("T")[0];
   try {
     const reservas = await Reserva.findAll({
       where: { userId: id },

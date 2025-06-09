@@ -38,6 +38,13 @@ export function userValidation(req, res, next) {
     errors.nacimiento = "La fecha de nacimiento es obligatoria.";
   } else if (isNaN(Date.parse(nacimiento))) {
     errors.nacimiento = "La fecha de nacimiento no es válida.";
+  } else {
+    const hoy = new Date();
+    const fechaNacimiento = new Date(nacimiento);
+    const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    if (edad < 18) {
+      errors.nacimiento = "Para registrarse debe ser mayor de 18 años";
+    }
   }
   if (!licencia) {
     errors.licencia = "La licencia de conducir es obligatoria.";

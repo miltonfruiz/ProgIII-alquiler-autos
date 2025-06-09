@@ -64,8 +64,19 @@ const CarPaymentPage = () => {
 
       setErrores(errores);
     } else {
+      const carId = JSON.parse(localStorage.getItem("datosAlquiler"))?.auto.id;
+      const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
+      const id_reserva = parseInt(localStorage.getItem("contadorReservas"));
+
+      console.log(typeof carId);
+      console.log(typeof userId);
+      console.log(typeof id_reserva);
+
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
+          carId: carId,
+          userId: userId,
+          id_reserva: id_reserva,
           cardType: tipoTarjeta,
           paymentMethod: choicePayment,
           cardNumber: datosPago.numeroTarjeta,
@@ -78,6 +89,9 @@ const CarPaymentPage = () => {
       } else if (choicePayment == "transferencia") {
         const file = String(datosPago.name);
         datosPagoCompleto = {
+          carId: carId,
+          userId: userId,
+          id_reserva: id_reserva,
           cardType: null,
           paymentMethod: choicePayment,
           cardNumber: null,

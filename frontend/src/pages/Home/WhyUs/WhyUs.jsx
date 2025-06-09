@@ -12,13 +12,11 @@ function WhyUs() {
           alt="Concesionaria"
         />
         <div className={styles.whyUsText}>
-          <span className={styles.trustText}>
-            ¿Porque confiar en (nom marca)?
-          </span>
+          <span className={styles.trustText}>¿Porque confiar en RentCar?</span>
           <span className={styles.whyUs}>
-            En (nombre de la marca) nos comprometemos a ofrecerte vehículos en
-            excelente estado, con mantenimiento constante y garantía de calidad.
-            Nuestro equipo te brinda una atención personalizada desde el primer
+            En RentCar nos comprometemos a ofrecerte vehículos en excelente
+            estado, con mantenimiento constante y garantía de calidad. Nuestro
+            equipo te brinda una atención personalizada desde el primer
             contacto, ayudándote a encontrar el auto ideal para cada ocasión.
             Queremos que disfrutes de una experiencia de alquiler rápida, simple
             y segura. Más que autos, te damos tranquilidad, respaldo y la

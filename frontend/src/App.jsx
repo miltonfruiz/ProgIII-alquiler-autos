@@ -53,9 +53,9 @@ function App() {
         <Route
           path="/user-profile"
           element={
-            // <ProtectedRouteUser isSigned={loggedIn}>
-            <UserProfile />
-            // </ProtectedRouteUser>
+            <ProtectedRouteUser isSigned={loggedIn}>
+              <UserProfile />
+            </ProtectedRouteUser>
           }
         />
         <Route path="/shop" element={<Shop loggedIn={loggedIn} />} />
