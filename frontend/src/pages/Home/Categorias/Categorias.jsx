@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { useRef } from "react";
 import styles from "./Categorias.module.css";
 import economicCar from "../../../../public/images/cars/toyota_etios.png";
 import estandarCar from "../../../../public/images/cars/fiat-cronos.png";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function Categorias({ loggedIn }) {
   const navigate = useNavigate();
+  const containerRef = useRef(null);
 
   const handleCategoriasClick = (categoria) => {
     if (!loggedIn) {
@@ -17,12 +18,35 @@ function Categorias({ loggedIn }) {
     navigate("/shop", { state: { categoriaSeleccionada: categoria } });
   };
 
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
   return (
     <section className={styles.categoriesSection}>
-      <div className={styles.titleConteiner}>
-        <h2>Categorias</h2>
+      <div className={styles.headerContainer}>
+        <div className={styles.titleConteiner}>
+          <h2>Categorias</h2>
+        </div>
+        <div className={styles.navigationButtons}>
+          <button onClick={scrollLeft} className={styles.navButton}>
+            &lt;
+          </button>
+          <button onClick={scrollRight} className={styles.navButton}>
+            &gt;
+          </button>
+        </div>
       </div>
-      <div className={styles.categoriesConteiner}>
+
+      <div className={styles.categoriesConteiner} ref={containerRef}>
         <div className={styles.cardConteiner}>
           <p className={styles.cardTitle}>Económico</p>
           <img className={styles.cardImage} src={economicCar} alt="" />
