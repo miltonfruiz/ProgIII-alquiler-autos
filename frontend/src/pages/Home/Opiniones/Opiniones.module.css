@@ -1,104 +1,174 @@
 .opinionesSection {
-  margin: 1rem 4rem;
+  padding: 5rem 1rem;
+  background-color: #fafafa;
 }
 
-.filledStar {
-  color: #3e26ad; /* Amarillo dorado */
+.sectionHeader {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
 }
 
-.emptyStar {
-  color: #e0e0e0; /* Gris claro */
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #000;
 }
 
-.opinionesTitle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: 3.75rem;
-}
-
-.ratingText {
-  margin-left: 8px;
-  font-size: 0.9rem;
+.sectionSubtitle {
+  font-size: 1.125rem;
   color: #666;
+  line-height: 1.6;
 }
 
-.opinionesConteiner {
+.opinionesContainer {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.opinionesGrid {
   display: grid;
-  grid-template-columns: repeat(2, 0.5fr);
-  gap: 1.5rem;
-  margin-bottom: 5.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  border: #e7e7e7 1px solid;
 }
 
 .opinionesCard {
+  background: white;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: #e7e7e7 1px solid;
   display: flex;
-  padding: 0.8rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background: #fff;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-.cardContent {
-  margin-left: 1.25rem;
-  width: 400px;
+.opinionesCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profileImage {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileInfo {
   display: flex;
   flex-direction: column;
 }
 
-.cardRating {
-  margin-top: auto;
+.name {
+  font-weight: 600;
+  color: #000;
 }
 
-/* Sistema de estrellas */
+.date {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.vehicleInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: #666;
+  background: #f5f5f5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
+.vehicleIcon {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.opinionText {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.opinionText::before {
+  content: "";
+  left: 0;
+  top: -0.5rem;
+  font-size: 2rem;
+  color: #e0e0e0;
+  font-family: Georgia, serif;
+}
+
+.ratingContainer {
+  padding-left: 1rem;
+
+  display: flex;
+  align-items: center;
+}
+
 .starRating {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-top: 8px;
+  gap: 0.25rem;
 }
 
-.profilePicConteiner {
-  flex-shrink: 0;
+.filledStar {
+  color: #ffc107;
+  font-size: 0.875rem;
 }
 
-.imageCard {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-}
-
-.cardHead {
-  display: flex;
-  justify-content: space-between;
-}
-
-.nameCard {
-  color: #1a202c;
-  font-weight: 500;
-  font-size: 1.25rem;
-}
-
-.dateCard {
-  color: #596780;
-}
-
-.cardIcon {
-  margin-right: 8px;
-}
-
-.cardVehicule {
-  color: #596780;
-}
-
-.cardOpinion {
-  color: #596780;
-  margin: 0.5rem 0;
-  font-weight: 300;
+.emptyStar {
+  color: #e0e0e0;
+  font-size: 0.875rem;
 }
 
 .ratingText {
-  margin-left: 0px;
-  margin-right: 130px;
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .opinionesSection {
+    padding: 3rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .opinionesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .vehicleInfo {
+    align-self: flex-start;
+  }
 }

@@ -18,9 +18,6 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 function StarRating({ rating = 4, maxStars = 5 }) {
   return (
     <div className={styles.starRating}>
-      <span className={styles.ratingText}>
-        {rating} de {maxStars} estrellas
-      </span>
       {[...Array(maxStars)].map((_, i) => (
         <FontAwesomeIcon
           key={i}
@@ -28,6 +25,9 @@ function StarRating({ rating = 4, maxStars = 5 }) {
           className={i < rating ? styles.filledStar : styles.emptyStar}
         />
       ))}
+      <span className={styles.ratingText}>
+        {rating} de {maxStars} estrellas
+      </span>
     </div>
   );
 }
@@ -35,138 +35,186 @@ function StarRating({ rating = 4, maxStars = 5 }) {
 function Opiniones() {
   return (
     <section className={styles.opinionesSection}>
-      <div className={styles.opinionesTitle}>
-        <p>Opiniones de clientes de RentCars</p>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>Lo que dicen nuestros clientes</h2>
+        <p className={styles.sectionSubtitle}>
+          Descubre por qué miles de personas confían en RentCars para sus
+          alquileres de vehículos
+        </p>
       </div>
-      <div className={styles.opinionesConteiner}>
-        <div className={styles.opinionesCard}>
-          <div className={styles.profilePicConteiner}>
-            <img className={styles.imageCard} src={profilePic} alt="" />
-          </div>
 
-          <div className={styles.cardContent}>
-            <div className={styles.cardHead}>
-              <span className={styles.nameCard}>Maria San Juan</span>
-              <span className={styles.dateCard}>25/03/2025</span>
+      <div className={styles.opinionesContainer}>
+        <div className={styles.opinionesGrid}>
+          <div className={styles.opinionesCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.profileContainer}>
+                <img
+                  className={styles.profileImage}
+                  src={profilePic}
+                  alt="Maria San Juan"
+                />
+                <div className={styles.profileInfo}>
+                  <span className={styles.name}>Maria San Juan</span>
+                  <span className={styles.date}>25/03/2025</span>
+                </div>
+              </div>
+              <div className={styles.vehicleInfo}>
+                <FontAwesomeIcon
+                  className={styles.vehicleIcon}
+                  icon={faCarRear}
+                />
+                <span>Toyota Etios</span>
+              </div>
             </div>
-            <p className={styles.cardVehicule}>
-              <FontAwesomeIcon className={styles.cardIcon} icon={faCarRear} />
-              Vehículo: Toyota Etios
+            <p className={styles.opinionText}>
+              "Muy amable y puntual. El auto estaba en excelentes condiciones."
             </p>
-            <p className={styles.cardOpinion}>
-              “Muy amable y puntual. El auto estaba en excelentes condiciones.”
-            </p>
-            <div className={styles.cardRating}>
+            <div className={styles.ratingContainer}>
               <StarRating rating={4} />
             </div>
           </div>
-        </div>
-        <div className={styles.opinionesCard}>
-          <div className={styles.profilePicConteiner}>
-            <img className={styles.imageCard} src={profilePic4} alt="" />
-          </div>
 
-          <div className={styles.cardContent}>
-            <div className={styles.cardHead}>
-              <span className={styles.nameCard}>Lucas Fernández</span>
-              <span className={styles.dateCard}>12/02/2025</span>
+          <div className={styles.opinionesCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.profileContainer}>
+                <img
+                  className={styles.profileImage}
+                  src={profilePic4}
+                  alt="Lucas Fernández"
+                />
+                <div className={styles.profileInfo}>
+                  <span className={styles.name}>Lucas Fernández</span>
+                  <span className={styles.date}>12/02/2025</span>
+                </div>
+              </div>
+              <div className={styles.vehicleInfo}>
+                <FontAwesomeIcon
+                  className={styles.vehicleIcon}
+                  icon={faCarRear}
+                />
+                <span>Peugot 208</span>
+              </div>
             </div>
-            <p className={styles.cardVehicule}>
-              <FontAwesomeIcon className={styles.cardIcon} icon={faCarRear} />
-              Vehículo: Peugot 208
+            <p className={styles.opinionText}>
+              "La experiencia fue súper cómoda, repetiría sin dudas."
             </p>
-            <p className={styles.cardOpinion}>
-              “La experiencia fue súper cómoda, repetiría sin dudas.”
-            </p>
-            <div className={styles.cardRating}>
+            <div className={styles.ratingContainer}>
               <StarRating rating={4} />
             </div>
           </div>
-        </div>
-        <div className={styles.opinionesCard}>
-          <div className={styles.profilePicConteiner}>
-            <img className={styles.imageCard} src={profilePic2} alt="" />
-          </div>
 
-          <div className={styles.cardContent}>
-            <div className={styles.cardHead}>
-              <span className={styles.nameCard}>Camila Ríos</span>
-              <span className={styles.dateCard}>22/01/2025</span>
+          <div className={styles.opinionesCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.profileContainer}>
+                <img
+                  className={styles.profileImage}
+                  src={profilePic2}
+                  alt="Camila Ríos"
+                />
+                <div className={styles.profileInfo}>
+                  <span className={styles.name}>Camila Ríos</span>
+                  <span className={styles.date}>22/01/2025</span>
+                </div>
+              </div>
+              <div className={styles.vehicleInfo}>
+                <FontAwesomeIcon
+                  className={styles.vehicleIcon}
+                  icon={faCarRear}
+                />
+                <span>Fiat Cronos</span>
+              </div>
             </div>
-            <p className={styles.cardVehicule}>
-              <FontAwesomeIcon className={styles.cardIcon} icon={faCarRear} />
-              Vehículo: Fiat Cronos
+            <p className={styles.opinionText}>
+              "Todo impecable. Muy buena atención y responsabilidad."
             </p>
-            <p className={styles.cardOpinion}>
-              “Todo impecable. Muy buena atención y responsabilidad.”
-            </p>
-            <div className={styles.cardRating}>
+            <div className={styles.ratingContainer}>
               <StarRating rating={5} />
             </div>
           </div>
-        </div>
-        <div className={styles.opinionesCard}>
-          <div className={styles.profilePicConteiner}>
-            <img className={styles.imageCard} src={profilePic5} alt="" />
-          </div>
 
-          <div className={styles.cardContent}>
-            <div className={styles.cardHead}>
-              <span className={styles.nameCard}>Tomás Aguirre</span>
-              <span className={styles.dateCard}>11/04/2025</span>
+          <div className={styles.opinionesCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.profileContainer}>
+                <img
+                  className={styles.profileImage}
+                  src={profilePic5}
+                  alt="Tomás Aguirre"
+                />
+                <div className={styles.profileInfo}>
+                  <span className={styles.name}>Tomás Aguirre</span>
+                  <span className={styles.date}>11/04/2025</span>
+                </div>
+              </div>
+              <div className={styles.vehicleInfo}>
+                <FontAwesomeIcon
+                  className={styles.vehicleIcon}
+                  icon={faCarRear}
+                />
+                <span>Volkswagen Gol</span>
+              </div>
             </div>
-            <p className={styles.cardVehicule}>
-              <FontAwesomeIcon className={styles.cardIcon} icon={faCarRear} />
-              Vehículo: Volkswagen Gol
+            <p className={styles.opinionText}>
+              "Rápido, sencillo y sin problemas. Recomiendo."
             </p>
-            <p className={styles.cardOpinion}>
-              “Rápido, sencillo y sin problemas. Recomiendo.”
-            </p>
-            <div className={styles.cardRating}>
+            <div className={styles.ratingContainer}>
               <StarRating rating={4} />
             </div>
           </div>
-        </div>
-        <div className={styles.opinionesCard}>
-          <div className={styles.profilePicConteiner}>
-            <img className={styles.imageCard} src={profilePic3} alt="" />
-          </div>
 
-          <div className={styles.cardContent}>
-            <div className={styles.cardHead}>
-              <span className={styles.nameCard}>Florencia Medina</span>
-              <span className={styles.dateCard}>20/01/2025</span>
+          <div className={styles.opinionesCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.profileContainer}>
+                <img
+                  className={styles.profileImage}
+                  src={profilePic3}
+                  alt="Florencia Medina"
+                />
+                <div className={styles.profileInfo}>
+                  <span className={styles.name}>Florencia Medina</span>
+                  <span className={styles.date}>20/01/2025</span>
+                </div>
+              </div>
+              <div className={styles.vehicleInfo}>
+                <FontAwesomeIcon
+                  className={styles.vehicleIcon}
+                  icon={faCarRear}
+                />
+                <span>Ford Ka</span>
+              </div>
             </div>
-            <p className={styles.cardVehicule}>
-              <FontAwesomeIcon className={styles.cardIcon} icon={faCarRear} />
-              Vehículo: Ford Ka
+            <p className={styles.opinionText}>
+              "Excelente trato y muy buen estado del auto."
             </p>
-            <p className={styles.cardOpinion}>
-              “Excelente trato y muy buen estado del auto.”
-            </p>
-            <div className={styles.cardRating}>
+            <div className={styles.ratingContainer}>
               <StarRating rating={4} />
             </div>
           </div>
-        </div>
-        <div className={styles.opinionesCard}>
-          <div className={styles.profilePicConteiner}>
-            <img className={styles.imageCard} src={profilePic6} alt="" />
-          </div>
 
-          <div className={styles.cardContent}>
-            <div className={styles.cardHead}>
-              <span className={styles.nameCard}>Julián Navarro</span>
-              <span className={styles.dateCard}>07/02/2025</span>
+          <div className={styles.opinionesCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.profileContainer}>
+                <img
+                  className={styles.profileImage}
+                  src={profilePic6}
+                  alt="Julián Navarro"
+                />
+                <div className={styles.profileInfo}>
+                  <span className={styles.name}>Julián Navarro</span>
+                  <span className={styles.date}>07/02/2025</span>
+                </div>
+              </div>
+              <div className={styles.vehicleInfo}>
+                <FontAwesomeIcon
+                  className={styles.vehicleIcon}
+                  icon={faCarRear}
+                />
+                <span>Volkswagen T-Cross</span>
+              </div>
             </div>
-            <p className={styles.cardVehicule}>
-              <FontAwesomeIcon className={styles.cardIcon} icon={faCarRear} />
-              Vehículo: Volkswagen T-Cross
+            <p className={styles.opinionText}>
+              "Todo salió como lo acordamos. Muy confiable."
             </p>
-            <p className={styles.cardOpinion}>
-              “Todo salió como lo acordamos. Muy confiable.”
-            </p>
-            <div className={styles.cardRating}>
+            <div className={styles.ratingContainer}>
               <StarRating rating={4} />
             </div>
           </div>

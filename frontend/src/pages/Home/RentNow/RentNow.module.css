@@ -1,98 +1,174 @@
-/* .rentNowSection {
-  margin: 50px 0 0 150px;
-}
-
-.rentNowImage {
-  width: 1620px;
-}
-
-.imageConteiner {
-  position: relative;
-}
-
-.rentNowTitle {
-  color: #edefff;
-  font-size: 2.5rem;
-  font-weight: 500;
-}
-
-.rentNowText {
-  color: #edefff;
-  font-weight: 400;
-  font-size: 1.5rem;
-}
-
-.rentNowButton {
-  color: #fff;
-  cursor: pointer;
-  padding: 25px 200px;
-  background-color: #7a77ff;
-  border-radius: 10px;
-} */
-
 .rentNowSection {
-  margin: 50px;
   position: relative;
-}
-
-.rentNowImage {
-  width: 100%;
-  display: block;
+  margin-bottom: 5rem;
 }
 
 .imageContainer {
   position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.rentNowImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  min-height: 300px;
+  object-fit: cover;
 }
 
 .overlayContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
 }
 
 .textContent {
-  margin-bottom: 30px;
-}
-
-.rentNowContent {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
+  max-width: 700px;
 }
 
 .rentNowTitle {
-  color: #edefff;
+  color: #ffffff;
   font-size: 2.5rem;
   font-weight: 800;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .rentNowText {
   color: #edefff;
   font-weight: 400;
   font-size: 1.5rem;
+  line-height: 1.5;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.buttonContainer {
+  margin-top: 1rem;
 }
 
 .rentNowButton {
   color: #fff;
   cursor: pointer;
-  padding: 1.5rem 5rem;
-  background-color: #9ea4ff;
+  padding: 1.2rem 3.5rem;
+  background-color: #4f46e5;
   border-radius: 10px;
   border: none;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
 }
 
 .rentNowButton:hover {
-  background-color: #7371fc;
+  background-color: #5243f3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+.rentNowButton:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .rentNowTitle {
+    font-size: 2.2rem;
+  }
+
+  .rentNowText {
+    font-size: 1.3rem;
+  }
+
+  .rentNowButton {
+    padding: 1.1rem 3rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .rentNowSection {
+    margin-bottom: 3rem;
+  }
+
+  .overlayContent {
+    padding: 1.5rem;
+  }
+
+  .rentNowTitle {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .rentNowText {
+    font-size: 1.1rem;
+  }
+
+  .textContent {
+    margin-bottom: 1.5rem;
+  }
+
+  .rentNowButton {
+    padding: 1rem 2.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rentNowSection {
+    margin-bottom: 2rem;
+  }
+
+  .imageContainer {
+    border-radius: 8px;
+  }
+
+  .overlayContent {
+    padding: 1rem;
+  }
+
+  .rentNowTitle {
+    font-size: 1.5rem;
+  }
+
+  .rentNowText {
+    font-size: 0.95rem;
+  }
+
+  .textContent {
+    margin-bottom: 1.2rem;
+  }
+
+  .rentNowButton {
+    padding: 0.9rem 2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .rentNowTitle {
+    font-size: 1.3rem;
+  }
+
+  .rentNowText {
+    font-size: 0.85rem;
+  }
+
+  .rentNowButton {
+    padding: 0.8rem 1.8rem;
+  }
 }

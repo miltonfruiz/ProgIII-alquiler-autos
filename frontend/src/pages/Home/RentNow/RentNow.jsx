@@ -16,22 +16,28 @@ function RentNow({ loggedIn }) {
 
   return (
     <section className={styles.rentNowSection}>
-      <div className={styles.imageConteiner}>
-        <img className={styles.rentNowImage} src={rentCars} alt="" />
-      </div>
-      <div className={styles.overlayContent}>
-        <div className={styles.rentNowContent}>
-          <span className={styles.rentNowTitle}>Reserva tu auto ahora</span>
-          <span className={styles.rentNowText}>
-            ¿Listo para manejar? Iniciá sesión o creá tu cuenta para completar
-            la reserva
-          </span>
-        </div>
-        <div className={styles.rentNowButtonConteiner}>
-          <button className={styles.rentNowButton} onClick={handleRentNowClick}>
-            Empezar ahora
-          </button>
-          {/* aqui hay que validar que este logeado*/}
+      <div className={styles.imageContainer}>
+        <img
+          className={styles.rentNowImage}
+          src={rentCars}
+          alt="Vehículos disponibles para alquilar"
+        />
+        <div className={styles.overlayContent}>
+          <div className={styles.textContent}>
+            <h2 className={styles.rentNowTitle}>Reserva tu auto ahora</h2>
+            <p className={styles.rentNowText}>
+              ¿Listo para manejar? Iniciá sesión o creá tu cuenta para completar
+              la reserva
+            </p>
+          </div>
+          <div className={styles.buttonContainer}>
+            <button
+              className={styles.rentNowButton}
+              onClick={handleRentNowClick}
+            >
+              Empezar ahora
+            </button>
+          </div>
         </div>
       </div>
     </section>

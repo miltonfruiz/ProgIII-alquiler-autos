@@ -27,11 +27,6 @@
   height: 100%;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
-}
-
-.carImage:hover {
-  transform: translateY(-5px);
 }
 
 .contentContainer {
