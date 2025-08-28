@@ -25,9 +25,7 @@ const LandingPage = () => {
       <section className="containerLanding">
         <div className="containerHeader">
           <div className="containerH1">
-            <h1 className="titleLanding">
-              <FaCarSide /> Bienvenidos a RentCars!
-            </h1>
+            <h1 className="titleLanding">¡Bienvenidos a RentCars!</h1>
           </div>
           <p className="textWelcome">
             Contamos con una flota moderna, precios accesibles y un servicio al

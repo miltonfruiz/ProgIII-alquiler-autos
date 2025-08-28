@@ -1,6 +1,6 @@
 .catalogoSection {
   flex: 1;
-  padding: 1rem;
+  padding: 2rem;
   overflow-y: auto;
   margin-left: 3rem;
   margin-right: 7rem;
@@ -13,7 +13,7 @@
 }
 
 .found {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 
@@ -39,7 +39,7 @@
 .recomendadosConteiner {
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
-  gap: 100px;
+  gap: 30px;
 }
 
 .cardConteiner {

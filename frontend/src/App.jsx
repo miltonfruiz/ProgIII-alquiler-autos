@@ -16,7 +16,7 @@ import Shop from "./pages/Shop/Shop";
 import Modal from "./components/Modal/Modal";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
-import Landing from "./pages/Landing";
+import Landing from "./pages/Landing/Landing";
 import Administration from "./pages/Administration";
 import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRouteAdmin";
 import ResetPassword from "./pages/Log/PasswordReset/PasswordReset";

@@ -6,20 +6,18 @@
 
 .containerH1 {
   display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .titleLanding {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0.7rem;
-  font-weight: 500;
-  font-size: 2.5rem;
+  font-weight: 700;
   margin: 1rem;
   color: azure;
-  text-align: justify;
-  letter-spacing: 4px;
-  margin-top: 170px;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 .containerSocial {

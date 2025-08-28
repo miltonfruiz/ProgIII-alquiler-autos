@@ -82,15 +82,18 @@ const Register = ({ setRegisterIn }) => {
   };
 
   return (
-    <div>
-      <RegisterForm
-        onSubmit={handleSubmit}
-        errores={errores}
-        refs={{
-          useRefs,
-        }}
-      />
-    </div>
+    <>
+      <UserNavbar />
+      <div>
+        <RegisterForm
+          onSubmit={handleSubmit}
+          errores={errores}
+          refs={{
+            useRefs,
+          }}
+        />
+      </div>
+    </>
   );
 };
 
