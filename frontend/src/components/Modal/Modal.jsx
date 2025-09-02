@@ -17,19 +17,26 @@ function Modal({ auto, onClose }) {
   if (!auto) return null;
 
   const navigate = useNavigate();
+  const hoy = new Date().toISOString().split("T")[0];
 
   const [formData, setFormData] = useState({
-    fecha_inicio: undefined,
-    fecha_fin: undefined,
+    fecha_inicio: hoy,
+    fecha_fin: hoy,
+    hora_inicio: "10:00", // Valor por defecto
+    hora_fin: "10:00", // Valor por defecto
   });
 
   const [errores, setErrores] = useState({
     fecha_inicio: "",
     fecha_fin: "",
+    hora_inicio: "",
+    hora_fin: "",
   });
 
   const fecha_inicioRef = useRef(null);
   const fecha_finRef = useRef(null);
+  const horario_inicioRef = useRef(null);
+  const horario_finRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,6 +76,8 @@ function Modal({ auto, onClose }) {
       const { success } = await crearReserva({
         fecha_inicio: formData.fecha_inicio,
         fecha_fin: formData.fecha_fin,
+        hora_inicio: formData.hora_inicio,
+        hora_fin: formData.hora_fin,
         carId: auto.id,
         userId,
       });
@@ -94,6 +103,8 @@ function Modal({ auto, onClose }) {
           auto: auto,
           fecha_inicio: formData.fecha_inicio,
           fecha_fin: formData.fecha_fin,
+          hora_inicio: formData.hora_inicio,
+          hora_fin: formData.hora_fin,
           total: total,
           tax: impuestos,
           totalFinal: precioFinal,
@@ -225,7 +236,15 @@ function Modal({ auto, onClose }) {
                     value={formData.fecha_inicio || ""}
                     ref={fecha_inicioRef}
                   />
-
+                  <input
+                    type="time"
+                    name="hora_inicio"
+                    id="hora_inicio"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.hora_inicio || ""}
+                    ref={horario_inicioRef}
+                  />
                   {/* ERROR */}
                   <div className={styles.errorContainer}>
                     <p
@@ -246,6 +265,16 @@ function Modal({ auto, onClose }) {
                     value={formData.fecha_fin || ""}
                     ref={fecha_finRef}
                   />
+                  <input
+                    type="time"
+                    name="hora_fin"
+                    id="hora_fin"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.hora_fin || ""}
+                    ref={horario_finRef}
+                  />
+
                   <p
                     className={`${styles.errorMessage} ${
                       errores.fecha_fin ? styles.visible : ""

@@ -217,19 +217,25 @@
 .inputDate {
   width: 100%;
   height: 2.8rem;
-  background-color: #f8f8f8;
+  background-color: #ffffff;
   border-radius: 0.3rem;
   padding: 0 1em;
-  border: 1px solid #ddd;
+  border: 1px solid #dbdbdb;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.3s;
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  transition: all 0.2s;
+  margin-bottom: 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
+
 .inputDate:focus {
   outline: none;
   border: 1px solid #6366f1;
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.inputDate:hover {
+  background-color: #0000000a;
 }
 
 /* STYLE ERRORS */
