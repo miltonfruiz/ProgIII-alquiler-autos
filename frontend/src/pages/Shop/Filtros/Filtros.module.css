@@ -1,33 +1,64 @@
 .filtrosConteiner {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: fit-content;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #0000003a;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  width: 500px;
+  height: 100vh;
+  padding: 2rem;
+  border-left: 1px solid #00000020;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
-.filtrosSection {
-  margin-left: 2.438rem;
+.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.headerFiltros {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.closeBtn {
+  border: none;
+  background: none;
+  color: #7a77ff;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(122, 119, 255, 0.1);
+  transform: rotate(90deg);
 }
 
 .titleSection {
-  text-align: center;
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 600;
+  margin: 0;
 }
 
 .checkBoxSection {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
 }
-
+/* checkbox mejorado */
 .checkBoxSection input[type="checkbox"] {
   appearance: none;
   margin-right: 0.8rem;
@@ -38,7 +69,7 @@
   background-color: white;
   cursor: pointer;
   position: relative;
-  transition: 0.2s;
+  transition: all 0.2s ease;
 }
 
 .checkBoxSection input[type="checkbox"]:checked {
@@ -58,16 +89,17 @@
 .categoriasFilter,
 .marcaFilter label {
   color: #596780;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
 .typeTitle {
   font-size: 0.9rem;
-  color: #dde2ff;
-  font-weight: 400;
+  color: #7a77ff;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 .marcaFilter h4 {
-  margin-top: 50px;
+  margin-top: 2rem;
 }

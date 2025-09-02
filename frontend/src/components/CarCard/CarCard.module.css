@@ -9,7 +9,7 @@
   min-height: 380px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   margin: 0 auto;
 }
 
@@ -101,7 +101,7 @@
   text-align: center;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: #4f46e5;
   font-weight: 600;
   font-size: 1rem;

@@ -13,6 +13,7 @@ function Shop({ loggedIn }) {
   const [autosDB, setAutosDB] = useState([]);
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
+  const [filtrosVisible, setFiltrosVisible] = useState(false);
 
   const location = useLocation(); // Esto sirve para recibir el state que esta en CATEGORIAS.JSX
   useEffect(() => {
@@ -72,18 +73,24 @@ function Shop({ loggedIn }) {
     <>
       <UserNavbar />
       <main className={styles.mainContainer}>
-        <Filtros
-          categorias={categoriasConCantidad} //LE PASO AL FILTROS.JSX LAS CANT. DE CATEGORIAS
-          marcas={marcasConCantidad} //LE PASO AL FILTROS.JSX LAS CANT. DE MARCAS
-          categoriasSeleccionadas={categoriasSeleccionadas}
-          setCategoriasSeleccionadas={setCategoriasSeleccionadas}
-          marcasSeleccionadas={marcasSeleccionadas}
-          setMarcasSeleccionadas={setMarcasSeleccionadas}
-        />
+        {filtrosVisible && (
+          <Filtros
+            categorias={categoriasConCantidad} //LE PASO AL FILTROS.JSX LAS CANT. DE CATEGORIAS
+            marcas={marcasConCantidad} //LE PASO AL FILTROS.JSX LAS CANT. DE MARCAS
+            categoriasSeleccionadas={categoriasSeleccionadas}
+            setCategoriasSeleccionadas={setCategoriasSeleccionadas}
+            marcasSeleccionadas={marcasSeleccionadas}
+            setMarcasSeleccionadas={setMarcasSeleccionadas}
+            setFiltrosVisible={setFiltrosVisible}
+            filtrosVisible={filtrosVisible}
+          />
+        )}
+
         <Catalogo
           autos={autosFiltrados}
           limpiarFiltros={limpiarFiltros}
           loggedIn={loggedIn}
+          setFiltrosVisible={setFiltrosVisible}
         />
       </main>
       <Footer />

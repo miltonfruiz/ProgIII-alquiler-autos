@@ -1,5 +1,7 @@
-import React, { useState } from "react";
 import styles from "./Filtros.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useRef } from "react";
 
 function Filtros({
   categorias,
@@ -8,7 +10,45 @@ function Filtros({
   setCategoriasSeleccionadas,
   marcasSeleccionadas,
   setMarcasSeleccionadas,
+  setFiltrosVisible,
+  filtrosVisible,
 }) {
+  const filtrosRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filtrosRef.current && !filtrosRef.current.contains(event.target)) {
+        setFiltrosVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setFiltrosVisible]);
+
+  useEffect(() => {
+    if (filtrosVisible) {
+      // Guardar el estado actual del scroll y bloquear el body
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+    } else {
+      // Restaurar el scroll normal
+      document.body.style.overflow = "unset";
+      document.body.style.position = "static";
+      document.body.style.width = "auto";
+    }
+
+    // Cleanup: restaurar el scroll cuando el componente se desmonte
+    return () => {
+      document.body.style.overflow = "unset";
+      document.body.style.position = "static";
+      document.body.style.width = "auto";
+    };
+  }, [filtrosVisible]);
+
   const handleCategoriaChange = (nombre) => {
     setCategoriasSeleccionadas((prev) =>
       prev.includes(nombre)
@@ -26,8 +66,19 @@ function Filtros({
   };
 
   return (
-    <aside className={styles.filtrosConteiner}>
-      <h3 className={styles.titleSection}>Filtros</h3>
+    <aside
+      ref={filtrosRef}
+      className={`${styles.filtrosConteiner} ${styles.show}`}
+    >
+      <div className={styles.headerFiltros}>
+        <h3 className={styles.titleSection}>Filtros</h3>
+        <button
+          className={styles.closeBtn}
+          onClick={() => setFiltrosVisible(false)}
+        >
+          <FontAwesomeIcon icon={faXmark} size="lg" />
+        </button>
+      </div>
 
       <div className={styles.filtrosSection}>
         {/* Categorías */}
@@ -39,7 +90,7 @@ function Filtros({
                 <input
                   type="checkbox"
                   value={categoria.nombre}
-                  checked={categoriasSeleccionadas.includes(categoria.nombre)} // GUARDA EL CHECK EN EL ARRAY DE CATEGORIAS
+                  checked={categoriasSeleccionadas.includes(categoria.nombre)}
                   onChange={() => handleCategoriaChange(categoria.nombre)}
                 />
                 {categoria.nombre} ({categoria.cantidad})
@@ -57,7 +108,7 @@ function Filtros({
                 <input
                   type="checkbox"
                   value={marca.nombre}
-                  checked={marcasSeleccionadas.includes(marca.nombre)} // GUARDA EL CHECK EN EL ARRAY DE MARCAS
+                  checked={marcasSeleccionadas.includes(marca.nombre)}
                   onChange={() => handleMarcaChange(marca.nombre)}
                 />
                 {marca.nombre} ({marca.cantidad})

@@ -4,6 +4,14 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ModalValidation from "../ModalValidation/ModalValidation";
 import { crearReserva } from "../../api/reservas";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLocationDot,
+  faCircleInfo,
+  faChevronDown,
+  faCheck,
+  faInfo,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
@@ -151,77 +159,202 @@ function Modal({ auto, onClose }) {
       >
         <div className={styles.overlayContent}>
           <h4 className={styles.overlayTitle}>Reserva</h4>
-          <div className={styles.carReserva}>
-            <span className={styles.reservaInfo}>
-              Auto a reservar:
-              <p className={styles.carSelected}>
-                {auto.name} | Ars ${auto.price.toLocaleString()} / Dia
-              </p>
-            </span>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.inputConteiner}>
-              <label className={styles.labelInput}>Desde</label>
-              <input
-                type="date"
-                name="fecha_inicio"
-                id="fecha_inicio"
-                className={styles.inputDate}
-                onChange={handleChange}
-                value={formData.fecha_inicio || ""}
-                ref={fecha_inicioRef}
-              />
-
-              {/* ERROR */}
-              <div className={styles.errorContainer}>
-                <p
-                  className={`${styles.errorMessage} ${
-                    errores.fecha_inicio ? styles.visible : ""
-                  }`}
-                >
-                  {errores.fecha_inicio}
-                </p>
+          <div className={styles.modalBody}>
+            <div className={styles.leftPanel}>
+              <div className={styles.carReserva}>
+                <span className={styles.reservaInfo}>
+                  Auto a reservar
+                  <p className={styles.carSelected}>
+                    {auto.brand} {auto.name} | Ars $
+                    {auto.price.toLocaleString()} / Dia
+                  </p>
+                </span>
+                <div className={styles.carImage}>
+                  {/* Aquí puedes agregar una imagen del auto si está disponible */}
+                  <div className={styles.imagePlaceholder}>
+                    <img src={auto.img} alt="Imagen del auto" />
+                  </div>
+                  <div className={styles.carDetails}>
+                    <h4>Esta reserva incluye</h4>
+                    <ul className={styles.inclusionList}>
+                      <li>
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.checkIcon}
+                        />
+                        Proteccion del Vehículo
+                      </li>
+                      <li>
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.checkIcon}
+                        />
+                        Proteccion Contra Terceros
+                      </li>
+                      <li>
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.checkIcon}
+                        />
+                        Proteccion Contra Robos
+                      </li>
+                    </ul>
+                    <div className={styles.infoAdicional}>
+                      <FontAwesomeIcon
+                        icon={faInfo}
+                        className={styles.moreInfoIcon}
+                      />
+                      <button className={styles.infoAdicionalBtn}>
+                        Informacion Adicional
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <label className={styles.labelInput}>Hasta</label>
-              <input
-                type="date"
-                name="fecha_fin"
-                id="fecha_fin"
-                className={styles.inputDate}
-                onChange={handleChange}
-                value={formData.fecha_fin || ""}
-                ref={fecha_finRef}
-              />
-              <p
-                className={`${styles.errorMessage} ${
-                  errores.fecha_fin ? styles.visible : ""
-                }`}
-              >
-                {errores.fecha_fin}
-              </p>
-            </div>
-            <hr
-              style={{
-                border: "none",
-                height: "1px",
-                backgroundColor: "#E8E8E8",
-                margin: "1rem 0",
-                borderradius: "5px",
-              }}
-            />
-            <div className={styles.precioTotal}>
-              <span className={styles.text}>Total</span>
-              <p className={styles.precio}>
-                ${calcularTotal().toLocaleString()}
-              </p>
-            </div>
+              <form onSubmit={handleSubmit}>
+                <div className={styles.inputConteiner}>
+                  <label className={styles.labelInput}>Desde</label>
+                  <input
+                    type="date"
+                    name="fecha_inicio"
+                    id="fecha_inicio"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.fecha_inicio || ""}
+                    ref={fecha_inicioRef}
+                  />
 
+                  {/* ERROR */}
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.fecha_inicio ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.fecha_inicio}
+                    </p>
+                  </div>
+                  <label className={styles.labelInput}>Hasta</label>
+                  <input
+                    type="date"
+                    name="fecha_fin"
+                    id="fecha_fin"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.fecha_fin || ""}
+                    ref={fecha_finRef}
+                  />
+                  <p
+                    className={`${styles.errorMessage} ${
+                      errores.fecha_fin ? styles.visible : ""
+                    }`}
+                  >
+                    {errores.fecha_fin}
+                  </p>
+                </div>
+                <hr
+                  style={{
+                    border: "none",
+                    height: "1px",
+                    backgroundColor: "#E8E8E8",
+                    margin: "1rem 0",
+                    borderradius: "5px",
+                  }}
+                />
+                <div className={styles.precioTotal}>
+                  <span className={styles.text}>Total</span>
+                  <p className={styles.precio}>
+                    ${calcularTotal().toLocaleString()}
+                  </p>
+                </div>
+              </form>
+            </div>
+            <div className={styles.rightPanel}>
+              {/* Aquí puedes agregar contenido adicional si es necesario */}
+              <div className={styles.placeInfo}>
+                <h3 className={styles.rightTitle}>Retirada</h3>
+
+                <div className={styles.placeHeader}>
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    className={styles.locationDot}
+                  />
+                  <p className={styles.date}>30/ago./2025 a las 10:00 AM</p>
+                </div>
+
+                <p className={styles.place}>
+                  Aeropuerto de Rosario "Islas Malvinas", Argentina
+                </p>
+                <span className={styles.caption}>Aeropuerto</span>
+                <div className={styles.retireInfo}>
+                  <FontAwesomeIcon
+                    icon={faCircleInfo}
+                    className={styles.infoIcon}
+                  />
+                  <span className={styles.infoText}>INFO IMPORTANTE</span>
+                </div>
+              </div>
+              {/* Devolucion */}
+              <div className={styles.placeInfo}>
+                <h3 className={styles.rightTitle}>Devolucion</h3>
+
+                <div className={styles.placeHeader}>
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    className={styles.locationDot}
+                  />
+                  <p className={styles.date}>30/ago./2025 a las 10:00 AM</p>
+                </div>
+
+                {/* Selector de lugar de devolución */}
+                <div className={styles.dropdownContainer}>
+                  <label
+                    htmlFor="returnLocation"
+                    className={styles.dropdownLabel}
+                  >
+                    Lugar de devolución
+                  </label>
+                  <div className={styles.customSelect}>
+                    <select
+                      id="returnLocation"
+                      className={styles.locationDropdown}
+                      onChange={(e) =>
+                        console.log("Ubicación seleccionada:", e.target.value)
+                      }
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Selecciona un lugar de devolución
+                      </option>
+                      <option value="airport">
+                        Aeropuerto de Rosario "Islas Malvinas"
+                      </option>
+                      <option value="downtown">
+                        Centro de Rosario - Sucursal Principal
+                      </option>
+                      <option value="busStation">
+                        Terminal de Ómnibus Mariano Moreno
+                      </option>
+                      <option value="other">Otra ubicación...</option>
+                    </select>
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className={styles.dropdownArrow}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.modalFooter}>
             <div className={styles.btnsConteiner}>
               <button
                 className={styles.btnCancelar}
                 onClick={() => {
                   localStorage.removeItem("datosAlquiler");
-                  onClose(); // cerrás el modal
+                  onClose();
                 }}
               >
                 Cancelar
@@ -229,12 +362,13 @@ function Modal({ auto, onClose }) {
               <button
                 className={styles.btnPagar}
                 type="submit"
+                onClick={handleSubmit}
                 disabled={Object.keys(errores).length > 0}
               >
                 Ir a pagar
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <ToastContainer position="top-center" autoClose={3000} />
