@@ -51,7 +51,7 @@ router.post(
       const { name, category, passengers, transmission, price, brand, estado } =
         req.body;
 
-      const image = req.file ? `/uploads/${req.file.filename}` : null;
+      const image = `http://localhost:3000/uploads/${req.file.filename}`;
 
       const car = await Car.create({
         name,
