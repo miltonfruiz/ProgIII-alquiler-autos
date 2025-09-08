@@ -15,15 +15,24 @@ import {
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
-
+  console.log("=== ESTRUCTURA DEL AUTO ===");
+  console.log("auto completo:", auto);
+  console.log("auto.id:", auto.id);
+  console.log("auto.id_car:", auto.id_car);
+  console.log("auto.carId:", auto.carId);
+  console.log("Todas las propiedades:", Object.keys(auto));
   const navigate = useNavigate();
   const hoy = new Date().toISOString().split("T")[0];
+  const ahora = new Date();
+  const horaActual = `${(ahora.getHours() + 1).toString().padStart(2, "0")}:00`; // Una hora después
 
   const [formData, setFormData] = useState({
     fecha_inicio: hoy,
     fecha_fin: hoy,
-    hora_inicio: "10:00", // Valor por defecto
-    hora_fin: "10:00", // Valor por defecto
+    hora_inicio: "10:00",
+    hora_fin: "10:00",
+    lugar_retiro: "airport",
+    lugar_devolucion: "airport", // Valor por defecto para evitar undefined
   });
 
   const [errores, setErrores] = useState({
@@ -31,6 +40,7 @@ function Modal({ auto, onClose }) {
     fecha_fin: "",
     hora_inicio: "",
     hora_fin: "",
+    lugar_devolucion: "",
   });
 
   const fecha_inicioRef = useRef(null);
@@ -41,14 +51,36 @@ function Modal({ auto, onClose }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    const newData = {
+    let newData = {
       ...formData,
       [name]: value,
     };
 
-    console.log("newData:", newData);
+    // Si cambia la fecha de inicio y es posterior a la fecha fin, actualizar fecha fin
+    if (name === "fecha_inicio" && value > formData.fecha_fin) {
+      newData.fecha_fin = value;
+    }
 
-    // limpiar errores
+    // Si cambia la fecha de inicio a hoy, ajustar la hora si es necesaria
+    if (name === "fecha_inicio" && value === hoy) {
+      const ahora = new Date();
+      const horaActual = `${(ahora.getHours() + 1)
+        .toString()
+        .padStart(2, "0")}:00`;
+
+      // Si la hora actual es menor que la hora seleccionada, mantener la seleccionada
+      if (
+        formData.hora_inicio <=
+        `${ahora.getHours().toString().padStart(2, "0")}:${ahora
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`
+      ) {
+        newData.hora_inicio = horaActual;
+      }
+    }
+
+    // Limpiar errores
     setErrores({});
 
     const newErrores = ModalValidation(newData);
@@ -70,6 +102,7 @@ function Modal({ auto, onClose }) {
 
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
+      return;
     }
 
     try {
@@ -79,6 +112,7 @@ function Modal({ auto, onClose }) {
         hora_inicio: formData.hora_inicio,
         hora_fin: formData.hora_fin,
         carId: auto.id,
+        lugar_devolucion: formData.lugar_devolucion,
         userId,
       });
 
@@ -105,6 +139,8 @@ function Modal({ auto, onClose }) {
           fecha_fin: formData.fecha_fin,
           hora_inicio: formData.hora_inicio,
           hora_fin: formData.hora_fin,
+          lugar_retiro: formData.lugar_retiro,
+          lugar_devolucion: formData.lugar_devolucion,
           total: total,
           tax: impuestos,
           totalFinal: precioFinal,
@@ -235,6 +271,7 @@ function Modal({ auto, onClose }) {
                     onChange={handleChange}
                     value={formData.fecha_inicio || ""}
                     ref={fecha_inicioRef}
+                    min={hoy} // Esto previene seleccionar fechas pasadas en el navegador
                   />
                   <input
                     type="time"
@@ -246,6 +283,15 @@ function Modal({ auto, onClose }) {
                     ref={horario_inicioRef}
                   />
                   {/* ERROR */}
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.hora_inicio ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.hora_inicio}
+                    </p>
+                  </div>
                   <div className={styles.errorContainer}>
                     <p
                       className={`${styles.errorMessage} ${
@@ -264,6 +310,7 @@ function Modal({ auto, onClose }) {
                     onChange={handleChange}
                     value={formData.fecha_fin || ""}
                     ref={fecha_finRef}
+                    min={formData.fecha_inicio || hoy} // La fecha fin no puede ser menor que la de inicio
                   />
                   <input
                     type="time"
@@ -274,7 +321,15 @@ function Modal({ auto, onClose }) {
                     value={formData.hora_fin || ""}
                     ref={horario_finRef}
                   />
-
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.hora_fin ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.hora_fin}
+                    </p>
+                  </div>
                   <p
                     className={`${styles.errorMessage} ${
                       errores.fecha_fin ? styles.visible : ""
@@ -348,11 +403,10 @@ function Modal({ auto, onClose }) {
                   <div className={styles.customSelect}>
                     <select
                       id="returnLocation"
+                      name="lugar_devolucion"
                       className={styles.locationDropdown}
-                      onChange={(e) =>
-                        console.log("Ubicación seleccionada:", e.target.value)
-                      }
-                      defaultValue=""
+                      onChange={handleChange} // Conectar al handleChange
+                      value={formData.lugar_devolucion}
                     >
                       <option value="" disabled>
                         Selecciona un lugar de devolución
@@ -372,6 +426,16 @@ function Modal({ auto, onClose }) {
                       icon={faChevronDown}
                       className={styles.dropdownArrow}
                     />
+                  </div>
+
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.lugar_devolucion ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.lugar_devolucion}
+                    </p>
                   </div>
                 </div>
               </div>

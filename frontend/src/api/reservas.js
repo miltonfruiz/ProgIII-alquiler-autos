@@ -1,33 +1,32 @@
-export const crearReserva = async ({
-  fecha_inicio,
-  fecha_fin,
-  carId,
-  userId,
-}) => {
+// frontend/src/api/reservas.js
+const API_BASE_URL = "http://localhost:3000";
+
+export const crearReserva = async (reservaData) => {
   try {
-    const res = await fetch("http://localhost:3000/reservas", {
+    console.log("Enviando datos al backend:", reservaData);
+
+    const response = await fetch(`${API_BASE_URL}/reservas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        fecha_inicio,
-        fecha_fin,
-        carId,
-        userId,
-      }),
+      body: JSON.stringify(reservaData),
     });
 
-    const data = await res.json();
+    console.log("Status de respuesta:", response.status);
 
-    if (!res.ok) {
-      console.error("Errores en la reserva:", data);
-      return { success: false, error: data };
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error("Error del servidor:", errorData);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+    console.log("Respuesta del servidor:", data);
 
     return { success: true, data };
   } catch (error) {
-    console.error("Error al conectar con el servidor:", error);
-    return { success: false, error };
+    console.error("Error en crearReserva:", error);
+    return { success: false, error: error.message };
   }
 };

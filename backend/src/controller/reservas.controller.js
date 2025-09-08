@@ -4,7 +4,15 @@ import { User } from "../models/User.js";
 
 export async function createReserva(req, res) {
   try {
-    const { fecha_inicio, fecha_fin, carId, userId } = req.body;
+    const {
+      fecha_inicio,
+      hora_inicio,
+      fecha_fin,
+      hora_fin,
+      lugar_devolucion,
+      carId,
+      userId,
+    } = req.body;
 
     const fecha_reserva = new Date();
 
@@ -16,7 +24,10 @@ export async function createReserva(req, res) {
 
     const nuevaReserva = await Reserva.create({
       fecha_inicio,
+      hora_inicio,
       fecha_fin,
+      hora_fin,
+      lugar_devolucion,
       estado_reserva: "pendiente",
       fecha_reserva,
       cant_dias,
@@ -89,6 +100,7 @@ export async function updateReserva(req, res) {
   try {
     const { id } = req.params;
     const { fecha_inicio, fecha_fin } = req.body;
+    const { hora_inicio, hora_fin } = req.body;
     const inicio = new Date(fecha_inicio);
     const fin = new Date(fecha_fin);
     const diffTime = Math.abs(fin - inicio);
@@ -97,6 +109,8 @@ export async function updateReserva(req, res) {
     if (!reserva) {
       return res.status(404).json({ mensaje: "Reserva no encontrada" });
     }
+    reserva.hora_inicio = hora_inicio;
+    reserva.hora_fin = hora_fin;
     reserva.fecha_inicio = fecha_inicio;
     reserva.fecha_fin = fecha_fin;
     reserva.cant_dias = cant_dias;
