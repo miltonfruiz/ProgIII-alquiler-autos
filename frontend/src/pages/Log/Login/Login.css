@@ -10,13 +10,13 @@
 .login-container {
   display: flex;
   flex-direction: column;
-  max-width: 750px;
+  max-width: 1000px;
   width: 100%;
   background-color: white;
-  border-radius: 12px;
+  border-radius: 0.6rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-height: 470px;
+  max-height: 700px;
   position: relative;
 }
 .login-form-section {
