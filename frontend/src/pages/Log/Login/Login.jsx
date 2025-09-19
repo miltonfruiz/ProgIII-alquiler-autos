@@ -70,20 +70,11 @@ const Login = ({ setLogged }) => {
       <UserNavbar />
       <div className="login-page">
         <div className="login-container">
-          <div className="login-image-section">
-            <img
-              src="images/auto.png"
-              alt="auto azul"
-              className="login-image"
-            />
-          </div>
-          <div className="login-form-section">
-            <LoginForm
-              onSubmit={handleLogin}
-              errores={errores}
-              refs={{ emailRef, passwordRef }}
-            />
-          </div>
+          <LoginForm
+            onSubmit={handleLogin}
+            errores={errores}
+            refs={{ emailRef, passwordRef }}
+          />
         </div>
       </div>
     </>
