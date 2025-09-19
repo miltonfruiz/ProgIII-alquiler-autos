@@ -2,13 +2,13 @@ import { useState } from "react";
 import "./LoginForm.css";
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { FiLogIn } from "react-icons/fi";
 
 const LoginForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

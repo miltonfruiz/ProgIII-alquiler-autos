@@ -36,6 +36,7 @@
 }
 
 .textContent h1 {
+  color: #fff;
   font-size: clamp(2.2rem, 5vw, 4rem);
   margin-bottom: 1.5rem;
   line-height: 1.2;

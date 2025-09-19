@@ -120,7 +120,7 @@ body.dark .formRegister {
 .labelRegister {
   font-size: 14px;
   font-weight: 400;
-  color: #000000;
+  color: #111827;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -241,14 +241,13 @@ body.dark .formRegister {
 .tienesCuenta {
   cursor: default;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.3rem;
   font-size: 12px;
   color: #6b7280;
   margin-bottom: 2rem;
 }
 
 .tienesCuenta a {
-  font-weight: 600;
   color: #6366f1;
   text-decoration: none;
 }
