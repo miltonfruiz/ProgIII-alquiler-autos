@@ -1,11 +1,7 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
-import carImage from "../../../../public/images/auto-hero.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import Carrousel from "../CarrouselHero/carrousel";
 
 function Hero({ loggedIn }) {
   const navigate = useNavigate();
@@ -20,7 +16,6 @@ function Hero({ loggedIn }) {
 
   return (
     <section className={styles.heroSection}>
-      <div className={styles.heroOverlay}></div>
       <div className={styles.heroContent}>
         <div className={styles.textContainer}>
           <div className={styles.textContent}>
@@ -30,11 +25,9 @@ function Hero({ loggedIn }) {
               preocupaciones
             </p>
           </div>
-          <div className={styles.btnContainer}>
-            <button onClick={handleRentClick}>Rentar ya</button>
-          </div>
         </div>
       </div>
+      <Carrousel />
     </section>
   );
 }

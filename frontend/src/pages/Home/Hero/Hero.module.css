@@ -4,25 +4,14 @@
   height: 90vh;
   min-height: 600px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  background-image: url("https://images.pexels.com/photos/754595/pexels-photo-754595.jpeg?_gl=1*1k13s*_ga*MjA3ODgzMzg2MC4xNzUyNTEzNzYz*_ga_8JE65Q40S6*czE3NTU2MTg5NjgkbzgkZzEkdDE3NTU2MTkyMjEkajEyJGwwJGgw");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   padding: 2rem;
   box-sizing: border-box;
   overflow: hidden;
-}
-
-.heroOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(111deg, #a86ce9 0%, #7f7df7 100%);
 }
 
 .heroContent {
@@ -36,19 +25,19 @@
 }
 
 .textContent h1 {
+  font-family: "Playfair Display", serif;
   color: #fff;
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
 }
 
 .textContent p {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
   margin-bottom: 2.5rem;
   line-height: 1.6;
-  font-weight: 300;
+  font-weight: 200;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
