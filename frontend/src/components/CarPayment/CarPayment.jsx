@@ -13,6 +13,11 @@ import {
   objetosItems,
 } from "./ObjetosCarPayment.jsx";
 import ResumenDeAlquiler from "./ResumenDeAlquiler.jsx";
+import {
+  ObtenerReservas,
+  ConfirmarReserva,
+  CancelarReserva,
+} from "../../api/actualizarReservas";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
@@ -56,7 +61,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (choicePayment == "tarjeta" || !choicePayment) {
       onSubmit(
@@ -69,6 +74,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     } else if (choicePayment == "transferencia") {
       onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
+
+    const data = await ObtenerReservas();
+    ConfirmarReserva(data);
   }
 
   function handleTarjeta(e) {
@@ -370,7 +378,14 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
         <button type="button" className="botonRentar" onClick={handleSubmit}>
           Rentar ahora
         </button>
-        <button type="button" className="botonCancelar">
+        <button
+          type="button"
+          className="botonCancelar"
+          onClick={async () => {
+            const data = await ObtenerReservas();
+            CancelarReserva(data);
+          }}
+        >
           Cancelar
         </button>
       </div>

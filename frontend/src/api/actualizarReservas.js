@@ -1,4 +1,4 @@
-const ObtenerReservas = async () => {
+export const ObtenerReservas = async () => {
   try {
     const response = await fetch("http://localhost:3000/reservas", {
       method: "GET",
@@ -67,7 +67,3 @@ export const CancelarReserva = async () => {
     throw error;
   }
 };
-
-const reservas = await ObtenerReservas();
-
-ConfirmarReserva(reservas);
