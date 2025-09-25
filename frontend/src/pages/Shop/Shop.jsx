@@ -19,6 +19,7 @@ function Shop({ loggedIn }) {
     const fetchAutos = async () => {
       try {
         const data = await obtenerAutos();
+        console.log(data.image); // me devuelve undefined
         setAutosDB(data);
       } catch (error) {
         console.error("Error al cargar autos desde el backend", error);

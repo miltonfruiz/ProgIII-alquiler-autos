@@ -70,9 +70,10 @@
 
 .cardButton button {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 3.5rem;
+  align-items: center;
+  margin: auto;
+  width: 100%;
   color: #fff;
   padding: 20px 100px;
   border-radius: 5px;
