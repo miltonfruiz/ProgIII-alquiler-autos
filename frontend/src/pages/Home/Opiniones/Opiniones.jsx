@@ -36,7 +36,7 @@ function Opiniones() {
   return (
     <section className={styles.opinionesSection}>
       <div className={styles.sectionHeader}>
-        <h2 className={styles.sectionTitle}>Lo que dicen nuestros clientes</h2>
+        <h2 className={styles.sectionTitle}>Experiencia de usuarios</h2>
         <p className={styles.sectionSubtitle}>
           Descubre por qué miles de personas confían en RentCars para sus
           alquileres de vehículos

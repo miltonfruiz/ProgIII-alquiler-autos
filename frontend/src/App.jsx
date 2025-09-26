@@ -26,50 +26,52 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
   return (
-    <BrowserRouter>
+    <>
       <ToastContainer
         position="top-right"
         autoClose={4000}
         closeOnClick
         pauseOnHover
       />
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Landing></Landing>} />
-        <Route path="/login" element={<Login setLogged={setLoggedIn} />} />
-        <Route path="/password-recovery" element={<PasswordRecovery />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Landing></Landing>} />
+          <Route path="/login" element={<Login setLogged={setLoggedIn} />} />
+          <Route path="/password-recovery" element={<PasswordRecovery />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
-        <Route
-          path="/register"
-          element={<Register setRegisterIn={setRegisterIn}></Register>}
-        ></Route>
-        <Route path="/home" element={<Home loggedIn={loggedIn} />} />
-        <Route
-          path="/carPayment"
-          element={<CarPaymentPage></CarPaymentPage>}
-        ></Route>
+          <Route
+            path="/register"
+            element={<Register setRegisterIn={setRegisterIn}></Register>}
+          ></Route>
+          <Route path="/home" element={<Home loggedIn={loggedIn} />} />
+          <Route
+            path="/carPayment"
+            element={<CarPaymentPage></CarPaymentPage>}
+          ></Route>
 
-        <Route
-          path="/user-profile"
-          element={
-            <ProtectedRouteUser isSigned={loggedIn}>
-              <UserProfile />
-            </ProtectedRouteUser>
-          }
-        />
-        <Route path="/shop" element={<Shop loggedIn={loggedIn} />} />
-        <Route
-          path="/administration"
-          element={
-            <ProtectedRouteAdmin>
-              {" "}
-              <Administration />{" "}
-            </ProtectedRouteAdmin>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/user-profile"
+            element={
+              <ProtectedRouteUser isSigned={loggedIn}>
+                <UserProfile />
+              </ProtectedRouteUser>
+            }
+          />
+          <Route path="/shop" element={<Shop loggedIn={loggedIn} />} />
+          <Route
+            path="/administration"
+            element={
+              <ProtectedRouteAdmin>
+                {" "}
+                <Administration />{" "}
+              </ProtectedRouteAdmin>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

@@ -6,28 +6,30 @@
   max-width: 1100px;
   margin: 60px auto;
 }
+
 .reservation-title {
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   color: #111827;
 }
 .reservation-subtitle {
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 400;
   color: #374151;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 22px;
 }
+
 .history-mypastreservations,
 .car-myreservations {
-  font-size: 18px;
+  font-size: 15px;
   margin-right: 5px;
 }
 .reservation-list {
@@ -42,6 +44,7 @@
   font-style: italic;
 }
 .reservation-card {
+  border-bottom: #afafaf 0.5px solid;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -49,7 +52,6 @@
   padding-top: 4rem;
   padding-bottom: 9rem;
   margin: 0.1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, max-height 0.4s ease,
     padding-bottom 0.4s ease;
   max-height: 170px;
@@ -66,27 +68,41 @@
   height: auto;
   object-fit: cover;
 }
+
 .reservation-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
+
 .reservation-info h2 {
   display: flex;
   align-items: center;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: black;
   margin-bottom: 3px;
   gap: 23px;
 }
+
 .reservation-info p {
   display: flex;
   align-items: center;
   font-size: 12px;
   font-weight: 300;
 }
+
+.reservation-info span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(31, 30, 30);
+}
+
+.data-myreservations {
+  color: rgb(0, 0, 0);
+}
+
 .extra-details {
   display: flex;
   flex-direction: column;
@@ -102,6 +118,12 @@
   font-size: 12px;
   font-weight: 300;
   color: white;
+}
+
+.extra-details span {
+  margin-left: 4px;
+  font-weight: 400;
+  color: black;
 }
 .reservation-card.expanded .extra-details {
   opacity: 1;
@@ -124,10 +146,11 @@
   margin-top: auto;
 }
 .toggle-details-button {
+  font-weight: 500;
   background-color: #6366f1;
   color: white;
   padding: 10px 23px;
-  font-size: 11px;
+  font-size: 12px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -148,22 +171,21 @@
   gap: 0.5rem;
 }
 .delete-myreservations {
-  font-size: 11px;
-  background-color: #ff4d4f;
-  color: white;
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #fff;
+  color: #d9363e;
   padding: 10px 33px;
-  border: none;
+
   border-radius: 8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin-top: 18px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
-.delete-myreservations:hover {
-  background-color: #d9363e;
-}
+
 .myreservations-fade-in {
   animation: myFadeIn 0.3s ease-in-out;
 }

@@ -34,7 +34,7 @@ const carBrands = [
   },
   {
     name: "Nissan",
-    logo: "https://static.wikia.nocookie.net/midnightclub/images/e/e9/Nissan-Logo-2020.png/revision/latest/scale-to-width-down/360?cb=20231006042015",
+    logo: "https://img.icons8.com/?size=100&id=58311&format=png&color=FFFFFF",
   },
   {
     name: "Hyundai",

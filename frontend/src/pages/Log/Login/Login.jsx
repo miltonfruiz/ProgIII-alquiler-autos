@@ -32,6 +32,7 @@ const Login = ({ setLogged }) => {
           );
           if (usuario) {
             toast.success("¡Usuario ingresado correctamente!");
+
             setLogged(true);
             localStorage.setItem(
               "loggedUser",

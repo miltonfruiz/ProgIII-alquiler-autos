@@ -47,39 +47,6 @@ export default function MyPastReservations() {
       facturacion: "Factura B",
       total: 29100,
     },
-    {
-      id: 4,
-      auto: "Toyota Etios",
-      fecha: "2024-09-05",
-      imagen: "/images/cars/toyota_etios-sedan.png",
-      precio: 21000,
-      impuestos: 4300,
-      metodoPago: "Efectivo",
-      facturacion: "Factura C",
-      total: 25300,
-    },
-    {
-      id: 5,
-      auto: "Toyota Corolla",
-      fecha: "2024-08-25",
-      imagen: "/images/cars/toyotaCorolla.png",
-      precio: 26000,
-      impuestos: 5500,
-      metodoPago: "Tarjeta de crédito",
-      facturacion: "Factura A",
-      total: 31500,
-    },
-    {
-      id: 6,
-      auto: "Volkswagen Gol",
-      fecha: "2024-07-15",
-      imagen: "/images/cars/volkswagenGol.png",
-      precio: 23000,
-      impuestos: 4800,
-      metodoPago: "Transferencia",
-      facturacion: "Factura B",
-      total: 27800,
-    },
   ]);
   const [ratings, setRatings] = useState({});
   const [modalReservaId, setModalReservaId] = useState(null);
@@ -146,11 +113,8 @@ export default function MyPastReservations() {
     }));
   };
   return (
-    <div className="reservation-container">
-      <h1 className="reservation-title">
-        <FaHistory className="history-mypastreservations" />
-        {t("navbar.myPastReservations")}
-      </h1>
+    <div className="pastReservation-container">
+      <h1 className="reservation-title">{t("navbar.myPastReservations")}</h1>
       <h6 className="reservation-subtitle">{t("navbar.check")}</h6>
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
@@ -166,7 +130,7 @@ export default function MyPastReservations() {
               >
                 <img src={res.imagen} alt={res.auto} className="car-image" />
                 <div className="reservation-info">
-                  <h2>{res.auto}</h2>
+                  <h4>{res.auto}</h4>
                   <p>
                     <MdDateRange className="data-myreservations" />
                     Fecha: {new Date(res.fecha).toLocaleDateString("es-AR")}
@@ -284,7 +248,7 @@ export default function MyPastReservations() {
                     }
                     className="submit-rating-button"
                   >
-                    <IoSend /> Enviar
+                    Calificar
                   </button>
                   <button
                     className="cancel-rating-button"
@@ -296,7 +260,7 @@ export default function MyPastReservations() {
                       }));
                     }}
                   >
-                    <MdOutlineCancel /> Cancelar
+                    Cancelar
                   </button>
                 </div>
               </div>

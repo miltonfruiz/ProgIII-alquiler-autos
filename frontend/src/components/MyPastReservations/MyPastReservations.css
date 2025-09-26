@@ -1,3 +1,12 @@
+.pastReservation-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 22px 32px;
+  max-width: 1100px;
+  margin: 60px auto;
+}
+
 .history-mypastreservations {
   font-size: 18px;
   margin-right: 5px;
@@ -6,8 +15,8 @@
   background-color: #ffc107;
   color: white;
   padding: 10px 36px;
-  font-size: 11px;
-  border: none;
+  font-size: 12px;
+  font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
   display: inline-flex;
@@ -113,9 +122,10 @@
 }
 .submit-rating-button,
 .cancel-rating-button {
+  font-weight: 500;
+  font-size: 12px;
   color: white;
-  padding: 10px 16px;
-  font-size: 11px;
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -126,10 +136,17 @@
   transition: background 0.3s ease;
 }
 .submit-rating-button {
-  background-color: #0f766e;
+  background-color: #6366f1;
 }
+
+.submit-rating-button:hover {
+  background-color: #4f46e5;
+}
+
 .cancel-rating-button {
-  background-color: #777b81;
+  color: red;
+  text-decoration: underline;
+  background-color: #fff;
 }
 @keyframes fadeIn {
   from {
