@@ -135,41 +135,8 @@ export default function MyPastReservations() {
                     <MdDateRange className="data-myreservations" />
                     Fecha: {new Date(res.fecha).toLocaleDateString("es-AR")}
                   </p>
-                  <div className="extra-details">
-                    <p>
-                      <IoPricetagSharp />
-                      Precio base: ${res.precio.toLocaleString()}
-                    </p>
-                    <p>
-                      <TbTax /> Impuestos: ${res.impuestos.toLocaleString()}
-                    </p>
-                    <p>
-                      <FaHandHoldingUsd />
-                      Método de pago: {res.metodoPago}
-                    </p>
-                    <p>
-                      <HiDocumentCurrencyDollar />
-                      Tipo de facturación: {res.facturacion}
-                    </p>
-                    <p>
-                      <BsCashCoin /> Total: ${res.total.toLocaleString()}
-                    </p>
-                  </div>
+
                   <div className="reservation-actions">
-                    <button
-                      onClick={() => toggleExpand(res.id)}
-                      className="toggle-details-button"
-                    >
-                      {expandedIds.includes(res.id) ? (
-                        <>
-                          <IoIosArrowUp /> {t("navbar.buttonHide")}
-                        </>
-                      ) : (
-                        <>
-                          <IoIosArrowDown /> {t("navbar.buttonSeeDetails")}
-                        </>
-                      )}
-                    </button>
                     {isRated(res.id) ? (
                       <button className="rated-button" disabled>
                         <FaStar className="icon-disabled" />
