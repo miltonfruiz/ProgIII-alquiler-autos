@@ -76,6 +76,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     }
 
     const data = await ObtenerReservas();
+    console.log(data);
     ConfirmarReserva(data);
   }
 
@@ -382,8 +383,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
           type="button"
           className="botonCancelar"
           onClick={async () => {
-            const data = await ObtenerReservas();
-            CancelarReserva(data);
+            console.log(CancelarReserva());
           }}
         >
           Cancelar

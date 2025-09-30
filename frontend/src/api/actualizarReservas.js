@@ -13,14 +13,16 @@ export const ObtenerReservas = async () => {
     return data;
   } catch (error) {
     console.error("Error en ObtenerReservas:", error);
+    return error;
   }
 };
 
 export const ConfirmarReserva = async (reservas) => {
   const ultimaReserva = reservas[reservas.length - 1];
+  console.log(ultimaReserva);
   try {
     const response = await fetch(
-      `http://localhost:3000/reservas${ultimaReserva.id_reserva}`,
+      `http://localhost:3000/reservas/${ultimaReserva.id_reserva}`,
       {
         method: "PUT",
         headers: {
@@ -44,17 +46,21 @@ export const ConfirmarReserva = async (reservas) => {
   }
 };
 
-export const CancelarReserva = async () => {
+export const CancelarReserva = async (reservas) => {
+  const ultimaReserva = reservas[reservas.length - 1];
   try {
-    const response = await fetch(`http://localhost:3000/reservas`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        estado_reserva: "cancelada",
-      }),
-    });
+    const response = await fetch(
+      `http://localhost:3000/reservas/${ultimaReserva.id_reserva}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          estado_reserva: "cancelada",
+        }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -64,6 +70,6 @@ export const CancelarReserva = async () => {
     return data;
   } catch (error) {
     console.error("Error en ActualizarReservas:", error);
-    throw error;
+    return error;
   }
 };

@@ -20,5 +20,6 @@ router.get("/reservas", getTodasLasReservas);
 router.put("/reservas/:id", updateReserva);
 //------------------- Eliminar reserva -------------------//
 router.delete("/reservas/:id", deleteReserva);
+//
 
 export default router;
