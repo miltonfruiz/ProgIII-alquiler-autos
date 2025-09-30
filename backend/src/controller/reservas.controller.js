@@ -96,6 +96,7 @@ export async function getTodasLasReservas(req, res) {
     res.status(500).json({ error: "Error al obtener reservas" });
   }
 }
+
 export async function updateReserva(req, res) {
   try {
     const { id } = req.params;
@@ -115,15 +116,18 @@ export async function updateReserva(req, res) {
     reserva.fecha_fin = fecha_fin;
     reserva.cant_dias = cant_dias;
     await reserva.save();
+
     const reservaActualizada = await Reserva.findByPk(id, {
       include: [User, Car],
     });
+
     res.status(200).json(reservaActualizada);
   } catch (error) {
     console.error("Error al actualizar reserva:", error);
     res.status(500).json({ mensaje: "Error al actualizar reserva" });
   }
 }
+
 export async function deleteReserva(req, res) {
   try {
     const { id } = req.params;

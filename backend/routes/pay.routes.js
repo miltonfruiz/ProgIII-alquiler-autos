@@ -45,6 +45,8 @@ router.post("/pays", payValidation, async (req, res) => {
     { estado_reserva: "confirmada" },
     { where: { id_reserva: id_reserva } }
   );
+
+  await Car.update({ estado: "no disponible" }, { where: { id: carId } });
 });
 
 //-------------------------- obtener pagos de una persona------------------
