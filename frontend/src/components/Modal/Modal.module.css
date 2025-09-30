@@ -4,9 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-
   background-color: rgba(0, 0, 0, 0.5); /* Oscurece el fondo */
-
   z-index: 1001;
   display: flex;
   align-items: center;
@@ -15,8 +13,8 @@
 
 .overlayConteiner {
   position: relative;
-  height: 650px;
-  width: 750px;
+  height: 80%;
+  width: 80%;
   border-radius: 1rem;
   background: white;
   box-shadow: 0 4px 22px rgba(0, 0, 0, 0.08);
@@ -24,8 +22,27 @@
   color: #1a202c;
 }
 
+.modalBody {
+  display: flex;
+  flex: 1;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.leftPanel {
+  flex: 2.5;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+/*  */
 .overlayContent {
-  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
 }
 
 .overlayTitle {
@@ -34,31 +51,93 @@
   justify-content: center;
   font-size: 2rem;
   font-weight: 600;
+  padding: 0 0 1rem 0;
 }
 
 .carReserva {
-  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
 .reservaInfo {
   display: flex;
-  font-weight: 500;
-  font-size: 1.25rem;
-}
-
-.carSelected {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   font-weight: 400;
-  margin-left: 0.5rem;
-  margin-bottom: 0;
   font-size: 1rem;
 }
 
-/* PRECIO */
+.carSelected {
+  font-weight: 600;
+  margin: 0 0 0 0;
+  font-size: 1.1rem;
+  color: #000000;
+}
 
+.carImage {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.imagePlaceholder {
+  height: 150px;
+  width: 200px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  object-fit: cover;
+}
+
+.carDetails h4 {
+  padding-left: 1rem;
+}
+
+.inclusionList {
+  list-style: none;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.checkIcon {
+  color: rgb(0, 0, 0);
+  margin-right: 0.5rem;
+}
+
+.infoAdicional {
+  color: #6ba1df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  cursor: help;
+  margin-left: 1.5rem;
+  border: 1px solid #6ba1df;
+  border-radius: 0.2rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.infoAdicionalBtn {
+  background: none;
+  color: #6ba1df;
+
+  border: none;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.infoIcon {
+  font-size: 1rem;
+  padding-right: 0.5rem;
+}
+
+/* PRECIO */
 .text {
   font-size: 1.25rem;
   font-weight: 500;
@@ -70,50 +149,57 @@
 
 /* Botones */
 
+.modalFooter {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8e8e8;
+}
+
 .btnsConteiner {
   display: flex;
-  width: 100%;
   justify-content: space-between;
-  gap: 100px;
+  gap: 1rem;
 }
 
 .btnsConteiner button {
-  margin-top: 2rem;
-  width: 250px;
-  height: 60px;
+  flex: 1;
+  height: 50px;
   font-size: 1rem;
   font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .btnCancelar {
-  all: unset;
-  color: red;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s ease;
+  background-color: #f8f8f8;
+  color: #ff3b30;
+  border: 1px solid #e0e0e0;
 }
 
 .btnCancelar:hover {
-  color: rgb(145, 2, 2);
+  background-color: #ffe6e6;
+  border-color: #ff3b30;
 }
 
 .btnPagar {
-  border-radius: 15px;
   background-color: #9ea4ff;
-  color: #fff;
+  color: white;
   border: none;
-  transition: background-color 0.3s ease;
 }
 
 .btnPagar:hover:not(:disabled) {
   background-color: #7371fc;
-
-  transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-.btnPagar:active:not(:disabled) {
-  transform: translateY(0);
+.btnPagar:disabled {
+  background-color: #a5a5a5;
+  color: #f0f0f0;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 /* INPUTS */
@@ -124,26 +210,32 @@
 }
 
 .labelInput {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 
 .inputDate {
-  width: 25rem;
-  height: 3rem;
-  background-color: #eeeeee;
-  border-radius: 0.6em;
-  padding: 1em;
-  border: none;
+  width: 100%;
+  height: 2.8rem;
+  background-color: #ffffff;
+  border-radius: 0.3rem;
+  padding: 0 1em;
+  border: 1px solid #dbdbdb;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.3s;
-  margin-bottom: 1.2rem;
+  transition: all 0.2s;
+  margin-bottom: 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .inputDate:focus {
   outline: none;
-  border-color: #6366f1;
+  border: 1px solid #6366f1;
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.inputDate:hover {
+  background-color: #0000000a;
 }
 
 /* STYLE ERRORS */
@@ -163,6 +255,128 @@
 .errorContainer {
   min-height: 1.2rem; /* Espacio reservado */
   position: relative;
+}
+
+/* PARTE DERECHA */
+.rightPanel {
+  flex: 2;
+  border-left: 1px solid #e8e8e8;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.placeInfo {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+}
+.locationDot {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.placeHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.date {
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin: 0;
+  padding-left: 0.5rem;
+}
+
+.place {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.caption {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: -0.3rem;
+}
+/* Info Retiro */
+
+.retireInfo {
+  background-color: #0000000a;
+  width: fit-content;
+  padding: 0.3rem 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+  color: #666;
+  cursor: help;
+  border-radius: 0.2rem;
+}
+
+.infoText {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Selector de lugar de devolución */
+
+.dropdownLabel {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.customSelect {
+  position: relative;
+  width: 100%;
+}
+
+.locationDropdown {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  padding-right: 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+  appearance: none;
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+.locationDropdown:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.dropdownArrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .dropdownContainer {
+    margin-top: 0.8rem;
+  }
+
+  .locationDropdown {
+    padding: 0.7rem 0.9rem;
+    padding-right: 2.3rem;
+  }
 }
 
 /* BTN DISABLED */

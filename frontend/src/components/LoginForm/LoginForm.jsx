@@ -2,13 +2,13 @@ import { useState } from "react";
 import "./LoginForm.css";
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { FiLogIn } from "react-icons/fi";
 
 const LoginForm = ({ onSubmit, errores, refs }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -63,12 +63,12 @@ const LoginForm = ({ onSubmit, errores, refs }) => {
       </div>
       <div className="button-container">
         <button type="submit" className="login-button">
-          <FiLogIn size={14} />
           Iniciar Sesión
         </button>
       </div>
       <p className="forgot-password">
-        <a href="/password-recovery">¿Olvidaste tu contraseña?</a>
+        ¿Olvidaste tu contraseña?{" "}
+        <a href="/password-recovery">Recuperar Contraseña</a>
       </p>
       <p className="register-link">
         ¿No tienes cuenta? <a href="/register">Regístrate</a>

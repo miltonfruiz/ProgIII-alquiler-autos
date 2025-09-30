@@ -1,0 +1,61 @@
+.user-profile-layout {
+  display: flex;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 100px auto 40px auto;
+  padding: 0 20px;
+  min-height: calc(100vh - 200px);
+  align-items: flex-start;
+}
+
+.profile-section {
+  flex: 0 0 400px;
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.reservations-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-width: 0;
+}
+
+.profile-section .profile-card {
+  margin: 0;
+  width: 100%;
+}
+
+.reservations-section .reservation-container,
+.reservations-section .pastReservation-container {
+  margin: 0;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .user-profile-layout {
+    flex-direction: column;
+    gap: 20px;
+    margin: 90px auto 30px auto;
+  }
+
+  .profile-section {
+    flex: none;
+    position: static;
+    width: 100%;
+  }
+
+  .reservations-section {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-profile-layout {
+    padding: 0 15px;
+    gap: 15px;
+  }
+}

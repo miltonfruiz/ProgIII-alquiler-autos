@@ -4,7 +4,15 @@ import { User } from "../models/User.js";
 
 export async function createReserva(req, res) {
   try {
-    const { fecha_inicio, fecha_fin, carId, userId } = req.body;
+    const {
+      fecha_inicio,
+      hora_inicio,
+      fecha_fin,
+      hora_fin,
+      lugar_devolucion,
+      carId,
+      userId,
+    } = req.body;
 
     const fecha_reserva = new Date();
 
@@ -16,7 +24,10 @@ export async function createReserva(req, res) {
 
     const nuevaReserva = await Reserva.create({
       fecha_inicio,
+      hora_inicio,
       fecha_fin,
+      hora_fin,
+      lugar_devolucion,
       estado_reserva: "pendiente",
       fecha_reserva,
       cant_dias,
@@ -89,30 +100,21 @@ export async function getTodasLasReservas(req, res) {
 export async function updateReserva(req, res) {
   try {
     const { id } = req.params;
-    const { fecha_inicio, fecha_fin, estado_reserva } = req.body;
-
+    const { fecha_inicio, fecha_fin } = req.body;
+    const { hora_inicio, hora_fin } = req.body;
+    const inicio = new Date(fecha_inicio);
+    const fin = new Date(fecha_fin);
+    const diffTime = Math.abs(fin - inicio);
+    const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     const reserva = await Reserva.findByPk(id);
     if (!reserva) {
       return res.status(404).json({ mensaje: "Reserva no encontrada" });
     }
-
-    // Si vienen fechas, recalcular cant_dias
-    if (fecha_inicio && fecha_fin) {
-      const inicio = new Date(fecha_inicio);
-      const fin = new Date(fecha_fin);
-      const diffTime = Math.abs(fin - inicio);
-      const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      reserva.fecha_inicio = fecha_inicio;
-      reserva.fecha_fin = fecha_fin;
-      reserva.cant_dias = cant_dias;
-    }
-
-    // Si viene el estado, actualizar solo eso
-    if (estado_reserva) {
-      reserva.estado_reserva = estado_reserva;
-    }
-
+    reserva.hora_inicio = hora_inicio;
+    reserva.hora_fin = hora_fin;
+    reserva.fecha_inicio = fecha_inicio;
+    reserva.fecha_fin = fecha_fin;
+    reserva.cant_dias = cant_dias;
     await reserva.save();
 
     const reservaActualizada = await Reserva.findByPk(id, {

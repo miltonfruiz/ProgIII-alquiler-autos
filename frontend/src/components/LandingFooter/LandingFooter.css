@@ -32,7 +32,7 @@
 }
 .logo {
   font-size: 1.5rem;
-  color: #fff;
+  color: #ffffff;
   transition: color 0.3s;
 }
 .logo:hover {
@@ -41,7 +41,7 @@
 .footerBottom {
   text-align: center;
   margin-top: 4rem;
-  border-top: 1px solid #444;
+  border-top: 1px solid #ffffff;
   padding-top: 1rem;
   font-size: 0.7rem;
 }
@@ -50,13 +50,13 @@
   font-size: 0.6rem;
   margin-bottom: 1.5rem;
 }
-.h2-title {
+.h3-title {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .icon-title-landing {
   margin-right: 10px;
-  color: #6366f1;
+  color: #764ba2;
   filter: drop-shadow(0 0 0.05rem white);
 }

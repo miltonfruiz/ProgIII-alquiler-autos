@@ -1,5 +1,6 @@
 import LoginForm from "../../../components/LoginForm/LoginForm";
 import LoginValidation from "../../../components/LoginValidation/LoginValidation";
+import UserNavbar from "../../../components/UserNavbar/UserNavbar";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -31,6 +32,7 @@ const Login = ({ setLogged }) => {
           );
           if (usuario) {
             toast.success("¡Usuario ingresado correctamente!");
+
             setLogged(true);
             localStorage.setItem(
               "loggedUser",
@@ -65,12 +67,10 @@ const Login = ({ setLogged }) => {
     }
   };
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <div className="login-image-section">
-          <img src="images/auto.png" alt="auto azul" className="login-image" />
-        </div>
-        <div className="login-form-section">
+    <>
+      <UserNavbar />
+      <div className="login-page">
+        <div className="login-container">
           <LoginForm
             onSubmit={handleLogin}
             errores={errores}
@@ -78,8 +78,7 @@ const Login = ({ setLogged }) => {
           />
         </div>
       </div>
-      <p className="login-footer">© 2025 Todos los derechos reservados</p>
-    </div>
+    </>
   );
 };
 

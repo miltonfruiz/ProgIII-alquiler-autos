@@ -1,57 +1,90 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import styles from "./Catalogo.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
-import mockCars from "../../../data/mockCars";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
-import { faRoad } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
 import Modal from "../../../components/Modal/Modal";
 
-function Catalogo({ autos, limpiarFiltros, loggedIn }) {
+function Catalogo({
+  autos,
+  limpiarFiltros,
+  loggedIn,
+  filtrosVisible,
+  setFiltrosVisible,
+}) {
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
   const navigate = useNavigate();
 
-  const abrirOverlay = (auto) => {
+  // Usar useCallback para funciones que se pasan como props
+  const abrirOverlay = useCallback((auto) => {
     setAutoSeleccionado(auto);
-  };
+  }, []);
 
-  const cerrarOverlay = () => {
-    setAutoSeleccionado(null); // Se utiliza null, ya que en el componente "overlay" se verifica con un IF si es NULL no se muestra.
-  };
+  const cerrarOverlay = useCallback(() => {
+    setAutoSeleccionado(null);
+  }, []);
 
+  // Efecto para controlar el scroll
   useEffect(() => {
     if (autoSeleccionado) {
       document.body.classList.add("bloquear-scroll");
     } else {
       document.body.classList.remove("bloquear-scroll");
     }
+
+    // Cleanup function
+    return () => {
+      document.body.classList.remove("bloquear-scroll");
+    };
   }, [autoSeleccionado]);
+
+  // Memoizar el contenido de los autos para mejorar rendimiento
+  const autosContent = useMemo(() => {
+    if (autos.length === 0) {
+      return (
+        <div className={styles.noResults}>
+          <p>No se encontraron autos con los filtros seleccionados</p>
+          <button className={styles.filterBtn} onClick={limpiarFiltros}>
+            Limpiar filtros
+          </button>
+        </div>
+      );
+    }
+
+    return autos.map((car) => (
+      <CarCard key={car.id} {...car} onRent={() => abrirOverlay(car)} />
+    ));
+  }, [autos, abrirOverlay, limpiarFiltros]);
 
   return (
     <section className={styles.catalogoSection}>
+      <h2 className={styles.title}>CATÁLOGO</h2>
+      {/* <div className={styles.categorySelector}>
+        <button>Compacto</button>
+        <button>Estandar</button>
+        <button>Full-Size</button>
+        <button>Premium</button>
+        <button>Deportivo</button>
+        <button>Economico</button>
+      </div> */}
       <div className={styles.headCatalogo}>
-        <p className={styles.found}>{autos.length} Autos Encontrados</p>
-        <button className={styles.filterBtn} onClick={limpiarFiltros}>
-          Borrar Filtros
+        <p className={styles.found}>
+          {autos.length} Auto{autos.length !== 1 ? "s" : ""} Encontrado
+          {autos.length !== 1 ? "s" : ""}
+        </p>
+        <button
+          className={`${styles.filterBtn} ${
+            filtrosVisible ? styles.active : ""
+          }`}
+          onClick={() => setFiltrosVisible((prev) => !prev)}
+          aria-expanded={filtrosVisible}
+          aria-controls="filtros-container"
+        >
+          {filtrosVisible ? "Ocultar filtros" : "Mostrar filtros"}
         </button>
       </div>
+
       <div className={styles.carsSection}>
-        <div className={styles.recomendadosConteiner}>
-          {autos.length > 0 ? (
-            autos.map((car) => (
-              <CarCard key={car.id} {...car} onRent={() => abrirOverlay(car)} />
-            ))
-          ) : (
-            <div className={styles.noResults}>
-              <p>No se encontraron autos con los filtros seleccionados</p>
-              <button className={styles.filterBtn} onClick={limpiarFiltros}>
-                Limpiar filtros
-              </button>
-            </div>
-          )}
-        </div>
+        <div className={styles.recomendadosConteiner}>{autosContent}</div>
       </div>
 
       {autoSeleccionado && (
@@ -61,4 +94,4 @@ function Catalogo({ autos, limpiarFiltros, loggedIn }) {
   );
 }
 
-export default Catalogo;
+export default React.memo(Catalogo);

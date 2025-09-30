@@ -89,10 +89,7 @@ export default function MyReservations() {
   }, [location]);
   return (
     <div id="my-reservations-link" className="reservation-container">
-      <h1 className="reservation-title">
-        <FaCarSide className="car-myreservations" />
-        {t("navbar.myReservations")}
-      </h1>
+      <h3 className="reservation-title">{t("navbar.myReservations")}</h3>
       <h6 className="reservation-subtitle">{t("navbar.stay")}</h6>
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
@@ -114,10 +111,13 @@ export default function MyReservations() {
                 <div className="reservation-info">
                   <h2>{res.Car?.name}</h2>
                   <p>
-                    <MdDateRange className="data-myreservations" />
-                    Desde:{" "}
-                    {new Date(res.fecha_inicio).toLocaleDateString("es-AR")} -
-                    Hasta: {new Date(res.fecha_fin).toLocaleDateString("es-AR")}
+                    <MdDateRange className="data-myreservations" size={20} />
+                    <span>
+                      {new Date(res.fecha_inicio).toLocaleDateString("es-AR")} -
+                    </span>
+                    <span>
+                      {new Date(res.fecha_fin).toLocaleDateString("es-AR")}
+                    </span>
                   </p>
 
                   <div className="extra-details">
@@ -132,7 +132,8 @@ export default function MyReservations() {
                     </p>
                     <p>
                       <FaHandHoldingUsd />
-                      Método de pago: {res.metodoPago}
+                      Método de pago:
+                      <span>{res.metodoPago}</span>
                     </p>
                     <p>
                       <HiDocumentCurrencyDollar />
@@ -167,7 +168,7 @@ export default function MyReservations() {
                         setShowConfirmModal(true);
                       }}
                     >
-                      <RiDeleteBin6Line /> Cancelar
+                      Cancelar
                     </button>
                   </div>
                 </div>

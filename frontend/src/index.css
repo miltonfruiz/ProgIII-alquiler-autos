@@ -1,6 +1,6 @@
 /* -------- Reset básico y tipografía -------- */
 :root {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", "Playfair Display", sans-serif;
   --transition: all 0.2s ease;
   --bg-color: #f9fafb;
   --text-color: #1f2937;
@@ -78,10 +78,5 @@ img {
 
 .bloquear-scroll {
   overflow-y: hidden;
-  background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
-}
-
-.desbloquear-scroll {
-  overflow-y: auto;
-  background-color: #f9fafb;
+  color: rgba(0, 0, 0, 0.397); /* Negro con 50% de opacidad */
 }

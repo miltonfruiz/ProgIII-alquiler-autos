@@ -13,9 +13,26 @@ export const Reserva = sequelize.define(
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
+    hora_inicio: {
+      type: DataTypes.TIME,
+      allowNull: false,
+    },
     fecha_fin: {
       type: DataTypes.DATEONLY,
       allowNull: false,
+    },
+    hora_fin: {
+      type: DataTypes.TIME,
+      allowNull: false,
+    },
+    lugar_devolucion: {
+      type: DataTypes.ENUM(
+        `Aeropuerto de Rosario "Islas Malvinas"`,
+        `Centro de Rosario - Sucursal Principal`,
+        `Terminal de Ómnibus Mariano Moreno`
+      ),
+      allowNull: false,
+      defaultValue: "Seleccione un lugar de devolucion",
     },
     estado_reserva: {
       type: DataTypes.ENUM(

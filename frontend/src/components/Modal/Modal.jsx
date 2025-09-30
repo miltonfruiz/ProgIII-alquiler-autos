@@ -4,36 +4,83 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ModalValidation from "../ModalValidation/ModalValidation";
 import { crearReserva } from "../../api/reservas";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLocationDot,
+  faCircleInfo,
+  faChevronDown,
+  faCheck,
+  faInfo,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
-
+  console.log("=== ESTRUCTURA DEL AUTO ===");
+  console.log("auto completo:", auto);
+  console.log("auto.id:", auto.id);
+  console.log("auto.id_car:", auto.id_car);
+  console.log("auto.carId:", auto.carId);
+  console.log("Todas las propiedades:", Object.keys(auto));
   const navigate = useNavigate();
+  const hoy = new Date().toISOString().split("T")[0];
+  const ahora = new Date();
+  const horaActual = `${(ahora.getHours() + 1).toString().padStart(2, "0")}:00`; // Una hora después
 
   const [formData, setFormData] = useState({
-    fecha_inicio: undefined,
-    fecha_fin: undefined,
+    fecha_inicio: hoy,
+    fecha_fin: hoy,
+    hora_inicio: "10:00",
+    hora_fin: "10:00",
+    lugar_retiro: "airport",
+    lugar_devolucion: "airport", // Valor por defecto para evitar undefined
   });
 
   const [errores, setErrores] = useState({
     fecha_inicio: "",
     fecha_fin: "",
+    hora_inicio: "",
+    hora_fin: "",
+    lugar_devolucion: "",
   });
 
   const fecha_inicioRef = useRef(null);
   const fecha_finRef = useRef(null);
+  const horario_inicioRef = useRef(null);
+  const horario_finRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    const newData = {
+    let newData = {
       ...formData,
       [name]: value,
     };
 
-    console.log("newData:", newData);
+    // Si cambia la fecha de inicio y es posterior a la fecha fin, actualizar fecha fin
+    if (name === "fecha_inicio" && value > formData.fecha_fin) {
+      newData.fecha_fin = value;
+    }
 
-    // limpiar errores
+    // Si cambia la fecha de inicio a hoy, ajustar la hora si es necesaria
+    if (name === "fecha_inicio" && value === hoy) {
+      const ahora = new Date();
+      const horaActual = `${(ahora.getHours() + 1)
+        .toString()
+        .padStart(2, "0")}:00`;
+
+      // Si la hora actual es menor que la hora seleccionada, mantener la seleccionada
+      if (
+        formData.hora_inicio <=
+        `${ahora.getHours().toString().padStart(2, "0")}:${ahora
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`
+      ) {
+        newData.hora_inicio = horaActual;
+      }
+    }
+
+    // Limpiar errores
     setErrores({});
 
     const newErrores = ModalValidation(newData);
@@ -55,13 +102,17 @@ function Modal({ auto, onClose }) {
 
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
+      return;
     }
 
     try {
       const { success } = await crearReserva({
         fecha_inicio: formData.fecha_inicio,
         fecha_fin: formData.fecha_fin,
+        hora_inicio: formData.hora_inicio,
+        hora_fin: formData.hora_fin,
         carId: auto.id,
+        lugar_devolucion: formData.lugar_devolucion,
         userId,
       });
 
@@ -86,6 +137,10 @@ function Modal({ auto, onClose }) {
           auto: auto,
           fecha_inicio: formData.fecha_inicio,
           fecha_fin: formData.fecha_fin,
+          hora_inicio: formData.hora_inicio,
+          hora_fin: formData.hora_fin,
+          lugar_retiro: formData.lugar_retiro,
+          lugar_devolucion: formData.lugar_devolucion,
           total: total,
           tax: impuestos,
           totalFinal: precioFinal,
@@ -151,77 +206,248 @@ function Modal({ auto, onClose }) {
       >
         <div className={styles.overlayContent}>
           <h4 className={styles.overlayTitle}>Reserva</h4>
-          <div className={styles.carReserva}>
-            <span className={styles.reservaInfo}>
-              Auto a reservar:
-              <p className={styles.carSelected}>
-                {auto.name} | Ars ${auto.price.toLocaleString()} / Dia
-              </p>
-            </span>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.inputConteiner}>
-              <label className={styles.labelInput}>Desde</label>
-              <input
-                type="date"
-                name="fecha_inicio"
-                id="fecha_inicio"
-                className={styles.inputDate}
-                onChange={handleChange}
-                value={formData.fecha_inicio || ""}
-                ref={fecha_inicioRef}
-              />
-
-              {/* ERROR */}
-              <div className={styles.errorContainer}>
-                <p
-                  className={`${styles.errorMessage} ${
-                    errores.fecha_inicio ? styles.visible : ""
-                  }`}
-                >
-                  {errores.fecha_inicio}
-                </p>
+          <div className={styles.modalBody}>
+            <div className={styles.leftPanel}>
+              <div className={styles.carReserva}>
+                <span className={styles.reservaInfo}>
+                  Auto a reservar
+                  <p className={styles.carSelected}>
+                    {auto.brand} {auto.name} | Ars $
+                    {auto.price.toLocaleString()} / Dia
+                  </p>
+                </span>
+                <div className={styles.carImage}>
+                  {/* Aquí puedes agregar una imagen del auto si está disponible */}
+                  <div className={styles.imagePlaceholder}>
+                    <img src={auto.img} alt="Imagen del auto" />
+                  </div>
+                  <div className={styles.carDetails}>
+                    <h4>Esta reserva incluye</h4>
+                    <ul className={styles.inclusionList}>
+                      <li>
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.checkIcon}
+                        />
+                        Proteccion del Vehículo
+                      </li>
+                      <li>
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.checkIcon}
+                        />
+                        Proteccion Contra Terceros
+                      </li>
+                      <li>
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.checkIcon}
+                        />
+                        Proteccion Contra Robos
+                      </li>
+                    </ul>
+                    <div className={styles.infoAdicional}>
+                      <FontAwesomeIcon
+                        icon={faInfo}
+                        className={styles.moreInfoIcon}
+                      />
+                      <button className={styles.infoAdicionalBtn}>
+                        Informacion Adicional
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <label className={styles.labelInput}>Hasta</label>
-              <input
-                type="date"
-                name="fecha_fin"
-                id="fecha_fin"
-                className={styles.inputDate}
-                onChange={handleChange}
-                value={formData.fecha_fin || ""}
-                ref={fecha_finRef}
-              />
-              <p
-                className={`${styles.errorMessage} ${
-                  errores.fecha_fin ? styles.visible : ""
-                }`}
-              >
-                {errores.fecha_fin}
-              </p>
+              <form onSubmit={handleSubmit}>
+                <div className={styles.inputConteiner}>
+                  <label className={styles.labelInput}>Desde</label>
+                  <input
+                    type="date"
+                    name="fecha_inicio"
+                    id="fecha_inicio"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.fecha_inicio || ""}
+                    ref={fecha_inicioRef}
+                    min={hoy} // Esto previene seleccionar fechas pasadas en el navegador
+                  />
+                  <input
+                    type="time"
+                    name="hora_inicio"
+                    id="hora_inicio"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.hora_inicio || ""}
+                    ref={horario_inicioRef}
+                  />
+                  {/* ERROR */}
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.hora_inicio ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.hora_inicio}
+                    </p>
+                  </div>
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.fecha_inicio ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.fecha_inicio}
+                    </p>
+                  </div>
+                  <label className={styles.labelInput}>Hasta</label>
+                  <input
+                    type="date"
+                    name="fecha_fin"
+                    id="fecha_fin"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.fecha_fin || ""}
+                    ref={fecha_finRef}
+                    min={formData.fecha_inicio || hoy} // La fecha fin no puede ser menor que la de inicio
+                  />
+                  <input
+                    type="time"
+                    name="hora_fin"
+                    id="hora_fin"
+                    className={styles.inputDate}
+                    onChange={handleChange}
+                    value={formData.hora_fin || ""}
+                    ref={horario_finRef}
+                  />
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.hora_fin ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.hora_fin}
+                    </p>
+                  </div>
+                  <p
+                    className={`${styles.errorMessage} ${
+                      errores.fecha_fin ? styles.visible : ""
+                    }`}
+                  >
+                    {errores.fecha_fin}
+                  </p>
+                </div>
+                <hr
+                  style={{
+                    border: "none",
+                    height: "1px",
+                    backgroundColor: "#E8E8E8",
+                    margin: "1rem 0",
+                    borderradius: "5px",
+                  }}
+                />
+                <div className={styles.precioTotal}>
+                  <span className={styles.text}>Total</span>
+                  <p className={styles.precio}>
+                    ${calcularTotal().toLocaleString()}
+                  </p>
+                </div>
+              </form>
             </div>
-            <hr
-              style={{
-                border: "none",
-                height: "1px",
-                backgroundColor: "#E8E8E8",
-                margin: "1rem 0",
-                borderradius: "5px",
-              }}
-            />
-            <div className={styles.precioTotal}>
-              <span className={styles.text}>Total</span>
-              <p className={styles.precio}>
-                ${calcularTotal().toLocaleString()}
-              </p>
-            </div>
+            <div className={styles.rightPanel}>
+              {/* Aquí puedes agregar contenido adicional si es necesario */}
+              <div className={styles.placeInfo}>
+                <h3 className={styles.rightTitle}>Retirada</h3>
 
+                <div className={styles.placeHeader}>
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    className={styles.locationDot}
+                  />
+                  <p className={styles.date}>30/ago./2025 a las 10:00 AM</p>
+                </div>
+
+                <p className={styles.place}>
+                  Aeropuerto de Rosario "Islas Malvinas", Argentina
+                </p>
+                <span className={styles.caption}>Aeropuerto</span>
+                <div className={styles.retireInfo}>
+                  <FontAwesomeIcon
+                    icon={faCircleInfo}
+                    className={styles.infoIcon}
+                  />
+                  <span className={styles.infoText}>INFO IMPORTANTE</span>
+                </div>
+              </div>
+              {/* Devolucion */}
+              <div className={styles.placeInfo}>
+                <h3 className={styles.rightTitle}>Devolucion</h3>
+
+                <div className={styles.placeHeader}>
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    className={styles.locationDot}
+                  />
+                  <p className={styles.date}>30/ago./2025 a las 10:00 AM</p>
+                </div>
+
+                {/* Selector de lugar de devolución */}
+                <div className={styles.dropdownContainer}>
+                  <label
+                    htmlFor="returnLocation"
+                    className={styles.dropdownLabel}
+                  >
+                    Lugar de devolución
+                  </label>
+                  <div className={styles.customSelect}>
+                    <select
+                      id="returnLocation"
+                      name="lugar_devolucion"
+                      className={styles.locationDropdown}
+                      onChange={handleChange} // Conectar al handleChange
+                      value={formData.lugar_devolucion}
+                    >
+                      <option value="" disabled>
+                        Selecciona un lugar de devolución
+                      </option>
+                      <option value="airport">
+                        Aeropuerto de Rosario "Islas Malvinas"
+                      </option>
+                      <option value="downtown">
+                        Centro de Rosario - Sucursal Principal
+                      </option>
+                      <option value="busStation">
+                        Terminal de Ómnibus Mariano Moreno
+                      </option>
+                      <option value="other">Otra ubicación...</option>
+                    </select>
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className={styles.dropdownArrow}
+                    />
+                  </div>
+
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.lugar_devolucion ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.lugar_devolucion}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.modalFooter}>
             <div className={styles.btnsConteiner}>
               <button
                 className={styles.btnCancelar}
                 onClick={() => {
                   localStorage.removeItem("datosAlquiler");
-                  onClose(); // cerrás el modal
+                  onClose();
                 }}
               >
                 Cancelar
@@ -229,12 +455,13 @@ function Modal({ auto, onClose }) {
               <button
                 className={styles.btnPagar}
                 type="submit"
+                onClick={handleSubmit}
                 disabled={Object.keys(errores).length > 0}
               >
                 Ir a pagar
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <ToastContainer position="top-center" autoClose={3000} />
