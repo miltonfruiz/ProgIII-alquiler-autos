@@ -25,9 +25,9 @@
 }
 
 .found {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #555;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #6b7280;
   margin: 0;
 }
 
@@ -37,7 +37,7 @@
   font: inherit;
   color: #7a77ff;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
   border-radius: 4px;
   transition: all 0.2s ease;
   outline: none;

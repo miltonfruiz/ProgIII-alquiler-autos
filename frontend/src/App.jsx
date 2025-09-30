@@ -32,6 +32,7 @@ function App() {
         autoClose={4000}
         closeOnClick
         pauseOnHover
+        closeButton
       />
       <BrowserRouter>
         <ScrollToTop />

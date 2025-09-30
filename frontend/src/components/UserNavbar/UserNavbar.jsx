@@ -1,8 +1,8 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import "./UserNavbar.css";
-import { CiSearch, CiEdit } from "react-icons/ci";
-import { FaCar, FaHome, FaUser } from "react-icons/fa";
+import { CiEdit } from "react-icons/ci";
+import { FaCar, FaUser } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 import { FiLogOut, FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "../Mode/Mode";
@@ -12,6 +12,8 @@ import { IoMdCheckmark } from "react-icons/io";
 import { BsCalendarDateFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 import { MdDashboardCustomize } from "react-icons/md";
+import SearchNavbar from "../SearchNavBar/SearchNavbar";
+import ResultsSearch from "../SearchNavBar/ResultsSearch/ResultsSearch";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,6 +35,7 @@ export default function UserNavbar() {
     { code: "en", name: "English", flag: "US" },
     { code: "pt", name: "Português", flag: "BR" },
   ];
+
   const handleLogout = () => {
     localStorage.removeItem("lang");
     localStorage.removeItem("token");
@@ -47,6 +50,7 @@ export default function UserNavbar() {
       navigate("/");
     }, 4000);
   };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -58,6 +62,7 @@ export default function UserNavbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   const changeLanguage = (lang) => {
     setFade(true);
     setTimeout(() => {
@@ -66,11 +71,13 @@ export default function UserNavbar() {
       setFade(false);
     }, 150);
   };
+
   useEffect(() => {
     if (!showDropdown) {
       setShowLanguages(false);
     }
   }, [showDropdown]);
+
   const currentLang = i18n.language;
   return (
     <nav className="navbar">
@@ -85,14 +92,7 @@ export default function UserNavbar() {
         </div>
       </div>
       <div className="navbar-center">
-        <div className="search-wrapper">
-          <CiSearch size={18} className="search-icon" />
-          <input
-            type="text"
-            placeholder={t("navbar.searchPlaceholder")}
-            className={`navbar-search ${fade ? "fade-out" : ""}`}
-          />
-        </div>
+        <SearchNavbar />
       </div>
       <div className="navbar-right">
         <div className="icon-wrapper">

@@ -58,6 +58,14 @@ function Catalogo({
   return (
     <section className={styles.catalogoSection}>
       <h2 className={styles.title}>CATÁLOGO</h2>
+      {/* <div className={styles.categorySelector}>
+        <button>Compacto</button>
+        <button>Estandar</button>
+        <button>Full-Size</button>
+        <button>Premium</button>
+        <button>Deportivo</button>
+        <button>Economico</button>
+      </div> */}
       <div className={styles.headCatalogo}>
         <p className={styles.found}>
           {autos.length} Auto{autos.length !== 1 ? "s" : ""} Encontrado
