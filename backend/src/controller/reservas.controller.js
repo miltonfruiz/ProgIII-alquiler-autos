@@ -85,31 +85,47 @@ export async function getTodasLasReservas(req, res) {
     res.status(500).json({ error: "Error al obtener reservas" });
   }
 }
+
 export async function updateReserva(req, res) {
   try {
     const { id } = req.params;
-    const { fecha_inicio, fecha_fin } = req.body;
-    const inicio = new Date(fecha_inicio);
-    const fin = new Date(fecha_fin);
-    const diffTime = Math.abs(fin - inicio);
-    const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const { fecha_inicio, fecha_fin, estado_reserva } = req.body;
+
     const reserva = await Reserva.findByPk(id);
     if (!reserva) {
       return res.status(404).json({ mensaje: "Reserva no encontrada" });
     }
-    reserva.fecha_inicio = fecha_inicio;
-    reserva.fecha_fin = fecha_fin;
-    reserva.cant_dias = cant_dias;
+
+    // Si vienen fechas, recalcular cant_dias
+    if (fecha_inicio && fecha_fin) {
+      const inicio = new Date(fecha_inicio);
+      const fin = new Date(fecha_fin);
+      const diffTime = Math.abs(fin - inicio);
+      const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      reserva.fecha_inicio = fecha_inicio;
+      reserva.fecha_fin = fecha_fin;
+      reserva.cant_dias = cant_dias;
+    }
+
+    // Si viene el estado, actualizar solo eso
+    if (estado_reserva) {
+      reserva.estado_reserva = estado_reserva;
+    }
+
     await reserva.save();
+
     const reservaActualizada = await Reserva.findByPk(id, {
       include: [User, Car],
     });
+
     res.status(200).json(reservaActualizada);
   } catch (error) {
     console.error("Error al actualizar reserva:", error);
     res.status(500).json({ mensaje: "Error al actualizar reserva" });
   }
 }
+
 export async function deleteReserva(req, res) {
   try {
     const { id } = req.params;
