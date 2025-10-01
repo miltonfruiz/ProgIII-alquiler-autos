@@ -22,6 +22,16 @@ export async function createReserva(req, res) {
     const diffTime = Math.abs(fin - inicio);
     const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
+    // Buscar el auto para obtener su precio
+    const auto = await Car.findByPk(carId);
+    if (!auto) {
+      return res.status(404).json({ mensaje: "Auto no encontrado" });
+    }
+
+    // Calcular total e impuestos
+    const total = cant_dias * auto.price;
+    const tax = total * 0.21;
+
     const nuevaReserva = await Reserva.create({
       fecha_inicio,
       hora_inicio,
@@ -31,9 +41,12 @@ export async function createReserva(req, res) {
       estado_reserva: "pendiente",
       fecha_reserva,
       cant_dias,
+      total,
+      tax,
       carId,
       userId,
     });
+
     const reservaConDatos = await Reserva.findOne({
       where: { id_reserva: nuevaReserva.id_reserva },
       include: [
@@ -47,6 +60,7 @@ export async function createReserva(req, res) {
         },
       ],
     });
+
     res.status(201).json({
       mensaje: "Reserva creada con éxito",
       reserva: reservaConDatos,

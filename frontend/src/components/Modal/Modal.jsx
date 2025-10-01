@@ -15,12 +15,12 @@ import {
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
-  console.log("=== ESTRUCTURA DEL AUTO ===");
-  console.log("auto completo:", auto);
-  console.log("auto.id:", auto.id);
-  console.log("auto.id_car:", auto.id_car);
-  console.log("auto.carId:", auto.carId);
-  console.log("Todas las propiedades:", Object.keys(auto));
+  // console.log("=== ESTRUCTURA DEL AUTO ===");
+  // console.log("auto completo:", auto);
+  // console.log("auto.id:", auto.id);
+  // console.log("auto.id_car:", auto.id_car);
+  // console.log("auto.carId:", auto.carId);
+  // console.log("Todas las propiedades:", Object.keys(auto));
   const navigate = useNavigate();
   const hoy = new Date().toISOString().split("T")[0];
   const ahora = new Date();
@@ -95,10 +95,10 @@ function Modal({ auto, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const erroresModal = ModalValidation(formData); // Se pasan los datos que contiene el state formData a validacion
-    console.log("Errores encontrados:", erroresModal);
+    // console.log("Errores encontrados:", erroresModal);
 
     const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
-    console.log("User ID desde localStorage:", userId);
+    // console.log("User ID desde localStorage:", userId);
 
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
@@ -113,6 +113,8 @@ function Modal({ auto, onClose }) {
         hora_fin: formData.hora_fin,
         carId: auto.id,
         lugar_devolucion: formData.lugar_devolucion,
+        total: total,
+        tax: tax,
         userId,
       });
 
@@ -191,6 +193,9 @@ function Modal({ auto, onClose }) {
     return total * 0.21;
   };
   console.log(errores);
+
+  const total = calcularTotal();
+  const impuestos = calcularImpuestos(total);
 
   return (
     <div
@@ -349,9 +354,7 @@ function Modal({ auto, onClose }) {
                 />
                 <div className={styles.precioTotal}>
                   <span className={styles.text}>Total</span>
-                  <p className={styles.precio}>
-                    ${calcularTotal().toLocaleString()}
-                  </p>
+                  <p className={styles.precio}>${total.toLocaleString()}</p>
                 </div>
               </form>
             </div>

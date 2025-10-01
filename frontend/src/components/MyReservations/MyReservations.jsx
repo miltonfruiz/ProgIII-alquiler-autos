@@ -54,7 +54,8 @@ export default function MyReservations() {
           `http://localhost:3000/reservas/user/${loggedUser.id}`
         );
         const data = await res.json();
-        setReservations(data);
+        console.log("Reservas recibidas:", data);
+        setReservations(Array.isArray(data) ? data : data.reservas || []);
       } catch (error) {
         console.error("Error al obtener reservas:", error);
       }
@@ -125,10 +126,7 @@ export default function MyReservations() {
                       <IoPricetagSharp /> Días: {res.cant_dias}
                     </p>
                     <p>
-                      <TbTax /> Impuestos: $
-                      {typeof datosAlquiler.tax === "number"
-                        ? datosAlquiler.tax.toLocaleString()
-                        : "N/A"}
+                      <TbTax /> Impuestos: $ ${res.tax.toLocaleString()}
                     </p>
                     <p>
                       <FaHandHoldingUsd />
@@ -140,10 +138,7 @@ export default function MyReservations() {
                       Tipo de facturación: {res.facturacion}
                     </p>
                     <p>
-                      <BsCashCoin /> Total: $
-                      {typeof datosAlquiler.total === "number"
-                        ? datosAlquiler.total.toLocaleString()
-                        : "N/A"}
+                      <BsCashCoin /> Total: $ ${res.total.toLocaleString()}
                     </p>
                   </div>
                   <div className="reservation-actions">
