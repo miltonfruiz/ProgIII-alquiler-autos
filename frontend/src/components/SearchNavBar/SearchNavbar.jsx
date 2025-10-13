@@ -105,6 +105,7 @@ function SearchNavbar() {
           Escribe al menos {MIN_SEARCH_LENGTH} caracteres
         </div>
       )}
+
       {/* Loading */}
       {loading && <div className={styles.loading}>Buscando...</div>}
 
