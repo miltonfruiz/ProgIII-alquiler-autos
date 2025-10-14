@@ -8,6 +8,8 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+import { Reserva } from "./models/Reserva.js";
+
 import "./models/index.js";
 import "./models/Car.js";
 import "./models/Review.js";
@@ -20,6 +22,7 @@ import usersRoutes from "../routes/users.routes.js";
 import adminRoutes from "../routes/admin.routes.js";
 import reservasRoutes from "../routes/reservas.routes.js";
 import payRoutes from "../routes/pay.routes.js";
+// import { iniciarActualizacionReservas } from "../job/updateReservations.js";
 
 const app = express();
 
@@ -43,6 +46,8 @@ try {
     res.status(404).json({ message: "Ruta no encontrada" });
   });
   await sequelize.sync();
+  // Funcion para iniciar la tarea programa de actualizacion de reservas
+  // iniciarActualizacionReservas();
   //await sequelize.sync({ force: true }); para borrar datos de la tabla
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
