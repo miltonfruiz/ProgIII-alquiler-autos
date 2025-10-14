@@ -13,14 +13,14 @@ body.dark .contenedorGeneral {
   background-color: rgb(37, 32, 32);
 }
 
-.DatosFacturacion {
+/* Factracion */
+.datosFacturacion {
   width: 45rem;
-  height: 20rem;
+  height: 22rem;
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin: 1rem;
-  padding: 1em;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 body.dark .DatosFacturacion {
@@ -50,18 +50,29 @@ body.dark .DatosFacturacion {
 }
 
 .labelDatos {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .inputDatos {
   width: 15rem;
   height: 2.5rem;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   border-radius: 0.6rem;
   border: none;
   padding-left: 1rem;
+  border: 1px solid #a8a8a8;
+}
+
+.inputDatos:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
 .error {
@@ -78,7 +89,7 @@ body.dark .DatosFacturacion {
   grid-template-rows: 5.2em 5.2em;
   gap: 0.6em;
   margin-left: 3em;
-  margin-top: 2em;
+  padding: 1.5rem 2rem;
 }
 
 .cajaInputDatos {
@@ -86,6 +97,7 @@ body.dark .DatosFacturacion {
   flex-direction: column;
 }
 
+/* Metodo pago */
 .metodoPago {
   width: 45rem;
   min-height: 10rem;
@@ -93,8 +105,8 @@ body.dark .DatosFacturacion {
   border-radius: 0.7rem;
   margin: 1rem;
   margin-top: 2rem;
-  padding: 1em;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  padding-bottom: 1em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 body.dark .metodoPago {
@@ -133,7 +145,7 @@ body.dark .metodoPago {
   margin-left: 3em;
   cursor: pointer;
   transition: ease all 0.3s;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 .ingresoTarjeta:hover {
@@ -150,7 +162,7 @@ body.dark .metodoPago {
   margin: 1rem;
   margin-left: 3em;
   cursor: pointer;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 body.dark .ingresoTarjeta {
@@ -223,9 +235,9 @@ body.dark .ingresoTarjeta:hover {
 .gridDatosTarjeta {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 5.2em 5.2em;
+  grid-template-rows: 7rem 7rem;
   gap: 0.6em;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
 }
 
 .cajaInputTarjeta {
@@ -248,12 +260,13 @@ body.dark .ingresoTarjeta:hover {
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 body.dark .cajaTransferenciaBancaria {
   background-color: #000000;
-  box-shadow: 3px 3px 6px 3px #ffffff5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+
   outline: solid 1px #ffffff;
   transition: all 0.3s;
 }
@@ -281,7 +294,8 @@ body.dark .cajaTransferenciaBancariaClickeado {
 body.dark .cajaTransferenciaBancaria:hover {
   color: #000000;
   background-color: #a201e2a4;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+
   outline: solid #ffffff 1px;
 }
 
@@ -295,7 +309,8 @@ body.dark .cajaTransferenciaBancaria:hover {
   background-color: #6366f1;
   color: #ffffff;
   transition: 0.3s;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+
   transition: all 0.3s;
   margin-top: 1rem;
 }
@@ -309,13 +324,13 @@ body.dark .botonArchivo {
 body.dark .botonArchivo:hover {
   background-color: #7956b1;
   color: #000000;
-  box-shadow: 3px 3px 6px 3px #6e6e6e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 .botonArchivo:hover {
   background-color: #473fdb;
   color: #ffffff;
-  box-shadow: 3px 3px 6px 3px #9797975d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 .containerPago {
@@ -426,6 +441,7 @@ body.dark .botonSacarArchivo {
   margin-left: 1.5rem;
 }
 
+/* Info importante */
 .infoImportante {
   width: 45rem;
   height: 35.5rem;
@@ -433,8 +449,7 @@ body.dark .botonSacarArchivo {
   background-color: #ffffff;
   margin: 1rem;
   margin-top: 2rem;
-  padding: 1rem;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
 }
 
 body.dark .infoImportante {
@@ -496,146 +511,228 @@ body.dark .infoImportante {
   margin-right: 0.5rem;
 }
 
-.resumenDeAlquiler {
-  width: 30rem;
-  height: 33rem;
-  border-radius: 0.7rem;
-  background-color: #ffffff;
-  margin: 1rem;
+/* ResumenDeAlquiler.css */
+
+.contenedor-principal {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   padding: 1rem;
-  box-shadow: 3px 3px 6px 3px #5e5e5e5d;
+  min-height: 100vh;
+  background-color: #f9fafb;
 }
 
-body.dark .resumenDeAlquiler {
-  background-color: black;
-  box-shadow: 4px 4px 8px 3px #5e5e5e5d;
+.contenedor-aside {
+  width: 100%;
+  max-width: 28rem;
 }
 
-.tituloResumen {
-  margin-left: 1rem;
-  font-weight: 500;
+.resumen-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Header Section */
+.header-seccion {
+  background: linear-gradient(to bottom right, #6366f1, #6366f1);
+  padding: 1.5rem;
+  color: #ffffff;
+  border-radius: 0.7rem 0.7rem 0 0;
+}
+
+.titulo-principal {
   font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  margin: 0;
 }
 
-.subtituloResumen {
-  margin: 0.3rem 0 1.5rem 1.5rem;
-  font-weight: 400;
+.subtitulo-principal {
+  color: #d3d3e4;
   font-size: 0.875rem;
-  color: #90a3bf;
+  line-height: 1.5;
+  margin: 0.5rem 0 0 0;
 }
-.cajaValoracionAuto {
+
+/* Content Padding */
+.contenido-padding {
+  padding: 1.5rem;
+}
+
+/* Auto Info Box */
+.auto-info-box {
+  background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.auto-flex {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
-.imagenResumen {
-  width: 11rem;
+
+.imagen-auto {
+  width: 8rem;
   height: 5rem;
-  margin: 1rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.nombreAutos {
-  font-family: "Poppins";
-  font-weight: 600;
-  font-size: 1rem;
-  margin: 1rem;
+.auto-detalles {
+  flex: 1;
 }
 
-.valoracionResumen {
+.nombre-auto {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #1f2937;
+  margin: 0;
+}
+
+.brand-auto {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 0.5rem 0;
+}
+
+.valoracion-container {
   display: flex;
-  flex-direction: row;
-  margin-left: 0.4rem;
-  margin-left: 1rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.cajaSubtotal {
+.estrellas-flex {
   display: flex;
-  flex-direction: row;
+  gap: 0.25rem;
 }
 
-.cajaImpuestos {
-  display: flex;
-  flex-direction: row;
-}
-
-.cajaPrecioFinal {
-  display: flex;
-  flex-direction: row;
-}
-
-.estrella {
+.estrella-icon {
+  color: #fbbf24;
   width: 1rem;
   height: 1rem;
 }
 
-.valoracion {
-  font-size: 0.8rem;
-  margin-left: 0.4rem;
-}
-
-.linea {
-  width: 27rem;
-  height: 0.063rem;
-  border: solid #d9d9d9 0.1rem;
-  border-radius: 5px;
-  margin: 1rem 0 1rem 0.5rem;
-}
-
-body.dark .linea {
-  border: solid #ffffff 0.063rem;
-}
-
-.tituloSubtotal {
-  font-family: "Poppins";
-  font-weight: 00;
-  font-size: 1.25rem;
-  margin: 0.75rem 0 0 0.75rem;
-  color: #90a3bf;
-}
-
-.subtotal {
-  font-family: "Poppins";
-  font-weight: 500;
-  font-size: 1.25rem;
-  margin: 0.7rem;
-  margin-left: 14.5rem;
-}
-
-.tituloImpuestos {
-  font-family: "Poppins";
-  font-weight: 400;
-  font-size: 1.25rem;
-  margin: 0.3rem 0 0 0.75rem;
-  color: #90a3bf;
-}
-
-.impuestos {
-  font-family: "Poppins";
-  font-weight: 500;
-  font-size: 1.25rem;
-  margin: 0.3rem 0 1rem 0.75rem;
-  margin-left: 14rem;
-}
-
-.tituloPrecioFinal {
-  font-family: "Poppins";
-  font-weight: 500;
-  font-size: 1.25rem;
-  margin: 1rem 0 0 1rem;
-}
-
-.subtituloPrecioFinal {
-  font-family: "Poppins";
-  font-weight: 400;
+.texto-valoracion {
   font-size: 0.875rem;
-  margin: 0.3rem 0 0 1.5rem;
-  color: #90a3bf;
+  color: #4b5563;
+  font-weight: 500;
 }
 
-.precioFinal {
-  font-family: "Poppins";
+/* Price Breakdown */
+.precios-container {
+  margin-bottom: 1.5rem;
+}
+
+.precio-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.precio-label {
+  color: #4b5563;
   font-weight: 500;
-  font-size: 1.75rem;
-  margin: 1rem;
+}
+
+.precio-valor {
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.separador-gradiente {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d1d5db, transparent);
+  margin: 1rem 0;
+}
+
+/* Total Box */
+.total-box {
+  background-color: #eff6ff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 2px solid #9596e9;
+  margin-bottom: 1rem;
+}
+
+.total-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-titulo {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.total-subtitulo {
+  color: #4b5563;
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.total-precio-container {
+  text-align: right;
+}
+
+.total-precio {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #4346ca;
+  margin: 0;
+}
+
+/* Dark Mode Support */
+body.dark .contenedor-principal {
+  background-color: #111827;
+}
+
+body.dark .resumen-card {
+  background-color: #1f2937;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .auto-info-box {
+  background: linear-gradient(to bottom right, #374151, #4b5563);
+  border-color: #4b5563;
+}
+
+body.dark .nombre-auto {
+  color: #f9fafb;
+}
+
+body.dark .precio-label,
+body.dark .precio-valor {
+  color: #e5e7eb;
+}
+
+body.dark .total-box {
+  background-color: #1e3a8a;
+  border-color: #3b82f6;
+}
+
+body.dark .total-titulo {
+  color: #f9fafb;
+}
+
+body.dark .total-subtitulo {
+  color: #d1d5db;
+}
+
+body.dark .separador-gradiente {
+  background: linear-gradient(to right, transparent, #4b5563, transparent);
 }
 
 .botonRentar {
