@@ -5,6 +5,7 @@ import {
   getTodasLasReservas,
   updateReserva,
   deleteReserva,
+  getPastReservationsByUser,
 } from "../src/controller/reservas.controller.js";
 import { validateReservation } from "../src/middlewares/reservaValidation.js";
 
@@ -20,6 +21,7 @@ router.get("/reservas", getTodasLasReservas);
 router.put("/reservas/:id", updateReserva);
 //------------------- Eliminar reserva -------------------//
 router.delete("/reservas/:id", deleteReserva);
-//
+//------------------ Obtener reservas pasadas por usuario ------------------//
+router.get("/reservas/user/:id", getPastReservationsByUser);
 
 export default router;

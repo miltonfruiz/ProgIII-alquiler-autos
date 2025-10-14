@@ -9,7 +9,6 @@ const router = Router();
 
 router.post("/pays", payValidation, async (req, res) => {
   const {
-    carId,
     userId,
     id_reserva,
     cardType,
@@ -25,7 +24,6 @@ router.post("/pays", payValidation, async (req, res) => {
   console.log("datos de entrada", req.body);
 
   const pay = await Pay.create({
-    carId,
     userId,
     id_reserva,
     cardType,
@@ -37,7 +35,6 @@ router.post("/pays", payValidation, async (req, res) => {
     voucher,
     acceptableTerms,
   });
-  res.status(201).json(pay);
 
   //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
 
@@ -47,6 +44,8 @@ router.post("/pays", payValidation, async (req, res) => {
   );
 
   await Car.update({ estado: "no disponible" }, { where: { id: carId } });
+
+  res.status(201).json(pay);
 });
 
 //-------------------------- obtener pagos de una persona------------------
