@@ -114,21 +114,31 @@ export async function getTodasLasReservas(req, res) {
 export async function updateReserva(req, res) {
   try {
     const { id } = req.params;
-    const { fecha_inicio, fecha_fin } = req.body;
+    const { fecha_inicio, fecha_fin, estado_reserva } = req.body;
     const { hora_inicio, hora_fin } = req.body;
-    const inicio = new Date(fecha_inicio);
-    const fin = new Date(fecha_fin);
-    const diffTime = Math.abs(fin - inicio);
-    const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
     const reserva = await Reserva.findByPk(id);
     if (!reserva) {
       return res.status(404).json({ mensaje: "Reserva no encontrada" });
     }
-    reserva.hora_inicio = hora_inicio;
-    reserva.hora_fin = hora_fin;
-    reserva.fecha_inicio = fecha_inicio;
-    reserva.fecha_fin = fecha_fin;
-    reserva.cant_dias = cant_dias;
+
+    // Si vienen fechas, recalcular cant_dias
+    if (fecha_inicio && fecha_fin) {
+      const inicio = new Date(fecha_inicio);
+      const fin = new Date(fecha_fin);
+      const diffTime = Math.abs(fin - inicio);
+      const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      reserva.fecha_inicio = fecha_inicio;
+      reserva.fecha_fin = fecha_fin;
+      reserva.cant_dias = cant_dias;
+    }
+
+    // Si viene el estado, actualizar solo eso
+    if (estado_reserva) {
+      reserva.estado_reserva = estado_reserva;
+    }
+
     await reserva.save();
 
     const reservaActualizada = await Reserva.findByPk(id, {
@@ -155,5 +165,46 @@ export async function deleteReserva(req, res) {
   } catch (error) {
     console.error("Error al eliminar reserva:", error);
     res.status(500).json({ mensaje: "Error al eliminar reserva" });
+  }
+}
+
+export async function getPastReservationsByUser(req, res) {
+  try {
+    const { id } = req.params;
+
+    const pastReservations = await Reserva.findAll({
+      where: {
+        userId: id,
+        fecha_fin: { $lt: new Date() }, // Reservas con fecha_fin anterior a hoy
+      },
+      include: [
+        {
+          model: Auto, // Incluye el modelo del auto para obtener imagen, nombre, etc.
+          attributes: ["nombre", "imagen", "precio_por_dia"],
+        },
+      ],
+      // Ordena por fecha_fin descendente para mostrar las más recientes primero
+      order: [["fecha_fin", "DESC"]],
+    });
+
+    // Formatear los datos para el frontend
+    const formattedReservations = pastReservations.map((reserva) => ({
+      id: reserva.id_reserva,
+      auto: reserva.Auto.nombre,
+      fecha: reserva.fecha_inicio,
+      imagen: reserva.Auto.imagen,
+      precio: parseFloat(reserva.total) - parseFloat(reserva.tax),
+      impuestos: parseFloat(reserva.tax),
+      metodoPago: reserva.metodo_pago || "No especificado",
+      facturacion: reserva.tipo_factura || "Factura B",
+      total: parseFloat(reserva.total),
+    }));
+
+    res.json(formattedReservations);
+  } catch (error) {
+    console.error("Error al obtener reservas pasadas del usuario:", error);
+    res
+      .status(500)
+      .json({ error: "Error al obtener reservas pasadas del usuario" });
   }
 }
