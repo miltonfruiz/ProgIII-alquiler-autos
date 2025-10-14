@@ -54,11 +54,9 @@ export const Reserva = sequelize.define(
     },
     total: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
     },
     tax: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
     },
   },
   {
