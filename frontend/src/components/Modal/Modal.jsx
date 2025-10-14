@@ -94,11 +94,9 @@ function Modal({ auto, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const erroresModal = ModalValidation(formData); // Se pasan los datos que contiene el state formData a validacion
-    // console.log("Errores encontrados:", erroresModal);
+    const erroresModal = ModalValidation(formData);
 
     const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
-    // console.log("User ID desde localStorage:", userId);
 
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
@@ -106,6 +104,10 @@ function Modal({ auto, onClose }) {
     }
 
     try {
+      const total = calcularTotal();
+      const impuestos = calcularImpuestos(total);
+      const precioFinal = total + impuestos;
+
       const { success } = await crearReserva({
         fecha_inicio: formData.fecha_inicio,
         fecha_fin: formData.fecha_fin,
@@ -114,26 +116,17 @@ function Modal({ auto, onClose }) {
         carId: auto.id,
         lugar_devolucion: formData.lugar_devolucion,
         total: total,
-        tax: tax,
+        tax: impuestos,
         userId,
       });
 
       if (success) {
-        // Branco: agrego esto para crear un id de reserva porque en el front no lo encontre en ningun lado
-        // ---------------------------------------------------------
-
+        // Contador de reservas
         let contador = localStorage.getItem("contadorReservas");
-
         contador = contador ? parseInt(contador) : 0;
-
         contador++;
-
         localStorage.setItem("contadorReservas", contador);
-        // --------------------------------------------------------
 
-        const total = calcularTotal();
-        const impuestos = calcularImpuestos(total);
-        const precioFinal = total + impuestos;
         // Guardar datos en localStorage
         const datosAlquiler = {
           auto: auto,
