@@ -41,6 +41,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
 
   const [pago, setPago] = useState({});
 
+  const [ultimoAutoId, setUltimoAutoId] = useState(null);
+  const [ultimoUsuarioId, setUltimoUsuarioId] = useState(null);
+  const [ultimaReservaId, setUltimaReservaId] = useState(null);
+
   const [imgTarjetas, setImgTarjetas] = useState("visa");
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
@@ -57,6 +61,12 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   useEffect(() => {
     setPago((prev) => ({
       ...prev,
+      userId: ultimoUsuarioId,
+      carId: ultimoAutoId,
+      reservaId: ultimaReservaId,
+      subtotal: JSON.parse(localStorage.getItem("datosAlquiler")).total,
+      tax: JSON.parse(localStorage.getItem("datosAlquiler")).tax,
+      total: JSON.parse(localStorage.getItem("datosAlquiler")).totalFinal,
       cardType: tipoTarjeta,
       PaymentMethod: choicePayment === "tarjeta" ? "tarjeta" : "transferencia",
       cardNumber: datosTarjeta.numeroTarjeta,
@@ -103,7 +113,10 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     const ultimaReserva = reservas[reservas.length - 1];
     const ultimoAuto = autos[autos.length - 1];
     const ultimoUsuario = usuarios[usuarios.length - 1];
-    CrearPago(pago, ultimoUsuario.id, ultimoAuto.id, ultimaReserva.id_reserva);
+    setUltimoAutoId(ultimoAuto.id);
+    setUltimoUsuarioId(ultimoUsuario.id);
+    setUltimaReservaId(ultimaReserva.id_reserva);
+    CrearPago(pago);
   }
 
   function handleTarjeta(e) {

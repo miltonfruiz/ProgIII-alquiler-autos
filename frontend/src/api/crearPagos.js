@@ -1,9 +1,4 @@
-export const CrearPago = async (
-  pago,
-  id_ulitmo_usuario,
-  id_ultimo_auto,
-  id_ultima_reserva
-) => {
+export const CrearPago = async (pago) => {
   try {
     const response = await fetch("http://localhost:3000/pagos", {
       method: "POST",
