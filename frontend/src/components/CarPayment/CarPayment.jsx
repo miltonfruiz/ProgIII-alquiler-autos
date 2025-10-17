@@ -4,7 +4,7 @@ import { FaCcMastercard } from "react-icons/fa6";
 import { SiAmericanexpress } from "react-icons/si";
 import { IoCard } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./CarPayment.css";
 import {
   objetosFormPersona,
@@ -18,6 +18,11 @@ import {
   ConfirmarReserva,
   CancelarReserva,
 } from "../../api/actualizarReservas";
+import {
+  CrearPago,
+  ObtenerAutos,
+  ObtenerUsuarios,
+} from "../../api/crearPagos.js";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
@@ -34,6 +39,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     cvc: "",
   });
 
+  const [pago, setPago] = useState({});
+
   const [imgTarjetas, setImgTarjetas] = useState("visa");
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
@@ -46,6 +53,20 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   const inputRef = useRef(null);
   const eleccionTarjetaRef = useRef(null);
   const eleccionTransferRef = useRef(null);
+
+  useEffect(() => {
+    setPago((prev) => ({
+      ...prev,
+      cardType: tipoTarjeta,
+      PaymentMethod: choicePayment === "tarjeta" ? "tarjeta" : "transferencia",
+      cardNumber: datosTarjeta.numeroTarjeta,
+      expirationDate: datosTarjeta.fechaTarjeta,
+      ownerName: datosTarjeta.nombreTarjeta,
+      cvc: datosTarjeta.cvc,
+      voucher: file ? file.name : null,
+      aceptableTerms: checkbox ? "si" : "no",
+    }));
+  }, [tipoTarjeta, choicePayment, datosTarjeta, file, checkbox]);
 
   function handleDatosFacturacion(e) {
     setDatosFacturacion({
@@ -75,8 +96,14 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
       onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
 
-    const data = await ObtenerReservas();
-    ConfirmarReserva(data);
+    const reservas = await ObtenerReservas();
+    const autos = await ObtenerAutos();
+    const usuarios = await ObtenerUsuarios();
+    ConfirmarReserva(reservas);
+    const ultimaReserva = reservas[reservas.length - 1];
+    const ultimoAuto = autos[autos.length - 1];
+    const ultimoUsuario = usuarios[usuarios.length - 1];
+    CrearPago(pago, ultimoUsuario.id, ultimoAuto.id, ultimaReserva.id_reserva);
   }
 
   function handleTarjeta(e) {
