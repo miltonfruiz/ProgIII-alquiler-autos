@@ -321,31 +321,35 @@ td {
 }
 
 .cancel-button-cars {
-  background-color: #ff4d4f;
-  font-size: 11px;
-  color: white;
-  padding: 10px 29px;
-  border: none;
+  background-color: #ffffff;
+  font-size: 12px;
+  font-family: 500;
+  color: #111827;
+  padding: 12px 29px;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: background 0.3s ease;
+  transition: all 0.4s ease;
 }
 .cancel-button-cars:hover {
   background-color: #d9363e;
+  color: white;
+  border: 1px solid #d9363e;
 }
 .cancel-icon-cars {
   color: white;
   font-size: 13px;
 }
 .create-button-cars {
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
   background-color: #10b981;
   color: white;
-  padding: 10px 39px;
+  padding: 13px 39px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
