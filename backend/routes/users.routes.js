@@ -3,6 +3,7 @@ import { User } from "../src/models/User.js";
 import { userValidation } from "../src/middlewares/userValidation.js";
 import { userPartialValidation } from "../src/middlewares/userPartialValidation.js";
 import nodemailer from "nodemailer";
+import bcrypt from "bcrypt";
 
 const router = Router();
 
@@ -40,6 +41,12 @@ router.post("/users", userValidation, async (req, res) => {
       licencia,
       numeroTelefonico,
     } = req.body;
+
+    // Validar que las contraseñas coincidan
+    if (contraseña !== repetirContraseña) {
+      return res.status(400).json({ error: "Las contraseñas no coinciden" });
+    }
+
     const existeDNI = await User.findOne({ where: { dni } });
     if (existeDNI) {
       return res
@@ -53,16 +60,22 @@ router.post("/users", userValidation, async (req, res) => {
         .status(400)
         .json({ error: "Ya existe un usuario con ese correo" });
     }
+
+    // Encriptacion de la contraseña
+    const saltRounds = 10;
+    const contraseñaEncriptada = await bcrypt.hash(contraseña, saltRounds);
+
     const newUser = await User.create({
       nombre,
       apellido,
       correo,
-      contraseña,
+      contraseña: contraseñaEncriptada,
       dni,
       nacimiento,
       licencia,
       numeroTelefonico,
     });
+
     res.status(201).json(newUser);
   } catch (error) {
     console.error("Error al crear usuario:", error);
@@ -165,22 +178,68 @@ router.post("/password-recovery", async (req, res) => {
 //------------------- Restablecer Contraseña -------------------//
 router.post("/reset-password", async (req, res) => {
   const { correo, nuevaContraseña, repetirContraseña } = req.body;
+
   if (!correo || !nuevaContraseña || !repetirContraseña) {
     return res.status(400).json({ error: "Todos los campos son obligatorios" });
   }
+
   if (nuevaContraseña !== repetirContraseña) {
     return res.status(400).json({ error: "Las contraseñas no coinciden" });
   }
+
   const user = await User.findOne({ where: { correo } });
+
   if (!user) {
     return res.status(404).json({ error: "Usuario no encontrado" });
   }
+
+  // Encriptacion de la nueva contraseña
   try {
-    await user.update({ contraseña: nuevaContraseña });
+    // Encriptar la nueva contraseña antes de guardarla
+    const saltRounds = 10;
+    const contraseñaEncriptada = await bcrypt.hash(nuevaContraseña, saltRounds);
+
+    await user.update({ contraseña: contraseñaEncriptada });
+
     res.status(200).json({ message: "Contraseña actualizada correctamente" });
   } catch (error) {
     console.error("Error al actualizar contraseña:", error);
     res.status(500).json({ error: "Error al actualizar la contraseña" });
+  }
+});
+
+// ------------------- LOGIN ------------------- //
+router.post("/login", async (req, res) => {
+  try {
+    const { correo, contraseña } = req.body;
+
+    if (!correo || !contraseña) {
+      return res.status(400).json({ error: "Correo y contraseña requeridos" });
+    }
+
+    const user = await User.findOne({ where: { correo } });
+
+    if (!user) {
+      return res.status(401).json({ error: "Usuario no encontrado" });
+    }
+
+    const passwordMatch = await bcrypt.compare(contraseña, user.contraseña);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Contraseña incorrecta" });
+    }
+
+    res.status(200).json({
+      message: "Inicio de sesión exitoso",
+      user: {
+        id: user.id,
+        nombre: user.nombre,
+        correo: user.correo,
+      },
+    });
+  } catch (error) {
+    console.error("Error en el login:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 });
 
