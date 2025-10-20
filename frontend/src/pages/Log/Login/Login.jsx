@@ -56,7 +56,6 @@ const Login = ({ setLogged }) => {
           );
 
           setTimeout(() => {
-            // Verificar si es admin (puedes agregar un campo role en la BD)
             if (data.user.correo === "admin@test.com") {
               navigate("/administration");
             } else {
