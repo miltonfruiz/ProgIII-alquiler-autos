@@ -9,41 +9,6 @@ import ModalValidation from "../ModalValidation/ModalValidation";
 import { useTranslation } from "react-i18next";
 
 export default function MyPastReservations() {
-  // const [pastReservations] = useState([
-  //   {
-  //     id: 1,
-  //     auto: "Chevrolet Prisma",
-  //     fecha: "2024-12-01",
-  //     imagen: "/images/cars/chevroletPrisma.png",
-  //     precio: 28000,
-  //     impuestos: 5900,
-  //     metodoPago: "Tarjeta de débito",
-  //     facturacion: "Factura A",
-  //     total: 33900,
-  //   },
-  //   {
-  //     id: 2,
-  //     auto: "Fiat Cronos",
-  //     fecha: "2024-11-15",
-  //     imagen: "/images/cars/fiat-cronos.png",
-  //     precio: 22000,
-  //     impuestos: 4600,
-  //     metodoPago: "Transferencia",
-  //     facturacion: "Factura B",
-  //     total: 26600,
-  //   },
-  //   {
-  //     id: 3,
-  //     auto: "Peugeot 208",
-  //     fecha: "2024-10-10",
-  //     imagen: "/images/cars/peugeot208.png",
-  //     precio: 24000,
-  //     impuestos: 5100,
-  //     metodoPago: "Mercado Pago",
-  //     facturacion: "Factura B",
-  //     total: 29100,
-  //   },
-  // ]);
   const [ratings, setRatings] = useState({});
   const [modalReservaId, setModalReservaId] = useState(null);
   const [expandedIds, setExpandedIds] = useState([]);
