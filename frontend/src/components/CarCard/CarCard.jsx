@@ -22,7 +22,11 @@ const CarCard = ({
       </div>
 
       <div className={styles.imageContainer}>
-        <img className={styles.cardImage} src={image} alt={name} />
+        <img
+          className={styles.cardImage}
+          src={`http://localhost:3000${image}`}
+          alt={name}
+        />
       </div>
 
       <div className={styles.cardDataCar}>
