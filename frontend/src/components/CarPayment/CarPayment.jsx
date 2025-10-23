@@ -382,8 +382,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               onChange={(e) => setCheckBox(e.target.checked)}
             />
             <p className="textoAcepto">Acepto Terminos y condiciones</p>
+            {errores.checkbox && <p className="error">{errores.checkbox}</p>}
           </div>
-          {errores.checkbox && <p className="error">{errores.checkbox}</p>}
         </div>
 
         <button type="button" className="botonRentar" onClick={handleSubmit}>

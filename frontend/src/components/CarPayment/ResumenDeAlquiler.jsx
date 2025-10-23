@@ -23,20 +23,20 @@ const ResumenDeAlquiler = () => {
               <div className="auto-flex">
                 <img
                   className="imagen-auto"
-                  src={datosAlquiler.auto.image}
+                  src={`http://localhost:3000${datosAlquiler.auto.image}`}
                   alt={datosAlquiler.auto.name}
                 />
                 <div className="auto-detalles">
                   <p className="nombre-auto">{datosAlquiler.auto.name}</p>
                   <p className="brand-auto">{datosAlquiler.auto.brand}</p>
-                  <div className="valoracion-container">
+                  {/* <div className="valoracion-container">
                     <div className="estrellas-flex">
                       {[0, 1, 2, 3, 4].map((index) => (
                         <FaStar key={index} className="estrella-icon" />
                       ))}
                     </div>
                     <span className="texto-valoracion">valoraciones</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
