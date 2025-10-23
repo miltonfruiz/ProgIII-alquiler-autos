@@ -68,7 +68,7 @@
 }
 .car-image {
   width: 150px;
-  height: auto;
+  height: fit-content;
   object-fit: cover;
 }
 

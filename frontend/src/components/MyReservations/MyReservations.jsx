@@ -105,7 +105,7 @@ export default function MyReservations() {
                 }`}
               >
                 <img
-                  src={res.Car?.image || "/images/volkswagen.png"}
+                  src={`http://localhost:3000${res.Car.image}`}
                   alt={res.Car?.name}
                   className="car-image"
                 />
