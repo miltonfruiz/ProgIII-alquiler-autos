@@ -203,7 +203,9 @@ function Modal({ auto, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.overlayContent}>
-          <h4 className={styles.overlayTitle}>Reserva</h4>
+          <div className={styles.modalHeader}>
+            <h3 className={styles.overlayTitle}>Reserva</h3>
+          </div>
           <div className={styles.modalBody}>
             <div className={styles.leftPanel}>
               <div className={styles.carReserva}>
@@ -217,7 +219,10 @@ function Modal({ auto, onClose }) {
                 <div className={styles.carImage}>
                   {/* Aquí puedes agregar una imagen del auto si está disponible */}
                   <div className={styles.imagePlaceholder}>
-                    <img src={auto.img} alt="Imagen del auto" />
+                    <img
+                      src={`http://localhost:3000${auto.image}`}
+                      alt="Imagen del auto"
+                    />
                   </div>
                   <div className={styles.carDetails}>
                     <h4>Esta reserva incluye</h4>
