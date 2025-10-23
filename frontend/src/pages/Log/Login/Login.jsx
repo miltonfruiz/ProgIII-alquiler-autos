@@ -24,6 +24,7 @@ const Login = ({ setLogged }) => {
       }
       setErrores(errorValidation);
     } else {
+      // Usar el endpoint /login que ya maneja bcrypt
       fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
@@ -56,6 +57,7 @@ const Login = ({ setLogged }) => {
           );
 
           setTimeout(() => {
+            // Verificar si es admin (puedes agregar un campo role en la BD)
             if (data.user.correo === "admin@test.com") {
               navigate("/administration");
             } else {
