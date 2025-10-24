@@ -1,6 +1,10 @@
 import { Reserva } from "../models/Reserva.js";
 import { Car } from "../models/Car.js";
 import { User } from "../models/User.js";
+import { actualizarReservasFinalizadas } from "../../job/updateReservations.js";
+import { Op } from "sequelize";
+
+actualizarReservasFinalizadas();
 
 export async function createReserva(req, res) {
   try {
@@ -72,16 +76,22 @@ export async function createReserva(req, res) {
 }
 export async function getReservasPorUsuario(req, res) {
   const { id } = req.params;
-  const hoy = new Date().toISOString().split("T")[0];
+
   try {
     const reservas = await Reserva.findAll({
-      where: { userId: id },
+      where: {
+        userId: id,
+        estado_reserva: {
+          [Op.in]: ["pendiente", "confirmada"],
+        },
+      },
       include: [
         {
           model: Car,
           attributes: ["name", "image", "brand", "price"],
         },
       ],
+      order: [["fecha_inicio", "DESC"]],
     });
 
     res.status(200).json(reservas);
@@ -92,6 +102,8 @@ export async function getReservasPorUsuario(req, res) {
 }
 export async function getTodasLasReservas(req, res) {
   try {
+    await actualizarReservasFinalizadas();
+
     const reservas = await Reserva.findAll({
       include: [
         {
@@ -114,8 +126,8 @@ export async function getTodasLasReservas(req, res) {
 export async function updateReserva(req, res) {
   try {
     const { id } = req.params;
-    const { fecha_inicio, fecha_fin, estado_reserva } = req.body;
-    const { hora_inicio, hora_fin } = req.body;
+    const { fecha_inicio, fecha_fin, estado_reserva, hora_inicio, hora_fin } =
+      req.body;
 
     const reserva = await Reserva.findByPk(id);
     if (!reserva) {
@@ -133,6 +145,10 @@ export async function updateReserva(req, res) {
       reserva.fecha_fin = fecha_fin;
       reserva.cant_dias = cant_dias;
     }
+
+    // Actualizar horarios si vienen
+    if (hora_inicio) reserva.hora_inicio = hora_inicio;
+    if (hora_fin) reserva.hora_fin = hora_fin;
 
     // Si viene el estado, actualizar solo eso
     if (estado_reserva) {
@@ -172,39 +188,43 @@ export async function getPastReservationsByUser(req, res) {
   try {
     const { id } = req.params;
 
+    // Buscar solo reservas con estado "finalizada"
     const pastReservations = await Reserva.findAll({
       where: {
         userId: id,
-        fecha_fin: { $lt: new Date() }, // Reservas con fecha_fin anterior a hoy
+        estado_reserva: "finalizada",
       },
       include: [
         {
-          model: Auto, // Incluye el modelo del auto para obtener imagen, nombre, etc.
-          attributes: ["nombre", "imagen", "precio_por_dia"],
+          model: Car,
+          attributes: ["name", "brand", "image", "price"],
+          required: false,
         },
       ],
-      // Ordena por fecha_fin descendente para mostrar las más recientes primero
-      order: [["fecha_fin", "DESC"]],
+      order: [["fecha_fin", "DESC"]], // Más recientes primero
     });
 
     // Formatear los datos para el frontend
     const formattedReservations = pastReservations.map((reserva) => ({
       id: reserva.id_reserva,
-      auto: reserva.Auto.nombre,
+      auto: reserva.Car ? `${reserva.Car.name}` : "Auto eliminado",
       fecha: reserva.fecha_inicio,
-      imagen: reserva.Auto.imagen,
-      precio: parseFloat(reserva.total) - parseFloat(reserva.tax),
-      impuestos: parseFloat(reserva.tax),
-      metodoPago: reserva.metodo_pago || "No especificado",
-      facturacion: reserva.tipo_factura || "Factura B",
-      total: parseFloat(reserva.total),
+      imagen: reserva.Car?.image
+        ? `http://localhost:3000${reserva.Car.image}`
+        : null,
+      precio: parseFloat(reserva.total || 0) - parseFloat(reserva.tax || 0),
+      impuestos: parseFloat(reserva.tax || 0),
+      total: parseFloat(reserva.total || 0),
+      fecha_fin: reserva.fecha_fin,
+      hora_fin: reserva.hora_fin,
     }));
 
-    res.json(formattedReservations);
+    res.status(200).json(formattedReservations);
   } catch (error) {
     console.error("Error al obtener reservas pasadas del usuario:", error);
-    res
-      .status(500)
-      .json({ error: "Error al obtener reservas pasadas del usuario" });
+    res.status(500).json({
+      error: "Error al obtener reservas pasadas del usuario",
+      mensaje: error.message,
+    });
   }
 }

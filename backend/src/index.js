@@ -22,7 +22,7 @@ import usersRoutes from "../routes/users.routes.js";
 import adminRoutes from "../routes/admin.routes.js";
 import reservasRoutes from "../routes/reservas.routes.js";
 import payRoutes from "../routes/pay.routes.js";
-// import { iniciarActualizacionReservas } from "../job/updateReservations.js";
+import { iniciarActualizacionReservas } from "../job/updateReservations.js";
 
 const app = express();
 
@@ -47,7 +47,7 @@ try {
   });
   await sequelize.sync();
   // Funcion para iniciar la tarea programa de actualizacion de reservas
-  // iniciarActualizacionReservas();
+  iniciarActualizacionReservas();
   //await sequelize.sync({ force: true }); para borrar datos de la tabla
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
