@@ -15,12 +15,12 @@ import {
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
-  console.log("=== ESTRUCTURA DEL AUTO ===");
-  console.log("auto completo:", auto);
-  console.log("auto.id:", auto.id);
-  console.log("auto.id_car:", auto.id_car);
-  console.log("auto.carId:", auto.carId);
-  console.log("Todas las propiedades:", Object.keys(auto));
+  // console.log("=== ESTRUCTURA DEL AUTO ===");
+  // console.log("auto completo:", auto);
+  // console.log("auto.id:", auto.id);
+  // console.log("auto.id_car:", auto.id_car);
+  // console.log("auto.carId:", auto.carId);
+  // console.log("Todas las propiedades:", Object.keys(auto));
   const navigate = useNavigate();
   const hoy = new Date().toISOString().split("T")[0];
   const ahora = new Date();
@@ -94,11 +94,9 @@ function Modal({ auto, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const erroresModal = ModalValidation(formData); // Se pasan los datos que contiene el state formData a validacion
-    console.log("Errores encontrados:", erroresModal);
+    const erroresModal = ModalValidation(formData);
 
     const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
-    console.log("User ID desde localStorage:", userId);
 
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
@@ -106,6 +104,10 @@ function Modal({ auto, onClose }) {
     }
 
     try {
+      const total = calcularTotal();
+      const impuestos = calcularImpuestos(total);
+      const precioFinal = total + impuestos;
+
       const { success } = await crearReserva({
         fecha_inicio: formData.fecha_inicio,
         fecha_fin: formData.fecha_fin,
@@ -113,25 +115,18 @@ function Modal({ auto, onClose }) {
         hora_fin: formData.hora_fin,
         carId: auto.id,
         lugar_devolucion: formData.lugar_devolucion,
+        total: total,
+        tax: impuestos,
         userId,
       });
 
       if (success) {
-        // Branco: agrego esto para crear un id de reserva porque en el front no lo encontre en ningun lado
-        // ---------------------------------------------------------
-
+        // Contador de reservas
         let contador = localStorage.getItem("contadorReservas");
-
         contador = contador ? parseInt(contador) : 0;
-
         contador++;
-
         localStorage.setItem("contadorReservas", contador);
-        // --------------------------------------------------------
 
-        const total = calcularTotal();
-        const impuestos = calcularImpuestos(total);
-        const precioFinal = total + impuestos;
         // Guardar datos en localStorage
         const datosAlquiler = {
           auto: auto,
@@ -192,6 +187,9 @@ function Modal({ auto, onClose }) {
   };
   console.log(errores);
 
+  const total = calcularTotal();
+  const impuestos = calcularImpuestos(total);
+
   return (
     <div
       className={styles.overlayBack}
@@ -205,7 +203,9 @@ function Modal({ auto, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.overlayContent}>
-          <h4 className={styles.overlayTitle}>Reserva</h4>
+          <div className={styles.modalHeader}>
+            <h3 className={styles.overlayTitle}>Reserva</h3>
+          </div>
           <div className={styles.modalBody}>
             <div className={styles.leftPanel}>
               <div className={styles.carReserva}>
@@ -219,7 +219,10 @@ function Modal({ auto, onClose }) {
                 <div className={styles.carImage}>
                   {/* Aquí puedes agregar una imagen del auto si está disponible */}
                   <div className={styles.imagePlaceholder}>
-                    <img src={auto.img} alt="Imagen del auto" />
+                    <img
+                      src={`http://localhost:3000${auto.image}`}
+                      alt="Imagen del auto"
+                    />
                   </div>
                   <div className={styles.carDetails}>
                     <h4>Esta reserva incluye</h4>
@@ -349,9 +352,7 @@ function Modal({ auto, onClose }) {
                 />
                 <div className={styles.precioTotal}>
                   <span className={styles.text}>Total</span>
-                  <p className={styles.precio}>
-                    ${calcularTotal().toLocaleString()}
-                  </p>
+                  <p className={styles.precio}>${total.toLocaleString()}</p>
                 </div>
               </form>
             </div>

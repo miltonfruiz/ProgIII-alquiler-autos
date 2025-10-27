@@ -13,7 +13,7 @@ const router = Router();
 //------------------- Configuración del almacenamiento -------------------//
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, path.join(__dirname, "../src/uploads")); // apunta a /backend/src/uploads
   },
   filename: function (req, file, cb) {
     const uniqueName = Date.now() + "-" + file.originalname;
@@ -51,7 +51,7 @@ router.post(
       const { name, category, passengers, transmission, price, brand, estado } =
         req.body;
 
-      const image = `http://localhost:3000/uploads/${req.file.filename}`;
+      const image = `/uploads/${req.file.filename}`;
 
       const car = await Car.create({
         name,

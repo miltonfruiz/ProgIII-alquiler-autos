@@ -13,13 +13,14 @@ import { BsCalendarDateFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 import { MdDashboardCustomize } from "react-icons/md";
 import SearchNavbar from "../SearchNavBar/SearchNavbar";
-import ResultsSearch from "../SearchNavBar/ResultsSearch/ResultsSearch";
 
 import "react-toastify/dist/ReactToastify.css";
 
 export default function UserNavbar() {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  //State para el menu movil
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const dropdownRef = useRef(null);
   const { theme, toggleTheme } = useTheme();
   const [showLanguages, setShowLanguages] = useState(false);
@@ -78,7 +79,13 @@ export default function UserNavbar() {
     }
   }, [showDropdown]);
 
+  // Cerrar menú móvil al cambiar de ruta
+  useEffect(() => {
+    setShowMobileMenu(false);
+  }, [location]);
+
   const currentLang = i18n.language;
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -91,10 +98,13 @@ export default function UserNavbar() {
           />
         </div>
       </div>
+
       <div className="navbar-center">
         <SearchNavbar />
       </div>
+
       <div className="navbar-right">
+        {/* Iconos para desktop/tablet */}
         <div className="icon-wrapper">
           {userEmail === "admin@test.com" && (
             <div className="nav-item">
@@ -118,22 +128,21 @@ export default function UserNavbar() {
               }}
             >
               <BsCalendarDateFill className="BsCalendarDateFill-icon nav-icon" />
+              <span className="nav-title">{t("navbar.reservations")}</span>
             </Link>
           </div>
           <div className="nav-item">
             <Link to="/shop" className="nav-link">
-              {" "}
-              <FaCar
-                title="Tienda de Autos"
-                className="faCar-icon nav-icon"
-              />{" "}
+              <FaCar title="Tienda de Autos" className="faCar-icon nav-icon" />
+              <span className="nav-title">{t("navbar.shop")}</span>
             </Link>
           </div>
           <div className="user-dropdown nav-item nav-link" ref={dropdownRef}>
             <FaUser
               className="faUserEdit-icon nav-icon"
               onClick={() => setShowDropdown((prev) => !prev)}
-            />{" "}
+            />
+            <span className="nav-title">{t("navbar.profile")}</span>
             {showDropdown && (
               <div
                 className="dropdown-menu"
@@ -143,7 +152,7 @@ export default function UserNavbar() {
                   className={`fade-button ${fade ? "fade-out" : ""}`}
                   onClick={() => setShowLanguages((prev) => !prev)}
                 >
-                  <IoLanguage className="icon-item-profile" />{" "}
+                  <IoLanguage className="icon-item-profile" />
                   {t("navbar.language")}
                 </button>
                 {showLanguages && (
@@ -177,12 +186,12 @@ export default function UserNavbar() {
                 >
                   {theme === "dark" ? (
                     <>
-                      <FiSun className="icon-item-profile" />{" "}
+                      <FiSun className="icon-item-profile" />
                       {t("navbar.themeLight")}
                     </>
                   ) : (
                     <>
-                      <FiMoon className="icon-item-profile" />{" "}
+                      <FiMoon className="icon-item-profile" />
                       {t("navbar.themeDark")}
                     </>
                   )}
@@ -213,7 +222,110 @@ export default function UserNavbar() {
             )}
           </div>
         </div>
+
+        {/* Menú hamburguesa para móvil */}
+        <div
+          className={`hamburger-menu ${showMobileMenu ? "active" : ""}`}
+          onClick={() => setShowMobileMenu((prev) => !prev)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
+
+      {/* Menú móvil */}
+      <div className={`mobile-menu ${showMobileMenu ? "active" : ""}`}>
+        {userEmail === "admin@test.com" && (
+          <div className="nav-item">
+            <Link to="/administration" className="nav-link">
+              <MdDashboardCustomize className="nav-icon" />
+              <span className="nav-title">{t("navbar.dashboard")}</span>
+            </Link>
+          </div>
+        )}
+        <div className="nav-item">
+          <Link
+            to="/user-profile"
+            className="nav-link"
+            onClick={() => {
+              setTimeout(() => {
+                const target = document.getElementById("my-reservations-link");
+                if (target) target.scrollIntoView({ behavior: "smooth" });
+              }, 500);
+            }}
+          >
+            <BsCalendarDateFill className="nav-icon" />
+            <span className="nav-title">
+              {t("navbar.reservations") || "Reservas"}
+            </span>
+          </Link>
+        </div>
+        <div className="nav-item">
+          <Link to="/shop" className="nav-link">
+            <FaCar className="nav-icon" />
+            <span className="nav-title">{t("navbar.shop") || "Tienda"}</span>
+          </Link>
+        </div>
+        <div className="nav-item">
+          <Link to="/user-profile" className="nav-link">
+            <CiEdit className="nav-icon" />
+            <span className="nav-title">{t("navbar.editProfile")}</span>
+          </Link>
+        </div>
+        <div className="nav-item" onClick={toggleTheme}>
+          <div className="nav-link">
+            {theme === "dark" ? (
+              <>
+                <FiSun className="nav-icon" />
+                <span className="nav-title">{t("navbar.themeLight")}</span>
+              </>
+            ) : (
+              <>
+                <FiMoon className="nav-icon" />
+                <span className="nav-title">{t("navbar.themeDark")}</span>
+              </>
+            )}
+          </div>
+        </div>
+        <div
+          className="nav-item"
+          onClick={() => setShowLanguages((prev) => !prev)}
+        >
+          <div className="nav-link">
+            <IoLanguage className="nav-icon" />
+            <span className="nav-title">{t("navbar.language")}</span>
+          </div>
+        </div>
+        {showLanguages && (
+          <div style={{ paddingLeft: "20px" }}>
+            {languages.map((lang) => (
+              <div
+                key={lang.code}
+                className="nav-item"
+                onClick={() => {
+                  changeLanguage(lang.code);
+                  setShowLanguages(false);
+                }}
+              >
+                <div className="nav-link">
+                  <Flag code={lang.flag} style={{ width: "20px" }} />
+                  <span className="nav-title">
+                    {t(`navbar.language_${lang.code}`) || lang.name}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="nav-item" onClick={handleLogout}>
+          <div className="nav-link">
+            <FiLogOut className="nav-icon" />
+            <span className="nav-title">{t("navbar.logout")}</span>
+          </div>
+        </div>
+      </div>
+
       <ToastContainer />
     </nav>
   );

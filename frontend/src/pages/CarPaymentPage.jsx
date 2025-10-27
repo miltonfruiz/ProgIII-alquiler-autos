@@ -68,13 +68,8 @@ const CarPaymentPage = () => {
       const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
       const id_reserva = parseInt(localStorage.getItem("contadorReservas"));
 
-      console.log(typeof carId);
-      console.log(typeof userId);
-      console.log(typeof id_reserva);
-
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
-          carId: carId,
           userId: userId,
           id_reserva: id_reserva,
           cardType: tipoTarjeta,
@@ -83,7 +78,7 @@ const CarPaymentPage = () => {
           expirationDate: datosPago.fechaTarjeta,
           ownerName: datosPago.nombreTarjeta,
           cvc: datosPago.cvc,
-          voucher: null,
+          voucher: "no aplica",
           acceptableTerms: checkbox,
         };
       } else if (choicePayment == "transferencia") {

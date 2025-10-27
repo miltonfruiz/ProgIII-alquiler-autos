@@ -13,14 +13,14 @@
 .footerSection h4 {
   display: flex;
   justify-content: center;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-bottom: 0.75rem;
   color: #6366f1;
 }
 .footerSection p {
   display: flex;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin: 0.3rem 0;
 }
 .socialIcons {
@@ -41,14 +41,14 @@
 .footerBottom {
   text-align: center;
   margin-top: 4rem;
-  border-top: 1px solid #ffffff;
+  border-top: 1px solid #e2e8f0;
   padding-top: 1rem;
   font-size: 0.7rem;
 }
 .footerBottom h6 {
   font-weight: 300;
-  font-size: 0.6rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.7rem;
+  margin-bottom: 1.6rem;
 }
 .h3-title {
   display: flex;

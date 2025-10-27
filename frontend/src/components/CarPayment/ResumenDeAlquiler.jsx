@@ -1,53 +1,81 @@
-import React from "react";
 import { FaStar } from "react-icons/fa";
+import "./CarPayment.css";
+
 const ResumenDeAlquiler = () => {
   const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 
   return (
-    <div>
-      <aside>
-        <div className="resumenDeAlquiler">
-          <h2 className="tituloResumen">Resumen de Alquiler</h2>
-          <h3 className="subtituloResumen">
-            Los precios pueden variar dependiendo de la duracion del alquiler y
-            del precio de su coche de alquiler.
-          </h3>
-          <div className="cajaValoracionAuto">
-            <img
-              className="imagenResumen"
-              src={datosAlquiler.auto.image}
-              alt=""
-            />
-            <div className="cajaExtrellasNombre">
-              <p className="nombreAutos">{datosAlquiler.auto.name}</p>
-              <div className="valoracionResumen">
-                {[0, 1, 2, 3, 4].map((estrella) => {
-                  return <FaStar className="estrella" />;
-                })}
+    <div className="contenedor-principal">
+      <aside className="contenedor-aside">
+        <div className="resumen-card">
+          {/* Header Section */}
+          <div className="header-seccion">
+            <h3 className="titulo-principal">Resumen de Alquiler</h3>
+            <p className="subtitulo-principal">
+              Los precios pueden variar dependiendo de la duración del alquiler
+              y del precio de su coche
+            </p>
+          </div>
 
-                <p className="valoracion">valoracion</p>
+          {/* Car Info Section */}
+          <div className="contenido-padding">
+            <div className="auto-info-box">
+              <div className="auto-flex">
+                <img
+                  className="imagen-auto"
+                  src={`http://localhost:3000${datosAlquiler.auto.image}`}
+                  alt={datosAlquiler.auto.name}
+                />
+                <div className="auto-detalles">
+                  <p className="nombre-auto">{datosAlquiler.auto.name}</p>
+                  <p className="brand-auto">{datosAlquiler.auto.brand}</p>
+                  {/* <div className="valoracion-container">
+                    <div className="estrellas-flex">
+                      {[0, 1, 2, 3, 4].map((index) => (
+                        <FaStar key={index} className="estrella-icon" />
+                      ))}
+                    </div>
+                    <span className="texto-valoracion">valoraciones</span>
+                  </div> */}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="linea"></div>
-          <div className="cajaSubtotal">
-            <p className="tituloSubtotal">Subtotal</p>
-            <p className="subtotal">${datosAlquiler.total}</p>
-          </div>
-          <div className="cajaImpuestos">
-            <p className="tituloImpuestos">Impuestos</p>
-            <p className="impuestos">${datosAlquiler.tax}</p>
-          </div>
-          <div className="cajaPrecioFinal">
-            <div>
-              <h2 className="tituloPrecioFinal">Precio final de renta</h2>
-              <h3 className="subtituloPrecioFinal">
-                Precio total con impuestos obligatorios
-              </h3>
+            {/* Price Breakdown */}
+            <div className="precios-container">
+              <div className="precio-fila">
+                <span className="precio-label">Subtotal</span>
+                <span className="precio-valor">
+                  ${datosAlquiler.total.toFixed(2)}
+                </span>
+              </div>
+
+              <div className="precio-fila">
+                <span className="precio-label">Impuestos</span>
+                <span className="precio-valor">
+                  ${datosAlquiler.tax.toFixed(2)}
+                </span>
+              </div>
+
+              <div className="separador-gradiente"></div>
+
+              {/* Total Section */}
+              <div className="total-box">
+                <div className="total-flex">
+                  <div>
+                    <h3 className="total-titulo">Precio Final</h3>
+                    <p className="total-subtitulo">
+                      Precio total con impuestos incluidos
+                    </p>
+                  </div>
+                  <div className="total-precio-container">
+                    <p className="total-precio">
+                      ${datosAlquiler.totalFinal.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <p className="precioFinal">${datosAlquiler.totalFinal}</p>
           </div>
         </div>
       </aside>

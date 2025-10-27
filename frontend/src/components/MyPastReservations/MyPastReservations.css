@@ -92,14 +92,6 @@
   background: #f1f5f9;
 }
 
-.car-image {
-  width: 150px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-
 .reservation-info {
   flex: 1;
   display: flex;

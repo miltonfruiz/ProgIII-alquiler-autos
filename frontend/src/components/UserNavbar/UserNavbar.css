@@ -5,34 +5,18 @@
   background-color: #6366f1;
   padding: 10px 24px;
   color: white;
-
-  /* estilos sosa para navbar Fija en la pagina */
   position: fixed;
   top: 0;
   z-index: 1000;
   width: 100%;
 }
 
-/* .search-results {
-  position: absolute;
-  min-height: 300px;
-  top: 80px; 
-  left: 25%;
-  transform: translateX(-50%);
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1001;
-  width: 300px; 
-  overflow-y: auto; 
-} */
-
 .navbar-left .navbar-logo {
   width: 80px;
   height: auto;
   cursor: pointer;
 }
+
 .navbar-center {
   flex: 1;
   display: flex;
@@ -45,11 +29,13 @@
   align-items: center;
   padding: 0px 100px;
 }
+
 .icon-wrapper {
   display: flex;
   gap: 40px;
   padding: 0px 120px;
 }
+
 .user-container,
 .cars-container {
   display: flex;
@@ -61,10 +47,12 @@
   height: 20px;
   width: 20px;
 }
+
 .navbar-right {
   display: flex;
   gap: 20px;
 }
+
 .faAdmin-icon,
 .BsCalendarDateFill-icon,
 .faHome-icon,
@@ -77,15 +65,18 @@
   font-size: 22px;
   margin-bottom: 3px;
 }
+
 .faAdmin-icon {
   color: rgba(255, 0, 0, 0.692);
 }
+
 .user-dropdown {
   font-size: 12px;
   font-weight: 300;
   position: relative;
   cursor: pointer;
 }
+
 .dropdown-menu {
   position: absolute;
   right: 0;
@@ -99,6 +90,7 @@
   flex-direction: column;
   min-width: 160px;
 }
+
 .dropdown-menu button {
   border-radius: 8px;
   display: flex;
@@ -113,18 +105,22 @@
   margin: 4px;
   transition: background 0.2s;
 }
+
 .dropdown-menu button:hover {
   width: 95%;
   color: white;
   border-radius: 8px;
   background-color: #5e49d8;
 }
+
 .icon-item-profile {
   margin-right: 5px;
 }
+
 .dropdown-submenu {
   position: relative;
 }
+
 .submenu {
   position: absolute;
   top: 0;
@@ -138,6 +134,7 @@
   flex-direction: column;
   min-width: 140px;
 }
+
 .submenu button {
   border-radius: 8px;
   display: flex;
@@ -152,16 +149,19 @@
   margin: 4px;
   transition: background 0.2s;
 }
+
 .submenu button:hover {
   width: 95%;
   color: white;
   border-radius: 8px;
   background-color: #5e49d8;
 }
+
 .active-language {
   background-color: #ddd;
   font-weight: bold;
 }
+
 .fade-button,
 .navbar-search,
 .navbar-language {
@@ -172,17 +172,21 @@
 .navbar-search.fade-out {
   opacity: 0;
 }
+
 .navbar-language.fade-out {
   opacity: 0;
 }
+
 .fade-button.fade-out {
   opacity: 0;
 }
+
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .nav-item a {
   display: flex;
   flex-direction: column;
@@ -192,6 +196,7 @@
   font-size: 12px;
   font-weight: 300;
 }
+
 .nav-link {
   display: flex;
   flex-direction: column;
@@ -200,40 +205,265 @@
   text-decoration: none;
   transition: color 0.3s ease;
 }
+
 .nav-link:hover .nav-icon,
 .nav-link:hover .nav-title {
   transition: color 0.3s ease;
   color: rgba(0, 0, 0, 0.76);
 }
+
+.nav-title {
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+/* Menú hamburguesa (oculto por defecto en desktop) */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.hamburger-menu span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Menú móvil */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: #6366f1;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mobile-menu.active {
+  max-height: 500px;
+}
+
+.mobile-menu .nav-item {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu .nav-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu .nav-link {
+  flex-direction: row;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.mobile-menu .nav-icon {
+  font-size: 20px;
+}
+
+.mobile-menu .nav-title {
+  font-size: 14px;
+  margin-top: 0;
+}
+
+/*--------------------------------*/
+/* DARK MODE */
 /*--------------------------------*/
 body.dark .navbar {
   background-color: black;
 }
+
 body.dark .dropdown-menu {
   background-color: black;
   border: 1px solid white;
 }
+
 body.dark .dropdown-menu button {
   color: white;
 }
+
 body.dark .dropdown-menu button:hover {
   background-color: white;
   color: black;
 }
+
 body.dark .submenu {
   background-color: black;
   border: 1px solid white;
 }
+
 body.dark .submenu button {
   color: white;
 }
+
 body.dark .submenu button:hover {
   background-color: white;
   color: black;
 }
+
 body.dark .nav-link:hover .nav-icon,
 body.dark .nav-link:hover .nav-title {
   transition: color 0.3s ease;
   color: #6366f1;
   filter: drop-shadow(0 0 0rem white);
+}
+
+body.dark .mobile-menu {
+  background-color: black;
+}
+
+body.dark .hamburger-menu span {
+  background-color: white;
+}
+
+/*--------------------------------*/
+/* RESPONSIVE DESIGN */
+/*--------------------------------*/
+
+/* Tablets (1024px y menos) */
+@media screen and (max-width: 1024px) {
+  .logo-wrapper {
+    padding: 0px 40px;
+  }
+
+  .icon-wrapper {
+    gap: 25px;
+    padding: 0px 40px;
+  }
+
+  .navbar-center {
+    flex: 0.8;
+  }
+}
+
+/* Tablets pequeñas (768px y menos) */
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 10px 16px;
+  }
+
+  .logo-wrapper {
+    padding: 0px 20px;
+  }
+
+  .navbar-left .navbar-logo {
+    width: 60px;
+  }
+
+  .icon-wrapper {
+    gap: 20px;
+    padding: 0px 20px;
+  }
+
+  .faAdmin-icon,
+  .BsCalendarDateFill-icon,
+  .faHome-icon,
+  .faUserEdit-icon,
+  .faCar-icon {
+    font-size: 20px;
+  }
+
+  .nav-title {
+    display: none;
+  }
+
+  .navbar-center {
+    flex: 0.6;
+  }
+}
+
+/* Móviles (480px y menos) */
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 10px 12px;
+  }
+
+  .logo-wrapper {
+    padding: 0px 10px;
+  }
+
+  .navbar-left .navbar-logo {
+    width: 50px;
+  }
+
+  /* Ocultar la barra de búsqueda en móvil */
+  .navbar-center {
+    display: none;
+  }
+
+  /* Ocultar iconos de navegación en móvil y mostrar hamburguesa */
+  .icon-wrapper {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  /* Ajustar dropdown en móvil */
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+    min-width: 200px;
+  }
+
+  .submenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    right: auto;
+  }
+}
+
+/* Móviles muy pequeños (360px y menos) */
+@media screen and (max-width: 360px) {
+  .navbar {
+    padding: 8px 10px;
+  }
+
+  .logo-wrapper {
+    padding: 0px 5px;
+  }
+
+  .navbar-left .navbar-logo {
+    width: 45px;
+  }
+
+  .dropdown-menu {
+    min-width: 180px;
+    font-size: 11px;
+  }
+
+  .dropdown-menu button {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
 }

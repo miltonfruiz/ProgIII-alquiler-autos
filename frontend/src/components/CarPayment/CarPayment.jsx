@@ -117,10 +117,14 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   return (
     <div className="contenedorGeneral">
       <div className="contenedorIzquierda">
-        <div className="DatosFacturacion">
-          <h2 className="titleDatos">Datos de facturacion</h2>
-          <h3 className="subtituloDatos">introduce tus datos de facturacion</h3>
-          <p className="paso1">Paso 1 de 3</p>
+        <div className="datosFacturacion">
+          <div className="header-seccion">
+            <h3 className="titulo-principal">Datos de facturacion</h3>
+            <p className="subtitulo-principal">
+              introduce tus datos de facturacion
+            </p>
+            {/* <p className="paso1">Paso 1 de 3</p> */}
+          </div>
           <div className="gridDatosFacturacion">
             {objetosFormPersona.map((input) => {
               return (
@@ -147,10 +151,13 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             })}
           </div>
         </div>
+        {/* Metodo de pago */}
         <div className="metodoPago">
-          <h2 className="tituloMetodo">Metodo de Pago</h2>
-          <h3 className="subtituloMetodo">Elije tu metodo de pago</h3>
-          <p className="paso2">Paso 2 de 3</p>
+          <div className="header-seccion">
+            <h3 className="titulo-principal">Metodo de Pago</h3>
+            <p className="subtitulo-principal">Elije tu metodo de pago</p>
+            {/* <p className="paso2">Paso 2 de 3</p> */}
+          </div>
           <div
             className={`ingresoTarjeta${
               choicePayment == "tarjeta" ? "Clickeado" : ""
@@ -347,12 +354,16 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
           )}
         </div>
 
+        {/* Info importante */}
         <div className="infoImportante">
-          <h2 className="tituloInfo">Informacion Importante</h2>
-          <h3 className="subtituloInfo">
-            Lee atentamente esta informacion de utilidad
-          </h3>
-          <p className="paso3">Paso 3 de 3</p>
+          <div className="header-seccion">
+            <h3 className="titulo-principal">Informacion Importante</h3>
+            <p className="subtitulo-principal">
+              Lee atentamente esta informacion de utilidad
+            </p>
+            {/* <p className="paso3">Paso 3 de 3</p> */}
+          </div>
+
           {objetosItems.map((items) => {
             return (
               <div className="cajaItems">
@@ -371,8 +382,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               onChange={(e) => setCheckBox(e.target.checked)}
             />
             <p className="textoAcepto">Acepto Terminos y condiciones</p>
+            {errores.checkbox && <p className="error">{errores.checkbox}</p>}
           </div>
-          {errores.checkbox && <p className="error">{errores.checkbox}</p>}
         </div>
 
         <button type="button" className="botonRentar" onClick={handleSubmit}>

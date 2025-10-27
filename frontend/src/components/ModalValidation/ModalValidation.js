@@ -1,29 +1,59 @@
 // export default function ModalValidation(formData) {
 //   const errores = {};
-//   const { fecha_inicio, fecha_fin } = formData;
+//   const { fecha_inicio, fecha_fin, hora_inicio, hora_fin } = formData;
 
 //   const hoy = new Date();
-//   hoy.setHours(0, 0, 0, 0); // normalizar fecha de hoy
+//   const fechaHoyString = `${hoy.getFullYear()}-${String(
+//     hoy.getMonth() + 1
+//   ).padStart(2, "0")}-${String(hoy.getDate()).padStart(2, "0")}`;
+//   const horaActual = hoy.getHours();
+//   const minutoActual = hoy.getMinutes();
 
+//   // Validación de fecha de inicio
 //   if (fecha_inicio) {
-//     const inicio = new Date(fecha_inicio);
-//     inicio.setHours(0, 0, 0, 0);
-
-//     if (inicio < hoy) {
-//       errores.fecha_inicio = "Debe ingresar una fecha igual o posterior a hoy";
+//     // Comparar strings directamente para evitar problemas de timezone
+//     if (fecha_inicio < fechaHoyString) {
+//       errores.fecha_inicio = "La fecha debe ser hoy o posterior";
 //     }
 //   }
 
+//   // Validación de hora de inicio
+//   if (fecha_inicio && hora_inicio) {
+//     const esHoy = fecha_inicio === fechaHoyString;
+
+//     if (esHoy) {
+//       const [horasInicio, minutosInicio] = hora_inicio.split(":").map(Number);
+//       const minutosInicioTotal = horasInicio * 60 + minutosInicio;
+//       const minutosActualTotal = horaActual * 60 + minutoActual;
+
+//       if (minutosInicioTotal <= minutosActualTotal) {
+//         errores.hora_inicio = "La hora debe ser posterior a la actual";
+//       }
+//     }
+//   }
+
+//   // Validación de fecha final
 //   if (fecha_fin && fecha_inicio) {
-//     const fin = new Date(fecha_fin);
-//     fin.setHours(0, 0, 0, 0);
-
-//     const inicio = new Date(fecha_inicio);
-//     inicio.setHours(0, 0, 0, 0);
-
-//     if (fin < inicio) {
+//     // Comparar strings directamente
+//     if (fecha_fin < fecha_inicio) {
 //       errores.fecha_fin =
-//         "La fecha final debe ser posterior o igual a la inicial";
+//         "La fecha final debe ser igual o posterior a la inicial";
+//     }
+//   }
+
+//   // Validación de hora final
+//   if (fecha_fin && hora_fin && fecha_inicio && hora_inicio) {
+//     // Si es el mismo día, validar que la hora final sea posterior a la inicial
+//     if (fecha_fin === fecha_inicio) {
+//       const [horasInicio, minutosInicio] = hora_inicio.split(":").map(Number);
+//       const [horasFin, minutosFin] = hora_fin.split(":").map(Number);
+
+//       const minutosInicioTotal = horasInicio * 60 + minutosInicio;
+//       const minutosFinTotal = horasFin * 60 + minutosFin;
+
+//       if (minutosFinTotal <= minutosInicioTotal) {
+//         errores.hora_fin = "La hora final debe ser posterior a la hora inicial";
+//       }
 //     }
 //   }
 
@@ -32,24 +62,21 @@
 
 export default function ModalValidation(formData) {
   const errores = {};
-  const { fecha_inicio, fecha_fin, hora_inicio, hora_fin, lugar_devolucion } =
-    formData;
+  const { fecha_inicio, fecha_fin, hora_inicio, hora_fin } = formData;
 
-  const hoy = new Date();
-  const fechaHoyString = hoy.toISOString().split("T")[0];
-  const horaActual = hoy.getHours();
-  const minutoActual = hoy.getMinutes();
-  const horaActualString = `${horaActual
-    .toString()
-    .padStart(2, "0")}:${minutoActual.toString().padStart(2, "0")}`;
+  // Obtener fecha y hora actual en la zona horaria local
+  const ahora = new Date();
+  const anio = ahora.getFullYear();
+  const mes = String(ahora.getMonth() + 1).padStart(2, "0");
+  const dia = String(ahora.getDate()).padStart(2, "0");
+  const fechaHoyString = `${anio}-${mes}-${dia}`;
+
+  const horaActual = ahora.getHours();
+  const minutoActual = ahora.getMinutes();
 
   // Validación de fecha de inicio
   if (fecha_inicio) {
-    const fechaInicioDate = new Date(fecha_inicio);
-    const fechaHoy = new Date(fechaHoyString);
-
-    // Permitir hoy y fechas futuras
-    if (fechaInicioDate < fechaHoy) {
+    if (fecha_inicio < fechaHoyString) {
       errores.fecha_inicio = "La fecha debe ser hoy o posterior";
     }
   }
@@ -59,12 +86,9 @@ export default function ModalValidation(formData) {
     const esHoy = fecha_inicio === fechaHoyString;
 
     if (esHoy) {
-      // Si es hoy, la hora debe ser posterior a la actual
       const [horasInicio, minutosInicio] = hora_inicio.split(":").map(Number);
-      const [horasActual, minutosActual] = [horaActual, minutoActual];
-
       const minutosInicioTotal = horasInicio * 60 + minutosInicio;
-      const minutosActualTotal = horasActual * 60 + minutosActual;
+      const minutosActualTotal = horaActual * 60 + minutoActual;
 
       if (minutosInicioTotal <= minutosActualTotal) {
         errores.hora_inicio = "La hora debe ser posterior a la actual";
@@ -74,10 +98,7 @@ export default function ModalValidation(formData) {
 
   // Validación de fecha final
   if (fecha_fin && fecha_inicio) {
-    const fechaFin = new Date(fecha_fin);
-    const fechaInicio = new Date(fecha_inicio);
-
-    if (fechaFin < fechaInicio) {
+    if (fecha_fin < fecha_inicio) {
       errores.fecha_fin =
         "La fecha final debe ser igual o posterior a la inicial";
     }
@@ -85,11 +106,7 @@ export default function ModalValidation(formData) {
 
   // Validación de hora final
   if (fecha_fin && hora_fin && fecha_inicio && hora_inicio) {
-    const fechaFin = new Date(fecha_fin);
-    const fechaInicio = new Date(fecha_inicio);
-
-    // Si es el mismo día, validar que la hora final sea posterior a la inicial
-    if (fechaFin.getTime() === fechaInicio.getTime()) {
+    if (fecha_fin === fecha_inicio) {
       const [horasInicio, minutosInicio] = hora_inicio.split(":").map(Number);
       const [horasFin, minutosFin] = hora_fin.split(":").map(Number);
 
