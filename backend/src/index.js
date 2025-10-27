@@ -8,8 +8,6 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-import { Reserva } from "./models/Reserva.js";
-
 import "./models/index.js";
 import "./models/Car.js";
 import "./models/Review.js";
