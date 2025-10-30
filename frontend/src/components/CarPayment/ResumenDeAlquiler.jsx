@@ -70,7 +70,11 @@ const ResumenDeAlquiler = () => {
                   </div>
                   <div className="total-precio-container">
                     <p className="total-precio">
-                      ${datosAlquiler.totalFinal.toFixed(2)}
+                      $
+                      {datosAlquiler.totalFinal.toLocaleString("es-AR", {
+                        maximumFractionDigits: 2,
+                      })}
+                      Ars
                     </p>
                   </div>
                 </div>
