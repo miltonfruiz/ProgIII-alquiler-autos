@@ -16,9 +16,9 @@ const CarCard = ({
 
   return (
     <div className={styles.cardContainer}>
+      <div className={styles.categoryBadge}>{category}</div>
       <div className={styles.headContainer}>
         <p className={styles.cardTitle}>{name}</p>
-        <p className={styles.carType}>{category}</p>
       </div>
 
       <div className={styles.imageContainer}>
