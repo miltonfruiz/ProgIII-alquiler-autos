@@ -55,9 +55,11 @@
 }
 
 .headContainer {
-  margin-bottom: 0.8rem;
   margin-bottom: 1rem;
   padding-right: 5rem;
+  min-height: 3.6rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 .cardTitle {
@@ -67,6 +69,11 @@
   color: #1e293b;
   line-height: 1.3;
   letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .carType {
