@@ -7,7 +7,8 @@ const router = Router();
 
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
-router.post("/pays", payValidation, async (req, res) => {
+router.post("/pays", async (req, res) => {
+  // cuando ande probar la validacion payValidation,
   const {
     carId,
     userId,

@@ -13,16 +13,7 @@ import {
   objetosItems,
 } from "./ObjetosCarPayment.jsx";
 import ResumenDeAlquiler from "./ResumenDeAlquiler.jsx";
-import {
-  ObtenerReservas,
-  ConfirmarReserva,
-  CancelarReserva,
-} from "../../api/actualizarReservas";
-import {
-  CrearPago,
-  ObtenerAutos,
-  ObtenerUsuarios,
-} from "../../api/crearPagos.js";
+import { ObtenerReservas, CancelarReserva } from "../../api/actualizarReservas";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
   const [datosFacturacion, setDatosFacturacion] = useState({
@@ -39,12 +30,6 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     cvc: "",
   });
 
-  const [pago, setPago] = useState({});
-
-  const [ultimoAutoId, setUltimoAutoId] = useState(null);
-  const [ultimoUsuarioId, setUltimoUsuarioId] = useState(null);
-  const [ultimaReservaId, setUltimaReservaId] = useState(null);
-
   const [imgTarjetas, setImgTarjetas] = useState("visa");
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
   const [seleccionCbu, setSeleccionCbu] = useState(false);
@@ -57,26 +42,6 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
   const inputRef = useRef(null);
   const eleccionTarjetaRef = useRef(null);
   const eleccionTransferRef = useRef(null);
-
-  useEffect(() => {
-    setPago((prev) => ({
-      ...prev,
-      userId: ultimoUsuarioId,
-      carId: ultimoAutoId,
-      reservaId: ultimaReservaId,
-      subtotal: JSON.parse(localStorage.getItem("datosAlquiler")).total,
-      tax: JSON.parse(localStorage.getItem("datosAlquiler")).tax,
-      total: JSON.parse(localStorage.getItem("datosAlquiler")).totalFinal,
-      cardType: tipoTarjeta,
-      PaymentMethod: choicePayment === "tarjeta" ? "tarjeta" : "transferencia",
-      cardNumber: datosTarjeta.numeroTarjeta,
-      expirationDate: datosTarjeta.fechaTarjeta,
-      ownerName: datosTarjeta.nombreTarjeta,
-      cvc: datosTarjeta.cvc,
-      voucher: file ? file.name : null,
-      aceptableTerms: checkbox ? "si" : "no",
-    }));
-  }, [tipoTarjeta, choicePayment, datosTarjeta, file, checkbox]);
 
   function handleDatosFacturacion(e) {
     setDatosFacturacion({
@@ -92,7 +57,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     });
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (choicePayment == "tarjeta" || !choicePayment) {
       onSubmit(
@@ -105,18 +70,6 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     } else if (choicePayment == "transferencia") {
       onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
-
-    const reservas = await ObtenerReservas();
-    const autos = await ObtenerAutos();
-    const usuarios = await ObtenerUsuarios();
-    ConfirmarReserva(reservas);
-    const ultimaReserva = reservas[reservas.length - 1];
-    const ultimoAuto = autos[autos.length - 1];
-    const ultimoUsuario = usuarios[usuarios.length - 1];
-    setUltimoAutoId(ultimoAuto.id);
-    setUltimoUsuarioId(ultimoUsuario.id);
-    setUltimaReservaId(ultimaReserva.id_reserva);
-    CrearPago(pago);
   }
 
   function handleTarjeta(e) {
