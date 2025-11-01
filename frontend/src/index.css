@@ -43,9 +43,6 @@ a {
   transition: color 0.2s ease-in-out;
 }
 
-a:hover {
-  color: #1d4ed8;
-}
 button {
   cursor: pointer;
   border: none;
