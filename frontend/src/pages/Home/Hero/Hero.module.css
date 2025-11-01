@@ -12,6 +12,8 @@
   box-sizing: border-box;
   overflow: hidden;
   background: linear-gradient(111deg, #a86ce9 0%, #7f7df7 100%);
+
+  margin-top: 80px;
 }
 
 .heroContent {

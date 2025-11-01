@@ -3,6 +3,9 @@
   margin-bottom: 100px;
   height: 100%;
   width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .loadingContainer {
@@ -12,4 +15,33 @@
   min-height: 400px;
   font-size: 18px;
   color: #666;
+}
+
+@media (max-width: 1400px) {
+  .mainContainer {
+    margin-bottom: 80px;
+  }
+}
+
+@media (max-width: 992px) {
+  .mainContainer {
+    margin-bottom: 60px;
+  }
+  
+  .loadingContainer {
+    min-height: 300px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContainer {
+    margin-bottom: 40px;
+  }
 }

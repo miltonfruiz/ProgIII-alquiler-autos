@@ -27,13 +27,6 @@ function App() {
   const [registerIn, setRegisterIn] = useState(false);
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={4000}
-        closeOnClick
-        pauseOnHover
-        closeButton
-      />
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
@@ -71,7 +64,16 @@ function App() {
             }
           />
         </Routes>
+        
       </BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        closeOnClick
+        pauseOnHover
+        closeButton
+      />
+
     </>
   );
 }
