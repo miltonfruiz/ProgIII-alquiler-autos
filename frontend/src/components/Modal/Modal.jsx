@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import styles from "./Modal.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -15,91 +15,152 @@ import {
 
 function Modal({ auto, onClose }) {
   if (!auto) return null;
-  // console.log("=== ESTRUCTURA DEL AUTO ===");
-  // console.log("auto completo:", auto);
-  // console.log("auto.id:", auto.id);
-  // console.log("auto.id_car:", auto.id_car);
-  // console.log("auto.carId:", auto.carId);
-  // console.log("Todas las propiedades:", Object.keys(auto));
+
   const navigate = useNavigate();
   const hoy = new Date().toISOString().split("T")[0];
-  const ahora = new Date();
-  const horaActual = `${(ahora.getHours() + 1).toString().padStart(2, "0")}:00`; // Una hora después
+
+  // Calcular hora mínima (una hora después de ahora)
+  const getHoraMinima = () => {
+    const ahora = new Date();
+    ahora.setHours(ahora.getHours() + 1);
+    return `${ahora.getHours().toString().padStart(2, "0")}:00`;
+  };
 
   const [formData, setFormData] = useState({
     fecha_inicio: hoy,
     fecha_fin: hoy,
-    hora_inicio: "10:00",
-    hora_fin: "10:00",
+    hora_inicio: getHoraMinima(),
+    hora_fin: getHoraMinima(),
     lugar_retiro: "airport",
-    lugar_devolucion: "airport", // Valor por defecto para evitar undefined
-  });
-
-  const [errores, setErrores] = useState({
-    fecha_inicio: "",
-    fecha_fin: "",
-    hora_inicio: "",
-    hora_fin: "",
     lugar_devolucion: "",
   });
+
+  const [errores, setErrores] = useState({});
 
   const fecha_inicioRef = useRef(null);
   const fecha_finRef = useRef(null);
   const horario_inicioRef = useRef(null);
   const horario_finRef = useRef(null);
 
+  // Función para formatear fecha y hora en español
+  const formatearFechaHora = (fecha, hora) => {
+    if (!fecha || !hora) return "Selecciona fecha y hora";
+
+    const meses = [
+      "ene",
+      "feb",
+      "mar",
+      "abr",
+      "may",
+      "jun",
+      "jul",
+      "ago",
+      "sep",
+      "oct",
+      "nov",
+      "dic",
+    ];
+
+    const fechaObj = new Date(fecha + "T00:00:00");
+    const dia = fechaObj.getDate();
+    const mes = meses[fechaObj.getMonth()];
+    const anio = fechaObj.getFullYear();
+
+    // Convertir hora de 24h a 12h con AM/PM
+    const [horas, minutos] = hora.split(":");
+    const horasNum = parseInt(horas);
+    const periodo = horasNum >= 12 ? "PM" : "AM";
+    const horas12 =
+      horasNum === 0 ? 12 : horasNum > 12 ? horasNum - 12 : horasNum;
+
+    return `${dia}/${mes}/${anio} a las ${horas12}:${minutos} ${periodo}`;
+  };
+
+  // Nombres de lugares
+  const nombresLugares = {
+    airport: 'Aeropuerto de Rosario "Islas Malvinas"',
+    downtown: "Centro de Rosario - Sucursal Principal",
+    busStation: "Terminal de Ómnibus Mariano Moreno",
+    other: "Otra ubicación",
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    let newData = {
-      ...formData,
-      [name]: value,
-    };
+    let newData = { ...formData, [name]: value };
 
     // Si cambia la fecha de inicio y es posterior a la fecha fin, actualizar fecha fin
     if (name === "fecha_inicio" && value > formData.fecha_fin) {
       newData.fecha_fin = value;
     }
 
-    // Si cambia la fecha de inicio a hoy, ajustar la hora si es necesaria
+    // Si cambia la fecha de inicio a hoy, verificar que la hora sea válida
     if (name === "fecha_inicio" && value === hoy) {
       const ahora = new Date();
-      const horaActual = `${(ahora.getHours() + 1)
-        .toString()
-        .padStart(2, "0")}:00`;
+      const horaMinima = getHoraMinima();
 
-      // Si la hora actual es menor que la hora seleccionada, mantener la seleccionada
-      if (
-        formData.hora_inicio <=
-        `${ahora.getHours().toString().padStart(2, "0")}:${ahora
-          .getMinutes()
-          .toString()
-          .padStart(2, "0")}`
-      ) {
-        newData.hora_inicio = horaActual;
+      if (formData.hora_inicio < horaMinima) {
+        newData.hora_inicio = horaMinima;
       }
     }
 
-    // Limpiar errores
-    setErrores({});
-
-    const newErrores = ModalValidation(newData);
-
-    if (Object.keys(newErrores).length > 0) {
-      setErrores(newErrores);
+    // Si la fecha de inicio cambia a una fecha futura, permitir cualquier hora
+    if (name === "fecha_inicio" && value > hoy) {
+      // No hace falta ajustar la hora
     }
 
+    // Validar en tiempo real
+    const newErrores = ModalValidation(newData);
+    setErrores(newErrores);
     setFormData(newData);
+  };
+
+  const calcularTotal = () => {
+    if (
+      Object.keys(errores).length > 0 ||
+      !formData.fecha_inicio ||
+      !formData.fecha_fin
+    )
+      return 0;
+
+    const inicio = new Date(formData.fecha_inicio);
+    const fin = new Date(formData.fecha_fin);
+
+    // Normalizar fechas sin horas
+    const fechaInicio = new Date(
+      inicio.getFullYear(),
+      inicio.getMonth(),
+      inicio.getDate()
+    );
+    const fechaFin = new Date(fin.getFullYear(), fin.getMonth(), fin.getDate());
+
+    const diffDias = Math.floor(
+      (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24)
+    );
+
+    return diffDias > 0 ? diffDias * auto.price : 0;
+  };
+
+  const calcularImpuestos = (total) => {
+    return total * 0.21;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const erroresModal = ModalValidation(formData);
 
-    const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
+    // Validar formulario completo
+    const erroresModal = ModalValidation(formData);
 
     if (Object.keys(erroresModal).length > 0) {
       setErrores(erroresModal);
+      toast.error("Por favor completa todos los campos correctamente");
+      return;
+    }
+
+    const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
+
+    if (!userId) {
+      toast.error("Debes iniciar sesión para hacer una reserva");
       return;
     }
 
@@ -148,7 +209,7 @@ function Modal({ auto, onClose }) {
 
         setTimeout(() => {
           navigate("/carPayment");
-        }, 3000);
+        }, 2000);
       } else {
         toast.error("No se pudo crear la reserva. Intenta nuevamente.");
       }
@@ -158,37 +219,9 @@ function Modal({ auto, onClose }) {
     }
   };
 
-  const calcularTotal = () => {
-    if (
-      Object.keys(errores).length > 0 ||
-      !formData.fecha_inicio ||
-      !formData.fecha_fin
-    )
-      return 0;
-
-    const inicio = new Date(formData.fecha_inicio);
-    const fin = new Date(formData.fecha_fin);
-
-    // Eliminar la hora para que no afecte el cálculo
-    const fechaInicio = new Date(
-      inicio.getFullYear(),
-      inicio.getMonth(),
-      inicio.getDate()
-    );
-    const fechaFin = new Date(fin.getFullYear(), fin.getMonth(), fin.getDate());
-
-    const diffDias =
-      Math.floor((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24)) + 1;
-    // .ceil para redondear la cantidad de dias, el fin-inicio devuelve en MILISEG, (1000 * 60 * 60 * 24) identifica la cantidad de MILISEG en un dia
-    return diffDias > 0 ? diffDias * auto.price : 0;
-  };
-  const calcularImpuestos = (total) => {
-    return total * 0.21;
-  };
-  console.log(errores);
-
   const total = calcularTotal();
   const impuestos = calcularImpuestos(total);
+  const precioFinal = total + impuestos;
 
   return (
     <div
@@ -206,22 +239,21 @@ function Modal({ auto, onClose }) {
           <div className={styles.modalHeader}>
             <h3 className={styles.overlayTitle}>Reserva</h3>
           </div>
+
           <div className={styles.modalBody}>
             <div className={styles.leftPanel}>
               <div className={styles.carReserva}>
                 <span className={styles.reservaInfo}>
                   Auto a reservar
                   <p className={styles.carSelected}>
-                    {auto.brand} {auto.name} | Ars $
-                    {auto.price.toLocaleString()} / Dia
+                    {auto.name} | ARS ${auto.price.toLocaleString()} / Día
                   </p>
                 </span>
                 <div className={styles.carImage}>
-                  {/* Aquí puedes agregar una imagen del auto si está disponible */}
                   <div className={styles.imagePlaceholder}>
                     <img
                       src={`http://localhost:3000${auto.image}`}
-                      alt="Imagen del auto"
+                      alt={`${auto.brand} ${auto.name}`}
                     />
                   </div>
                   <div className={styles.carDetails}>
@@ -232,23 +264,21 @@ function Modal({ auto, onClose }) {
                           icon={faCheck}
                           className={styles.checkIcon}
                         />
-                        Proteccion del Vehículo
+                        Protección del Vehículo
                       </li>
                       <li>
-                        {" "}
                         <FontAwesomeIcon
                           icon={faCheck}
                           className={styles.checkIcon}
                         />
-                        Proteccion Contra Terceros
+                        Protección Contra Terceros
                       </li>
                       <li>
-                        {" "}
                         <FontAwesomeIcon
                           icon={faCheck}
                           className={styles.checkIcon}
                         />
-                        Proteccion Contra Robos
+                        Protección Contra Robos
                       </li>
                     </ul>
                     <div className={styles.infoAdicional}>
@@ -256,13 +286,14 @@ function Modal({ auto, onClose }) {
                         icon={faInfo}
                         className={styles.moreInfoIcon}
                       />
-                      <button className={styles.infoAdicionalBtn}>
-                        Informacion Adicional
+                      <button className={styles.infoAdicionalBtn} type="button">
+                        Información Adicional
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
+
               <form onSubmit={handleSubmit}>
                 <div className={styles.inputConteiner}>
                   <label className={styles.labelInput}>Desde</label>
@@ -272,9 +303,9 @@ function Modal({ auto, onClose }) {
                     id="fecha_inicio"
                     className={styles.inputDate}
                     onChange={handleChange}
-                    value={formData.fecha_inicio || ""}
+                    value={formData.fecha_inicio}
                     ref={fecha_inicioRef}
-                    min={hoy} // Esto previene seleccionar fechas pasadas en el navegador
+                    min={hoy}
                   />
                   <input
                     type="time"
@@ -282,10 +313,9 @@ function Modal({ auto, onClose }) {
                     id="hora_inicio"
                     className={styles.inputDate}
                     onChange={handleChange}
-                    value={formData.hora_inicio || ""}
+                    value={formData.hora_inicio}
                     ref={horario_inicioRef}
                   />
-                  {/* ERROR */}
                   <div className={styles.errorContainer}>
                     <p
                       className={`${styles.errorMessage} ${
@@ -304,6 +334,7 @@ function Modal({ auto, onClose }) {
                       {errores.fecha_inicio}
                     </p>
                   </div>
+
                   <label className={styles.labelInput}>Hasta</label>
                   <input
                     type="date"
@@ -311,9 +342,9 @@ function Modal({ auto, onClose }) {
                     id="fecha_fin"
                     className={styles.inputDate}
                     onChange={handleChange}
-                    value={formData.fecha_fin || ""}
+                    value={formData.fecha_fin}
                     ref={fecha_finRef}
-                    min={formData.fecha_inicio || hoy} // La fecha fin no puede ser menor que la de inicio
+                    min={formData.fecha_inicio || hoy}
                   />
                   <input
                     type="time"
@@ -321,7 +352,7 @@ function Modal({ auto, onClose }) {
                     id="hora_fin"
                     className={styles.inputDate}
                     onChange={handleChange}
-                    value={formData.hora_fin || ""}
+                    value={formData.hora_fin}
                     ref={horario_finRef}
                   />
                   <div className={styles.errorContainer}>
@@ -333,31 +364,41 @@ function Modal({ auto, onClose }) {
                       {errores.hora_fin}
                     </p>
                   </div>
-                  <p
-                    className={`${styles.errorMessage} ${
-                      errores.fecha_fin ? styles.visible : ""
-                    }`}
-                  >
-                    {errores.fecha_fin}
-                  </p>
+                  <div className={styles.errorContainer}>
+                    <p
+                      className={`${styles.errorMessage} ${
+                        errores.fecha_fin ? styles.visible : ""
+                      }`}
+                    >
+                      {errores.fecha_fin}
+                    </p>
+                  </div>
                 </div>
+
                 <hr
                   style={{
                     border: "none",
                     height: "1px",
                     backgroundColor: "#E8E8E8",
                     margin: "1rem 0",
-                    borderradius: "5px",
+                    borderRadius: "5px",
                   }}
                 />
+
                 <div className={styles.precioTotal}>
-                  <span className={styles.text}>Total</span>
-                  <p className={styles.precio}>${total.toLocaleString()}</p>
+                  <p className={styles.precio}>
+                    Total: $
+                    {precioFinal.toLocaleString("es-AR", {
+                      maximumFractionDigits: 2,
+                    })}{" "}
+                    Ars
+                  </p>
                 </div>
               </form>
             </div>
+
             <div className={styles.rightPanel}>
-              {/* Aquí puedes agregar contenido adicional si es necesario */}
+              {/* Retirada */}
               <div className={styles.placeInfo}>
                 <h3 className={styles.rightTitle}>Retirada</h3>
 
@@ -366,11 +407,17 @@ function Modal({ auto, onClose }) {
                     icon={faLocationDot}
                     className={styles.locationDot}
                   />
-                  <p className={styles.date}>30/ago./2025 a las 10:00 AM</p>
+                  <p className={styles.date}>
+                    {formatearFechaHora(
+                      formData.fecha_inicio,
+                      formData.hora_inicio
+                    )}
+                  </p>
                 </div>
 
                 <p className={styles.place}>
-                  Aeropuerto de Rosario "Islas Malvinas", Argentina
+                  {nombresLugares[formData.lugar_retiro] ||
+                    'Aeropuerto de Rosario "Islas Malvinas"'}
                 </p>
                 <span className={styles.caption}>Aeropuerto</span>
                 <div className={styles.retireInfo}>
@@ -381,16 +428,19 @@ function Modal({ auto, onClose }) {
                   <span className={styles.infoText}>INFO IMPORTANTE</span>
                 </div>
               </div>
-              {/* Devolucion */}
+
+              {/* Devolución */}
               <div className={styles.placeInfo}>
-                <h3 className={styles.rightTitle}>Devolucion</h3>
+                <h3 className={styles.rightTitle}>Devolución</h3>
 
                 <div className={styles.placeHeader}>
                   <FontAwesomeIcon
                     icon={faLocationDot}
                     className={styles.locationDot}
                   />
-                  <p className={styles.date}>30/ago./2025 a las 10:00 AM</p>
+                  <p className={styles.date}>
+                    {formatearFechaHora(formData.fecha_fin, formData.hora_fin)}
+                  </p>
                 </div>
 
                 {/* Selector de lugar de devolución */}
@@ -406,10 +456,10 @@ function Modal({ auto, onClose }) {
                       id="returnLocation"
                       name="lugar_devolucion"
                       className={styles.locationDropdown}
-                      onChange={handleChange} // Conectar al handleChange
+                      onChange={handleChange}
                       value={formData.lugar_devolucion}
                     >
-                      <option value="" disabled>
+                      <option value="">
                         Selecciona un lugar de devolución
                       </option>
                       <option value="airport">
@@ -439,13 +489,33 @@ function Modal({ auto, onClose }) {
                     </p>
                   </div>
                 </div>
+
+                {/* Mostrar lugar seleccionado */}
+                {formData.lugar_devolucion && (
+                  <>
+                    <p className={styles.place}>
+                      {nombresLugares[formData.lugar_devolucion]}
+                    </p>
+                    <span className={styles.caption}>
+                      {formData.lugar_devolucion === "airport"
+                        ? "Aeropuerto"
+                        : formData.lugar_devolucion === "downtown"
+                        ? "Centro"
+                        : formData.lugar_devolucion === "busStation"
+                        ? "Terminal"
+                        : "Otro"}
+                    </span>
+                  </>
+                )}
               </div>
             </div>
           </div>
+
           <div className={styles.modalFooter}>
             <div className={styles.btnsConteiner}>
               <button
                 className={styles.btnCancelar}
+                type="button"
                 onClick={() => {
                   localStorage.removeItem("datosAlquiler");
                   onClose();
@@ -457,7 +527,9 @@ function Modal({ auto, onClose }) {
                 className={styles.btnPagar}
                 type="submit"
                 onClick={handleSubmit}
-                disabled={Object.keys(errores).length > 0}
+                disabled={
+                  Object.keys(errores).length > 0 || !formData.lugar_devolucion
+                }
               >
                 Ir a pagar
               </button>
@@ -465,9 +537,8 @@ function Modal({ auto, onClose }) {
           </div>
         </div>
       </div>
-      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 }
-// FALTA TERMINAR
+
 export default Modal;

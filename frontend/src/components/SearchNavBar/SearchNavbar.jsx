@@ -30,7 +30,7 @@ function SearchNavbar() {
   const handleInputChange = (e) => {
     setTextSearch(e.target.value);
     setError(null);
-    if (value.trim() === "") {
+    if (e.target.value.trim() === "") {
       setResults([]);
       setShowResults(false);
       setLoading(false);
@@ -38,29 +38,30 @@ function SearchNavbar() {
   };
 
   useEffect(() => {
-    // No buscar si el input está vacío o es muy corto
     if (textSearch.trim() === "" || textSearch.length < MIN_SEARCH_LENGTH) {
       setLoading(false);
       setShowResults(false);
       document.body.classList.remove("bloquear-scroll");
       return;
     }
-    // Bloquear scroll
-    document.body.classList.add("bloquear-scroll");
 
+    document.body.classList.add("bloquear-scroll");
     setLoading(true);
     setError(null);
 
     const getData = setTimeout(() => {
-      // Traigo los autos
-      fetch(`http://localhost:3000/cars`)
+      // Obtener todos los autos sin paginación para búsqueda local
+      fetch(`http://localhost:3000/cars?limit=1000`)
         .then((res) => {
           if (!res.ok) throw new Error("Error en la búsqueda");
           return res.json();
         })
         .then((data) => {
+          // Extraer el array de autos de la respuesta paginada
+          const allCars = data.autos || [];
+
           // Filtrar en el frontend
-          const filtered = data.filter(
+          const filtered = allCars.filter(
             (car) =>
               car.name.toLowerCase().includes(textSearch.toLowerCase()) ||
               car.category?.toLowerCase().includes(textSearch.toLowerCase()) ||

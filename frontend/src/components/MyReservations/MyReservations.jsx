@@ -1,24 +1,20 @@
 import { useState, useEffect } from "react";
 import "./MyReservations.css";
-import { FaCarSide, FaHandHoldingUsd } from "react-icons/fa";
+import { FaHandHoldingUsd } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoPricetagSharp } from "react-icons/io5";
 import { TbTax } from "react-icons/tb";
 import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
-import { toast } from "react-toastify";
 
 export default function MyReservations() {
   const [reservations, setReservations] = useState([]);
   const [expandedIds, setExpandedIds] = useState([]);
   const [reservationToDelete, setReservationToDelete] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const { t } = useTranslation();
+
   const handleDelete = async (id_reserva) => {
     try {
       const res = await fetch(`http://localhost:3000/reservas/${id_reserva}`, {
@@ -30,20 +26,24 @@ export default function MyReservations() {
       }
 
       setReservations((prev) =>
-        prev.filter((res) => res.id_reserva !== id_reserva)
+        prev.filter((reservation) => reservation.id_reserva !== id_reserva)
       );
-      toast.success("Reserva eliminada!");
+
+      alert("Reserva eliminada exitosamente!");
     } catch (error) {
       console.error("Error al cancelar reserva:", error);
       alert("No se pudo cancelar la reserva.");
     }
   };
 
-  const toggleExpand = (id) => {
+  const toggleExpand = (id_reserva) => {
     setExpandedIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+      prev.includes(id_reserva)
+        ? prev.filter((item) => item !== id_reserva)
+        : [...prev, id_reserva]
     );
   };
+
   useEffect(() => {
     const fetchReservations = async () => {
       try {
@@ -63,49 +63,26 @@ export default function MyReservations() {
 
     fetchReservations();
   }, []);
-  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
-  const location = useLocation();
 
-  useEffect(() => {
-    if (location.hash === "#my-reservations-link") {
-      setTimeout(() => {
-        const element = document.getElementById("my-reservations-link");
-        if (element) {
-          const navbarHeight = 90;
-          const elementRect = element.getBoundingClientRect();
-          const elementTop = elementRect.top + window.scrollY;
-          const elementHeight = elementRect.height;
-          const viewportHeight = window.innerHeight;
-          const offset =
-            elementTop -
-            (viewportHeight - elementHeight) / 2 +
-            navbarHeight / 2;
-          window.scrollTo({
-            top: offset,
-            behavior: "smooth",
-          });
-        }
-      }, 300);
-    }
-  }, [location]);
   return (
     <div id="my-reservations-link" className="reservation-container">
-      <h3 className="reservation-title">{t("navbar.myReservations")}</h3>
-      <h6 className="reservation-subtitle">{t("navbar.stay")}</h6>
+      <h3 className="reservation-title">Mis Reservas</h3>
+      <h6 className="reservation-subtitle">Gestiona tus reservas activas</h6>
+
       <div className="reservation-scroll-wrapper">
         <div className="reservation-list">
           {reservations.length === 0 ? (
-            <p className="no-reservations">{t("navbar.noActive")}.</p>
+            <p className="no-reservations">No tienes reservas activas.</p>
           ) : (
             reservations.map((res) => (
               <div
                 key={res.id_reserva}
                 className={`reservation-card myreservations-fade-in ${
-                  expandedIds.includes(res.id) ? "expanded" : ""
+                  expandedIds.includes(res.id_reserva) ? "expanded" : ""
                 }`}
               >
                 <img
-                  src={`http://localhost:3000${res.Car.image}`}
+                  src={`http://localhost:3000${res.Car?.image}`}
                   alt={res.Car?.name}
                   className="car-image"
                 />
@@ -114,10 +91,15 @@ export default function MyReservations() {
                   <p>
                     <MdDateRange className="data-myreservations" size={20} />
                     <span>
-                      {new Date(res.fecha_inicio).toLocaleDateString("es-AR")} -
+                      {new Date(
+                        res.fecha_inicio + "T00:00:00"
+                      ).toLocaleDateString("es-AR")}{" "}
+                      -
                     </span>
                     <span>
-                      {new Date(res.fecha_fin).toLocaleDateString("es-AR")}
+                      {new Date(res.fecha_fin + "T00:00:00").toLocaleDateString(
+                        "es-AR"
+                      )}
                     </span>
                   </p>
 
@@ -126,7 +108,7 @@ export default function MyReservations() {
                       <IoPricetagSharp /> Días: {res.cant_dias}
                     </p>
                     <p>
-                      <TbTax /> Impuestos: $ ${res.tax.toLocaleString()}
+                      <TbTax /> Impuestos: ${res.tax?.toLocaleString()}
                     </p>
                     <p>
                       <FaHandHoldingUsd />
@@ -138,21 +120,22 @@ export default function MyReservations() {
                       Tipo de facturación: {res.facturacion}
                     </p>
                     <p>
-                      <BsCashCoin /> Total: $ ${res.total.toLocaleString()}
+                      <BsCashCoin /> Total: ${res.total?.toLocaleString()}
                     </p>
                   </div>
+
                   <div className="reservation-actions">
                     <button
-                      onClick={() => toggleExpand(res.id)}
+                      onClick={() => toggleExpand(res.id_reserva)}
                       className="toggle-details-button"
                     >
-                      {expandedIds.includes(res.id) ? (
+                      {expandedIds.includes(res.id_reserva) ? (
                         <>
-                          <IoIosArrowUp /> {t("navbar.buttonHide")}
+                          <IoIosArrowUp /> Ocultar detalles
                         </>
                       ) : (
                         <>
-                          <IoIosArrowDown /> {t("navbar.buttonSeeDetails")}
+                          <IoIosArrowDown /> Ver detalles
                         </>
                       )}
                     </button>
@@ -170,23 +153,23 @@ export default function MyReservations() {
               </div>
             ))
           )}
-          {showConfirmModal && reservationToDelete && (
-            <ConfirmDeleteModal
-              itemName={reservationToDelete.Car?.name || "la reserva"}
-              itemType="la reserva"
-              onConfirm={() => {
-                handleDelete(reservationToDelete.id_reserva);
-                setReservationToDelete(null);
-                setShowConfirmModal(false);
-              }}
-              onCancel={() => {
-                setReservationToDelete(null);
-                setShowConfirmModal(false);
-              }}
-            />
-          )}
         </div>
       </div>
+
+      {showConfirmModal && reservationToDelete && (
+        <ConfirmDeleteModal
+          itemName={reservationToDelete.Car?.name || "la reserva"}
+          onConfirm={() => {
+            handleDelete(reservationToDelete.id_reserva);
+            setReservationToDelete(null);
+            setShowConfirmModal(false);
+          }}
+          onCancel={() => {
+            setReservationToDelete(null);
+            setShowConfirmModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -11,7 +11,7 @@ function ResultsSearch({ cars, maxResults = 5 }) {
           {displayedCars.map((car) => (
             <div key={car.id} className={styles.carCard}>
               <img
-                src={car.image}
+                src={`http://localhost:3000${car.image}`}
                 alt={car.name}
                 className={styles.carImage}
                 onError={(e) => {
@@ -22,7 +22,7 @@ function ResultsSearch({ cars, maxResults = 5 }) {
                 <h4 className={styles.carName}>{car.name}</h4>
                 <p className={styles.carCategory}>{car.category}</p>
                 <p className={styles.carPrice}>
-                  ${car.price ? car.price.toLocaleString() : "N/A"}
+                  ${car.price ? car.price.toLocaleString() : "N/A"} Ars
                 </p>
                 <a className={styles.btnReservar}>Ir a reservar</a>
               </div>
