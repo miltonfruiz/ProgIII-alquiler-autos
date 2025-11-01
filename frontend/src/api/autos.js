@@ -1,6 +1,8 @@
-export const obtenerAutos = async () => {
+export const obtenerAutos = async (page = 1, limit = 20) => {
   try {
-    const response = await fetch(`http://localhost:3000/cars`);
+    const response = await fetch(
+      `http://localhost:3000/cars?page=${page}&limit=${limit}`
+    );
     if (!response.ok) {
       throw new Error("Error al obtener los autos");
     }
