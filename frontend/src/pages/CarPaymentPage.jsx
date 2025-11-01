@@ -12,6 +12,8 @@ import {
 } from "../api/actualizarReservas.js";
 import { CrearPago, ObtenerAutos, ObtenerUsuarios } from "../api/crearPagos.js";
 
+const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
+
 // import { useDataContext } from "./Contexts/Contexts";
 
 const CarPaymentPage = () => {
@@ -90,6 +92,9 @@ const CarPaymentPage = () => {
           carId: idUltimoAuto,
           userId: idUltimoUsuario,
           id_reserva: idUltimaReserva,
+          subtotal: datosAlquiler.total,
+          tax: datosAlquiler.tax,
+          total: datosAlquiler.totalFinal,
           cardType: tipoTarjeta,
           paymentMethod: choicePayment,
           cardNumber: datosPago.numeroTarjeta,
@@ -106,6 +111,9 @@ const CarPaymentPage = () => {
           carId: idUltimoAuto,
           userId: idUltimoUsuario,
           id_reserva: idUltimaReserva,
+          subtotal: datosAlquiler.total,
+          tax: datosAlquiler.tax,
+          total: datosAlquiler.totalFinal,
           cardType: null,
           paymentMethod: choicePayment,
           cardNumber: null,
@@ -115,6 +123,7 @@ const CarPaymentPage = () => {
           voucher: file,
           acceptableTerms: checkbox,
         };
+        CrearPago(datosPagoCompleto);
       }
 
       console.log(datosPagoCompleto);

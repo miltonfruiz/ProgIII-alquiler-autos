@@ -31,7 +31,7 @@ export const ObtenerAutos = async () => {
     return data;
   } catch (error) {
     console.error("Error en ObtenerReservas:", error);
-    return error;
+    throw error;
   }
 };
 
@@ -50,6 +50,6 @@ export const ObtenerUsuarios = async () => {
     return data;
   } catch (error) {
     console.error("Error en ObtenerReservas:", error);
-    return error;
+    throw error;
   }
 };

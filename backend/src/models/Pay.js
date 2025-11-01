@@ -12,6 +12,42 @@ export const Pay = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
+    carId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Car,
+        key: "id",
+      },
+    },
+    reservationId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Reserva,
+        key: "id_reserva",
+      },
+    },
+    subtotal: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
+    },
+    tax: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
+    },
+    total: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
+    },
     cardType: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -49,5 +85,6 @@ export const Pay = sequelize.define(
   },
   {
     timestamps: false,
+    freezeTableName: true, // para que use "Pay" y no "Pays"
   }
 );
