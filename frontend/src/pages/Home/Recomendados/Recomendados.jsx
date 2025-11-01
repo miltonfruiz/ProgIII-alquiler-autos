@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, use, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Recomendados.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
@@ -28,6 +28,18 @@ function Recomendados({ autos, loggedIn }) {
       containerRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    //Traer autos recomendados al montar el componente
+    fetch("http://localhost:3000/cars")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Autos recomendados:", data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener autos recomendados:", error);
+      });
+  }, []);
 
   return (
     <section className={styles.recomendadosSection}>
