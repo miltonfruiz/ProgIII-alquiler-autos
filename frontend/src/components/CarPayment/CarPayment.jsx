@@ -18,8 +18,11 @@ import {
   ConfirmarReserva,
   CancelarReserva,
 } from "../../api/actualizarReservas";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
+  const navigate = useNavigate()
+
   const [datosFacturacion, setDatosFacturacion] = useState({
     nombre: "",
     apellido: "",
@@ -109,6 +112,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     });
     setTipoTarjeta(e.target.value);
   }
+
+  
 
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
@@ -395,6 +400,9 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
           onClick={async () => {
             const data = await ObtenerReservas();
             CancelarReserva(data);
+          toast.info("Reserva cancelada correctamente");
+          setTimeout(() => navigate("/home"), 1500);
+
           }}
         >
           Cancelar
