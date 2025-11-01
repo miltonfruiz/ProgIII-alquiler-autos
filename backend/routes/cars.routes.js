@@ -21,10 +21,41 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
+//------------------- Buscar autos -------------------//
+router.get("/cars/search", async (req, res) => {
+  try {
+    const { q } = req.query; // query de búsqueda
+
+    if (!q || q.trim().length < 3) {
+      return res.json([]);
+    }
+
+    const { Op } = require("sequelize");
+
+    const cars = await Car.findAll({
+      where: {
+        [Op.or]: [
+          { name: { [Op.iLike]: `%${q}%` } },
+          { category: { [Op.iLike]: `%${q}%` } },
+          { brand: { [Op.iLike]: `%${q}%` } },
+        ],
+      },
+      limit: 3, // limitar resultados de búsqueda
+    });
+
+    res.json(cars);
+  } catch (error) {
+    console.error("Error en búsqueda:", error);
+    res.status(500).json({ message: "Error al buscar autos", error });
+  }
+});
 //------------------- Obtener autos -------------------//
 router.get("/cars", async (req, res) => {
   try {
     const { page = 1, limit = 20, category, brand } = req.query;
+
+    const pagNum = parseInt(page);
+    const limitNum = parseInt(limit);
 
     const where = {};
     if (category) where.category = category;
@@ -32,8 +63,8 @@ router.get("/cars", async (req, res) => {
 
     const { count, rows } = await Car.findAndCountAll({
       where,
-      limit,
-      offset: (page - 1) * limit,
+      limit: limitNum,
+      offset: (pagNum - 1) * limitNum,
     });
 
     const totalPages = Math.ceil(count / limit);
@@ -41,7 +72,7 @@ router.get("/cars", async (req, res) => {
     res.json({
       autos: rows,
       pagination: {
-        currentPage: page,
+        currentPage: pagNum,
         totalPages: totalPages,
         totalItems: count,
         itemsPerPage: limit,
