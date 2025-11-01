@@ -93,3 +93,5 @@ router.post("/pays", async (req, res) => {
 });*/
 
 export default router;
+
+//VER DESPUES CUAL ES EL ERROR DE PORQUE NO ME INSERTA EN LA BASE DE DATOS EL PAGO CON CLAUDE
