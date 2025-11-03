@@ -6,6 +6,8 @@ export async function createReserva(req, res) {
   try {
     const { fecha_inicio, fecha_fin, carId, userId } = req.body;
 
+    console.log("Datos recibidos para crear reserva:", req.body);
+
     const fecha_reserva = new Date();
 
     const inicio = new Date(fecha_inicio);

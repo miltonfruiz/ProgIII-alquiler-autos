@@ -87,6 +87,9 @@ const CarPaymentPage = () => {
       const idUltimoUsuario = ultimoUsuario.id;
       const idUltimaReserva = ultimaReserva.id_reserva;
 
+      console.log("datos alquiler subtotal", datosAlquiler.total);
+      console.log("datos alquiler total", datosAlquiler.totalFinal);
+
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
           carId: idUltimoAuto,
