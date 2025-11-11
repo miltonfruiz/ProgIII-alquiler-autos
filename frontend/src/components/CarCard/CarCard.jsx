@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./CarCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faRoad } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 
 const CarCard = ({
   name,
@@ -13,6 +14,8 @@ const CarCard = ({
   onRent,
 }) => {
   const [activo, setActivo] = useState(false);
+
+  
 
   return (
     <div className={styles.cardContainer}>
