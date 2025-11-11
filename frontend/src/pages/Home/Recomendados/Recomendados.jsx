@@ -1,20 +1,27 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, use, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Recomendados.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
 import Modal from "../../../components/Modal/Modal";
 
-function Recomendados({ autos, loggedIn }) {
+function Recomendados({ loggedIn }) {
   const navigate = useNavigate();
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
   const containerRef = useRef(null);
+  const [autos, setAutos] = useState([]);
 
   const handleRent = (car) => {
-    if (loggedIn) {
-      setAutoSeleccionado(car);
-    } else {
+    if (!loggedIn) {
       navigate("/login");
+    } else {
+      document.body.classList.add("bloquear-scroll");
+      setAutoSeleccionado(car);
     }
+  };
+
+  const handleOnClose = () => {
+    document.body.classList.remove("bloquear-scroll");
+    setAutoSeleccionado(null);
   };
 
   const scrollLeft = () => {
@@ -28,6 +35,18 @@ function Recomendados({ autos, loggedIn }) {
       containerRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    fetch("http://localhost:3000/cars/recomendados")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Autos recomendados:", data);
+        setAutos(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener autos recomendados:", error);
+      });
+  }, []);
 
   return (
     <section className={styles.recomendadosSection}>
@@ -48,15 +67,17 @@ function Recomendados({ autos, loggedIn }) {
 
       <div className={styles.recomendadosConteiner} ref={containerRef}>
         {autos.map((car) => (
-          <CarCard key={car.id} {...car} onRent={() => handleRent(car)} />
+          <CarCard
+            key={car.id}
+            {...car}
+            onRent={() => handleRent(car)}
+            loggedIn={loggedIn}
+          />
         ))}
       </div>
 
       {autoSeleccionado && (
-        <Modal
-          auto={autoSeleccionado}
-          onClose={() => setAutoSeleccionado(null)}
-        />
+        <Modal auto={autoSeleccionado} onClose={handleOnClose} />
       )}
     </section>
   );

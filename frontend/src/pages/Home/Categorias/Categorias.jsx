@@ -72,7 +72,7 @@ function Categorias({ loggedIn }) {
           <p className={styles.cardLabel}>Desde </p>
           <p className={styles.cardPrice}>
             <span className={styles.priceValue}>Ars $37.800 /</span>
-            <span className={styles.priceUnit}> Día</span>
+            <span className={styles.priceUnit}> día</span>
           </p>
           <div className={styles.cardButton}>
             <button onClick={() => handleCategoriasClick("Estándar")}>

@@ -21,13 +21,84 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
+//------------------- Autos Recomendados -------------------//
+router.get("/cars/recomendados", async (req, res) => {
+  try {
+    const cars = await Car.findAll({
+      limit: 6,
+      order: [["Id", "DESC"]],
+    });
+
+    res.json(cars);
+  } catch (error) {
+    console.error("Error al obtener autos recomendados:", error);
+    res
+      .status(500)
+      .json({ message: "Error al obtener autos recomendados", error });
+  }
+});
+
+//------------------- Buscar autos -------------------//
+router.get("/cars/search", async (req, res) => {
+  try {
+    const { q } = req.query; // query de búsqueda
+
+    if (!q || q.trim().length < 3) {
+      return res.json([]);
+    }
+
+    const { Op } = require("sequelize");
+
+    const cars = await Car.findAll({
+      where: {
+        [Op.or]: [
+          { name: { [Op.iLike]: `%${q}%` } },
+          { category: { [Op.iLike]: `%${q}%` } },
+          { brand: { [Op.iLike]: `%${q}%` } },
+        ],
+      },
+      limit: 3, // limitar resultados de búsqueda
+    });
+
+    res.json(cars);
+  } catch (error) {
+    console.error("Error en búsqueda:", error);
+    res.status(500).json({ message: "Error al buscar autos", error });
+  }
+});
 //------------------- Obtener autos -------------------//
 router.get("/cars", async (req, res) => {
   try {
-    const cars = await Car.findAll();
-    res.json(cars);
+    const { page = 1, limit = 20, category, brand } = req.query;
+
+    const pagNum = parseInt(page);
+    const limitNum = parseInt(limit);
+
+    const where = {};
+    if (category) where.category = category;
+    if (brand) where.brand = brand;
+
+    const { count, rows } = await Car.findAndCountAll({
+      where,
+      limit: limitNum,
+      offset: (pagNum - 1) * limitNum,
+    });
+
+    const totalPages = Math.ceil(count / limit);
+
+    res.json({
+      autos: rows,
+      pagination: {
+        currentPage: pagNum,
+        totalPages: totalPages,
+        totalItems: count,
+        itemsPerPage: limit,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+    });
   } catch (error) {
-    console.error("Error al hacer Car.findAll():", error.message);
+    console.error("Error al hacer Car.findAndCountAll():", error.message);
     res.status(500).json({ message: "Error al obtener autos", error });
   }
 });
@@ -105,3 +176,13 @@ router.delete("/cars/:id", async (req, res) => {
   }
 });
 export default router;
+
+//------------------- Traer autos para admin -------------------//
+router.get("/cars/admin/all", async (req, res) => {
+  try {
+    const cars = await Car.findAll();
+    res.json(cars);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener autos", error });
+  }
+});

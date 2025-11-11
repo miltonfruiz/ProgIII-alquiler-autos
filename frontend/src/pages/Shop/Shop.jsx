@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import mockCars from "../../data/mockCars";
-import Navbar from "../../components/Navbar/Navbar";
+import { useState, useEffect, use } from "react";
 import Catalogo from "./Catalogo/Catalogo";
 import Footer from "../../components/Footer/Footer";
 import Filtros from "../Shop/Filtros/Filtros";
@@ -11,31 +9,53 @@ import { obtenerAutos } from "../../api/autos";
 
 function Shop({ loggedIn }) {
   const [autosDB, setAutosDB] = useState([]);
+  const [pagination, setPagination] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
   const [filtrosVisible, setFiltrosVisible] = useState(false);
 
   const location = useLocation(); // Esto sirve para recibir el state que esta en CATEGORIAS.JSX
-  useEffect(() => {
-    const fetchAutos = async () => {
-      try {
-        const data = await obtenerAutos();
-        console.log(data.image); // me devuelve undefined
-        setAutosDB(data);
-      } catch (error) {
-        console.error("Error al cargar autos desde el backend", error);
-      }
-    };
 
-    fetchAutos();
+  // Función para cargar autos con paginación
+  const fetchAutos = async (page = 1) => {
+    setLoading(true);
+    try {
+      const data = await obtenerAutos(page, 20);
+      console.log("Datos recibidos:", data);
+
+      // Ajuste para manejar diferentes estructuras de respuesta
+      setAutosDB(data.autos || data);
+      setPagination(data.pagination || null);
+      setCurrentPage(page);
+    } catch (error) {
+      console.error("Error al cargar autos desde el backend", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAutos(1);
   }, []);
 
+  // Manejar categoría seleccionada desde el estado de la ubicación
   useEffect(() => {
     if (location.state?.categoriaSeleccionada) {
       //Hay alguna categoriaSeleccionada?
       setCategoriasSeleccionadas([location.state.categoriaSeleccionada]); // Aqui se le pasa la categoria seleccionada, desde el HOME CATEGORIAS
+      setCurrentPage(1);
     }
   }, [location.state]);
+
+  // Función para manejar cambio de página
+  const handlePageChange = (newPage) => {
+    fetchAutos(newPage);
+    // Scroll al inicio de la página
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const contarPorCampo = (autos, campo) => {
     return autos.reduce((acc, auto) => {
@@ -87,12 +107,21 @@ function Shop({ loggedIn }) {
           />
         )}
 
-        <Catalogo
-          autos={autosFiltrados}
-          limpiarFiltros={limpiarFiltros}
-          loggedIn={loggedIn}
-          setFiltrosVisible={setFiltrosVisible}
-        />
+        {loading ? (
+          <div className={styles.loadingContainer}>
+            <p>Cargando autos...</p>
+          </div>
+        ) : (
+          <Catalogo
+            autos={autosFiltrados}
+            limpiarFiltros={limpiarFiltros}
+            loggedIn={loggedIn}
+            setFiltrosVisible={setFiltrosVisible}
+            filtrosVisible={filtrosVisible}
+            pagination={pagination}
+            onPageChange={handlePageChange}
+          />
+        )}
       </main>
       <Footer />
     </>

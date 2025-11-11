@@ -467,3 +467,24 @@ body.dark .hamburger-menu span {
     font-size: 11px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    height: 60px; /* Altura reducida en móviles */
+    padding: 8px 16px;
+  }
+  
+  :root {
+    --navbar-height: 60px; /* Actualiza la variable */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    height: 55px; /* Altura aún más reducida */
+  }
+  
+  :root {
+    --navbar-height: 55px;
+  }
+}

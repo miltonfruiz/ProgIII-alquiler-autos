@@ -9,8 +9,6 @@ const CarBrandsCarousel = () => {
     <div className={styles.carouselContainer}>
       <div
         className={`${styles.carouselTrack} ${isPaused ? styles.paused : ""}`}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
       >
         {/* Primera serie de marcas */}
         {CarBrands.map((brand, index) => (

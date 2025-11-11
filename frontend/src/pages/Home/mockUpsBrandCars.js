@@ -34,7 +34,7 @@ const carBrands = [
   },
   {
     name: "Nissan",
-    logo: "https://img.icons8.com/?size=100&id=58311&format=png&color=FFFFFF",
+    logo: "https://www.carlogos.org/car-logos/nissan-logo-2020-white-show.png",
   },
   {
     name: "Hyundai",

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./WhyUs.module.css";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShieldAlt,
@@ -71,7 +72,9 @@ function WhyUs() {
             </div>
           </div>
 
-          <button className={styles.ctaButton}>Descubre nuestra flota</button>
+          <Link to="/shop" className={styles.ctaButton}>
+            Descubre nuestra flota
+          </Link>
         </div>
       </div>
     </section>

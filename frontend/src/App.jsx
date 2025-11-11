@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 import CarPaymentPage from "./pages/CarPaymentPage";
 import Cars from "./pages/Cars";
+import "leaflet/dist/leaflet.css";
 
 //Sosa
 import Navbar from "./components/Navbar/Navbar";
@@ -21,19 +22,13 @@ import Administration from "./pages/Administration";
 import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRouteAdmin";
 import ResetPassword from "./pages/Log/PasswordReset/PasswordReset";
 import { ToastContainer } from "react-toastify";
+import HowRent from "./pages/HowRent/HowRent";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerIn, setRegisterIn] = useState(false);
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={4000}
-        closeOnClick
-        pauseOnHover
-        closeButton
-      />
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
@@ -70,8 +65,16 @@ function App() {
               </ProtectedRouteAdmin>
             }
           />
+          <Route path="/infoReservation" element={<HowRent></HowRent>}></Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        closeOnClick
+        pauseOnHover
+        closeButton
+      />
     </>
   );
 }

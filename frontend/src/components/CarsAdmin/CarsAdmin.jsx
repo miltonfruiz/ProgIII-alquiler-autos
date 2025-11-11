@@ -33,12 +33,14 @@ const CarsAdmin = () => {
     estado: "",
   });
   const [carToDelete, setCarToDelete] = useState(null);
+
   useEffect(() => {
-    fetch("http://localhost:3000/cars")
+    fetch("http://localhost:3000/cars/admin/all")
       .then((res) => res.json())
-      .then((data) => setCars([...data]))
+      .then((data) => setCars(data))
       .catch((err) => console.error("Error al traer autos:", err));
   }, []);
+
   const handleDelete = async (car) => {
     try {
       await fetch(`http://localhost:3000/cars/${car.id}`, {
@@ -50,15 +52,18 @@ const CarsAdmin = () => {
       console.error("Error al eliminar auto:", error);
     }
   };
+
   const confirmDelete = async () => {
     if (carToDelete) {
       await handleDelete(carToDelete);
       setCarToDelete(null);
     }
   };
+
   const cancelDelete = () => {
     setCarToDelete(null);
   };
+
   const handleCreate = async (e) => {
     e.preventDefault();
     const errors = CardAdminValidation(newCar);
@@ -88,6 +93,7 @@ const CarsAdmin = () => {
       console.error("Error al crear auto:", error);
     }
   };
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     const errors = CardAdminValidation(newCar);
@@ -119,6 +125,7 @@ const CarsAdmin = () => {
       console.error("Error al actualizar auto:", error);
     }
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewCar((prev) => ({
@@ -126,10 +133,12 @@ const CarsAdmin = () => {
       [name]: value,
     }));
   };
+
   const handleCloseModal = () => {
     setShowModal(false);
     resetForm();
   };
+
   const resetForm = () => {
     setEditingCar(null);
     setFormErrors({});
@@ -144,9 +153,11 @@ const CarsAdmin = () => {
       estado: "",
     });
   };
+
   const filteredCars = cars.filter((car) =>
     car.name?.toLowerCase().includes(search.toLowerCase())
   );
+
   const handleDownloadCars = () => {
     const options = {
       excludeFields: ["createdAt", "updatedAt", "image"],
@@ -168,6 +179,7 @@ const CarsAdmin = () => {
 
     downloadCSV(cars, "autos_backup.csv", options);
   };
+
   return (
     <div className="admin-cars-container">
       <div className="admin-container-table">

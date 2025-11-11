@@ -16,9 +16,18 @@ export const crearReserva = async (reservaData) => {
     console.log("Status de respuesta:", response.status);
 
     if (!response.ok) {
-      const errorData = await response.text();
+      const errorData = await response.json();
       console.error("Error del servidor:", errorData);
-      throw new Error(`HTTP error! status: ${response.status}`);
+
+      // Devolver el mensaje específico de error
+      return {
+        success: false,
+        error:
+          errorData.errores?.disponibilidad ||
+          errorData.mensaje ||
+          "Error al crear la reserva",
+        errores: errorData.errores,
+      };
     }
 
     const data = await response.json();
