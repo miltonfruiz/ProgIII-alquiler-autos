@@ -1,6 +1,7 @@
 import styles from "./Results.module.css";
+import { useNavigate } from "react-router-dom";
 
-function ResultsSearch({ cars, maxResults = 5 }) {
+function ResultsSearch({ cars, maxResults = 5, onClose }) {
   const displayedCars = cars.slice(0, maxResults);
   const hasMore = cars.length > maxResults;
 

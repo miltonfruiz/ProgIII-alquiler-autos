@@ -3,6 +3,8 @@ import styles from "./CarCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faRoad } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CarCard = ({
   name,
@@ -12,10 +14,19 @@ const CarCard = ({
   transmission,
   price,
   onRent,
+  loggedIn,
 }) => {
   const [activo, setActivo] = useState(false);
+  const navigate = useNavigate();
 
-  
+  const handleRentClick = () => {
+    if (!loggedIn) {
+      toast("Debes iniciar sesión para rentar un auto");
+      navigate("/login");
+      return;
+    }
+    onRent();
+  };
 
   return (
     <div className={styles.cardContainer}>
@@ -51,7 +62,7 @@ const CarCard = ({
       </div>
 
       <div className={styles.cardButton}>
-        <button onClick={onRent} className={styles.rentButton}>
+        <button onClick={handleRentClick} className={styles.rentButton}>
           Rentar ahora
         </button>
       </div>

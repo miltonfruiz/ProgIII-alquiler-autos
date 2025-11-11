@@ -21,6 +21,23 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
+//------------------- Autos Recomendados -------------------//
+router.get("/cars/recomendados", async (req, res) => {
+  try {
+    const cars = await Car.findAll({
+      limit: 6,
+      order: [["Id", "DESC"]],
+    });
+
+    res.json(cars);
+  } catch (error) {
+    console.error("Error al obtener autos recomendados:", error);
+    res
+      .status(500)
+      .json({ message: "Error al obtener autos recomendados", error });
+  }
+});
+
 //------------------- Buscar autos -------------------//
 router.get("/cars/search", async (req, res) => {
   try {

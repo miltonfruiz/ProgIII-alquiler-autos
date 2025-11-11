@@ -1,9 +1,10 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./Modal.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ModalValidation from "../ModalValidation/ModalValidation";
 import { crearReserva } from "../../api/reservas";
+import MapComponent from "../MapComponent/MapComponent"; // Importar el componente del mapa
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
@@ -19,7 +20,6 @@ function Modal({ auto, onClose }) {
   const navigate = useNavigate();
   const hoy = new Date().toISOString().split("T")[0];
 
-  // Calcular hora mínima (una hora después de ahora)
   const getHoraMinima = () => {
     const ahora = new Date();
     ahora.setHours(ahora.getHours() + 1);
@@ -42,7 +42,6 @@ function Modal({ auto, onClose }) {
   const horario_inicioRef = useRef(null);
   const horario_finRef = useRef(null);
 
-  // Función para formatear fecha y hora en español
   const formatearFechaHora = (fecha, hora) => {
     if (!fecha || !hora) return "Selecciona fecha y hora";
 
@@ -66,7 +65,6 @@ function Modal({ auto, onClose }) {
     const mes = meses[fechaObj.getMonth()];
     const anio = fechaObj.getFullYear();
 
-    // Convertir hora de 24h a 12h con AM/PM
     const [horas, minutos] = hora.split(":");
     const horasNum = parseInt(horas);
     const periodo = horasNum >= 12 ? "PM" : "AM";
@@ -76,7 +74,6 @@ function Modal({ auto, onClose }) {
     return `${dia}/${mes}/${anio} a las ${horas12}:${minutos} ${periodo}`;
   };
 
-  // Nombres de lugares
   const nombresLugares = {
     airport: 'Aeropuerto de Rosario "Islas Malvinas"',
     downtown: "Centro de Rosario - Sucursal Principal",
@@ -86,17 +83,13 @@ function Modal({ auto, onClose }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     let newData = { ...formData, [name]: value };
 
-    // Si cambia la fecha de inicio y es posterior a la fecha fin, actualizar fecha fin
     if (name === "fecha_inicio" && value > formData.fecha_fin) {
       newData.fecha_fin = value;
     }
 
-    // Si cambia la fecha de inicio a hoy, verificar que la hora sea válida
     if (name === "fecha_inicio" && value === hoy) {
-      const ahora = new Date();
       const horaMinima = getHoraMinima();
 
       if (formData.hora_inicio < horaMinima) {
@@ -104,12 +97,6 @@ function Modal({ auto, onClose }) {
       }
     }
 
-    // Si la fecha de inicio cambia a una fecha futura, permitir cualquier hora
-    if (name === "fecha_inicio" && value > hoy) {
-      // No hace falta ajustar la hora
-    }
-
-    // Validar en tiempo real
     const newErrores = ModalValidation(newData);
     setErrores(newErrores);
     setFormData(newData);
@@ -126,7 +113,6 @@ function Modal({ auto, onClose }) {
     const inicio = new Date(formData.fecha_inicio);
     const fin = new Date(formData.fecha_fin);
 
-    // Normalizar fechas sin horas
     const fechaInicio = new Date(
       inicio.getFullYear(),
       inicio.getMonth(),
@@ -148,7 +134,6 @@ function Modal({ auto, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar formulario completo
     const erroresModal = ModalValidation(formData);
 
     if (Object.keys(erroresModal).length > 0) {
@@ -182,13 +167,11 @@ function Modal({ auto, onClose }) {
       });
 
       if (success) {
-        // Contador de reservas
         let contador = localStorage.getItem("contadorReservas");
         contador = contador ? parseInt(contador) : 0;
         contador++;
         localStorage.setItem("contadorReservas", contador);
 
-        // Guardar datos en localStorage
         const datosAlquiler = {
           auto: auto,
           fecha_inicio: formData.fecha_inicio,
@@ -420,6 +403,15 @@ function Modal({ auto, onClose }) {
                     'Aeropuerto de Rosario "Islas Malvinas"'}
                 </p>
                 <span className={styles.caption}>Aeropuerto</span>
+
+                {/* Mapa de retirada */}
+                <div className={styles.mapContainer}>
+                  <MapComponent
+                    location={formData.lugar_retiro}
+                    height="180px"
+                  />
+                </div>
+
                 <div className={styles.retireInfo}>
                   <FontAwesomeIcon
                     icon={faCircleInfo}
@@ -490,7 +482,7 @@ function Modal({ auto, onClose }) {
                   </div>
                 </div>
 
-                {/* Mostrar lugar seleccionado */}
+                {/* Mostrar lugar seleccionado y mapa */}
                 {formData.lugar_devolucion && (
                   <>
                     <p className={styles.place}>
@@ -505,6 +497,14 @@ function Modal({ auto, onClose }) {
                         ? "Terminal"
                         : "Otro"}
                     </span>
+
+                    {/* Mapa de devolución */}
+                    <div className={styles.mapContainer}>
+                      <MapComponent
+                        location={formData.lugar_devolucion}
+                        height="180px"
+                      />
+                    </div>
                   </>
                 )}
               </div>

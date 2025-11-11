@@ -156,7 +156,7 @@
   color: #fff;
   border: none;
   border-radius: 12px;
-  background-color: #4f46e5;
+  background-color: #574fe7;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
@@ -268,5 +268,50 @@
 
   .imageContainer {
     height: 130px;
+  }
+}
+
+.card.highlighted {
+  border: 2px solid #6555fd !important;
+  box-shadow: 0 0 20px rgba(101, 85, 253, 0.4) !important;
+  transform: scale(1.02);
+  animation: pulseGlow 2s infinite;
+}
+
+.highlightBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(90deg, #6555fd, #8c6dfb);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  z-index: 2;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(101, 85, 253, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(101, 85, 253, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(101, 85, 253, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(101, 85, 253, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(101, 85, 253, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(101, 85, 253, 0);
   }
 }

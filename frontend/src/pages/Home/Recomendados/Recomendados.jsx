@@ -11,11 +11,17 @@ function Recomendados({ loggedIn }) {
   const [autos, setAutos] = useState([]);
 
   const handleRent = (car) => {
-    if (loggedIn) {
-      setAutoSeleccionado(car);
-    } else {
+    if (!loggedIn) {
       navigate("/login");
+    } else {
+      document.body.classList.add("bloquear-scroll");
+      setAutoSeleccionado(car);
     }
+  };
+
+  const handleOnClose = () => {
+    document.body.classList.remove("bloquear-scroll");
+    setAutoSeleccionado(null);
   };
 
   const scrollLeft = () => {
@@ -61,15 +67,17 @@ function Recomendados({ loggedIn }) {
 
       <div className={styles.recomendadosConteiner} ref={containerRef}>
         {autos.map((car) => (
-          <CarCard key={car.id} {...car} onRent={() => handleRent(car)} />
+          <CarCard
+            key={car.id}
+            {...car}
+            onRent={() => handleRent(car)}
+            loggedIn={loggedIn}
+          />
         ))}
       </div>
 
       {autoSeleccionado && (
-        <Modal
-          auto={autoSeleccionado}
-          onClose={() => setAutoSeleccionado(null)}
-        />
+        <Modal auto={autoSeleccionado} onClose={handleOnClose} />
       )}
     </section>
   );

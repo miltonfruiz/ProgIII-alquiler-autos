@@ -8,7 +8,7 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(110deg, #6b5cff 0%, #9b6cf3 50%, #c68af8 100%);
+  background: linear-gradient(110deg, #6b5cff 20%, #9b6cf3 50%, #c68af8 100%);
   color: #fff;
 }
 

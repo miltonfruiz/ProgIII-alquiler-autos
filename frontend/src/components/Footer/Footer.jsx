@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -16,9 +17,9 @@ function Footer() {
         <h3 className={styles.footerTitle}>Sobre Nosotros</h3>
         <ul className={styles.footerLinks}>
           <li>
-            <a href="#" className={styles.footerLink}>
+            <Link to={"/infoReservation"} className={styles.footerLink}>
               Cómo alquilar
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#" className={styles.footerLink}>
@@ -36,17 +37,17 @@ function Footer() {
         <h3 className={styles.footerTitle}>Redes Sociales</h3>
         <ul className={styles.footerLinks}>
           <li>
-            <a href="#" className={styles.footerLink}>
+            <a href="https://www.facebook.com/" className={styles.footerLink}>
               Facebook
             </a>
           </li>
           <li>
-            <a href="#" className={styles.footerLink}>
+            <a href="https://www.instagram.com/" className={styles.footerLink}>
               Instagram
             </a>
           </li>
           <li>
-            <a href="#" className={styles.footerLink}>
+            <a href="https://x.com/home" className={styles.footerLink}>
               Twitter
             </a>
           </li>

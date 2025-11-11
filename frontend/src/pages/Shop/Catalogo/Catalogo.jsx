@@ -96,9 +96,14 @@ function Catalogo({
     }
 
     return autos.map((car) => (
-      <CarCard key={car.id} {...car} onRent={() => abrirOverlay(car)} />
+      <CarCard
+        key={car.id}
+        {...car}
+        onRent={() => abrirOverlay(car)}
+        loggedIn={loggedIn}
+      />
     ));
-  }, [autos, abrirOverlay, limpiarFiltros]);
+  }, [autos, abrirOverlay, limpiarFiltros, loggedIn]);
 
   return (
     <section className={styles.catalogoSection}>

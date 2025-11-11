@@ -55,7 +55,7 @@ const Login = ({ setLogged }) => {
               nombre: data.user.nombre,
             })
           );
-          
+
           setTimeout(() => {
             // Verificar si es admin (puedes agregar un campo role en la BD)
             if (data.user.correo === "admin@test.com") {
@@ -92,7 +92,6 @@ const Login = ({ setLogged }) => {
             errores={errores}
             refs={{ emailRef, passwordRef }}
           />
-          
         </div>
       </div>
     </>
