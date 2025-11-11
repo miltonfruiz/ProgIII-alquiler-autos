@@ -4,10 +4,11 @@ import styles from "./Recomendados.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
 import Modal from "../../../components/Modal/Modal";
 
-function Recomendados({ autos, loggedIn }) {
+function Recomendados({ loggedIn }) {
   const navigate = useNavigate();
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
   const containerRef = useRef(null);
+  const [autos, setAutos] = useState([]);
 
   const handleRent = (car) => {
     if (loggedIn) {
@@ -30,11 +31,11 @@ function Recomendados({ autos, loggedIn }) {
   };
 
   useEffect(() => {
-    //Traer autos recomendados al montar el componente
-    fetch("http://localhost:3000/cars")
+    fetch("http://localhost:3000/cars/recomendados")
       .then((response) => response.json())
       .then((data) => {
         console.log("Autos recomendados:", data);
+        setAutos(data);
       })
       .catch((error) => {
         console.error("Error al obtener autos recomendados:", error);

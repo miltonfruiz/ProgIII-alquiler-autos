@@ -1,4 +1,3 @@
-/* Hero.css */
 .heroSection {
   width: 100%;
   height: 90vh;
@@ -8,68 +7,63 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 2rem;
-  box-sizing: border-box;
   overflow: hidden;
-  background: linear-gradient(111deg, #a86ce9 0%, #7f7df7 100%);
+  background: linear-gradient(110deg, #6b5cff 0%, #9b6cf3 50%, #c68af8 100%);
+  color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .heroContent {
   position: relative;
   z-index: 2;
   text-align: center;
-  color: white;
-  max-width: 800px;
+  max-width: 750px;
   padding: 2rem;
   animation: fadeIn 1s ease-out;
 }
 
-.textContent h1 {
-  font-family: "Playfair Display", serif;
-  color: #fff;
-  font-size: clamp(2.4rem, 6vw, 4.2rem);
-  margin-bottom: 1.5rem;
+.textContainer h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 4rem);
   line-height: 1.2;
-  font-weight: 900;
+  margin-bottom: 1.2rem;
+  color: #ffff;
 }
 
-.textContent p {
-  font-size: clamp(1rem, 2.2vw, 1.2rem);
-  margin-bottom: 2.5rem;
+.textContainer p {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-family: "Play fair display", sans-serif;
+  font-weight: 300;
+  color: #f3f3f3;
+  margin-bottom: 2rem;
   line-height: 1.6;
-  font-weight: 200;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.btnContainer {
-  margin-top: 1.5rem;
 }
 
 .btnContainer button {
   color: #fff;
-  background-color: #6555fd;
+  background: linear-gradient(90deg, #6555fd, #8c6dfb);
   border: none;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  padding: 1.5rem 5rem;
-  font-size: 1.2rem;
-  cursor: pointer;
+  border-radius: 30px;
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(101, 85, 253, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(101, 85, 253, 0.4);
   position: relative;
   overflow: hidden;
 }
 
 .btnContainer button:hover {
-  background-color: #7f7df7;
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(101, 85, 253, 0.5);
-}
-
-.btnContainer button:active {
-  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(101, 85, 253, 0.5);
+  background: linear-gradient(90deg, #7f7df7, #a385ff);
 }
 
 .btnContainer button::after {
@@ -82,10 +76,10 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.25),
     transparent
   );
-  transition: 0.5s;
+  transition: left 0.5s;
 }
 
 .btnContainer button:hover::after {
@@ -104,55 +98,45 @@
   }
 }
 
-/* Media Queries */
+/* Responsividad */
 @media (max-width: 768px) {
-  .hero-section {
+  .heroSection {
     height: 80vh;
-    min-height: 500px;
     padding: 1.5rem;
   }
 
-  .hero-content {
-    padding: 1.5rem;
+  .textContainer h1 {
+    font-size: 2.4rem;
   }
 
-  .text-content h1 {
-    margin-bottom: 1.2rem;
+  .textContainer p {
+    font-size: 1rem;
   }
 
-  .text-content p {
-    margin-bottom: 2rem;
-  }
-
-  .btn-container button {
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
+  .btnContainer button {
+    padding: 0.9rem 2.5rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-section {
+  .heroSection {
     height: 70vh;
     min-height: 400px;
-    padding: 1rem;
   }
 
-  .hero-content {
-    padding: 1rem;
-  }
-
-  .text-content h1 {
+  .textContainer h1 {
     font-size: 2rem;
   }
 
-  .text-content p {
-    font-size: 1rem;
+  .textContainer p {
+    font-size: 0.95rem;
   }
 
-  .btn-container button {
-    padding: 0.9rem 2rem;
+  .btnContainer button {
+    padding: 0.8rem 2rem;
     font-size: 1rem;
     width: 100%;
-    max-width: 280px;
+    max-width: 260px;
   }
 }
