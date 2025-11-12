@@ -21,7 +21,7 @@ const ConfirmDeleteModal = ({
             <FaCheckCircle className="confirm-modal-icon" /> Confirmar
           </button>
           <button className="cancel-button-cars" onClick={onCancel}>
-            <MdCancel className="cancel-icon-cars" /> Cancelar
+            Cancelar
           </button>
         </div>
       </div>

@@ -104,7 +104,7 @@ const CarPaymentPage = () => {
           expirationDate: datosPago.fechaTarjeta,
           ownerName: datosPago.nombreTarjeta,
           cvc: datosPago.cvc,
-          voucher: null,
+          voucher: "no aplica",
           acceptableTerms: checkbox,
         };
         CrearPago(datosPagoCompleto);

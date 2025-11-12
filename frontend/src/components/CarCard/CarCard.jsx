@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import styles from "./CarCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faRoad } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CarCard = ({
   name,
@@ -11,35 +14,57 @@ const CarCard = ({
   transmission,
   price,
   onRent,
+  loggedIn,
 }) => {
-  function CarCard({ onRent, ...props }) {
-    const [activo, setActivo] = useState(false);
-  } // ← Correcto, está dentro del componente
+  const [activo, setActivo] = useState(false);
+  const navigate = useNavigate();
+
+  const handleRentClick = () => {
+    if (!loggedIn) {
+      toast("Debes iniciar sesión para rentar un auto");
+      navigate("/login");
+      return;
+    }
+    onRent();
+  };
+
   return (
-    <div className={styles.cardConteiner}>
-      <div className={styles.headConteiner}>
+    <div className={styles.cardContainer}>
+      <div className={styles.categoryBadge}>{category}</div>
+      <div className={styles.headContainer}>
         <p className={styles.cardTitle}>{name}</p>
-        <p className={styles.carType}>{category}</p>
       </div>
-      <img className={styles.cardImage} src={image} alt={name} />
+
+      <div className={styles.imageContainer}>
+        <img
+          className={styles.cardImage}
+          src={`http://localhost:3000${image}`}
+          alt={name}
+        />
+      </div>
+
       <div className={styles.cardDataCar}>
         <span className={styles.cardCapacity}>
-          <FontAwesomeIcon className={styles.iconUsers} icon={faUsers} />
+          <FontAwesomeIcon className={styles.icon} icon={faUsers} />
           {` ${passengers} Personas`}
         </span>
         <span className={styles.cardGearBox}>
-          <FontAwesomeIcon className={styles.iconRoad} icon={faRoad} />
+          <FontAwesomeIcon className={styles.icon} icon={faRoad} />
           {transmission}
         </span>
       </div>
-      <p className={styles.cardPrice}>
+
+      <div className={styles.priceContainer}>
         <span className={styles.priceValue}>
           Ars ${price.toLocaleString()} /
         </span>
-        <span className={styles.priceUnit}> Día</span>
-      </p>
+        <span className={styles.priceUnit}> día</span>
+      </div>
+
       <div className={styles.cardButton}>
-        <button onClick={onRent}>Rentar</button>
+        <button onClick={handleRentClick} className={styles.rentButton}>
+          Rentar ahora
+        </button>
       </div>
     </div>
   );

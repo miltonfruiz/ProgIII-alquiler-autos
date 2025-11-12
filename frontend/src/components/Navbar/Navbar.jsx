@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Navbar.module.css";
 import carLogo from "../../assets/car-logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

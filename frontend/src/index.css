@@ -1,8 +1,8 @@
 /* -------- Reset básico y tipografía -------- */
 :root {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", "Playfair Display", sans-serif;
   --transition: all 0.2s ease;
-  --bg-color: #f9fafb;
+  --bg-color: #fafafa;
   --text-color: #1f2937;
   --link-color: #2563eb;
   --link-hover-color: #1d4ed8;
@@ -43,9 +43,6 @@ a {
   transition: color 0.2s ease-in-out;
 }
 
-a:hover {
-  color: #1d4ed8;
-}
 button {
   cursor: pointer;
   border: none;
@@ -77,11 +74,20 @@ img {
 /* ESTILOS PARA OVERLAY */
 
 .bloquear-scroll {
-  overflow-y: hidden;
-  background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.397); /* Negro con 50% de opacidad */
 }
 
-.desbloquear-scroll {
-  overflow-y: auto;
-  background-color: #f9fafb;
+.overlay-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  backdrop-filter: blur(2px);
 }

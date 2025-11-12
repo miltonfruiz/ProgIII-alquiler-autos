@@ -1,5 +1,6 @@
 import LoginForm from "../../../components/LoginForm/LoginForm";
 import LoginValidation from "../../../components/LoginValidation/LoginValidation";
+import UserNavbar from "../../../components/UserNavbar/UserNavbar";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -11,8 +12,10 @@ const Login = ({ setLogged }) => {
   const passwordRef = useRef(null);
   const [errores, setErrores] = useState({});
   const navigate = useNavigate();
+
   const handleLogin = (FormData) => {
     const errorValidation = LoginValidation({ datos: FormData });
+
     if (Object.keys(errorValidation).length > 0) {
       if (errorValidation.email && emailRef.current) {
         emailRef.current.focus();
@@ -21,56 +24,69 @@ const Login = ({ setLogged }) => {
       }
       setErrores(errorValidation);
     } else {
-      fetch("http://localhost:3000/users")
-        .then((res) => res.json())
-        .then((users) => {
-          const usuario = users.find(
-            (u) =>
-              u.correo === FormData.email.trim() &&
-              u.contraseña === FormData.password.trim()
-          );
-          if (usuario) {
-            toast.success("¡Usuario ingresado correctamente!");
-            setLogged(true);
-            localStorage.setItem(
-              "loggedUser",
-              JSON.stringify({
-                email: usuario.correo,
-                password: usuario.contraseña,
-                id: usuario.id,
-              })
-            );
+      // Usar el endpoint /login que ya maneja bcrypt
+      fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          correo: FormData.email.trim(),
+          contraseña: FormData.password.trim(),
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            return res.json().then((error) => {
+              throw new Error(error.error || "Error en el login");
+            });
+          }
+          return res.json();
+        })
+        .then((data) => {
+          toast.success("¡Usuario ingresado correctamente!");
 
-            setTimeout(() => {
-              if (
-                usuario.correo === "admin@test.com" &&
-                usuario.contraseña === "admin123"
-              ) {
-                navigate("/administration");
-              } else {
-                navigate("/home");
-              }
-            }, 2000);
-          } else {
+          setLogged(true);
+          localStorage.setItem(
+            "loggedUser",
+            JSON.stringify({
+              email: data.user.correo,
+              id: data.user.id,
+              nombre: data.user.nombre,
+            })
+          );
+
+          setTimeout(() => {
+            // Verificar si es admin (puedes agregar un campo role en la BD)
+            if (data.user.correo === "admin@test.com") {
+              navigate("/administration");
+            } else {
+              navigate("/home");
+            }
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error("Error al verificar usuario:", err);
+
+          if (err.message.includes("Usuario no encontrado")) {
             toast.error("Ese usuario no está registrado.");
             setTimeout(() => {
               navigate("/register");
             }, 3500);
+          } else if (err.message.includes("Contraseña incorrecta")) {
+            toast.error("Contraseña incorrecta.");
+          } else {
+            toast.error("Ocurrió un error al verificar el usuario.");
           }
-        })
-        .catch((err) => {
-          console.error("Error al verificar usuario:", err);
-          toast.error("Ocurrió un error al verificar el usuario.");
         });
     }
   };
+
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <div className="login-image-section">
-          <img src="images/auto.png" alt="auto azul" className="login-image" />
-        </div>
-        <div className="login-form-section">
+    <>
+      <UserNavbar />
+      <div className="login-page">
+        <div className="login-container">
           <LoginForm
             onSubmit={handleLogin}
             errores={errores}
@@ -78,8 +94,7 @@ const Login = ({ setLogged }) => {
           />
         </div>
       </div>
-      <p className="login-footer">© 2025 Todos los derechos reservados</p>
-    </div>
+    </>
   );
 };
 

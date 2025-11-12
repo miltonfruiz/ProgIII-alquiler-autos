@@ -70,15 +70,17 @@ const ReservationsAdmin = () => {
       setReservations((prev) =>
         prev.filter((r) => r.id_reserva !== id_reserva)
       );
-      setShowConfirmModal(false);
+      setReservationToDelete(null);
+      toast.success("Reserva eliminada correctamente");
     } catch (error) {
       console.error("Error al cancelar reserva:", error);
+      toast.error("Hubo un problema al eliminar la reserva.");
     }
   };
 
   const confirmDelete = () => {
     if (reservationToDelete) {
-      handleDelete(reservationToDelete);
+      handleDelete(reservationToDelete.id_reserva);
       setReservationToDelete(null);
     }
   };

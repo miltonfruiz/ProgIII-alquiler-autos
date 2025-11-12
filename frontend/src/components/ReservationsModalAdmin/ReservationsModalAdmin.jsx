@@ -106,7 +106,6 @@ const ReservationsModalAdmin = ({
                 type="button"
                 onClick={onClose}
               >
-                <MdCancel className="cancel-icon-cars" />
                 Cancelar
               </button>
             </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { dataForm } from "./dataRegister";
 import "./RegisterForm.css";
@@ -16,6 +15,14 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
     licencia: "",
     numeroTelefonico: "",
   });
+
+  function handleChangeCheck(e) {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  }
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,10 +59,32 @@ const RegisterForm = ({ onSubmit, errores, refs }) => {
             );
           })}
         </div>
+        {/* Checkbox de términos y condiciones */}
+        <div className="termsContainer">
+          <label className="termsLabel">
+            <input
+              type="checkbox"
+              name="acceptTerms"
+              checked={formData.acceptTerms}
+              onChange={handleChangeCheck}
+              className="termsCheckbox"
+            />
+            <span className="checkmark"></span>
+            Acepto los{" "}
+            <a href="/terminos" target="_blank" rel="noopener noreferrer">
+              Términos y Condiciones
+            </a>{" "}
+            y la{" "}
+            <a href="/privacidad" target="_blank" rel="noopener noreferrer">
+              Política de Privacidad
+            </a>
+          </label>
+          {errores.acceptTerms && (
+            <p className="error-message visible">{errores.acceptTerms}</p>
+          )}
+        </div>
         <div className="divButton">
-          <button className="buttonRegister">
-            <FiLogIn size={14} /> Registrarse
-          </button>
+          <button className="buttonRegister">Registrarse</button>
         </div>
         <p className="tienesCuenta">
           ¿Ya tienes una cuenta? <a href="/login">Iniciar sesión</a>

@@ -73,23 +73,21 @@ export const transmissionOptions = [
   { value: "Automática", label: "Automática" },
 ];
 export const brandOptions = [
-  { value: "Kia", label: "Kia" },
   { value: "Chevrolet", label: "Chevrolet" },
   { value: "Nissan", label: "Nissan" },
   { value: "Hyundai", label: "Hyundai" },
   { value: "Toyota", label: "Toyota" },
   { value: "Volskwagen", label: "Volskwagen" },
   { value: "Honda", label: "Honda" },
-  { value: "Mazda", label: "Mazda" },
   { value: "BMW", label: "BMW" },
   { value: "Mercedes-Benz", label: "Mercedes-Benz" },
   { value: "Ford", label: "Ford" },
   { value: "Jeep", label: "Jeep" },
-  { value: "Chrysler", label: "Chrysler" },
-  { value: "Dodge", label: "Dodge" },
+  { value: "Citroën", label: "Citroën" },
   { value: "Audi", label: "Audi" },
   { value: "Tesla", label: "Tesla" },
-  { value: "BYD", label: "BYD" },
+  { value: "Peugeot", label: "Peugeot" },
+  { value: "Renault", label: "Renault" },
 ];
 export const reservationState = [
   { value: "Pendiente", label: "Pendiente" },

@@ -7,8 +7,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 400;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 15px;
   margin-bottom: 1.5rem;
 }
 .confirm-buttons {
@@ -17,10 +17,11 @@
   gap: 1rem;
 }
 .confirm-button {
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
   background-color: #10b981;
   color: white;
-  padding: 10px 25px;
+  padding: 13px 29px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -30,6 +31,7 @@
   transition: background 0.3s ease;
   margin-right: 7px;
 }
+
 .confirm-button:hover {
   background-color: #059669;
 }
