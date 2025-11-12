@@ -4,7 +4,9 @@ import { FaCcMastercard } from "react-icons/fa6";
 import { SiAmericanexpress } from "react-icons/si";
 import { IoCard } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./CarPayment.css";
 import {
   objetosFormPersona,
@@ -29,6 +31,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     nombreTarjeta: "",
     cvc: "",
   });
+
+  const navigate = useNavigate();
 
   const [imgTarjetas, setImgTarjetas] = useState("visa");
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
@@ -70,6 +74,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     } else if (choicePayment == "transferencia") {
       onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
+    navigate("/home");
   }
 
   function handleTarjeta(e) {

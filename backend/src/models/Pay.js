@@ -31,6 +31,7 @@ export const Pay = sequelize.define(
     reservationId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: true,
       references: {
         model: Reserva,
         key: "id_reserva",

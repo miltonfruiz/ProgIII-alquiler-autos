@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import CarPayment from "../components/CarPayment/CarPayment";
 import CarPaymentValidation from "../components/CarPaymentValidation/CarPaymentValidation";
 import UserNavbar from "../components/UserNavbar/UserNavbar";

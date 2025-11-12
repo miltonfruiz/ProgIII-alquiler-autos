@@ -25,7 +25,7 @@ Car.hasOne(Pay, { foreignKey: "carId", onDelete: "CASCADE" });
 Pay.belongsTo(Car, { foreignKey: "carId" });
 
 User.hasMany(Pay, { foreignKey: "userId", onDelete: "CASCADE" });
-Pay.belongsTo(Car, { foreignKey: "userId" });
+Pay.belongsTo(User, { foreignKey: "userId" });
 
 User.hasMany(Review, { foreignKey: "userId", onDelete: "CASCADE" });
 Review.belongsTo(User, { foreignKey: "userId" });
