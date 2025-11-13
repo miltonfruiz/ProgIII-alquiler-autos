@@ -3,12 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import "./UserNavbar.css";
 import { CiEdit } from "react-icons/ci";
 import { FaCar, FaUser } from "react-icons/fa";
-import { IoLanguage } from "react-icons/io5";
-import { FiLogOut, FiSun, FiMoon } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import { useTheme } from "../Mode/Mode";
 import { useTranslation } from "react-i18next";
-import Flag from "react-world-flags";
-import { IoMdCheckmark } from "react-icons/io";
 import { BsCalendarDateFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 import { MdDashboardCustomize } from "react-icons/md";
@@ -19,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function UserNavbar() {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+
   //State para el menu movil
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const dropdownRef = useRef(null);
@@ -41,6 +39,7 @@ export default function UserNavbar() {
     localStorage.removeItem("lang");
     localStorage.removeItem("token");
     localStorage.removeItem("theme");
+    localStorage.removeItem("loggedUser");
     toast.success("Cerrando Sesión...", {
       position: "top-right",
       autoClose: 2000,
@@ -106,7 +105,7 @@ export default function UserNavbar() {
       <div className="navbar-right">
         {/* Iconos para desktop/tablet */}
         <div className="icon-wrapper">
-          {userEmail === "admin@test.com" && (
+          {loggedUser && userEmail === "admin@test.com" && (
             <div className="nav-item">
               <Link to="/administration" className="nav-link">
                 <MdDashboardCustomize className="faAdmin-icon nav-icon" />
@@ -142,82 +141,63 @@ export default function UserNavbar() {
               className="faUserEdit-icon nav-icon"
               onClick={() => setShowDropdown((prev) => !prev)}
             />
-            <span className="nav-title">{t("navbar.profile")}</span>
+            <span className="nav-title">
+              {loggedUser ? t("navbar.profile") : "Cuenta"}
+            </span>
             {showDropdown && (
               <div
                 className="dropdown-menu"
                 onClick={(e) => e.stopPropagation()}
               >
-                <button
-                  className={`fade-button ${fade ? "fade-out" : ""}`}
-                  onClick={() => setShowLanguages((prev) => !prev)}
-                >
-                  <IoLanguage className="icon-item-profile" />
-                  {t("navbar.language")}
-                </button>
-                {showLanguages && (
-                  <div className="submenu">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => changeLanguage(lang.code)}
-                        className={`navbar-language ${
-                          lang.code === currentLang ? "active-language" : ""
-                        }${fade ? " fade-out" : ""}`}
-                      >
-                        <Flag
-                          code={lang.flag}
-                          style={{ width: "20px", marginRight: "8px" }}
-                        />
-                        {t(`navbar.language_${lang.code}`) || lang.name}
-                        {lang.code === currentLang && (
-                          <IoMdCheckmark
-                            size={14}
-                            style={{ marginLeft: "8px" }}
-                          />
-                        )}
-                      </button>
-                    ))}
-                  </div>
+                {loggedUser ? (
+                  <>
+                    {/* Solo mostrar estas opciones cuando el usuario está logueado */}
+                    <button
+                      onClick={() => {
+                        if (!isOnEditProfile) {
+                          setFade(true);
+                          setTimeout(() => navigate("/user-profile"), 300);
+                        }
+                      }}
+                      className={`fade-button ${fade ? "fade-out" : ""}`}
+                    >
+                      <CiEdit className="icon-item-profile" />
+                      {t("navbar.editProfile")}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setFade(true);
+                        setTimeout(() => handleLogout(), 300);
+                      }}
+                      className={`fade-button ${fade ? "fade-out" : ""}`}
+                    >
+                      <FiLogOut className="icon-item-profile" />
+                      {t("navbar.logout")}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {/* Mostrar Login y Registro cuando el usuario NO está logueado */}
+                    <button
+                      onClick={() => {
+                        setFade(true);
+                        setTimeout(() => navigate("/login"), 300);
+                      }}
+                      className={`fade-button ${fade ? "fade-out" : ""}`}
+                    >
+                      Iniciar Sesión
+                    </button>
+                    <button
+                      onClick={() => {
+                        setFade(true);
+                        setTimeout(() => navigate("/register"), 300);
+                      }}
+                      className={`fade-button ${fade ? "fade-out" : ""}`}
+                    >
+                      Registrarse
+                    </button>
+                  </>
                 )}
-                <button
-                  className={`fade-button ${fade ? "fade-out" : ""}`}
-                  onClick={toggleTheme}
-                >
-                  {theme === "dark" ? (
-                    <>
-                      <FiSun className="icon-item-profile" />
-                      {t("navbar.themeLight")}
-                    </>
-                  ) : (
-                    <>
-                      <FiMoon className="icon-item-profile" />
-                      {t("navbar.themeDark")}
-                    </>
-                  )}
-                </button>
-                <button
-                  onClick={() => {
-                    if (!isOnEditProfile) {
-                      setFade(true);
-                      setTimeout(() => navigate("/user-profile"), 300);
-                    }
-                  }}
-                  className={`fade-button ${fade ? "fade-out" : ""}`}
-                >
-                  <CiEdit className="icon-item-profile" />
-                  {t("navbar.editProfile")}
-                </button>
-                <button
-                  onClick={() => {
-                    setFade(true);
-                    setTimeout(() => handleLogout(), 300);
-                  }}
-                  className={`fade-button ${fade ? "fade-out" : ""}`}
-                >
-                  <FiLogOut className="icon-item-profile" />
-                  {t("navbar.logout")}
-                </button>
               </div>
             )}
           </div>
@@ -267,63 +247,23 @@ export default function UserNavbar() {
             <span className="nav-title">{t("navbar.shop") || "Tienda"}</span>
           </Link>
         </div>
-        <div className="nav-item">
-          <Link to="/user-profile" className="nav-link">
-            <CiEdit className="nav-icon" />
-            <span className="nav-title">{t("navbar.editProfile")}</span>
-          </Link>
-        </div>
-        <div className="nav-item" onClick={toggleTheme}>
-          <div className="nav-link">
-            {theme === "dark" ? (
-              <>
-                <FiSun className="nav-icon" />
-                <span className="nav-title">{t("navbar.themeLight")}</span>
-              </>
-            ) : (
-              <>
-                <FiMoon className="nav-icon" />
-                <span className="nav-title">{t("navbar.themeDark")}</span>
-              </>
-            )}
-          </div>
-        </div>
-        <div
-          className="nav-item"
-          onClick={() => setShowLanguages((prev) => !prev)}
-        >
-          <div className="nav-link">
-            <IoLanguage className="nav-icon" />
-            <span className="nav-title">{t("navbar.language")}</span>
-          </div>
-        </div>
-        {showLanguages && (
-          <div style={{ paddingLeft: "20px" }}>
-            {languages.map((lang) => (
-              <div
-                key={lang.code}
-                className="nav-item"
-                onClick={() => {
-                  changeLanguage(lang.code);
-                  setShowLanguages(false);
-                }}
-              >
-                <div className="nav-link">
-                  <Flag code={lang.flag} style={{ width: "20px" }} />
-                  <span className="nav-title">
-                    {t(`navbar.language_${lang.code}`) || lang.name}
-                  </span>
-                </div>
+        {loggedUser && (
+          <>
+            <div className="nav-item">
+              <Link to="/user-profile" className="nav-link">
+                <CiEdit className="nav-icon" />
+                <span className="nav-title">{t("navbar.editProfile")}</span>
+              </Link>
+            </div>
+
+            <div className="nav-item" onClick={handleLogout}>
+              <div className="nav-link">
+                <FiLogOut className="nav-icon" />
+                <span className="nav-title">{t("navbar.logout")}</span>
               </div>
-            ))}
-          </div>
+            </div>
+          </>
         )}
-        <div className="nav-item" onClick={handleLogout}>
-          <div className="nav-link">
-            <FiLogOut className="nav-icon" />
-            <span className="nav-title">{t("navbar.logout")}</span>
-          </div>
-        </div>
       </div>
 
       <ToastContainer />
