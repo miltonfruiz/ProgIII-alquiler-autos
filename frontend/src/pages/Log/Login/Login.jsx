@@ -50,12 +50,12 @@ const Login = ({ setLogged }) => {
           localStorage.setItem(
             "loggedUser",
             JSON.stringify({
-              email: data.user.correo,
               id: data.user.id,
               nombre: data.user.nombre,
+              apellido: data.user.apellido,
+              email: data.user.correo,
             })
           );
-
           setTimeout(() => {
             // Verificar si es admin (puedes agregar un campo role en la BD)
             if (data.user.correo === "admin@test.com") {
