@@ -11,6 +11,7 @@ import {
   CancelarReserva,
 } from "../api/actualizarReservas.js";
 import { CrearPago, ObtenerUsuarios } from "../api/crearPagos.js";
+import { useNavigate } from "react-router-dom";
 
 const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 
@@ -19,6 +20,7 @@ const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
 
+  const navigate = useNavigate();
   // const { estadoIds, setEstadoIds } = useDataContext();
 
   const useRefs = {
@@ -97,7 +99,7 @@ const CarPaymentPage = () => {
           carId: idAutoReserva,
           userId: idUsuarioReserva,
           id_reserva: idUltimaReserva,
-          subtotal: datosAlquiler.total,
+          subtotal: ultimaReserva.subtotal,
           tax: ultimaReserva.tax,
           total: ultimaReserva.total,
           cardType: tipoTarjeta,
@@ -116,9 +118,9 @@ const CarPaymentPage = () => {
           carId: idAutoReserva,
           userId: idUsuarioReserva,
           id_reserva: idUltimaReserva,
-          subtotal: datosAlquiler.total,
-          tax: datosAlquiler.tax,
-          total: datosAlquiler.totalFinal,
+          subtotal: ultimaReserva.subtotal,
+          tax: ultimaReserva.tax,
+          total: ultimaReserva.total,
           cardType: null,
           paymentMethod: choicePayment,
           cardNumber: null,
@@ -135,6 +137,7 @@ const CarPaymentPage = () => {
 
       toast.success("¡auto rentado!");
       setErrores({});
+      navigate("/home");
     }
   }
 
