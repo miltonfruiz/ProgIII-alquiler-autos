@@ -47,6 +47,7 @@ export async function createReserva(req, res) {
       estado_reserva: "pendiente",
       fecha_reserva,
       cant_dias,
+      subtotal: auto.price,
       total,
       tax,
       carId,

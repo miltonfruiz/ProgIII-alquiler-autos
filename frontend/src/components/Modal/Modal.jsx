@@ -161,7 +161,8 @@ function Modal({ auto, onClose }) {
         hora_fin: formData.hora_fin,
         carId: auto.id,
         lugar_devolucion: formData.lugar_devolucion,
-        total: total,
+        subtotal: total,
+        total: precioFinal,
         tax: impuestos,
         userId,
       });
@@ -180,7 +181,8 @@ function Modal({ auto, onClose }) {
           hora_fin: formData.hora_fin,
           lugar_retiro: formData.lugar_retiro,
           lugar_devolucion: formData.lugar_devolucion,
-          total: total,
+          subtotal: total,
+          total: precioFinal,
           tax: impuestos,
           totalFinal: precioFinal,
         };

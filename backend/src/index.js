@@ -43,6 +43,7 @@ try {
   app.use((req, res, next) => {
     res.status(404).json({ message: "Ruta no encontrada" });
   });
+
   await sequelize.sync();
   // Funcion para iniciar la tarea programa de actualizacion de reservas
   iniciarActualizacionReservas();
