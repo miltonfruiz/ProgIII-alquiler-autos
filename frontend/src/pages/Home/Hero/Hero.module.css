@@ -8,7 +8,6 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(110deg, #6b5cff 20%, #9b6cf3 50%, #c68af8 100%);
   color: #fff;
 }
 
@@ -17,7 +16,7 @@
   inset: 0;
   z-index: 1;
   background: linear-gradient(111deg, #a86ce9 0%, #7f7df7 100%);
-  margin-top: 80px;
+  padding-top: 80px;
 }
 
 .heroContent {
