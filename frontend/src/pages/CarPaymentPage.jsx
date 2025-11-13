@@ -11,6 +11,7 @@ import {
   CancelarReserva,
 } from "../api/actualizarReservas.js";
 import { CrearPago, ObtenerUsuarios } from "../api/crearPagos.js";
+import { useNavigate } from "react-router-dom";
 
 const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 
@@ -19,6 +20,7 @@ const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
 
+  const navigate = useNavigate();
   // const { estadoIds, setEstadoIds } = useDataContext();
 
   const useRefs = {
@@ -135,6 +137,7 @@ const CarPaymentPage = () => {
 
       toast.success("¡auto rentado!");
       setErrores({});
+      navigate("/home");
     }
   }
 
