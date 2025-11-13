@@ -10,6 +10,7 @@ const router = Router();
 router.post("/pays", async (req, res) => {
   // cuando ande probar la validacion payValidation,
   const {
+    carId,
     userId,
     id_reserva,
     subtotal,

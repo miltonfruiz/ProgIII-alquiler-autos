@@ -15,13 +15,11 @@ import {
   objetosItems,
 } from "./ObjetosCarPayment.jsx";
 import ResumenDeAlquiler from "./ResumenDeAlquiler.jsx";
-import { ObtenerReservas, CancelarReserva } from "../../api/actualizarReservas";
 import {
   ObtenerReservas,
-  ConfirmarReserva,
   CancelarReserva,
+  ConfirmarReserva,
 } from "../../api/actualizarReservas";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
   const navigate = useNavigate();
@@ -39,8 +37,6 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     nombreTarjeta: "",
     cvc: "",
   });
-
-  const navigate = useNavigate();
 
   const [imgTarjetas, setImgTarjetas] = useState("visa");
   const [seleccionTarjeta, setSeleccionTarjeta] = useState(false);
@@ -82,7 +78,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     } else if (choicePayment == "transferencia") {
       onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
-    navigate("/home");
+    // navigate("/home");
   }
 
   function handleTarjeta(e) {

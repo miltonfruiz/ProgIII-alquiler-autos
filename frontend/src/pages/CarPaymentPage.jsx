@@ -10,7 +10,7 @@ import {
   ConfirmarReserva,
   CancelarReserva,
 } from "../api/actualizarReservas.js";
-import { CrearPago, ObtenerAutos, ObtenerUsuarios } from "../api/crearPagos.js";
+import { CrearPago, ObtenerUsuarios } from "../api/crearPagos.js";
 
 const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 
@@ -77,14 +77,16 @@ const CarPaymentPage = () => {
       setErrores(errores);
     } else {
       const reservas = await ObtenerReservas();
-      const autos = await ObtenerAutos();
-      const usuarios = await ObtenerUsuarios();
+
       ConfirmarReserva(reservas);
       const ultimaReserva = reservas[reservas.length - 1];
-      const ultimoAuto = autos[autos.length - 1];
-      const ultimoUsuario = usuarios[usuarios.length - 1];
-      const idUltimoAuto = ultimoAuto.id;
-      const idUltimoUsuario = ultimoUsuario.id;
+
+      console.log("ultima reserva", ultimaReserva);
+      console.log("id auto de la ultima reserva", ultimaReserva.carId);
+      console.log("id usuario de la ultima reserva", ultimaReserva.userId);
+
+      const idAutoReserva = ultimaReserva.carId;
+      const idUsuarioReserva = ultimaReserva.userId;
       const idUltimaReserva = ultimaReserva.id_reserva;
 
       console.log("datos alquiler subtotal", datosAlquiler.total);
@@ -92,8 +94,8 @@ const CarPaymentPage = () => {
 
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
-          carId: idUltimoAuto,
-          userId: idUltimoUsuario,
+          carId: idAutoReserva,
+          userId: idUsuarioReserva,
           id_reserva: idUltimaReserva,
           subtotal: datosAlquiler.total,
           tax: datosAlquiler.tax,
@@ -104,15 +106,15 @@ const CarPaymentPage = () => {
           expirationDate: datosPago.fechaTarjeta,
           ownerName: datosPago.nombreTarjeta,
           cvc: datosPago.cvc,
-          voucher: "no aplica",
+          voucher: null,
           acceptableTerms: checkbox,
         };
         CrearPago(datosPagoCompleto);
       } else if (choicePayment == "transferencia") {
         const file = String(datosPago.name);
         datosPagoCompleto = {
-          carId: idUltimoAuto,
-          userId: idUltimoUsuario,
+          carId: idAutoReserva,
+          userId: idUsuarioReserva,
           id_reserva: idUltimaReserva,
           subtotal: datosAlquiler.total,
           tax: datosAlquiler.tax,
