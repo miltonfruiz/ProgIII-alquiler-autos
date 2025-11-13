@@ -7,10 +7,15 @@ const router = Router();
 
 //-------------------------- Creacion de una instancia pago ----------------------------------------//
 
-router.post("/pays", payValidation, async (req, res) => {
+router.post("/pays", async (req, res) => {
+  // cuando ande probar la validacion payValidation,
   const {
+    carId,
     userId,
     id_reserva,
+    subtotal,
+    tax,
+    total,
     cardType,
     paymentMethod,
     cardNumber,
@@ -23,9 +28,13 @@ router.post("/pays", payValidation, async (req, res) => {
 
   console.log("datos de entrada", req.body);
 
-  const pay = await Pay.create({
+  console.log("📦 Datos a insertar:", {
+    carId,
     userId,
-    id_reserva,
+    reservationId: id_reserva,
+    subtotal,
+    tax,
+    total,
     cardType,
     paymentMethod,
     cardNumber,
@@ -35,17 +44,40 @@ router.post("/pays", payValidation, async (req, res) => {
     voucher,
     acceptableTerms,
   });
+  try {
+    const pay = await Pay.create({
+      carId,
+      userId,
+      reservationId: id_reserva,
+      subtotal,
+      tax,
+      total,
+      cardType,
+      paymentMethod,
+      cardNumber,
+      expirationDate,
+      ownerName,
+      cvc,
+      voucher,
+      acceptableTerms,
+    });
+    res.status(201).json(pay);
+  } catch (error) {
+    console.error("Error al crear el pago:", error);
+    res.status(500).json({ error: "Error al crear el pago" });
+  }
 
   //aqui actualizamos el estado de la reserva (Reservation model) una vez que estamos en el pago, luego del POST de pay
+  try {
+    await Reserva.update(
+      { estado_reserva: "confirmada" },
+      { where: { id_reserva: id_reserva } }
+    );
 
-  await Reserva.update(
-    { estado_reserva: "confirmada" },
-    { where: { id_reserva: id_reserva } }
-  );
-
-  await Car.update({ estado: "no disponible" }, { where: { id: carId } });
-
-  res.status(201).json(pay);
+    await Car.update({ estado: "no disponible" }, { where: { id: carId } });
+  } catch (error) {
+    console.error("Error al actualizar la reserva o el auto:", error);
+  }
 });
 
 //-------------------------- obtener pagos de una persona------------------
@@ -61,3 +93,5 @@ router.post("/pays", payValidation, async (req, res) => {
 });*/
 
 export default router;
+
+//VER DESPUES CUAL ES EL ERROR DE PORQUE NO ME INSERTA EN LA BASE DE DATOS EL PAGO CON CLAUDE

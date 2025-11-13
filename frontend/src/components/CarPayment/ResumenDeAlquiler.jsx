@@ -1,8 +1,35 @@
+import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import "./CarPayment.css";
+import { ObtenerReservas } from "../../api/actualizarReservas";
+
+const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 
 const ResumenDeAlquiler = () => {
-  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
+  const [reservas, setReservas] = useState([]);
+
+  useEffect(() => {
+    const cargarReservas = async () => {
+      const data = await ObtenerReservas();
+      console.log("Datos de reservas cargados:", data);
+      setReservas(data);
+    };
+
+    cargarReservas();
+  }, []);
+
+  const ultimaReserva =
+    reservas.length > 0 ? reservas[reservas.length - 1] : null;
+
+  // MOVER LA VALIDACIÓN ANTES DE LOS CONSOLE.LOG
+  if (!ultimaReserva) {
+    return <div className="contenedor-principal">Cargando reservas...</div>;
+  }
+
+  console.log("Reservas obtenidas:", reservas);
+  console.log("total final:", ultimaReserva.total);
+  console.log("subtotal:", ultimaReserva.subtotal);
+  console.log("tax:", ultimaReserva.tax);
 
   return (
     <div className="contenedor-principal">
@@ -29,14 +56,6 @@ const ResumenDeAlquiler = () => {
                 <div className="auto-detalles">
                   <p className="nombre-auto">{datosAlquiler.auto.name}</p>
                   <p className="brand-auto">{datosAlquiler.auto.brand}</p>
-                  {/* <div className="valoracion-container">
-                    <div className="estrellas-flex">
-                      {[0, 1, 2, 3, 4].map((index) => (
-                        <FaStar key={index} className="estrella-icon" />
-                      ))}
-                    </div>
-                    <span className="texto-valoracion">valoraciones</span>
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -46,14 +65,14 @@ const ResumenDeAlquiler = () => {
               <div className="precio-fila">
                 <span className="precio-label">Subtotal</span>
                 <span className="precio-valor">
-                  ${datosAlquiler.total.toFixed(2)}
+                  ${ultimaReserva.subtotal.toFixed(2)}
                 </span>
               </div>
 
               <div className="precio-fila">
                 <span className="precio-label">Impuestos</span>
                 <span className="precio-valor">
-                  ${datosAlquiler.tax.toFixed(2)}
+                  ${ultimaReserva.tax.toFixed(2)}
                 </span>
               </div>
 
@@ -71,7 +90,7 @@ const ResumenDeAlquiler = () => {
                   <div className="total-precio-container">
                     <p className="total-precio">
                       $
-                      {datosAlquiler.totalFinal.toLocaleString("es-AR", {
+                      {ultimaReserva.total.toLocaleString("es-AR", {
                         maximumFractionDigits: 2,
                       })}
                       Ars

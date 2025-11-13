@@ -5,6 +5,8 @@ import { SiAmericanexpress } from "react-icons/si";
 import { IoCard } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./CarPayment.css";
 import {
   objetosFormPersona,
@@ -15,13 +17,13 @@ import {
 import ResumenDeAlquiler from "./ResumenDeAlquiler.jsx";
 import {
   ObtenerReservas,
-  ConfirmarReserva,
   CancelarReserva,
+  ConfirmarReserva,
 } from "../../api/actualizarReservas";
-import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CarPayment = ({ onSubmit, errores, refs }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [datosFacturacion, setDatosFacturacion] = useState({
     nombre: "",
@@ -64,7 +66,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     });
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (choicePayment == "tarjeta" || !choicePayment) {
       onSubmit(
@@ -77,9 +79,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     } else if (choicePayment == "transferencia") {
       onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
     }
-
-    const data = await ObtenerReservas();
-    ConfirmarReserva(data);
+    // navigate("/home");
   }
 
   function handleTarjeta(e) {
@@ -112,8 +112,6 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
     });
     setTipoTarjeta(e.target.value);
   }
-
-  
 
   document.body.classList.add("desbloquear-scroll"); //AGREGO PARA DESBLOQUEAR EL SCROLL-Y PORQUE AL PASAR DEL AUTO A EL PAY SE TRABA
 
@@ -400,9 +398,8 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
           onClick={async () => {
             const data = await ObtenerReservas();
             CancelarReserva(data);
-          toast.info("Reserva cancelada correctamente");
-          setTimeout(() => navigate("/home"), 1500);
-
+            toast.info("Reserva cancelada correctamente");
+            setTimeout(() => navigate("/home"), 1500);
           }}
         >
           Cancelar
