@@ -8,29 +8,8 @@ const router = Router();
 //------------------- Crear comentario -------------------//
 router.post("/reviews", reviewValidation, async (req, res) => {
   try {
-    console.log("📩 Datos recibidos:", req.body);
+    console.log("Datos recibidos:", req.body);
     const { carId, userId, username, rating, comment } = req.body;
-
-    // Solo validar que el auto existe
-    const car = await Car.findByPk(carId);
-    if (!car) {
-      return res.status(404).json({
-        error: "El auto especificado no existe",
-      });
-    }
-
-    // Verificar reviews duplicadas
-    const existingReview = await Review.findOne({
-      where: { carId, userId },
-    });
-
-    if (existingReview) {
-      return res.status(400).json({
-        error: "Ya has calificado este auto anteriormente",
-      });
-    }
-
-    // Crear la review
     const review = await Review.create({
       carId,
       userId,
@@ -38,27 +17,14 @@ router.post("/reviews", reviewValidation, async (req, res) => {
       rating,
       comment,
     });
-
-    // Actualizar rating promedio
     const reviews = await Review.findAll({ where: { carId } });
+
     const avgRating =
       reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
-
-    await Car.update(
-      { rating: avgRating.toFixed(2) },
-      { where: { id: carId } }
-    );
-
-    res.status(201).json({
-      message: "Review creada exitosamente",
-      review,
-    });
+    await Car.update({ rating: avgRating }, { where: { id: carId } });
+    res.status(201).json(review);
   } catch (error) {
-    console.error("❌ Error:", error);
-    res.status(500).json({
-      error: "Error al crear el comentario",
-      details: error.message,
-    });
+    res.status(500).json({ error: "Error al crear el comentario" });
   }
 });
 //------------------- Obtener comentarios -------------------//

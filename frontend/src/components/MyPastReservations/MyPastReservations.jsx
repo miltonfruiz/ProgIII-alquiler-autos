@@ -95,7 +95,7 @@ export default function MyPastReservations() {
     try {
       const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
       const fullName = loggedUser
-        ? `${loggedUser.nombre}${loggedUser.apellido}`.trim()
+        ? `${loggedUser.nombre} ${loggedUser.apellido}`.trim()
         : "Usuario Anónimo";
 
       // Buscar la reserva específica
