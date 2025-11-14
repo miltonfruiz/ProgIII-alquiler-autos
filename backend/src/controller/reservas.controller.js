@@ -18,6 +18,8 @@ export async function createReserva(req, res) {
       userId,
     } = req.body;
 
+    console.log("Datos recibidos para crear reserva:", req.body);
+
     const fecha_reserva = new Date();
 
     const inicio = new Date(fecha_inicio);
@@ -45,7 +47,8 @@ export async function createReserva(req, res) {
       estado_reserva: "pendiente",
       fecha_reserva,
       cant_dias,
-      total,
+      subtotal: total,
+      total: total + tax,
       tax,
       carId,
       userId,

@@ -14,11 +14,15 @@ export const ObtenerReservas = async () => {
     return data;
   } catch (error) {
     console.error("Error en ObtenerReservas:", error);
-    return error;
+    throw error; // se retorna array vacio para que no falle el codigo que llama a esta funcion
   }
 };
 
 export const ConfirmarReserva = async (reservas) => {
+  if (!reservas || reservas.length === 0) {
+    console.log("No hay reservas para confirmar.");
+    return null;
+  }
   const ultimaReserva = reservas[reservas.length - 1];
   console.log(ultimaReserva);
   try {
@@ -48,6 +52,11 @@ export const ConfirmarReserva = async (reservas) => {
 };
 
 export const CancelarReserva = async (reservas) => {
+  if (!reservas || reservas.length === 0) {
+    console.log("No hay reservas para cancelar.");
+    return null;
+  }
+
   const ultimaReserva = reservas[reservas.length - 1];
   try {
     const response = await fetch(
@@ -71,6 +80,6 @@ export const CancelarReserva = async (reservas) => {
     return data;
   } catch (error) {
     console.error("Error en ActualizarReservas:", error);
-    return error;
+    throw error;
   }
 };

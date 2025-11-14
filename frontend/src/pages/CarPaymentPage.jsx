@@ -1,15 +1,26 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import CarPayment from "../components/CarPayment/CarPayment";
 import CarPaymentValidation from "../components/CarPaymentValidation/CarPaymentValidation";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  ObtenerReservas,
+  ConfirmarReserva,
+  CancelarReserva,
+} from "../api/actualizarReservas.js";
+import { CrearPago, ObtenerUsuarios } from "../api/crearPagos.js";
+import { useNavigate } from "react-router-dom";
+
+const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
+
 // import { useDataContext } from "./Contexts/Contexts";
 
 const CarPaymentPage = () => {
   const [errores, setErrores] = useState({});
 
+  const navigate = useNavigate();
   // const { estadoIds, setEstadoIds } = useDataContext();
 
   const useRefs = {
@@ -40,7 +51,7 @@ const CarPaymentPage = () => {
 
   let datosPagoCompleto = {};
 
-  function handlerSubmit(
+  async function handlerSubmit(
     datosFacturacion,
     datosPago,
     choicePayment,
@@ -62,31 +73,54 @@ const CarPaymentPage = () => {
         }
       });
 
+      const reservas = await ObtenerReservas();
+      CancelarReserva(reservas);
+
       setErrores(errores);
     } else {
-      const carId = JSON.parse(localStorage.getItem("datosAlquiler"))?.auto.id;
-      const userId = JSON.parse(localStorage.getItem("loggedUser"))?.id;
-      const id_reserva = parseInt(localStorage.getItem("contadorReservas"));
+      const reservas = await ObtenerReservas();
+
+      ConfirmarReserva(reservas);
+      const ultimaReserva = reservas[reservas.length - 1];
+
+      console.log("ultima reserva", ultimaReserva);
+      console.log("id auto de la ultima reserva", ultimaReserva.carId);
+      console.log("id usuario de la ultima reserva", ultimaReserva.userId);
+
+      const idAutoReserva = ultimaReserva.carId;
+      const idUsuarioReserva = ultimaReserva.userId;
+      const idUltimaReserva = ultimaReserva.id_reserva;
+
+      console.log("datos alquiler subtotal", datosAlquiler.total);
+      console.log("datos alquiler total", datosAlquiler.totalFinal);
 
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
-          userId: userId,
-          id_reserva: id_reserva,
+          carId: idAutoReserva,
+          userId: idUsuarioReserva,
+          id_reserva: idUltimaReserva,
+          subtotal: ultimaReserva.subtotal,
+          tax: ultimaReserva.tax,
+          total: ultimaReserva.total,
           cardType: tipoTarjeta,
           paymentMethod: choicePayment,
           cardNumber: datosPago.numeroTarjeta,
           expirationDate: datosPago.fechaTarjeta,
           ownerName: datosPago.nombreTarjeta,
           cvc: datosPago.cvc,
-          voucher: "no aplica",
+          voucher: null,
           acceptableTerms: checkbox,
         };
+        CrearPago(datosPagoCompleto);
       } else if (choicePayment == "transferencia") {
         const file = String(datosPago.name);
         datosPagoCompleto = {
-          carId: carId,
-          userId: userId,
-          id_reserva: id_reserva,
+          carId: idAutoReserva,
+          userId: idUsuarioReserva,
+          id_reserva: idUltimaReserva,
+          subtotal: ultimaReserva.subtotal,
+          tax: ultimaReserva.tax,
+          total: ultimaReserva.total,
           cardType: null,
           paymentMethod: choicePayment,
           cardNumber: null,
@@ -96,33 +130,14 @@ const CarPaymentPage = () => {
           voucher: file,
           acceptableTerms: checkbox,
         };
+        CrearPago(datosPagoCompleto);
       }
 
       console.log(datosPagoCompleto);
 
-      fetch(`http://localhost:3000/pays`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datosPagoCompleto),
-      })
-        .then((respuesta) => {
-          console.log("Respuesta del servidor:", respuesta);
-          if (respuesta.ok) {
-            console.log("Pago realizado correctamente");
-          } else {
-            console.log("Error al realizar el pago");
-            toast.error("Error al realizar el pago");
-          }
-        })
-        .catch((error) => {
-          console.error("Error al enviar el formulario:", error);
-          toast.error("Error al enviar el formulario");
-        });
-
       toast.success("¡auto rentado!");
       setErrores({});
+      navigate("/home");
     }
   }
 
