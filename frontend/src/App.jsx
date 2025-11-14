@@ -40,7 +40,12 @@ function App() {
 
           <Route
             path="/register"
-            element={<Register setRegisterIn={setRegisterIn}></Register>}
+            element={
+              <Register
+                setRegisterIn={setRegisterIn}
+                setLoggedIn={setLoggedIn}
+              ></Register>
+            }
           ></Route>
           <Route path="/home" element={<Home loggedIn={loggedIn} />} />
           <Route

@@ -44,8 +44,6 @@ const Login = ({ setLogged }) => {
           return res.json();
         })
         .then((data) => {
-          toast.success("¡Usuario ingresado correctamente!");
-
           setLogged(true);
           localStorage.setItem(
             "loggedUser",
@@ -65,6 +63,7 @@ const Login = ({ setLogged }) => {
               navigate("/home");
             }
           }, 2000);
+          toast.success("¡Usuario ingresado correctamente!");
         })
         .catch((err) => {
           console.error("Error al verificar usuario:", err);

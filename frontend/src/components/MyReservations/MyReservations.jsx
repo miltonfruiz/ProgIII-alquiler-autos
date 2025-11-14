@@ -118,7 +118,7 @@ export default function MyReservations() {
                     <p>
                       <TbTax /> Impuestos: ${res.tax?.toLocaleString()}
                     </p>
-                    <p>
+                    {/* <p>
                       <FaHandHoldingUsd />
                       Método de pago:
                       <span>{res.metodoPago}</span>
@@ -126,7 +126,7 @@ export default function MyReservations() {
                     <p>
                       <HiDocumentCurrencyDollar />
                       Tipo de facturación: {res.facturacion}
-                    </p>
+                    </p> */}
                     <p>
                       <BsCashCoin /> Total: ${res.total?.toLocaleString()}
                     </p>
