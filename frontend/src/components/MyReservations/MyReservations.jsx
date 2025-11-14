@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./MyReservations.css";
 import { FaHandHoldingUsd } from "react-icons/fa";
-import { MdDateRange } from "react-icons/md";
+import { MdDateRange, MdLocationOn } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoPricetagSharp } from "react-icons/io5";
 import { TbTax } from "react-icons/tb";
@@ -105,12 +105,20 @@ export default function MyReservations() {
 
                   <div className="extra-details">
                     <p>
+                      <MdLocationOn />
+                      Lugar de recogida: Aeropuerto de Rosario
+                    </p>
+                    <p>
+                      <MdLocationOn />
+                      Lugar de devolución: {res.lugar_devolucion}
+                    </p>
+                    <p>
                       <IoPricetagSharp /> Días: {res.cant_dias}
                     </p>
                     <p>
                       <TbTax /> Impuestos: ${res.tax?.toLocaleString()}
                     </p>
-                    <p>
+                    {/* <p>
                       <FaHandHoldingUsd />
                       Método de pago:
                       <span>{res.metodoPago}</span>
@@ -118,7 +126,7 @@ export default function MyReservations() {
                     <p>
                       <HiDocumentCurrencyDollar />
                       Tipo de facturación: {res.facturacion}
-                    </p>
+                    </p> */}
                     <p>
                       <BsCashCoin /> Total: ${res.total?.toLocaleString()}
                     </p>

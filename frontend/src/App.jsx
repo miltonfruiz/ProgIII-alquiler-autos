@@ -19,6 +19,7 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import Landing from "./pages/Landing/Landing";
 import Administration from "./pages/Administration";
+import Empleados from "./pages/Empleados";
 import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRouteAdmin";
 import ResetPassword from "./pages/Log/PasswordReset/PasswordReset";
 import { ToastContainer } from "react-toastify";
@@ -39,7 +40,12 @@ function App() {
 
           <Route
             path="/register"
-            element={<Register setRegisterIn={setRegisterIn}></Register>}
+            element={
+              <Register
+                setRegisterIn={setRegisterIn}
+                setLoggedIn={setLoggedIn}
+              ></Register>
+            }
           ></Route>
           <Route path="/home" element={<Home loggedIn={loggedIn} />} />
           <Route
@@ -62,6 +68,15 @@ function App() {
               <ProtectedRouteAdmin>
                 {" "}
                 <Administration />{" "}
+              </ProtectedRouteAdmin>
+            }
+          />
+          <Route
+            path="/empleados"
+            element={
+              <ProtectedRouteAdmin>
+                {" "}
+                <Empleados />{" "}
               </ProtectedRouteAdmin>
             }
           />

@@ -59,13 +59,11 @@ export const User = sequelize.define(
         is: /^[0-9]{10}$/, // Validación para un número telefónico de 10 dígitos
       },
     },
-    /*
     rol: {
       type: DataTypes.ENUM("administrador", "empleado", "usuario"),
       allowNull: false,
       defaultValue: "usuario",
     },
-     */
   },
   {
     timestamps: false,

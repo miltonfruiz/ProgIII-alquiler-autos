@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
 import Footer from "../components/Footer/Footer";
 
-const Register = ({ setRegisterIn }) => {
+const Register = ({ setRegisterIn, setLoggedIn }) => {
   const useRefs = {
     nameRegister: useRef(null),
     lastNameRegister: useRef(null),
@@ -68,12 +68,13 @@ const Register = ({ setRegisterIn }) => {
           toast.error(data.error || "Error al registrar el usuario.");
           return;
         }
-        toast.success("¡Usuario registrado correctamente!");
         setErrores({});
         setRegisterIn(true);
+        setLoggedIn(true);
         setTimeout(() => {
           navigate("/home");
         }, 3000);
+        toast("¡Usuario registrado correctamente!");
       } catch (error) {
         console.error("Error al enviar el formulario:", error);
         toast.error("Error del servidor.");

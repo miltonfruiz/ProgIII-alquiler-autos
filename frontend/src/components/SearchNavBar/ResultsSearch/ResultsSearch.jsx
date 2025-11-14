@@ -1,9 +1,20 @@
 import styles from "./Results.module.css";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Modal from "../../Modal/Modal";
 
 function ResultsSearch({ cars, maxResults = 5, onClose }) {
   const displayedCars = cars.slice(0, maxResults);
   const hasMore = cars.length > maxResults;
+  const [selectedCar, setSelectedCar] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleReservarClick = (car) => {
+    setSelectedCar(car);
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedCar(null);
+  };
 
   return (
     <>
@@ -25,7 +36,12 @@ function ResultsSearch({ cars, maxResults = 5, onClose }) {
                 <p className={styles.carPrice}>
                   ${car.price ? car.price.toLocaleString() : "N/A"} Ars
                 </p>
-                <a className={styles.btnReservar}>Ir a reservar</a>
+                <button
+                  className={styles.btnReservar}
+                  onClick={() => handleReservarClick(car)}
+                >
+                  Ir a reservar
+                </button>
               </div>
             </div>
           ))}
@@ -39,6 +55,9 @@ function ResultsSearch({ cars, maxResults = 5, onClose }) {
         <div className={styles.noResults}>
           <p>No se encontraron resultados</p>
         </div>
+      )}
+      {isModalOpen && selectedCar && (
+        <Modal auto={selectedCar} onClose={handleCloseModal} />
       )}
     </>
   );
