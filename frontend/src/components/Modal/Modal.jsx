@@ -75,10 +75,10 @@ function Modal({ auto, onClose }) {
   };
 
   const nombresLugares = {
-    airport: 'Aeropuerto de Rosario "Islas Malvinas"',
-    downtown: "Centro de Rosario - Sucursal Principal",
-    busStation: "Terminal de Ómnibus Mariano Moreno",
-    other: "Otra ubicación",
+    AeropuertoDeRosario: 'Aeropuerto de Rosario "Islas Malvinas"',
+    SucursalPrincipal: "Centro de Rosario - Sucursal Principal",
+    Terminal: "Terminal de Ómnibus Mariano Moreno",
+    Otra: "Otra ubicación",
   };
 
   const handleChange = (e) => {
@@ -367,7 +367,15 @@ function Modal({ auto, onClose }) {
                     borderRadius: "5px",
                   }}
                 />
-
+                <div className={styles.precioDetalle}>
+                  <p className={styles.precioItem}>
+                    Impuestos: $
+                    {impuestos.toLocaleString("es-AR", {
+                      maximumFractionDigits: 2,
+                    })}{" "}
+                    Ars
+                  </p>
+                </div>
                 <div className={styles.precioTotal}>
                   <p className={styles.precio}>
                     Total: $

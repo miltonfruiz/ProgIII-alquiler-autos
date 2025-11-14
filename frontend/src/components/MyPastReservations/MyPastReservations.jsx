@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import "./MyPastReservations.css";
 import "../MyReservations/MyReservations.css";
 import { FaHistory, FaHandHoldingUsd, FaStar } from "react-icons/fa";
@@ -18,8 +18,10 @@ export default function MyPastReservations() {
   const { t } = useTranslation();
 
   const [pastReservations, setPastReservations] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
+  //Fetch para reservas pasadas
   useEffect(() => {
     const fetchPastReservations = async () => {
       try {
@@ -75,7 +77,7 @@ export default function MyPastReservations() {
     }));
   };
 
-  const handleRating = (id, formData) => {
+  const handleRating = async (reservaId, formData) => {
     const errorValidation = ModalValidation({ datos: formData });
     if (Object.keys(errorValidation).length > 0) {
       if (errorValidation.comment && commentRef.current) {
@@ -85,28 +87,71 @@ export default function MyPastReservations() {
       }
       setModalErrores((prev) => ({
         ...prev,
-        [id]: errorValidation,
+        [reservaId]: errorValidation,
       }));
       return;
     }
-    toast.success("¡Gracias por tu calificación!");
-    setRatings((prev) => ({
-      ...prev,
-      [id]: {
-        ...prev[id],
-        stars: formData.stars,
-        comment: formData.comment,
-        showForm: false,
-      },
-    }));
-    setModalReservaId(null);
-    setModalErrores((prev) => ({
-      ...prev,
-      [id]: {},
-    }));
-  };
 
-  //FETCH PARA TRAER ANTIGUAS RESERVAS
+    try {
+      const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+      const fullName = loggedUser
+        ? `${loggedUser.nombre}${loggedUser.apellido}`.trim()
+        : "Usuario Anónimo";
+
+      // Buscar la reserva específica
+      const reservation = pastReservations.find((r) => r.id === reservaId);
+
+      if (!reservation || !reservation.carId) {
+        toast.error("No se pudo encontrar el auto asociado a la reserva");
+        return;
+      }
+
+      const payLoad = {
+        carId: reservation.carId,
+        userId: loggedUser.id,
+        username: fullName,
+        rating: formData.stars,
+        comment: formData.comment,
+      };
+
+      console.log("Payload enviado:", payLoad);
+
+      const response = await fetch("http://localhost:3000/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payLoad),
+      });
+
+      // Obtener la respuesta del servidor
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Error del servidor:", data);
+        throw new Error(data.error || "Error al enviar la valoración");
+      }
+
+      toast.success("¡Gracias por tu calificación!");
+      setRatings((prev) => ({
+        ...prev,
+        [reservaId]: {
+          ...prev[reservaId],
+          stars: formData.stars,
+          comment: formData.comment,
+          showForm: false,
+        },
+      }));
+      setModalReservaId(null);
+      setModalErrores((prev) => ({
+        ...prev,
+        [reservaId]: {},
+      }));
+    } catch (error) {
+      console.error("Error completo:", error);
+      toast.error(`Error: ${error.message}`);
+    }
+  };
 
   return (
     <div className="pastReservation-container">

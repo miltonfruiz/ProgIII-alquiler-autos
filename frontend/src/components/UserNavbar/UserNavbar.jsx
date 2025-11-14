@@ -84,6 +84,8 @@ export default function UserNavbar() {
   }, [location]);
 
   const currentLang = i18n.language;
+  const isAdmin = loggedUser?.rol === "administrador";
+  const isEmpleado = loggedUser?.rol === "empleado";
 
   return (
     <nav className="navbar">
@@ -105,9 +107,17 @@ export default function UserNavbar() {
       <div className="navbar-right">
         {/* Iconos para desktop/tablet */}
         <div className="icon-wrapper">
-          {loggedUser && userEmail === "admin@test.com" && (
+          {isAdmin && (
             <div className="nav-item">
               <Link to="/administration" className="nav-link">
+                <MdDashboardCustomize className="faAdmin-icon nav-icon" />
+                <span className="nav-title">{t("navbar.dashboard")}</span>
+              </Link>
+            </div>
+          )}
+          {isEmpleado && (
+            <div className="nav-item">
+              <Link to="/empleados" className="nav-link">
                 <MdDashboardCustomize className="faAdmin-icon nav-icon" />
                 <span className="nav-title">{t("navbar.dashboard")}</span>
               </Link>

@@ -54,11 +54,17 @@ const ReservationsModalAdmin = ({
                 disabled={editingReservation}
               >
                 <option value="">Seleccionar auto</option>
-                {cars.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.brand} {c.name}
+                {Array.isArray(cars) && cars.length > 0 ? (
+                  cars.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.brand} {c.name}
+                    </option>
+                  ))
+                ) : (
+                  <option value="" disabled>
+                    No hay autos disponibles
                   </option>
-                ))}
+                )}
               </select>
               {formErrors.carId && (
                 <p className="error-admin-input visible">{formErrors.carId}</p>

@@ -54,11 +54,12 @@ const Login = ({ setLogged }) => {
               nombre: data.user.nombre,
               apellido: data.user.apellido,
               email: data.user.correo,
+              rol: data.user.rol,
             })
           );
           setTimeout(() => {
             // Verificar si es admin (puedes agregar un campo role en la BD)
-            if (data.user.correo === "admin@test.com") {
+            if (data.user.rol === "administrador") {
               navigate("/administration");
             } else {
               navigate("/home");

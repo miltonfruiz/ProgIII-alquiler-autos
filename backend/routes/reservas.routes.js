@@ -8,10 +8,16 @@ import {
   getPastReservationsByUser,
 } from "../src/controller/reservas.controller.js";
 import { validateReservation } from "../src/middlewares/reservaValidation.js";
+import { verificarAutenticado } from "../src/middlewares/authValidation.js";
 
 const router = Router();
 //------------------- Crear reservas -------------------//
-router.post("/reservas", validateReservation, createReserva);
+router.post(
+  "/reservas",
+  validateReservation,
+  createReserva,
+  verificarAutenticado
+);
 //------------------- Obtener todas las reservas -------------------//
 router.get("/reservas", getTodasLasReservas);
 //------------------- Obtener reservas por ID -------------------//

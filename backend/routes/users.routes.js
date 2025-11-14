@@ -74,6 +74,7 @@ router.post("/users", userValidation, async (req, res) => {
       nacimiento,
       licencia,
       numeroTelefonico,
+      rol: "usuario",
     });
 
     res.status(201).json(newUser);
@@ -234,7 +235,9 @@ router.post("/login", async (req, res) => {
       user: {
         id: user.id,
         nombre: user.nombre,
+        apellido: user.apellido,
         correo: user.correo,
+        rol: user.rol,
       },
     });
   } catch (error) {
