@@ -66,14 +66,15 @@ function App() {
           />
           <Route path="/infoReservation" element={<HowRent></HowRent>}></Route>
         </Routes>
+        <ToastContainer
+          position="top-right"
+          autoClose={1500}
+          closeOnClick
+          pauseOnHover={false}
+          closeButton
+          limit={1}
+        />
       </BrowserRouter>
-      <ToastContainer
-        position="top-right"
-        autoClose={4000}
-        closeOnClick
-        pauseOnHover
-        closeButton
-      />
     </>
   );
 }

@@ -68,13 +68,12 @@ const Register = ({ setRegisterIn }) => {
           toast.error(data.error || "Error al registrar el usuario.");
           return;
         }
-        const toastId = toast.success("¡Usuario registrado correctamente!");
+        toast.success("¡Usuario registrado correctamente!");
         setErrores({});
         setRegisterIn(true);
         setTimeout(() => {
-          toast.dismiss(toastId);
           navigate("/home");
-        }, 3000);
+        }, 2000);
       } catch (error) {
         console.error("Error al enviar el formulario:", error);
         toast.error("Error del servidor.");
