@@ -44,8 +44,6 @@ const Login = ({ setLogged }) => {
           return res.json();
         })
         .then((data) => {
-          toast.success("¡Usuario ingresado correctamente!");
-
           setLogged(true);
           localStorage.setItem(
             "loggedUser",
@@ -53,7 +51,7 @@ const Login = ({ setLogged }) => {
               email: data.user.correo,
               id: data.user.id,
               nombre: data.user.nombre,
-            })
+            }),
           );
 
           setTimeout(() => {

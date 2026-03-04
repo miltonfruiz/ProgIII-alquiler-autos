@@ -68,7 +68,6 @@ const Register = ({ setRegisterIn }) => {
           toast.error(data.error || "Error al registrar el usuario.");
           return;
         }
-        toast.success("¡Usuario registrado correctamente!");
         setErrores({});
         setRegisterIn(true);
         setTimeout(() => {
