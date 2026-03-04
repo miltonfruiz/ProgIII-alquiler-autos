@@ -44,7 +44,7 @@ const Login = ({ setLogged }) => {
           return res.json();
         })
         .then((data) => {
-          toast.success("¡Usuario ingresado correctamente!");
+          const toastId = toast.success("¡Usuario ingresado correctamente!");
 
           setLogged(true);
           localStorage.setItem(
@@ -57,6 +57,7 @@ const Login = ({ setLogged }) => {
           );
 
           setTimeout(() => {
+            toast.dismiss(toastId);
             // Verificar si es admin (puedes agregar un campo role en la BD)
             if (data.user.correo === "admin@test.com") {
               navigate("/administration");
