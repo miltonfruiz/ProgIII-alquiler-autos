@@ -5,6 +5,7 @@ import PasswordRecovery from "./pages/Log/PasswordRecovery/PasswordRecovery";
 import ProtectedRouteUser from "./components/ProtectedRouteUser/ProtectedRouteUser";
 import UserProfile from "./pages/UserProfile";
 import Register from "./pages/Register";
+import ProtectedRoutesRegister from "./components/ProtectedRoutesRegister/ProtectedRoutesRegister";
 import CarPaymentPage from "./pages/CarPaymentPage";
 import Cars from "./pages/Cars";
 import "leaflet/dist/leaflet.css";
