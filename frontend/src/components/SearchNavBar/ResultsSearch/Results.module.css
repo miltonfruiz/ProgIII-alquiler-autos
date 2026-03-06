@@ -22,11 +22,6 @@
   padding: 12px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
-  transition: background 0.2s;
-}
-
-.carCard:hover {
-  background: #f5f5f5;
 }
 
 .carCard:last-child {

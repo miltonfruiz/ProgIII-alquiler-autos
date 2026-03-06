@@ -116,12 +116,12 @@ function Modal({ auto, onClose }) {
     const fechaInicio = new Date(
       inicio.getFullYear(),
       inicio.getMonth(),
-      inicio.getDate()
+      inicio.getDate(),
     );
     const fechaFin = new Date(fin.getFullYear(), fin.getMonth(), fin.getDate());
 
     const diffDias = Math.floor(
-      (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24)
+      (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24),
     );
 
     return diffDias > 0 ? diffDias * auto.price : 0;
@@ -403,7 +403,7 @@ function Modal({ auto, onClose }) {
                   <p className={styles.date}>
                     {formatearFechaHora(
                       formData.fecha_inicio,
-                      formData.hora_inicio
+                      formData.hora_inicio,
                     )}
                   </p>
                 </div>
@@ -502,10 +502,10 @@ function Modal({ auto, onClose }) {
                       {formData.lugar_devolucion === "airport"
                         ? "Aeropuerto"
                         : formData.lugar_devolucion === "downtown"
-                        ? "Centro"
-                        : formData.lugar_devolucion === "busStation"
-                        ? "Terminal"
-                        : "Otro"}
+                          ? "Centro"
+                          : formData.lugar_devolucion === "busStation"
+                            ? "Terminal"
+                            : "Otro"}
                     </span>
 
                     {/* Mapa de devolución */}

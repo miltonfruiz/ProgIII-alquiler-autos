@@ -473,7 +473,7 @@ body.dark .hamburger-menu span {
     height: 60px; /* Altura reducida en móviles */
     padding: 8px 16px;
   }
-  
+
   :root {
     --navbar-height: 60px; /* Actualiza la variable */
   }
@@ -483,7 +483,7 @@ body.dark .hamburger-menu span {
   .navbar {
     height: 55px; /* Altura aún más reducida */
   }
-  
+
   :root {
     --navbar-height: 55px;
   }
