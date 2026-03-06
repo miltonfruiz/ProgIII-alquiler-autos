@@ -200,7 +200,7 @@ export async function getPastReservationsByUser(req, res) {
       include: [
         {
           model: Car,
-          attributes: ["name", "brand", "image", "price"],
+          attributes: ["id", "name", "brand", "image", "price"],
           required: false,
         },
       ],
@@ -220,6 +220,7 @@ export async function getPastReservationsByUser(req, res) {
       total: parseFloat(reserva.total || 0),
       fecha_fin: reserva.fecha_fin,
       hora_fin: reserva.hora_fin,
+      carId: reserva.carId,
     }));
 
     res.status(200).json(formattedReservations);

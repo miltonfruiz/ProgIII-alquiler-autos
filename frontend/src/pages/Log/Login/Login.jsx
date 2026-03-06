@@ -48,20 +48,22 @@ const Login = ({ setLogged }) => {
           localStorage.setItem(
             "loggedUser",
             JSON.stringify({
-              email: data.user.correo,
               id: data.user.id,
               nombre: data.user.nombre,
+              apellido: data.user.apellido,
+              email: data.user.correo,
+              rol: data.user.rol,
             }),
           );
-
           setTimeout(() => {
             // Verificar si es admin (puedes agregar un campo role en la BD)
-            if (data.user.correo === "admin@test.com") {
+            if (data.user.rol === "administrador") {
               navigate("/administration");
             } else {
               navigate("/home");
             }
           }, 2000);
+          toast.success("¡Usuario ingresado correctamente!");
         })
         .catch((err) => {
           console.error("Error al verificar usuario:", err);

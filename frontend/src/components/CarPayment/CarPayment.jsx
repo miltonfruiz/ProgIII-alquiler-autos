@@ -6,7 +6,6 @@ import { IoCard } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import "./CarPayment.css";
 import {
   objetosFormPersona,

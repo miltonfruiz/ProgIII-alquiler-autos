@@ -3,10 +3,9 @@ import { FaStar } from "react-icons/fa";
 import "./CarPayment.css";
 import { ObtenerReservas } from "../../api/actualizarReservas";
 
-const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
-
 const ResumenDeAlquiler = () => {
   const [reservas, setReservas] = useState([]);
+  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
 
   useEffect(() => {
     const cargarReservas = async () => {

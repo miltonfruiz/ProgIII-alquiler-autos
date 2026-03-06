@@ -28,7 +28,7 @@ export const objetosFormPersona = [
 
 export const objetosFormTarjeta = [
   {
-    label: "Numero de Tarjeta",
+    label: "Numero de Tarjeta(sin espacios)",
     type: "text",
     name: "numeroTarjeta",
   },

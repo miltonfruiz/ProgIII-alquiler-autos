@@ -8,9 +8,17 @@ const router = Router();
 //------------------- Crear comentario -------------------//
 router.post("/reviews", reviewValidation, async (req, res) => {
   try {
-    const { carId, username, rating, comment } = req.body;
-    const review = await Review.create({ carId, username, rating, comment });
+    console.log("Datos recibidos:", req.body);
+    const { carId, userId, username, rating, comment } = req.body;
+    const review = await Review.create({
+      carId,
+      userId,
+      username,
+      rating,
+      comment,
+    });
     const reviews = await Review.findAll({ where: { carId } });
+
     const avgRating =
       reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
     await Car.update({ rating: avgRating }, { where: { id: carId } });
