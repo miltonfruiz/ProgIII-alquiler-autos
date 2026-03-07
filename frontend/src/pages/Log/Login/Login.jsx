@@ -63,7 +63,6 @@ const Login = ({ setLogged }) => {
               navigate("/home");
             }
           }, 2000);
-          toast.success("¡Usuario ingresado correctamente!");
         })
         .catch((err) => {
           console.error("Error al verificar usuario:", err);

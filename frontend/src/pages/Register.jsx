@@ -74,7 +74,6 @@ const Register = ({ setRegisterIn, setLoggedIn }) => {
         setTimeout(() => {
           navigate("/home");
         }, 3000);
-        toast("¡Usuario registrado correctamente!");
       } catch (error) {
         console.error("Error al enviar el formulario:", error);
         toast.error("Error del servidor.");
