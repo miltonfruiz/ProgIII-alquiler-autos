@@ -79,7 +79,7 @@ const CarsAdmin = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    const errors = CardAdminValidation(newCar);
+    const errors = CardAdminValidation(newCar, false);
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
     try {
@@ -109,7 +109,7 @@ const CarsAdmin = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const errors = CardAdminValidation(newCar);
+    const errors = CardAdminValidation(newCar, true);
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
     try {

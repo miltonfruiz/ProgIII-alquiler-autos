@@ -4,7 +4,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { Car } from "../src/models/Car.js";
-import { carValidation } from "../src/middlewares/carValidation.js";
+import {
+  carValidation,
+  carUpdateValidation,
+} from "../src/middlewares/carValidation.js";
 import { Reserva } from "../src/models/Reserva.js";
 import { Op } from "sequelize";
 
@@ -148,7 +151,7 @@ router.post(
 router.put(
   "/cars/:id",
   upload.single("image"),
-  carValidation,
+  carUpdateValidation,
   async (req, res) => {
     try {
       const car = await Car.findByPk(req.params.id);
@@ -156,6 +159,8 @@ router.put(
 
       if (req.file) {
         req.body.image = `/uploads/${req.file.filename}`;
+      } else {
+        req.body.image = car.image;
       }
 
       await car.update(req.body);
