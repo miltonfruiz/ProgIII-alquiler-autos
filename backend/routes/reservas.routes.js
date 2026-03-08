@@ -14,9 +14,9 @@ const router = Router();
 //------------------- Crear reservas -------------------//
 router.post(
   "/reservas",
+  verificarAutenticado,
   validateReservation,
   createReserva,
-  verificarAutenticado
 );
 //------------------- Obtener todas las reservas -------------------//
 router.get("/reservas", getTodasLasReservas);

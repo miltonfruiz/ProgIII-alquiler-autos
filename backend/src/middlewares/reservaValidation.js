@@ -26,12 +26,17 @@ export async function validateReservation(req, res, next) {
     fecha_inicio,
     fecha_fin,
     hora_inicio,
-    hora_fin
+    hora_fin,
   );
 
+  console.log("ERRORES QUE VIENEN DEL VALIDATE RESERVATION", errores);
+
   if (!valid) {
-    console.log("Errores de validación de fechas:", errores);
-    return res.status(400).json({ errores });
+    return res.status(400).json({
+      errores: {
+        disponibilidad: Object.values(errores)[0], // muestra el primer error específico
+      },
+    });
   }
 
   try {
@@ -48,10 +53,9 @@ export async function validateReservation(req, res, next) {
     console.log("Reservas existentes encontradas:", reservasExistentes.length);
 
     if (reservasExistentes.length > 0) {
-      console.log("Reserva superpuesta encontrada:", reservasExistentes);
       return res.status(400).json({
         errores: {
-          disponibilidad: "El auto ya está reservado en esas fechas",
+          disponibilidad: `El auto no está disponible del ${fecha_inicio} al ${fecha_fin}`,
         },
       });
     }
