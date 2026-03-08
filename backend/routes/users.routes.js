@@ -5,6 +5,9 @@ import { userPartialValidation } from "../src/middlewares/userPartialValidation.
 import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
 
+import { Reserva } from "../src/models/Reserva.js";
+import { Op } from "sequelize";
+
 const router = Router();
 
 //------------------- Obtener usuarios -------------------//
@@ -139,11 +142,33 @@ router.put("/users/:id", userPartialValidation, async (req, res) => {
 router.delete("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await User.destroy({ where: { id } });
-    if (!deleted)
-      return res.status(404).json({ error: "Usuario no encontrado" });
+
+    // Verificar si el usuario existe
+    const user = await User.findByPk(id);
+    if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
+
+    // Buscar reservas activas (cualquiera que NO esté finalizada)
+    const activeReservations = await Reserva.findAll({
+      where: {
+        userId: id,
+        estado_reserva: { [Op.ne]: "finalizada" }, // Ajusta el campo según tu modelo
+      },
+    });
+
+    if (activeReservations.length > 0)
+      return res.status(409).json({
+        error: "No se puede eliminar el usuario porque tiene reservas activas.",
+      });
+
+    // Eliminar reservas pasadas (finalizadas) en cascada
+    await Reserva.destroy({ where: { userId: id } });
+
+    // Eliminar usuario
+    await user.destroy();
+
     res.sendStatus(204);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Error al eliminar el usuario" });
   }
 });

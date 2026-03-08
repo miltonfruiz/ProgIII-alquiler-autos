@@ -18,7 +18,7 @@ router.get(
   async (req, res) => {
     const cars = await Car.findAll();
     res.json(cars);
-  }
+  },
 );
 //------------------- Crear autos -------------------//
 router.post(
@@ -32,7 +32,7 @@ router.post(
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
-  }
+  },
 );
 //------------------- Editar autos -------------------//
 router.put(
@@ -48,7 +48,7 @@ router.put(
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
-  }
+  },
 );
 //------------------- Eliminar autos -------------------//
 router.delete(
@@ -64,7 +64,7 @@ router.delete(
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  }
+  },
 );
 
 //------------------- USERS -------------------//

@@ -117,7 +117,7 @@ const CarsAdmin = () => {
       toast.success("Auto editado correctamente!");
       const updatedCar = await res.json();
       setCars((prevCars) =>
-        prevCars.map((car) => (car.id === updatedCar.id ? updatedCar : car))
+        prevCars.map((car) => (car.id === updatedCar.id ? updatedCar : car)),
       );
       setShowModal(false);
       resetForm();
@@ -155,7 +155,7 @@ const CarsAdmin = () => {
   };
 
   const filteredCars = cars.filter((car) =>
-    car.name?.toLowerCase().includes(search.toLowerCase())
+    car.name?.toLowerCase().includes(search.toLowerCase()),
   );
 
   const handleDownloadCars = () => {

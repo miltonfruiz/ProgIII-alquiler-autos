@@ -140,7 +140,7 @@ router.post(
       console.error(err);
       res.status(400).json({ message: "Error al crear auto", error: err });
     }
-  }
+  },
 );
 //------------------- Actualizar auto -------------------//
 router.put(
@@ -161,7 +161,7 @@ router.put(
     } catch (error) {
       res.status(400).json({ message: "Error al actualizar auto", error });
     }
-  }
+  },
 );
 
 //------------------- Eliminar auto -------------------//
@@ -170,8 +170,9 @@ router.delete("/cars/:id", async (req, res) => {
     const car = await Car.findByPk(req.params.id);
     if (!car) return res.status(404).json({ message: "Auto no encontrado" });
     await car.destroy();
-    res.json({ message: "Auto eliminado correctamente" });
+    res.status(200).json({ message: "Auto eliminado correctamente" });
   } catch (error) {
+    console.error("Error al eliminar auto:", error.message);
     res.status(500).json({ message: "Error al eliminar auto", error });
   }
 });

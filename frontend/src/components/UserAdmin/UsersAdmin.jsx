@@ -67,7 +67,7 @@ const UsersAdmin = () => {
         const response = await res.json();
         console.error("Respuesta del backend:", response);
         toast.error(
-          response.error || response.errors || "Error al crear usuario"
+          response.error || response.errors || "Error al crear usuario",
         );
         return;
       }
@@ -98,7 +98,7 @@ const UsersAdmin = () => {
       }
       const updatedUser = await res.json();
       setUsers((prev) =>
-        prev.map((u) => (u.id === updatedUser.id ? updatedUser : u))
+        prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)),
       );
       toast.success("Usuario actualizado");
       setShowModal(false);
@@ -107,17 +107,32 @@ const UsersAdmin = () => {
       console.error("Error al actualizar usuario:", error);
     }
   };
+
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:3000/users/${id}`, {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
         method: "DELETE",
       });
+
+      if (response.status === 409) {
+        const data = await response.json();
+        toast.error(data.error); // "No se puede eliminar... reservas activas"
+        return;
+      }
+
+      if (!response.ok) {
+        toast.error("Error al eliminar el usuario");
+        return;
+      }
+
       setUsers(users.filter((u) => u.id !== id));
       toast.success("Usuario eliminado");
     } catch (error) {
       console.error("Error al eliminar usuario:", error);
+      toast.error("Error de conexión");
     }
   };
+
   const confirmDelete = () => {
     if (userToDelete) {
       handleDelete(userToDelete.id);
@@ -151,7 +166,7 @@ const UsersAdmin = () => {
     ? users.filter((user) =>
         `${user.nombre} ${user.apellido}`
           .toLowerCase()
-          .includes(search.toLowerCase())
+          .includes(search.toLowerCase()),
       )
     : [];
   const handleDownloadUsers = () => {
