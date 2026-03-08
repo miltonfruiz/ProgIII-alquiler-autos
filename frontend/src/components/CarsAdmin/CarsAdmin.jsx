@@ -43,13 +43,26 @@ const CarsAdmin = () => {
 
   const handleDelete = async (car) => {
     try {
-      await fetch(`http://localhost:3000/cars/${car.id}`, {
+      const response = await fetch(`http://localhost:3000/cars/${car.id}`, {
         method: "DELETE",
       });
-      toast.success("Auto borrado correctamente!");
+
+      if (response.status === 409) {
+        const data = await response.json();
+        toast.error(data.message);
+        return;
+      }
+
+      if (!response.ok) {
+        toast.error("Error al eliminar el auto");
+        return;
+      }
+
       setCars(cars.filter((c) => c.id !== car.id));
+      toast.success("Auto borrado correctamente!");
     } catch (error) {
       console.error("Error al eliminar auto:", error);
+      toast.error("Error de conexión");
     }
   };
 

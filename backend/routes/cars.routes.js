@@ -5,6 +5,8 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { Car } from "../src/models/Car.js";
 import { carValidation } from "../src/middlewares/carValidation.js";
+import { Reserva } from "../src/models/Reserva.js";
+import { Op } from "sequelize";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -169,6 +171,23 @@ router.delete("/cars/:id", async (req, res) => {
   try {
     const car = await Car.findByPk(req.params.id);
     if (!car) return res.status(404).json({ message: "Auto no encontrado" });
+
+    // Verificar reservas activas
+    const activeReservations = await Reserva.findAll({
+      where: {
+        carId: req.params.id,
+        estado_reserva: { [Op.notIn]: ["finalizada", "cancelada"] }, // Solo reservas activas
+      },
+    });
+
+    if (activeReservations.length > 0)
+      return res.status(409).json({
+        message: "No se puede eliminar el auto porque tiene reservas activas.",
+      });
+
+    // Eliminar reservas finalizadas en cascada
+    await Reserva.destroy({ where: { carId: req.params.id } });
+
     await car.destroy();
     res.status(200).json({ message: "Auto eliminado correctamente" });
   } catch (error) {
