@@ -68,7 +68,7 @@ const ReservationsAdmin = () => {
       if (!res.ok) throw new Error("Error al eliminar");
 
       setReservations((prev) =>
-        prev.filter((r) => r.id_reserva !== id_reserva)
+        prev.filter((r) => r.id_reserva !== id_reserva),
       );
       setReservationToDelete(null);
       toast.success("Reserva eliminada correctamente");
@@ -111,7 +111,7 @@ const ReservationsAdmin = () => {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newReservation),
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Error al actualizar reserva");
@@ -120,7 +120,7 @@ const ReservationsAdmin = () => {
 
       toast.success("Reserva actualizada correctamente");
       setReservations((prev) =>
-        prev.map((r) => (r.id_reserva === updated.id_reserva ? updated : r))
+        prev.map((r) => (r.id_reserva === updated.id_reserva ? updated : r)),
       );
       setShowModal(false);
       setEditingReservation(null);
@@ -174,7 +174,7 @@ const ReservationsAdmin = () => {
       });
     } catch (error) {
       console.error(error);
-      toast.error("Hubo un problema al crear la reserva.");
+      toast.error(error);
     }
   };
   const columns = [
