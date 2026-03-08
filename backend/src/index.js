@@ -44,7 +44,7 @@ try {
     res.status(404).json({ message: "Ruta no encontrada" });
   });
 
-  await sequelize.sync({ force: true });
+  await sequelize.sync();
   // Funcion para iniciar la tarea programa de actualizacion de reservas
   iniciarActualizacionReservas();
   //await sequelize.sync({ force: true }); para borrar datos de la tabla
