@@ -13,8 +13,6 @@ import {
 import { CrearPago, ObtenerUsuarios } from "../api/crearPagos.js";
 import { useNavigate } from "react-router-dom";
 
-const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
-
 // import { useDataContext } from "./Contexts/Contexts";
 
 const CarPaymentPage = () => {
@@ -56,7 +54,7 @@ const CarPaymentPage = () => {
     datosPago,
     choicePayment,
     checkbox,
-    tipoTarjeta
+    tipoTarjeta,
   ) {
     const errores = CarPaymentValidation({
       datosFacturacion,
@@ -90,9 +88,6 @@ const CarPaymentPage = () => {
       const idAutoReserva = ultimaReserva.carId;
       const idUsuarioReserva = ultimaReserva.userId;
       const idUltimaReserva = ultimaReserva.id_reserva;
-
-      console.log("datos alquiler subtotal", datosAlquiler.total);
-      console.log("datos alquiler total", datosAlquiler.totalFinal);
 
       if (choicePayment == "tarjeta") {
         datosPagoCompleto = {
