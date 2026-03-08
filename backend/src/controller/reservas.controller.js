@@ -183,8 +183,17 @@ export async function deleteReserva(req, res) {
 
     res.status(200).json({ mensaje: "Reserva eliminada correctamente" });
   } catch (error) {
-    console.error("Error al eliminar reserva:", error);
-    res.status(500).json({ mensaje: "Error al eliminar reserva" });
+    if (
+      error.name === "SequelizeForeignKeyConstraintError" ||
+      error.parent?.code === "SQLITE_CONSTRAINT"
+    ) {
+      return res.status(400).json({
+        mensaje:
+          "No se puede cancelar la reserva porque tiene un pago asociado.",
+      });
+    }
+
+    res.status(500).json({ mensaje: error.message });
   }
 }
 

@@ -8,6 +8,7 @@ import { TbTax } from "react-icons/tb";
 import { HiDocumentCurrencyDollar } from "react-icons/hi2";
 import { BsCashCoin } from "react-icons/bs";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import { toast } from "react-toastify";
 
 export default function MyReservations() {
   const [reservations, setReservations] = useState([]);
@@ -21,18 +22,21 @@ export default function MyReservations() {
         method: "DELETE",
       });
 
+      const data = await res.json();
+      console.log("Respuesta al eliminar reserva:", data);
+      console.log("res.status:", res.status);
       if (!res.ok) {
-        throw new Error("Error al cancelar la reserva");
+        throw new Error(data.mensaje || "Error al cancelar la reserva");
       }
 
       setReservations((prev) =>
-        prev.filter((reservation) => reservation.id_reserva !== id_reserva)
+        prev.filter((reservation) => reservation.id_reserva !== id_reserva),
       );
 
-      alert("Reserva eliminada exitosamente!");
+      toast.success(data.mensaje || "Reserva eliminada exitosamente!");
     } catch (error) {
       console.error("Error al cancelar reserva:", error);
-      alert("No se pudo cancelar la reserva.");
+      toast.error(error.message);
     }
   };
 
@@ -40,7 +44,7 @@ export default function MyReservations() {
     setExpandedIds((prev) =>
       prev.includes(id_reserva)
         ? prev.filter((item) => item !== id_reserva)
-        : [...prev, id_reserva]
+        : [...prev, id_reserva],
     );
   };
 
@@ -51,7 +55,7 @@ export default function MyReservations() {
         if (!loggedUser?.id) return;
 
         const res = await fetch(
-          `http://localhost:3000/reservas/user/${loggedUser.id}`
+          `http://localhost:3000/reservas/user/${loggedUser.id}`,
         );
         const data = await res.json();
         console.log("Reservas recibidas:", data);
@@ -92,13 +96,13 @@ export default function MyReservations() {
                     <MdDateRange className="data-myreservations" size={20} />
                     <span>
                       {new Date(
-                        res.fecha_inicio + "T00:00:00"
+                        res.fecha_inicio + "T00:00:00",
                       ).toLocaleDateString("es-AR")}{" "}
                       -
                     </span>
                     <span>
                       {new Date(res.fecha_fin + "T00:00:00").toLocaleDateString(
-                        "es-AR"
+                        "es-AR",
                       )}
                     </span>
                   </p>
