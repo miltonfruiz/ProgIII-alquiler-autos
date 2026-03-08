@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import { PORT } from "./config.js";
 import { sequelize } from "./db.js";

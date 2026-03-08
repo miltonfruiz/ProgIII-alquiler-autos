@@ -4,6 +4,7 @@ import { userValidation } from "../src/middlewares/userValidation.js";
 import { userPartialValidation } from "../src/middlewares/userPartialValidation.js";
 import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
@@ -230,8 +231,15 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Contraseña incorrecta" });
     }
 
+    const token = jwt.sign(
+      { id: user.id, rol: user.rol },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" },
+    );
+
     res.status(200).json({
       message: "Inicio de sesión exitoso",
+      token,
       user: {
         id: user.id,
         nombre: user.nombre,

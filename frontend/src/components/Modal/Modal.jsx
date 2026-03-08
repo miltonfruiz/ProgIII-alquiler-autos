@@ -199,14 +199,11 @@ function Modal({ auto, onClose }) {
           navigate("/carPayment");
         }, 2000);
       } else {
-        console.log("ERROR:", error);
-        toast.error(
-          error || "Error al crear la reserva. Por favor, intenta nuevamente.",
-          {
-            containerId: "modal",
-            position: "top-right",
-          },
-        );
+        console.log("ERROR:", error.error);
+        toast.error(error?.error || error, {
+          containerId: "modal",
+          position: "top-right",
+        });
       }
     } catch (error) {
       console.error("Error al crear la reserva:", error);

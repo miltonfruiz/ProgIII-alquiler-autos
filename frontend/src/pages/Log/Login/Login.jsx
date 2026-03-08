@@ -53,6 +53,7 @@ const Login = ({ setLogged }) => {
               apellido: data.user.apellido,
               email: data.user.correo,
               rol: data.user.rol,
+              token: data.token,
             }),
           );
           setTimeout(() => {

@@ -5,10 +5,13 @@ export const crearReserva = async (reservaData) => {
   try {
     console.log("Enviando datos al backend:", reservaData);
 
+    const token = JSON.parse(localStorage.getItem("loggedUser"))?.token;
+
     const response = await fetch(`${API_BASE_URL}/reservas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // ← acá se manda el token
       },
       body: JSON.stringify(reservaData),
     });
@@ -22,10 +25,7 @@ export const crearReserva = async (reservaData) => {
       // Devolver el mensaje específico de error
       return {
         success: false,
-        error:
-          errorData.errores?.disponibilidad ||
-          errorData.mensaje ||
-          "Error al crear la reserva",
+        error: errorData,
         errores: errorData.errores,
       };
     }

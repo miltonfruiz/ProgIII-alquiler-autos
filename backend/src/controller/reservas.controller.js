@@ -77,6 +77,7 @@ export async function createReserva(req, res) {
     res.status(500).json({ mensaje: "Error al crear la reserva" });
   }
 }
+
 export async function getReservasPorUsuario(req, res) {
   const { id } = req.params;
 
