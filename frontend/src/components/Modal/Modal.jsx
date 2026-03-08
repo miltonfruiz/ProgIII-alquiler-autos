@@ -190,7 +190,8 @@ function Modal({ auto, onClose }) {
         localStorage.setItem("datosAlquiler", JSON.stringify(datosAlquiler));
 
         toast.success("¡Fechas seleccionadas correctamente!", {
-          position: "top-center",
+          containerId: "modal",
+          position: "top-right",
         });
         setErrores({});
 
@@ -200,6 +201,10 @@ function Modal({ auto, onClose }) {
       } else {
         toast.error(
           error || "Error al crear la reserva. Por favor, intenta nuevamente.",
+          {
+            containerId: "modal",
+            position: "top-right",
+          },
         );
       }
     } catch (error) {
@@ -551,6 +556,12 @@ function Modal({ auto, onClose }) {
           </div>
         </div>
       </div>
+      <ToastContainer
+        containerId="modal"
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar
+      />
     </div>
   );
 }
