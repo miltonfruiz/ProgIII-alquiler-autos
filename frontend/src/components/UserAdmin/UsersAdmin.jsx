@@ -67,7 +67,7 @@ const UsersAdmin = () => {
         const response = await res.json();
         console.error("Respuesta del backend:", response);
         toast.error(
-          response.error || response.errors || "Error al crear usuario"
+          response.error || response.errors || "Error al crear usuario",
         );
         return;
       }
@@ -98,7 +98,7 @@ const UsersAdmin = () => {
       }
       const updatedUser = await res.json();
       setUsers((prev) =>
-        prev.map((u) => (u.id === updatedUser.id ? updatedUser : u))
+        prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)),
       );
       toast.success("Usuario actualizado");
       setShowModal(false);
@@ -151,7 +151,7 @@ const UsersAdmin = () => {
     ? users.filter((user) =>
         `${user.nombre} ${user.apellido}`
           .toLowerCase()
-          .includes(search.toLowerCase())
+          .includes(search.toLowerCase()),
       )
     : [];
   const handleDownloadUsers = () => {
