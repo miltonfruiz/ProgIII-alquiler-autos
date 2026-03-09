@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const CarCard = ({
+  id,
   name,
   category,
   image,
@@ -25,7 +26,11 @@ const CarCard = ({
       navigate("/login");
       return;
     }
-    onRent();
+    navigate("/reserva", {
+      state: {
+        auto: { id, name, category, image, passengers, transmission, price },
+      },
+    });
   };
 
   return (

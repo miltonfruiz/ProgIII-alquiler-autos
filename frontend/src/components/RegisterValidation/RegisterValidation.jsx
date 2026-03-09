@@ -59,16 +59,15 @@ const RegisterValidation = ({ datos }) => {
 
   if (!datos.licencia.trim()) {
     errores.licencia = "Debe ingresar licencia";
-  } else if (!/\d/.test(datos.licencia)) {
-    errores.licencia =
-      "la licencia no puede tener letras ni caracteres especiales";
+  } else if (!/^\d{8}$/.test(datos.licencia)) {
+    errores.licencia = "La licencia debe tener exactamente 8 números";
   }
 
   if (!datos.numeroTelefonico.trim()) {
     errores.numeroTelefonico = "* Debe ingresar número telefónico";
   } else if (
     /!^(?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{2,3}\)?[-.\s]?)?\d{4,}[-.\s]?\d{4}$/.test(
-      datos.numeroTelefonico
+      datos.numeroTelefonico,
     )
   ) {
     errores.numeroTelefonico = "* ingrese un numero valido";

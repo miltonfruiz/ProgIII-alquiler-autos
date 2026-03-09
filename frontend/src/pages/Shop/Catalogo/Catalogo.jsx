@@ -3,6 +3,7 @@ import styles from "./Catalogo.module.css";
 import CarCard from "../../../components/CarCard/CarCard";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../../components/Modal/Modal";
+import ReservaPage from "../../Reserva/ReservaPage";
 
 function Catalogo({
   autos,
@@ -99,7 +100,7 @@ function Catalogo({
       <CarCard
         key={car.id}
         {...car}
-        onRent={() => abrirOverlay(car)}
+        // onRent={() => abrirOverlay(car)}
         loggedIn={loggedIn}
       />
     ));
@@ -148,14 +149,14 @@ function Catalogo({
                 >
                   {page}
                 </button>
-              )
+              ),
             )}
           </div>
         </div>
       )}
 
       {autoSeleccionado && (
-        <Modal auto={autoSeleccionado} onClose={cerrarOverlay} />
+        <ReservaPage auto={autoSeleccionado} onClose={cerrarOverlay} />
       )}
     </section>
   );

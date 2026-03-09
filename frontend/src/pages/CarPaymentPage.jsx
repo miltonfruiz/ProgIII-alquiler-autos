@@ -13,11 +13,11 @@ import {
 import { CrearPago, ObtenerUsuarios } from "../api/crearPagos.js";
 import { useNavigate } from "react-router-dom";
 
-const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
-
 // import { useDataContext } from "./Contexts/Contexts";
 
 const CarPaymentPage = () => {
+  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
+
   const [errores, setErrores] = useState({});
 
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const CarPaymentPage = () => {
     datosPago,
     choicePayment,
     checkbox,
-    tipoTarjeta
+    tipoTarjeta,
   ) {
     const errores = CarPaymentValidation({
       datosFacturacion,
