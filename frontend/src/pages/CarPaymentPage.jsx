@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import CarPayment from "../components/CarPayment/CarPayment";
 import CarPaymentValidation from "../components/CarPaymentValidation/CarPaymentValidation";
 import UserNavbar from "../components/UserNavbar/UserNavbar";
@@ -17,6 +17,27 @@ import { useNavigate } from "react-router-dom";
 
 const CarPaymentPage = () => {
   const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
+  const pagoConcretado = useRef(false);
+  useEffect(() => {
+    const cancelarSiAbandonar = async () => {
+      if (!pagoConcretado.current) {
+        const reservas = await ObtenerReservas();
+        CancelarReserva(reservas);
+      }
+    };
+
+    // Cancelar si cierra/recarga la pestaña
+    const handleBeforeUnload = () => {
+      cancelarSiAbandonar();
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Cleanup: se ejecuta cuando el componente se desmonta (navega a otro lado)
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      cancelarSiAbandonar();
+    };
+  }, []);
 
   const [errores, setErrores] = useState({});
 
@@ -134,6 +155,7 @@ const CarPaymentPage = () => {
       }
 
       console.log(datosPagoCompleto);
+      pagoConcretado.current = true;
 
       toast.success("¡auto rentado!");
       setErrores({});
