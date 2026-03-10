@@ -52,24 +52,28 @@
   align-items: flex-start;
   gap: 1rem;
   background-color: white;
-  padding-top: 3rem;
-  padding-bottom: 9rem;
+  padding: 1.2rem 0.5rem;
   margin: 0.1rem;
-  transition: transform 0.2s ease, max-height 0.4s ease,
+  transition:
+    transform 0.2s ease,
+    max-height 0.4s ease,
     padding-bottom 0.4s ease;
   max-height: 170px;
   overflow: hidden;
   flex-wrap: wrap;
   position: relative;
+  min-width: 0;
 }
 .reservation-card.expanded {
-  max-height: 350px;
+  max-height: 420px;
   padding-bottom: 1.5rem;
 }
 .car-image {
-  width: 150px;
-  height: fit-content;
+  width: 140px;
+  height: auto;
   object-fit: cover;
+  flex-shrink: 0; /* ← la imagen no se encoge */
+  border-radius: 6px;
 }
 
 .reservation-info {
@@ -77,16 +81,18 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
+  min-width: 0; /* ← CRÍTICO: permite que el texto haga wrap */
+  overflow: hidden;
 }
 
 .reservation-info h2 {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: black;
   margin-bottom: 3px;
-  gap: 23px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* ← si el nombre es largo, corta con ... */
 }
 
 .reservation-info p {
@@ -113,7 +119,10 @@
   transform: translateY(5px);
   max-height: 0;
   overflow: hidden;
-  transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    max-height 0.4s ease;
   color: black;
   gap: 3px;
 }
@@ -179,7 +188,7 @@
   background-color: #fff;
   color: #d9363e;
   padding: 10px 33px;
-
+  border: #afafaf 0.5px solid;
   border-radius: 8px;
   cursor: pointer;
   display: inline-flex;
@@ -245,24 +254,105 @@ body.dark .reservation-info p {
   .reservation-container {
     margin: 0 auto;
     max-width: 800px;
+    padding: 18px 20px;
+  }
+
+  .car-image {
+    width: 120px;
   }
 }
 
 @media (max-width: 768px) {
+  .reservation-container {
+    padding: 16px 12px;
+  }
+
+  .reservation-title {
+    font-size: 1.25rem;
+  }
   .reservation-card {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    flex-direction: column; /* ← imagen arriba, info abajo */
+    align-items: center;
+    max-height: 230px;
+    padding: 1rem 0.5rem;
+  }
+
+  .reservation-card.expanded {
+    max-height: 560px;
   }
 
   .car-image {
     width: 100%;
-    max-width: 250px;
+    max-width: 240px;
     margin: 0 auto;
   }
 
   .reservation-info {
     width: 100%;
+    text-align: left;
+  }
+
+  .reservation-info h2 {
+    font-size: 14px;
+  }
+
+  /* En columna el texto puede hacer wrap, quitamos el ellipsis */
+  .reservation-info h2,
+  .reservation-info p {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .reservation-info span {
+    font-size: 0.85rem;
+  }
+
+  .reservation-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .toggle-details-button,
+  .delete-myreservations {
+    flex: 1;
+    justify-content: center;
+    font-size: 11px;
+    padding: 9px 10px;
+    margin-top: 8px;
+  }
+
+  .reservation-scroll-wrapper {
+    max-height: 450px;
+  }
+
+  @media (max-width: 480px) {
+    .reservation-container {
+      padding: 12px;
+    }
+
+    .reservation-card {
+      max-height: 200px;
+    }
+
+    .reservation-card.expanded {
+      max-height: 560px;
+    }
+
+    .reservation-actions {
+      flex-direction: column; /* ← botones apilados en pantalla muy chica */
+    }
+
+    .toggle-details-button,
+    .delete-myreservations {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .reservation-info span {
+      font-size: 0.85rem;
+    }
   }
 }

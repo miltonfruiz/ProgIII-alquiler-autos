@@ -15,13 +15,13 @@ export const objetosFormPersona = [
     name: "apellido",
   },
   {
-    label: "Numero de telefono",
-    placeholder: "5493333333333",
+    label: "Telefóno",
+    placeholder: "+54 9 11 1234-5678",
     name: "numeroTelefonico",
   },
   {
     label: "DNI",
-    placeholder: "4000000",
+    placeholder: "42345678",
     name: "dni",
   },
 ];
@@ -33,7 +33,7 @@ export const objetosFormTarjeta = [
     name: "numeroTarjeta",
   },
   {
-    label: "Fecha de expiracion",
+    label: "Fecha de expiración",
     type: "date",
     name: "fechaTarjeta",
   },

@@ -1,15 +1,16 @@
 .searchWrapper {
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 999px;
   padding: 0px 18px;
   width: 100%;
   max-width: 350px;
+  border: 1px solid #e0e0e0;
 }
 
 .searchIcon {
-  color: gray;
+  color: rgb(0, 0, 0);
 }
 
 .navBarSearch {
@@ -19,6 +20,7 @@
   padding: 8px 12px;
   border-radius: 999px;
   font-size: 14px;
+  background: #ffffff;
 }
 .navBarSearch::placeholder {
   font-size: 12px;

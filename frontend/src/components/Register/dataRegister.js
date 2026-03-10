@@ -25,7 +25,7 @@ export const dataForm = [
   {
     icono: MdMail,
     label: "Correo electrónico",
-    placeholder: "ejemplo@gmail.com",
+    placeholder: "tu@mail.com",
     name: "email",
     type: "email",
   },
@@ -46,7 +46,7 @@ export const dataForm = [
   {
     icono: HiIdentification,
     label: "DNI",
-    placeholder: "11111111",
+    placeholder: "44123456",
     name: "dni",
     type: "text",
   },
@@ -67,7 +67,7 @@ export const dataForm = [
   {
     icono: FaPhone,
     label: "Número telefónico",
-    placeholder: "153123456",
+    placeholder: "+54 9 11 1234-5678",
     name: "numeroTelefonico",
     type: "text",
   },

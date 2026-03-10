@@ -4,7 +4,10 @@ import { CiSearch } from "react-icons/ci";
 import { toast, ToastContainer } from "react-toastify";
 import UsersModalAdmin from "../UsersModalAdmin/UsersModalAdmin";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
-import { UsersValidationAdmin } from "../UsersValidationAdmin/UsersValidationAdmin";
+import {
+  UsersValidationAdmin,
+  UsersValidationAdminUpdate,
+} from "../UsersValidationAdmin/UsersValidationAdmin";
 import { downloadCSV } from "../CarsAdminUtils/CarsAdminUtils";
 import AdminTable from "../AdminTable/AdminTable";
 import "../AdminTable/AdminTable.css";
@@ -82,7 +85,7 @@ const UsersAdmin = () => {
   };
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const errors = UsersValidationAdmin(newUser);
+    const errors = UsersValidationAdminUpdate(newUser);
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
     try {
@@ -92,8 +95,9 @@ const UsersAdmin = () => {
         body: JSON.stringify(newUser),
       });
       if (!res.ok) {
-        const { error } = await res.json();
-        toast.error(error || "Error al actualizar usuario");
+        const data = await res.json();
+        console.error("Error del backend:", data); // ← ver qué campo falla
+        toast.error(data.error || JSON.stringify(data));
         return;
       }
       const updatedUser = await res.json();
@@ -107,17 +111,32 @@ const UsersAdmin = () => {
       console.error("Error al actualizar usuario:", error);
     }
   };
+
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:3000/users/${id}`, {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
         method: "DELETE",
       });
+
+      if (response.status === 409) {
+        const data = await response.json();
+        toast.error(data.error); // "No se puede eliminar... reservas activas"
+        return;
+      }
+
+      if (!response.ok) {
+        toast.error("Error al eliminar el usuario");
+        return;
+      }
+
       setUsers(users.filter((u) => u.id !== id));
       toast.success("Usuario eliminado");
     } catch (error) {
       console.error("Error al eliminar usuario:", error);
+      toast.error("Error de conexión");
     }
   };
+
   const confirmDelete = () => {
     if (userToDelete) {
       handleDelete(userToDelete.id);
@@ -233,8 +252,6 @@ const UsersAdmin = () => {
               nombre: user.nombre,
               apellido: user.apellido,
               correo: user.correo,
-              contraseña: "",
-              repetirContraseña: "",
               dni: user.dni,
               nacimiento: user.nacimiento,
               licencia: user.licencia,

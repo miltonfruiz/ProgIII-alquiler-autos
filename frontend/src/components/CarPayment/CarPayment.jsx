@@ -73,7 +73,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
         datosTarjeta,
         choicePayment,
         checkbox,
-        tipoTarjeta
+        tipoTarjeta,
       );
     } else if (choicePayment == "transferencia") {
       onSubmit(datosFacturacion, file, choicePayment, checkbox, tipoTarjeta);
@@ -153,108 +153,102 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
             })}
           </div>
         </div>
-        {/* Metodo de pago */}
         <div className="metodoPago">
           <div className="header-seccion">
             <h3 className="titulo-principal">Metodo de Pago</h3>
             <p className="subtitulo-principal">Elije tu metodo de pago</p>
-            {/* <p className="paso2">Paso 2 de 3</p> */}
           </div>
+
+          {/* Tarjeta */}
           <div
-            className={`ingresoTarjeta${
-              choicePayment == "tarjeta" ? "Clickeado" : ""
-            }`}
-            onClick={(e) => {
-              setChoicePayment(() => "tarjeta");
+            className={`opcionPago ${choicePayment === "tarjeta" ? "opcionPagoActiva" : ""}`}
+            onClick={() => {
+              setChoicePayment("tarjeta");
               eleccionTarjetaRef.current.click();
             }}
           >
-            <div className="seleccionTarjeta">
+            <div className="opcionPagoHeader">
               <input
                 type="radio"
                 name="opcion"
                 value="1"
-                className="eleccionTarjeta"
+                className="radioPago"
                 onChange={handleTarjeta}
                 ref={eleccionTarjetaRef}
               />
-              <label htmlFor="" className="labelTarjeta">
-                Pago con tarjeta
-              </label>
+              <span className="iconoPago"></span>
+              <span className="labelOpcionPago">Pago con tarjeta</span>
             </div>
 
             {seleccionTarjeta && (
               <div
                 className={`containerPago ${stateTransition ? "Visible" : ""}`}
               >
-                <label htmlFor="seleccion" className="seleccion">
-                  Seleccione una tarjeta
-                </label>
-                <select
-                  name=""
-                  id="seleccion"
-                  className="selectMetodo"
-                  onChange={handleImagenes}
-                >
-                  {objetosTarjetas.map((tarjeta) => {
-                    return (
-                      <option value={tarjeta.value}>{tarjeta.nombre}</option>
-                    );
-                  })}
-                </select>
-
-                {imgTarjetas == "visa" && (
-                  <RiVisaLine className="logosTarjeta" />
-                )}
-                {imgTarjetas == "mastercard" && (
-                  <FaCcMastercard className="logosTarjeta" />
-                )}
-                {imgTarjetas == "american" && (
-                  <SiAmericanexpress className="logosTarjeta" />
-                )}
-                {imgTarjetas == "debito" && <IoCard className="logosTarjeta" />}
+                <div className="selectRow">
+                  <label htmlFor="seleccion" className="seleccion">
+                    Seleccione una tarjeta
+                  </label>
+                  <select
+                    id="seleccion"
+                    className="selectMetodo"
+                    onChange={handleImagenes}
+                  >
+                    {objetosTarjetas.map((tarjeta) => (
+                      <option key={tarjeta.value} value={tarjeta.value}>
+                        {tarjeta.nombre}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="logosTarjetaWrap">
+                    {imgTarjetas === "visa" && (
+                      <RiVisaLine className="logosTarjeta" />
+                    )}
+                    {imgTarjetas === "mastercard" && (
+                      <FaCcMastercard className="logosTarjeta" />
+                    )}
+                    {imgTarjetas === "american" && (
+                      <SiAmericanexpress className="logosTarjeta" />
+                    )}
+                    {imgTarjetas === "debito" && (
+                      <IoCard className="logosTarjeta" />
+                    )}
+                  </span>
+                </div>
                 <div className="gridDatosTarjeta">
-                  {objetosFormTarjeta.map((input) => {
-                    return (
-                      <div className="cajaInputTarjeta">
-                        <div>
-                          <label htmlFor="" className="labelMetodo">
-                            {input.label}
-                          </label>
-                          <input
-                            type={input.type}
-                            className="inputMetodo"
-                            placeholder={input.label}
-                            name={input.name}
-                            value={datosTarjeta[input.name]}
-                            onChange={handleDatosTarjeta}
-                            ref={refs.useRefs[`${input.name}Ref`]}
-                          />
-                          {errores[input.name] && (
-                            <p className="error">{errores[input.name]}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
+                  {objetosFormTarjeta.map((input) => (
+                    <div key={input.name} className="cajaInputTarjeta">
+                      <label className="labelMetodo">{input.label}</label>
+                      <input
+                        type={input.type}
+                        className="inputMetodo"
+                        placeholder={input.label}
+                        name={input.name}
+                        value={datosTarjeta[input.name]}
+                        onChange={handleDatosTarjeta}
+                        ref={refs.useRefs[`${input.name}Ref`]}
+                      />
+                      {errores[input.name] && (
+                        <p className="error">{errores[input.name]}</p>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
           </div>
 
+          {/* Transferencia */}
           <div
-            className={`cajaTransferenciaBancaria${
-              choicePayment == "transferencia" ? "Clickeado" : ""
-            }`}
+            className={`opcionPago ${choicePayment === "transferencia" ? "opcionPagoActiva" : ""}`}
             onClick={() => {
-              setChoicePayment(() => "transferencia");
+              setChoicePayment("transferencia");
               eleccionTransferRef.current.click();
             }}
             tabIndex={-1}
             ref={refs.useRefs.errorEleccionRef}
           >
             <div
-              className="containterEleccionTransfer"
+              className="opcionPagoHeader"
               ref={refs.useRefs.comprobanteRef}
               tabIndex={-1}
             >
@@ -262,88 +256,96 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
                 type="radio"
                 name="opcion"
                 value="2"
-                className="eleccionTranferencia"
+                className="radioPago"
                 onChange={handleCbu}
                 ref={eleccionTransferRef}
               />
-              <p className="transferenciaBancaria">
+              <span className="iconoPago"></span>
+              <span className="labelOpcionPago">
                 Pago con Transferencia Bancaria
-              </p>
+              </span>
             </div>
 
             {seleccionCbu && (
               <div
-                className={`conteinerTransferencia ${
-                  stateTransition ? "Visible" : ""
-                }`}
+                className={`conteinerTransferencia ${stateTransition ? "Visible" : ""}`}
               >
-                <h3 className="tituloTransferencia">
-                  Transfiera a esta cuenta
-                </h3>
+                <p className="tituloTransferencia">Transferí a esta cuenta</p>
                 <div className="conteinerTransfer">
                   <div className="containerCbuTransfer">
-                    <h3>CBU</h3>
-                    <p>1430001717001234567890</p>
+                    <span className="cbuLabel">CBU</span>
+                    <span className="cbuValor">1430001717001234567890</span>
                   </div>
-
                   <div className="containerCbuTransfer">
-                    <h3>Alias</h3>
-                    <p>autos.alquiler.mpago</p>
+                    <span className="cbuLabel">Alias</span>
+                    <span className="cbuValor">autos.alquiler.mpago</span>
                   </div>
                 </div>
+
                 <div
-                  className={`containerArrastre ${
-                    isDragging || file ? `Activo` : ``
-                  }`}
+                  className={`containerArrastre ${isDragging || file ? "Activo" : ""}`}
                   onDragOver={(e) => {
                     e.preventDefault();
                     setIsDragging(true);
                   }}
-                  onDragLeave={(e) => {
-                    setIsDragging(false);
-                  }}
+                  onDragLeave={() => setIsDragging(false)}
                   onDrop={(e) => {
                     e.preventDefault();
-                    const file = e.dataTransfer.files[0];
-                    setFile((prevFile) => file);
+                    setFile(e.dataTransfer.files[0]);
                   }}
                 >
-                  {file ? (
-                    <p className="">Archivo cargado: {file.name}</p>
-                  ) : (
-                    <p className="">
-                      Arrastre el comprobante aqui o seleccione un archivo
-                    </p>
+                  {!file && (
+                    <div className="uploadIcon">
+                      <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#6366f1"
+                        strokeWidth="1.5"
+                      >
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                      </svg>
+                    </div>
                   )}
+                  <p className="textoArrastre">
+                    {file
+                      ? `📎 ${file.name}`
+                      : "Arrastrá el comprobante aquí o seleccioná un archivo"}
+                  </p>
                   <input
                     type="file"
-                    className="comprobante"
-                    onChange={(e) => {
-                      if (e.target.files[0]) {
-                        setFile((prevFile) => e.target.files[0]);
-                      }
-                    }}
                     style={{ display: "none" }}
                     ref={inputRef}
+                    onChange={(e) => {
+                      if (e.target.files[0]) setFile(e.target.files[0]);
+                    }}
                   />
                   <button
                     className="botonArchivo"
-                    onClick={(e) => inputRef.current.click()}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      inputRef.current.click();
+                    }}
                   >
-                    Seleccione un archivo
+                    Seleccionar archivo
                   </button>
-
-                  {isDragging || file ? (
+                  {(isDragging || file) && (
                     <button
                       className="botonSacarArchivo"
-                      onClick={() => {
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setFile(null);
                         setIsDragging(false);
                       }}
                     >
                       <FaRegTrashCan />
                     </button>
-                  ) : null}
+                  )}
                 </div>
                 {errores.comprobante && (
                   <p className="error">{errores.comprobante}</p>
@@ -351,6 +353,7 @@ const CarPayment = ({ onSubmit, errores, refs }) => {
               </div>
             )}
           </div>
+
           {errores.errorEleccion && (
             <p className="error">{errores.errorEleccion}</p>
           )}

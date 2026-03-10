@@ -6,6 +6,10 @@ import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+import { Reserva } from "../src/models/Reserva.js";
+import { Pay } from "../src/models/Pay.js";
+import { Op } from "sequelize";
+
 const router = Router();
 
 //------------------- Obtener usuarios -------------------//
@@ -98,11 +102,11 @@ router.put("/users/:id", userPartialValidation, async (req, res) => {
       nombre,
       apellido,
       correo,
-      contraseña,
       dni,
       nacimiento,
       licencia,
       numeroTelefonico,
+      rol,
     } = req.body;
     const user = await User.findByPk(id);
     if (!user) {
@@ -120,15 +124,26 @@ router.put("/users/:id", userPartialValidation, async (req, res) => {
     if (existingDni && existingDni.id !== Number(id)) {
       return res.status(400).json({ error: "El DNI ya está en uso" });
     }
+    const existingNumeroTelefonico = await User.findOne({
+      where: { numeroTelefonico },
+    });
+    if (
+      existingNumeroTelefonico &&
+      existingNumeroTelefonico.id !== Number(id)
+    ) {
+      return res
+        .status(400)
+        .json({ error: "El número telefónico ya está en uso" });
+    }
     await user.update({
       nombre,
       apellido,
       correo,
-      contraseña,
       dni,
       nacimiento,
       licencia,
       numeroTelefonico,
+      rol,
     });
     res.status(200).json(user);
   } catch (error) {
@@ -139,13 +154,40 @@ router.put("/users/:id", userPartialValidation, async (req, res) => {
 //------------------- Eliminar usuario -------------------//
 router.delete("/users/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const deleted = await User.destroy({ where: { id } });
-    if (!deleted)
-      return res.status(404).json({ error: "Usuario no encontrado" });
+    const id = Number(req.params.id);
+
+    const user = await User.findByPk(id);
+    if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
+
+    const activeReservations = await Reserva.findAll({
+      where: {
+        userId: id,
+        estado_reserva: { [Op.notIn]: ["finalizada", "cancelada"] },
+      },
+    });
+
+    if (activeReservations.length > 0)
+      return res.status(409).json({
+        error: "No se puede eliminar el usuario porque tiene reservas activas.",
+      });
+
+    // Obtener IDs de las reservas del usuario
+    const reservas = await Reserva.findAll({ where: { userId: id } });
+    const reservaIds = reservas.map((r) => r.id_reserva);
+
+    if (reservaIds.length > 0) {
+      await Pay.destroy({ where: { id_reserva: { [Op.in]: reservaIds } } });
+      await Pay.destroy({ where: { userId: id } });
+      await Reserva.destroy({ where: { userId: id } });
+    }
+
+    await user.destroy();
     res.sendStatus(204);
   } catch (error) {
-    res.status(500).json({ error: "Error al eliminar el usuario" });
+    console.error("🔥 Error:", error.message);
+    res
+      .status(500)
+      .json({ error: "Error al eliminar el usuario", detalle: error.message });
   }
 });
 //------------------- Recuperar Contraseña -------------------//

@@ -43,13 +43,26 @@ const CarsAdmin = () => {
 
   const handleDelete = async (car) => {
     try {
-      await fetch(`http://localhost:3000/cars/${car.id}`, {
+      const response = await fetch(`http://localhost:3000/cars/${car.id}`, {
         method: "DELETE",
       });
-      toast.success("Auto borrado correctamente!");
+
+      if (response.status === 409) {
+        const data = await response.json();
+        toast.error(data.message);
+        return;
+      }
+
+      if (!response.ok) {
+        toast.error("Error al eliminar el auto");
+        return;
+      }
+
       setCars(cars.filter((c) => c.id !== car.id));
+      toast.success("Auto borrado correctamente!");
     } catch (error) {
       console.error("Error al eliminar auto:", error);
+      toast.error("Error de conexión");
     }
   };
 
@@ -66,7 +79,7 @@ const CarsAdmin = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    const errors = CardAdminValidation(newCar);
+    const errors = CardAdminValidation(newCar, false);
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
     try {
@@ -96,7 +109,7 @@ const CarsAdmin = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const errors = CardAdminValidation(newCar);
+    const errors = CardAdminValidation(newCar, true);
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
     try {
@@ -117,7 +130,7 @@ const CarsAdmin = () => {
       toast.success("Auto editado correctamente!");
       const updatedCar = await res.json();
       setCars((prevCars) =>
-        prevCars.map((car) => (car.id === updatedCar.id ? updatedCar : car))
+        prevCars.map((car) => (car.id === updatedCar.id ? updatedCar : car)),
       );
       setShowModal(false);
       resetForm();
@@ -155,7 +168,7 @@ const CarsAdmin = () => {
   };
 
   const filteredCars = cars.filter((car) =>
-    car.name?.toLowerCase().includes(search.toLowerCase())
+    car.name?.toLowerCase().includes(search.toLowerCase()),
   );
 
   const handleDownloadCars = () => {

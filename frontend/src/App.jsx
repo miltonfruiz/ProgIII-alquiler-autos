@@ -24,6 +24,7 @@ import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin/ProtectedRoute
 import ResetPassword from "./pages/Log/PasswordReset/PasswordReset";
 import { ToastContainer } from "react-toastify";
 import HowRent from "./pages/HowRent/HowRent";
+import ReservaPage from "./pages/Reserva/ReservaPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -81,6 +82,7 @@ function App() {
             }
           />
           <Route path="/infoReservation" element={<HowRent></HowRent>}></Route>
+          <Route path="/reserva" element={<ReservaPage></ReservaPage>}></Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer

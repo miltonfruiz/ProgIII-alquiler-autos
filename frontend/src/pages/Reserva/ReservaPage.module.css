@@ -1,0 +1,558 @@
+/* ===== PAGE LAYOUT ===== */
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-color: #f7f7f9;
+  color: #1a202c;
+}
+
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* ===== HEADER ===== */
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.85rem 1.5rem;
+  position: sticky;
+  top: 0;
+  margin-top: 100px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid #1a202c;
+  color: #1a202c;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0;
+}
+
+.headerSpacer {
+  /* Mirror del backButton para centrar el título */
+  width: 90px;
+}
+
+/* ===== MAIN CONTENT ===== */
+
+.pageContent {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  padding-bottom: 6rem; /* espacio para el footer sticky */
+}
+
+/* ===== LEFT PANEL ===== */
+
+.leftPanel {
+  flex: 2.5;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  height: fit-content;
+}
+
+.carReserva {
+  margin-bottom: 1.5rem;
+}
+
+.reservaInfo {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #555;
+}
+
+.carSelected {
+  font-weight: 600;
+  margin: 0.2rem 0 0;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.carImage {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.imagePlaceholder {
+  height: 130px;
+  width: 170px;
+  min-width: 170px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagePlaceholder img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.carDetails h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.inclusionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.88rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.checkIcon {
+  color: #6366f1;
+  margin-right: 0.5rem;
+}
+
+.infoAdicional {
+  color: #6ba1df;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  cursor: help;
+  border: 1px solid #6ba1df;
+  border-radius: 0.2rem;
+  padding: 0.3rem 0.6rem;
+  width: fit-content;
+}
+
+.infoAdicionalBtn {
+  background: none;
+  color: #6ba1df;
+  border: none;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* INPUTS */
+
+.inputConteiner {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelInput {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.inputDate {
+  width: 100%;
+  height: 2.8rem;
+  background-color: #fff;
+  border-radius: 0.3rem;
+  padding: 0 1em;
+  border: 1px solid #dbdbdb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.inputDate:focus {
+  outline: none;
+  border: 1px solid #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.inputDate:hover {
+  background-color: #f9f9ff;
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: #e8e8e8;
+  margin: 1rem 0;
+  border-radius: 5px;
+}
+
+/* PRECIO */
+
+.precioDetalle {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.precioItem {
+  margin: 0;
+}
+
+.precioTotal .precio {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+/* ERRORS */
+
+.errorContainer {
+  min-height: 1.2rem;
+  position: relative;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.8rem;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  margin: 0;
+}
+
+.errorMessage.visible {
+  height: auto;
+}
+
+/* ===== RIGHT PANEL ===== */
+
+.rightPanel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.placeInfo {
+  background: white;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rightTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem;
+  color: #1a202c;
+}
+
+.locationDot {
+  color: #6366f1;
+  font-size: 0.9rem;
+}
+
+.placeHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.date {
+  font-size: 0.88rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.place {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.caption {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.retireInfo {
+  background-color: #f5f5f5;
+  width: fit-content;
+  padding: 0.3rem 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+  color: #666;
+  cursor: help;
+  border-radius: 0.2rem;
+}
+
+.infoIcon {
+  font-size: 0.9rem;
+}
+
+.infoText {
+  font-size: 0.78rem;
+  color: #666;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* DROPDOWN */
+
+.dropdownLabel {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.customSelect {
+  position: relative;
+  width: 100%;
+}
+
+.locationDropdown {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+  appearance: none;
+  background-color: white;
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.locationDropdown:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.dropdownArrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* MAP */
+
+.mapContainer {
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e8e8e8;
+  z-index: 0;
+}
+
+/* ===== FOOTER STICKY ===== */
+
+.pageFooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e8e8e8;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 100;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.07);
+}
+
+.footerPricing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.footerImpuestos {
+  font-size: 0.82rem;
+  color: #888;
+}
+
+.footerTotal {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.btnsConteiner {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btnsConteiner button {
+  height: 44px;
+  padding: 0 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btnCancelar {
+  background-color: #f8f8f8;
+  color: #ff3b30;
+  border: 1px solid #e0e0e0;
+}
+
+.btnCancelar:hover {
+  background-color: #ffe6e6;
+  border-color: #ff3b30;
+}
+
+.btnPagar {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+}
+
+.btnPagar:hover:not(:disabled) {
+  background-color: #4f52d4;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+.btnPagar:disabled {
+  background-color: #c5c5c5;
+  color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .pageContent {
+    flex-direction: column;
+    padding: 1rem;
+    padding-bottom: 7rem;
+    gap: 1rem;
+  }
+
+  .leftPanel,
+  .rightPanel {
+    flex: unset;
+    width: 100%;
+  }
+
+  .headerSpacer {
+    width: 70px;
+  }
+
+  .backButton span {
+    display: none; /* Solo icono en mobile */
+  }
+
+  .carImage {
+    flex-direction: column;
+    width: 250px;
+  }
+
+  .imagePlaceholder {
+    width: 100%;
+    height: 180px;
+    min-width: unset;
+  }
+
+  .carDetails h4 {
+    margin-top: 0.5rem;
+  }
+
+  .mapContainer {
+    height: 150px !important;
+  }
+
+  .pageFooter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .footerPricing {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btnsConteiner {
+    width: 100%;
+  }
+
+  .btnsConteiner button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageHeader {
+    padding: 0.75rem 1rem;
+  }
+
+  .pageTitle {
+    font-size: 1.2rem;
+  }
+
+  .leftPanel,
+  .placeInfo {
+    padding: 1rem;
+  }
+}

@@ -1,4 +1,4 @@
-const CardAdminValidation = (car) => {
+const CardAdminValidation = (car, isEditing = false) => {
   const errors = {};
 
   if (!car.name || car.name.trim().length < 2) {
@@ -7,8 +7,8 @@ const CardAdminValidation = (car) => {
   if (!car.category || car.category.trim() === "") {
     errors.category = "* Debes seleccionar categoría";
   }
-  if (!car.image) {
-    errors.image = "* Debe ingresar imagen";
+  if (!isEditing && !car.image) {
+    errors.image = "La imagen es obligatoria.";
   }
   if (!car.passengers || isNaN(car.passengers) || Number(car.passengers) <= 0) {
     errors.passengers = "* Debe ingresar un número válido";

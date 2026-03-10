@@ -3,12 +3,12 @@ export function userPartialValidation(req, res, next) {
     nombre,
     apellido,
     correo,
-    contraseña,
-    repetirContraseña,
+
     dni,
     nacimiento,
     licencia,
     numeroTelefonico,
+    rol,
   } = req.body;
 
   const errors = {};
@@ -20,14 +20,14 @@ export function userPartialValidation(req, res, next) {
     }
   }
 
-  if (contraseña) {
-    if (contraseña.length < 6) {
-      errors.contraseña = "La contraseña debe tener al menos 6 caracteres.";
-    }
-    if (repetirContraseña !== contraseña) {
-      errors.repetirContraseña = "Las contraseñas no coinciden.";
-    }
-  }
+  // if (contraseña) {
+  //   if (contraseña.length < 6) {
+  //     errors.contraseña = "La contraseña debe tener al menos 6 caracteres.";
+  //   }
+  //   if (repetirContraseña !== contraseña) {
+  //     errors.repetirContraseña = "Las contraseñas no coinciden.";
+  //   }
+  // }
 
   if (dni && !/^\d{7,10}$/.test(dni)) {
     errors.dni = "El DNI debe tener entre 7 y 10 dígitos.";

@@ -44,6 +44,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   padding: 22px 32px;
   margin: 10px auto;
+  margin-bottom: 100px;
   max-width: 1108px;
 }
 .admin-thead {
