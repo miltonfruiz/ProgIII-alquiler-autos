@@ -26,7 +26,7 @@ export async function validateReservation(req, res, next) {
     fecha_inicio,
     fecha_fin,
     hora_inicio,
-    hora_fin
+    hora_fin,
   );
 
   if (!valid) {
@@ -40,6 +40,7 @@ export async function validateReservation(req, res, next) {
     const reservasExistentes = await Reserva.findAll({
       where: {
         carId,
+        estado_reserva: { [Op.notIn]: ["cancelada"] },
         fecha_inicio: { [Op.lte]: fecha_fin },
         fecha_fin: { [Op.gte]: fecha_inicio },
       },
