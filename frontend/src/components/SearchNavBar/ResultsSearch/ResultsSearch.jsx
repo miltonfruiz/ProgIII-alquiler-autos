@@ -1,15 +1,17 @@
 import styles from "./Results.module.css";
 import { useState } from "react";
-import Modal from "../../Modal/Modal";
+import ReservaPage from "../../../pages/Reserva/ReservaPage";
+import { useNavigate } from "react-router-dom";
 
 function ResultsSearch({ cars, maxResults = 5, onClose }) {
   const displayedCars = cars.slice(0, maxResults);
   const hasMore = cars.length > maxResults;
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const handleReservarClick = (car) => {
-    setSelectedCar(car);
-    setIsModalOpen(true);
+    onClose?.(); // ✅ cerrar el dropdown de búsqueda si existe
+    navigate("/reserva", { state: { auto: car } }); // ✅ navegar con el auto
   };
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -56,9 +58,9 @@ function ResultsSearch({ cars, maxResults = 5, onClose }) {
           <p>No se encontraron resultados</p>
         </div>
       )}
-      {isModalOpen && selectedCar && (
-        <Modal auto={selectedCar} onClose={handleCloseModal} />
-      )}
+      {/* {isModalOpen && selectedCar && (
+        <ReservaPage car={selectedCar} onClose={handleCloseModal} />
+      )} */}
     </>
   );
 }

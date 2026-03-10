@@ -19,7 +19,7 @@ const UserProfile = () => {
           <MyPastReservations />
         </div>
       </div>
-      <LandingFooter />
+      <Footer />
     </>
   );
 };
