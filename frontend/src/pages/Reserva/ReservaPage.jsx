@@ -155,7 +155,7 @@ function ReservaPage() {
       const impuestos = calcularImpuestos(total);
       const precioFinal = total + impuestos;
 
-      const { success } = await crearReserva({
+      const { success, errores } = await crearReserva({
         fecha_inicio: formData.fecha_inicio,
         fecha_fin: formData.fecha_fin,
         hora_inicio: formData.hora_inicio,
@@ -196,7 +196,8 @@ function ReservaPage() {
           navigate("/carPayment");
         }, 2000);
       } else {
-        toast.error("No se pudo crear la reserva. Intenta nuevamente.");
+        console.error("Error al crear la reserva:", errores.disponibilidad);
+        toast.error(errores.disponibilidad || "Error al crear la reserva");
       }
     } catch (error) {
       console.error("Error al crear la reserva:", error);

@@ -3,6 +3,7 @@ import { Car } from "../models/Car.js";
 import { User } from "../models/User.js";
 import { actualizarReservasFinalizadas } from "../../job/updateReservations.js";
 import { Op } from "sequelize";
+import { Pay } from "../models/Pay.js";
 
 actualizarReservasFinalizadas();
 
@@ -175,6 +176,14 @@ export async function updateReserva(req, res) {
 export async function deleteReserva(req, res) {
   try {
     const { id } = req.params;
+
+    console.log("Intentando eliminar reserva con id:", id);
+    const pagosEliminados = await Pay.destroy({ where: { reservationId: id } });
+    console.log(
+      `Pagos eliminados asociados a la reserva ${id}:`,
+      pagosEliminados,
+    );
+
     const deleted = await Reserva.destroy({ where: { id_reserva: id } });
 
     if (deleted === 0) {
