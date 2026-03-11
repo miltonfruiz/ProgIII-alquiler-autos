@@ -1,6 +1,0 @@
-
-1) resolver lo de calificar las reservas
-
-2) corregir diseño de la busqueda de los autos
-
-3) que al cancelar reserva no se borre el pago si no que cambie el estado de este
