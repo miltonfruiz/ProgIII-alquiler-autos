@@ -48,10 +48,21 @@ function App() {
               ></Register>
             }
           ></Route>
-          <Route path="/home" element={<Home loggedIn={loggedIn} />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRouteUser isSigned={loggedIn}>
+                <Home loggedIn={loggedIn} />
+              </ProtectedRouteUser>
+            }
+          />
           <Route
             path="/carPayment"
-            element={<CarPaymentPage></CarPaymentPage>}
+            element={
+              <ProtectedRouteUser isSigned={loggedIn}>
+                <CarPaymentPage></CarPaymentPage>
+              </ProtectedRouteUser>
+            }
           ></Route>
 
           <Route
@@ -62,7 +73,14 @@ function App() {
               </ProtectedRouteUser>
             }
           />
-          <Route path="/shop" element={<Shop loggedIn={loggedIn} />} />
+          <Route
+            path="/shop"
+            element={
+              <ProtectedRouteUser isSigned={loggedIn}>
+                <Shop loggedIn={loggedIn} />
+              </ProtectedRouteUser>
+            }
+          />
           <Route
             path="/administration"
             element={
@@ -82,7 +100,14 @@ function App() {
             }
           />
           <Route path="/infoReservation" element={<HowRent></HowRent>}></Route>
-          <Route path="/reserva" element={<ReservaPage></ReservaPage>}></Route>
+          <Route
+            path="/reserva"
+            element={
+              <ProtectedRouteUser isSigned={loggedIn}>
+                <ReservaPage></ReservaPage>
+              </ProtectedRouteUser>
+            }
+          ></Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer
