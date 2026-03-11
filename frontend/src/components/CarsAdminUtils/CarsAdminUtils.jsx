@@ -66,7 +66,7 @@ export const categoryOptions = [
 ];
 export const stateOptions = [
   { value: "Disponible", label: "Disponible" },
-  { value: "No Disponible", label: "No Disponible" },
+  { value: "No disponible", label: "No disponible" },
 ];
 export const transmissionOptions = [
   { value: "Manual", label: "Manual" },

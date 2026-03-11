@@ -150,10 +150,23 @@ router.post(
 //------------------- Actualizar auto -------------------//
 router.put(
   "/cars/:id",
+  (req, res, next) => {
+    console.log("ANTES DEL UPLOAD");
+    next();
+  },
   upload.single("image"),
+  (req, res, next) => {
+    console.log("DESPUES DEL UPLOAD");
+    next();
+  },
   carUpdateValidation,
   async (req, res) => {
+    console.log(
+      "----------------------------------------------ENTRO AL ENDPOINT---------------------------------------------------",
+    );
     try {
+      console.log("DATOS QUE LLEGAN DEL FRONT:", req.body);
+
       const car = await Car.findByPk(req.params.id);
       if (!car) return res.status(404).json({ message: "Auto no encontrado" });
 
@@ -163,8 +176,19 @@ router.put(
         req.body.image = car.image;
       }
 
-      await car.update(req.body);
-      res.json(car);
+      const updatedCar = await car.update({
+        name: req.body.name,
+        category: req.body.category,
+        passengers: req.body.passengers,
+        transmission: req.body.transmission,
+        price: req.body.price,
+        brand: req.body.brand,
+        state: req.body.estado,
+        image: req.body.image,
+      });
+
+      console.log("Auto actualizado:", updatedCar.toJSON());
+      res.json(updatedCar);
     } catch (error) {
       res.status(400).json({ message: "Error al actualizar auto", error });
     }

@@ -71,7 +71,7 @@ router.post("/pays", async (req, res) => {
   try {
     await Reserva.update(
       { estado_reserva: "confirmada" },
-      { where: { id_reserva: id_reserva } }
+      { where: { id_reserva: id_reserva } },
     );
 
     await Car.update({ estado: "no disponible" }, { where: { id: carId } });

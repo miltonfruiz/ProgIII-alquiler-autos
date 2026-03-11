@@ -1,0 +1,8 @@
+1) hacer que el estado del auto cambie de disponible a no disponible y que si esta en no disponible que no se vea en el catalogo
+primero tengo que ver que no tenga reservas
+
+2) revisar validaciones del admin
+
+3) hacer que se pueda alquilar por hora
+
+4) resolver lo de calificar las reservas

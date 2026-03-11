@@ -38,8 +38,8 @@ export function carValidation(req, res, next) {
   }
   if (typeof estado === "undefined" || estado === null) {
     errors.estado = "El estado es obligatorio.";
-  } else if (estado !== "Disponible" && estado !== "No Disponible") {
-    errors.estado = "El estado debe ser 'Disponible' o 'No Disponible'.";
+  } else if (estado !== "Disponible" && estado !== "No disponible") {
+    errors.estado = "El estado debe ser 'Disponible' o 'No disponible'.";
   }
   if (Object.keys(errors).length > 0) {
     return res.status(400).json({ errors });
@@ -48,6 +48,8 @@ export function carValidation(req, res, next) {
 }
 
 export function carUpdateValidation(req, res, next) {
+  console.log("BODY EN VALIDACION:", req.body);
+
   const { name, category, passengers, transmission, price, brand, estado } =
     req.body;
   const errors = {};
@@ -91,9 +93,11 @@ export function carUpdateValidation(req, res, next) {
 
   if (typeof estado === "undefined" || estado === null) {
     errors.estado = "El estado es obligatorio.";
-  } else if (estado !== "Disponible" && estado !== "No Disponible") {
-    errors.estado = "El estado debe ser 'Disponible' o 'No Disponible'.";
+  } else if (estado !== "Disponible" && estado !== "No disponible") {
+    errors.estado = "El estado debe ser 'Disponible' o 'No disponible'.";
   }
+
+  console.log("ERRORES:", errors); // al final antes del if
 
   if (Object.keys(errors).length > 0) {
     return res.status(400).json({ errors });

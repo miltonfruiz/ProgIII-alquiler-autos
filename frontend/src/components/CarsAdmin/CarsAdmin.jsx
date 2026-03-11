@@ -117,6 +117,12 @@ const CarsAdmin = () => {
       Object.entries(newCar).forEach(([key, value]) => {
         if (value) formData.append(key, value);
       });
+
+      console.log(
+        "Datos enviados al servidor:",
+        Object.fromEntries(formData.entries()),
+      );
+
       const res = await fetch(`http://localhost:3000/cars/${editingCar.id}`, {
         method: "PUT",
         body: formData,
