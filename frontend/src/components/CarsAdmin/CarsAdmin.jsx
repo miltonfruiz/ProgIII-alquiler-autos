@@ -129,8 +129,9 @@ const CarsAdmin = () => {
       });
       if (!res.ok) {
         const text = await res.text();
-        console.error("Respuesta del servidor:", text);
-        alert("Error al actualizar el auto.");
+        console.error("Respuesta del servidor:", text.message);
+        const data = JSON.parse(text);
+        toast.error(data.message);
         return;
       }
       toast.success("Auto editado correctamente!");
@@ -142,6 +143,7 @@ const CarsAdmin = () => {
       resetForm();
     } catch (error) {
       console.error("Error al actualizar auto:", error);
+      toast.error(error.message || "Error de conexión");
     }
   };
 

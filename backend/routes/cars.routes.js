@@ -30,6 +30,7 @@ const upload = multer({ storage });
 router.get("/cars/recomendados", async (req, res) => {
   try {
     const cars = await Car.findAll({
+      where: { state: "Disponible" },
       limit: 6,
       order: [["Id", "DESC"]],
     });
@@ -56,13 +57,14 @@ router.get("/cars/search", async (req, res) => {
 
     const cars = await Car.findAll({
       where: {
+        state: "Disponible",
         [Op.or]: [
-          { name: { [Op.iLike]: `%${q}%` } },
-          { category: { [Op.iLike]: `%${q}%` } },
-          { brand: { [Op.iLike]: `%${q}%` } },
+          { name: { [Op.like]: `%${q}%` } },
+          { category: { [Op.like]: `%${q}%` } },
+          { brand: { [Op.like]: `%${q}%` } },
         ],
       },
-      limit: 3, // limitar resultados de búsqueda
+      limit: 3,
     });
 
     res.json(cars);
@@ -84,7 +86,10 @@ router.get("/cars", async (req, res) => {
     if (brand) where.brand = brand;
 
     const { count, rows } = await Car.findAndCountAll({
-      where,
+      where: {
+        ...where,
+        state: "Disponible",
+      },
       limit: limitNum,
       offset: (pagNum - 1) * limitNum,
     });
@@ -111,6 +116,8 @@ router.get("/cars", async (req, res) => {
 router.get("/cars/:id", async (req, res) => {
   try {
     const car = await Car.findByPk(req.params.id);
+    if (car.state == "No disponible")
+      return res.status(404).json({ message: "Auto no disponible" });
     if (!car) return res.status(404).json({ message: "Auto no encontrado" });
     res.json(car);
   } catch (error) {
@@ -165,8 +172,6 @@ router.put(
       "----------------------------------------------ENTRO AL ENDPOINT---------------------------------------------------",
     );
     try {
-      console.log("DATOS QUE LLEGAN DEL FRONT:", req.body);
-
       const car = await Car.findByPk(req.params.id);
       if (!car) return res.status(404).json({ message: "Auto no encontrado" });
 
@@ -174,6 +179,21 @@ router.put(
         req.body.image = `/uploads/${req.file.filename}`;
       } else {
         req.body.image = car.image;
+      }
+
+      const reservasAuto = await Reserva.findAll({
+        where: {
+          carId: req.params.id,
+        },
+      });
+
+      console.log("RESERVAS DEL AUTO:", reservasAuto);
+
+      if (reservasAuto.length > 0 && req.body.estado === "No disponible") {
+        return res.status(400).json({
+          message:
+            "No se puede actualizar el estado del auto porque tiene reservas asociadas.",
+        });
       }
 
       const updatedCar = await car.update({
