@@ -118,18 +118,24 @@ function ReservaPage() {
       !formData.fecha_fin
     )
       return 0;
-    const inicio = new Date(formData.fecha_inicio);
-    const fin = new Date(formData.fecha_fin);
-    const fechaInicio = new Date(
-      inicio.getFullYear(),
-      inicio.getMonth(),
-      inicio.getDate(),
-    );
-    const fechaFin = new Date(fin.getFullYear(), fin.getMonth(), fin.getDate());
-    const diffDias = Math.floor(
-      (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24),
-    );
-    return diffDias > 0 ? diffDias * auto.price : 0;
+
+    const inicio = new Date(`${formData.fecha_inicio}T${formData.hora_inicio}`);
+    const fin = new Date(`${formData.fecha_fin}T${formData.hora_fin}`);
+
+    const diffMs = fin - inicio;
+    if (diffMs <= 0) return 0;
+
+    const diffHoras = diffMs / (1000 * 60 * 60);
+    const diasCompletos = Math.floor(diffHoras / 24);
+    const horasExtra = diffHoras - diasCompletos * 24;
+
+    const precioPorHora = auto.price / 24;
+
+    const precioEnDias = diasCompletos * auto.price;
+
+    const precioEnHoras = horasExtra * precioPorHora;
+
+    return precioEnDias + precioEnHoras;
   };
 
   const calcularImpuestos = (total) => total * 0.21;
@@ -187,6 +193,8 @@ function ReservaPage() {
           tax: impuestos,
           totalFinal: precioFinal,
         };
+
+        console.log("DATOS DEL ALQUILER:", datosAlquiler);
 
         localStorage.setItem("datosAlquiler", JSON.stringify(datosAlquiler));
         toast.success("¡Fechas seleccionadas correctamente!");

@@ -29,13 +29,14 @@ export default function MyPastReservations() {
         const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
         const res = await fetch(
-          `http://localhost:3000/reservas/past/user/${loggedUser.id}`
+          `http://localhost:3000/reservas/past/user/${loggedUser.id}`,
         );
         if (!res.ok) {
           throw new Error("Error al obtener reservas pasadas");
         }
 
         const data = await res.json();
+        console.log("Reservas pasadas obtenidas:", data);
         setPastReservations(data);
       } catch (error) {
         console.error("Error al obtener reservas pasadas:", error);
@@ -53,7 +54,7 @@ export default function MyPastReservations() {
 
   const toggleExpand = (id) => {
     setExpandedIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
 

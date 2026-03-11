@@ -21,22 +21,35 @@ export async function createReserva(req, res) {
 
     console.log("Datos recibidos para crear reserva:", req.body);
 
-    const fecha_reserva = new Date();
-
-    const inicio = new Date(fecha_inicio);
-    const fin = new Date(fecha_fin);
-
-    const diffTime = Math.abs(fin - inicio);
-    const cant_dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
     // Buscar el auto para obtener su precio
     const auto = await Car.findByPk(carId);
     if (!auto) {
       return res.status(404).json({ mensaje: "Auto no encontrado" });
     }
 
-    // Calcular total e impuestos
-    const total = cant_dias * auto.price;
+    const inicio = new Date(`${fecha_inicio}T${hora_inicio}`);
+    const fin = new Date(`${fecha_fin}T${hora_fin}`);
+
+    const fecha_reserva = new Date().toISOString().split("T")[0]; // fecha de hoy
+
+    const diffMs = fin - inicio;
+
+    if (diffMs <= 0) {
+      return res.status(400).json({ mensaje: "Las fechas no son válidas" });
+    }
+
+    const diffHoras = diffMs / (1000 * 60 * 60);
+    const cant_dias = Math.floor(diffHoras / 24);
+    const horasExtra = diffHoras - cant_dias * 24;
+
+    const precioPorHora = auto.price / 24;
+
+    const precioEnDias = cant_dias * auto.price;
+
+    const precioDeHorasExtras = horasExtra * precioPorHora;
+
+    const total = precioEnDias + precioDeHorasExtras;
+
     const tax = total * 0.21;
 
     const nuevaReserva = await Reserva.create({
@@ -184,7 +197,10 @@ export async function deleteReserva(req, res) {
       pagosEliminados,
     );
 
-    const deleted = await Reserva.destroy({ where: { id_reserva: id } });
+    const deleted = await Reserva.update(
+      { estado_reserva: "finalizada" },
+      { where: { id_reserva: id } },
+    );
 
     if (deleted === 0) {
       return res.status(404).json({ mensaje: "Reserva no encontrada" });

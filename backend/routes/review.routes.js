@@ -17,11 +17,9 @@ router.post("/reviews", reviewValidation, async (req, res) => {
       rating,
       comment,
     });
-    const reviews = await Review.findAll({ where: { carId } });
 
-    const avgRating =
-      reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
-    await Car.update({ rating: avgRating }, { where: { id: carId } });
+    console.log("COMENTARIO CREADO:", review);
+
     res.status(201).json(review);
   } catch (error) {
     res.status(500).json({ error: "Error al crear el comentario" });

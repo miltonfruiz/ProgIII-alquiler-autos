@@ -1,8 +1,6 @@
-1) hacer que el estado del auto cambie de disponible a no disponible y que si esta en no disponible que no se vea en el catalogo
-primero tengo que ver que no tenga reservas
 
-2) revisar validaciones del admin
+1) resolver lo de calificar las reservas
 
-3) hacer que se pueda alquilar por hora
+2) corregir diseño de la busqueda de los autos
 
-4) resolver lo de calificar las reservas
+3) que al cancelar reserva no se borre el pago si no que cambie el estado de este

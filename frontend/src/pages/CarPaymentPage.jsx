@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 // import { useDataContext } from "./Contexts/Contexts";
 
 const CarPaymentPage = () => {
-  const datosAlquiler = JSON.parse(localStorage.getItem("datosAlquiler"));
   const pagoConcretado = useRef(false);
   useEffect(() => {
     const cancelarSiAbandonar = async () => {
