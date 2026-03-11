@@ -124,17 +124,17 @@ router.put("/users/:id", userPartialValidation, async (req, res) => {
     if (existingDni && existingDni.id !== Number(id)) {
       return res.status(400).json({ error: "El DNI ya está en uso" });
     }
-    const existingNumeroTelefonico = await User.findOne({
-      where: { numeroTelefonico },
-    });
-    if (
-      existingNumeroTelefonico &&
-      existingNumeroTelefonico.id !== Number(id)
-    ) {
-      return res
-        .status(400)
-        .json({ error: "El número telefónico ya está en uso" });
-    }
+    // const existingNumeroTelefonico = await User.findOne({
+    //  where: { numeroTelefonico },
+    //});
+    //if (
+    //  existingNumeroTelefonico &&
+    //  existingNumeroTelefonico.id !== Number(id)
+    //) {
+    //  return res
+    //    .status(400)
+    //    .json({ error: "El número telefónico ya está en uso" });
+    //}
     await user.update({
       nombre,
       apellido,
